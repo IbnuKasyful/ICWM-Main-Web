@@ -1,0 +1,470 @@
+/** Data contoh profil yayasan: capaian, legalitas, pengurus, mitra, laporan. */
+
+export const capaianMentah: unknown[] = [
+  { label: "Santri aktif", nilai: 2140, satuan: "", keterangan: "Seluruh unit, tahun ajaran 2025/2026" },
+  { label: "Alumni", nilai: 6800, satuan: "", keterangan: "Sejak 1998" },
+  { label: "Hafizh 30 juz", nilai: 512, satuan: "", keterangan: "Lulusan program tahfizh" },
+  { label: "Pengajar & pengasuh", nilai: 286, satuan: "", keterangan: "Guru, musyrif, dan tenaga kependidikan" },
+  { label: "Unit pendidikan", nilai: 10, satuan: "", keterangan: "Dari PAUD hingga perguruan tinggi" },
+  { label: "Kampus", nilai: 2, satuan: "", keterangan: "Bogor dan Sleman" },
+];
+
+export const legalitasMentah: unknown[] = [
+  {
+    nama_dokumen: "Akta Pendirian Yayasan",
+    nomor: "No. 42 / 1998",
+    penerbit: "Notaris Kabupaten Bogor",
+    tahun: 1998,
+  },
+  {
+    nama_dokumen: "Surat Keputusan Kemenkumham",
+    nomor: "AHU-0001234.AH.01.04.Tahun 2014",
+    penerbit: "Kementerian Hukum dan HAM RI",
+    tahun: 2014,
+  },
+  {
+    nama_dokumen: "Nomor Pokok Wajib Pajak",
+    nomor: "01.234.567.8-403.000",
+    penerbit: "Direktorat Jenderal Pajak",
+    tahun: 2014,
+  },
+  {
+    nama_dokumen: "Izin Operasional LAZIS",
+    nomor: "SK No. 118 Tahun 2021",
+    penerbit: "Kementerian Agama RI",
+    tahun: 2021,
+  },
+  {
+    nama_dokumen: "Izin Operasional Satuan Pendidikan",
+    nomor: "421.2/Kpts.089/Disdik",
+    penerbit: "Dinas Pendidikan Kabupaten Bogor",
+    tahun: 2016,
+  },
+  {
+    nama_dokumen: "Akreditasi Perguruan Tinggi",
+    nomor: "No. 3021/SK/BAN-PT/Ak/STIU/2023",
+    penerbit: "BAN-PT",
+    tahun: 2023,
+  },
+];
+
+type PengurusInput = {
+  slug: string;
+  nama: string;
+  jabatan: string;
+  dewan: string;
+  bio: string;
+  foto: number | null;
+};
+
+const pengurusInput: PengurusInput[] = [
+  {
+    slug: "kh-ahmad-syaifuddin",
+    nama: "KH. Ahmad Syaifuddin, Lc., M.A.",
+    jabatan: "Ketua Dewan Pembina",
+    dewan: "pembina",
+    bio: "Pendiri Islamic Center Wadi Mubarak. Alumnus Universitas Islam Madinah, mengasuh halaqah tahfizh sejak 1996.",
+    foto: 1,
+  },
+  {
+    slug: "hj-siti-maryam",
+    nama: "Hj. Siti Maryam, S.Pd.I.",
+    jabatan: "Anggota Dewan Pembina",
+    dewan: "pembina",
+    bio: "Mendampingi pengembangan pendidikan keputrian yayasan sejak berdirinya asrama putri pertama.",
+    foto: 2,
+  },
+  {
+    slug: "drs-h-mustofa-kamal",
+    nama: "Drs. H. Mustofa Kamal",
+    jabatan: "Ketua Dewan Pengawas",
+    dewan: "pengawas",
+    bio: "Berlatar audit internal lembaga pendidikan; mengawasi kepatuhan tata kelola dan pelaporan keuangan yayasan.",
+    foto: 3,
+  },
+  {
+    slug: "ir-nurhayati-rahman",
+    nama: "Ir. Nurhayati Rahman, M.M.",
+    jabatan: "Anggota Dewan Pengawas",
+    dewan: "pengawas",
+    bio: "Fokus pada pengawasan pengelolaan aset dan pembangunan sarana prasarana kampus.",
+    foto: 4,
+  },
+  {
+    slug: "ust-abdurrahman-hakim",
+    nama: "Ust. Abdurrahman Hakim, Lc.",
+    jabatan: "Ketua Yayasan",
+    dewan: "pengurus",
+    bio: "Memimpin operasional yayasan sejak 2019. Mengampu kajian ushul fikih di STIU Wadi Mubarak.",
+    foto: 5,
+  },
+  {
+    slug: "ahmad-fauzan",
+    nama: "Ahmad Fauzan, S.E.",
+    jabatan: "Sekretaris Yayasan",
+    dewan: "pengurus",
+    bio: "Menangani administrasi, legalitas, dan hubungan kelembagaan yayasan.",
+    foto: 6,
+  },
+  {
+    slug: "hana-fadhilah",
+    nama: "Hana Fadhilah, S.Ak.",
+    jabatan: "Bendahara Yayasan",
+    dewan: "pengurus",
+    bio: "Menyusun laporan keuangan tahunan dan mengoordinasikan audit eksternal.",
+    foto: 7,
+  },
+  {
+    slug: "ust-ridwan-maulana",
+    nama: "Ust. Ridwan Maulana, Lc., M.Pd.",
+    jabatan: "Direktur Pendidikan",
+    dewan: "pelaksana",
+    bio: "Mengoordinasikan kurikulum tahfizh dan diniyah lintas unit dari PAUD hingga perguruan tinggi.",
+    foto: 8,
+  },
+  {
+    slug: "faridah-nur-aini",
+    nama: "Faridah Nur Aini, S.Psi.",
+    jabatan: "Direktur Kesantrian",
+    dewan: "pelaksana",
+    bio: "Menangani pembinaan santri, layanan konseling, dan perlindungan anak di lingkungan pesantren.",
+    foto: 9,
+  },
+  {
+    slug: "muhammad-iqbal",
+    nama: "Muhammad Iqbal, S.Sos.",
+    jabatan: "Direktur LAZIS",
+    dewan: "pelaksana",
+    bio: "Mengelola penghimpunan dan penyaluran zakat, infak, sedekah, serta wakaf yayasan.",
+    foto: 10,
+  },
+];
+
+export const pengurusMentah: unknown[] = pengurusInput.map((p, i) => ({
+  slug: p.slug,
+  nama: p.nama,
+  jabatan: p.jabatan,
+  dewan: p.dewan,
+  foto:
+    p.foto === null
+      ? null
+      : { src: `/img/orang-${p.foto}.svg`, alt: `Potret ${p.nama}`, width: 800, height: 800 },
+  bio: p.bio,
+  urutan: i + 1,
+}));
+
+export const laporanMentah: unknown[] = [
+  {
+    slug: "laporan-keuangan-2025",
+    judul: "Laporan Keuangan Yayasan Tahun 2025",
+    tahun: 2025,
+    jenis: "keuangan",
+    ukuran: "2,4 MB",
+    format: "PDF",
+    url: "/dokumen/laporan-keuangan-2025.pdf",
+    ringkasan: "Laporan posisi keuangan, aktivitas, dan arus kas yang telah ditelaah akuntan publik.",
+  },
+  {
+    slug: "laporan-penyaluran-lazis-2025",
+    judul: "Laporan Penyaluran ZIS dan Wakaf 2025",
+    tahun: 2025,
+    jenis: "program",
+    ukuran: "1,8 MB",
+    format: "PDF",
+    url: "/dokumen/laporan-penyaluran-lazis-2025.pdf",
+    ringkasan: "Rincian penghimpunan dan penyaluran per program beserta jumlah penerima manfaat.",
+  },
+  {
+    slug: "laporan-dampak-pendidikan-2025",
+    judul: "Laporan Dampak Program Pendidikan 2025",
+    tahun: 2025,
+    jenis: "dampak",
+    ukuran: "3,1 MB",
+    format: "PDF",
+    url: "/dokumen/laporan-dampak-pendidikan-2025.pdf",
+    ringkasan: "Capaian hafalan, kelulusan, dan sebaran studi lanjut alumni seluruh unit.",
+  },
+  {
+    slug: "laporan-keuangan-2024",
+    judul: "Laporan Keuangan Yayasan Tahun 2024",
+    tahun: 2024,
+    jenis: "keuangan",
+    ukuran: "2,2 MB",
+    format: "PDF",
+    url: "/dokumen/laporan-keuangan-2024.pdf",
+    ringkasan: "Laporan keuangan tahunan beserta catatan atas laporan keuangan.",
+  },
+  {
+    slug: "laporan-penyaluran-lazis-2024",
+    judul: "Laporan Penyaluran ZIS dan Wakaf 2024",
+    tahun: 2024,
+    jenis: "program",
+    ukuran: "1,6 MB",
+    format: "PDF",
+    url: "/dokumen/laporan-penyaluran-lazis-2024.pdf",
+    ringkasan: "Rekapitulasi penyaluran delapan asnaf dan program wakaf produktif.",
+  },
+  {
+    slug: "laporan-keuangan-2023",
+    judul: "Laporan Keuangan Yayasan Tahun 2023",
+    tahun: 2023,
+    jenis: "keuangan",
+    ukuran: "2,0 MB",
+    format: "PDF",
+    url: "/dokumen/laporan-keuangan-2023.pdf",
+    ringkasan: "Laporan keuangan tahunan yayasan periode 1 Januari – 31 Desember 2023.",
+  },
+];
+
+export const mitraMentah: unknown[] = [
+  {
+    slug: "kementerian-agama-ri",
+    nama: "Kementerian Agama Republik Indonesia",
+    jenis: "pemerintah",
+    logo: null,
+    keterangan: "Pembinaan dan pengawasan lembaga amil zakat serta pendidikan keagamaan.",
+    sejak: 2021,
+  },
+  {
+    slug: "dinas-pendidikan-kabupaten-bogor",
+    nama: "Dinas Pendidikan Kabupaten Bogor",
+    jenis: "pemerintah",
+    logo: null,
+    keterangan: "Perizinan operasional dan pembinaan satuan pendidikan formal.",
+    sejak: 2016,
+  },
+  {
+    slug: "jaringan-sekolah-islam-terpadu",
+    nama: "Jaringan Sekolah Islam Terpadu",
+    jenis: "pendidikan",
+    logo: null,
+    keterangan: "Pengembangan kurikulum terpadu dan pelatihan guru.",
+    sejak: 2012,
+  },
+  {
+    slug: "lembaga-wakaf-nusantara",
+    nama: "Lembaga Wakaf Nusantara",
+    jenis: "lembaga-sosial",
+    logo: null,
+    keterangan: "Pendampingan pengelolaan wakaf produktif dan literasi wakaf.",
+    sejak: 2020,
+  },
+  {
+    slug: "yayasan-peduli-yatim-indonesia",
+    nama: "Yayasan Peduli Yatim Indonesia",
+    jenis: "lembaga-sosial",
+    logo: null,
+    keterangan: "Program beasiswa bersama untuk santri yatim dan dhuafa.",
+    sejak: 2019,
+  },
+  {
+    slug: "bank-syariah-mitra",
+    nama: "Bank Syariah Mitra",
+    jenis: "korporasi",
+    logo: null,
+    keterangan: "Layanan perbankan syariah dan program CSR pendidikan.",
+    sejak: 2018,
+  },
+];
+
+export const testimoniMentah: unknown[] = [
+  {
+    slug: "testimoni-wali-santri-smp",
+    nama: "Bapak Hendra Wijaya",
+    peran: "Wali santri SMP Tahfizh Putra",
+    unit: "smp-tahfizh-putra",
+    kutipan:
+      "Yang membuat kami tenang bukan janji jumlah juz, tapi karena musyrif tahu betul karakter anak kami dan mengabari kalau ada yang perlu dibicarakan.",
+    foto: { src: "/img/orang-3.svg", alt: "", width: 800, height: 800 },
+  },
+  {
+    slug: "testimoni-alumni-sma",
+    nama: "Fatimah Az-Zahra",
+    peran: "Alumni SMA Tahfizh Putri, angkatan 2022",
+    unit: "sma-tahfizh-putri",
+    kutipan:
+      "Kebiasaan muraja'ah sebelum subuh yang dibentuk di asrama masih saya jalankan sampai sekarang di bangku kuliah.",
+    foto: { src: "/img/orang-6.svg", alt: "", width: 800, height: 800 },
+  },
+  {
+    slug: "testimoni-peserta-pkm",
+    nama: "Ibu Suryani",
+    peran: "Peserta kelas tahsin dewasa",
+    unit: "pkm-wadi-mubarak",
+    kutipan:
+      "Usia saya 58 tahun dan baru belajar tajwid dari nol. Pengampunya sabar dan tidak pernah membuat saya merasa terlambat.",
+    foto: { src: "/img/orang-9.svg", alt: "", width: 800, height: 800 },
+  },
+];
+
+export const agendaMentah: unknown[] = [
+  {
+    slug: "tasmi-akbar-santri-sma",
+    judul: "Tasmi' Akbar Santri SMA Tahfizh",
+    mulai: "2026-08-09T07:00:00+07:00",
+    selesai: "2026-08-09T15:00:00+07:00",
+    tempat: "Masjid Utama, Kampus Bogor",
+    lokasi: "bogor",
+    unit: ["sma-tahfizh-putra", "sma-tahfizh-putri"],
+    ringkasan: "Ujian tasmi' terbuka 30 juz yang dapat disaksikan wali santri dan masyarakat umum.",
+    terbuka_umum: true,
+  },
+  {
+    slug: "open-house-ppdb-2026",
+    judul: "Open House PPDB 2026/2027",
+    mulai: "2026-08-16T08:00:00+07:00",
+    selesai: "2026-08-16T12:00:00+07:00",
+    tempat: "Aula Yayasan, Kampus Bogor",
+    lokasi: "bogor",
+    unit: ["sdit-wadi-mubarak", "smp-tahfizh-putra", "sma-tahfizh-putra"],
+    ringkasan: "Sesi tanya jawab bersama kepala unit, tur kampus, dan penjelasan alur pendaftaran.",
+    terbuka_umum: true,
+  },
+  {
+    slug: "kajian-pekanan-agustus",
+    judul: "Kajian Pekanan: Adab Menuntut Ilmu",
+    mulai: "2026-08-22T16:00:00+07:00",
+    selesai: "2026-08-22T17:30:00+07:00",
+    tempat: "Masjid Utama, Kampus Bogor",
+    lokasi: "bogor",
+    unit: ["pkm-wadi-mubarak"],
+    ringkasan: "Kajian rutin terbuka untuk umum, disiarkan juga melalui kanal daring yayasan.",
+    terbuka_umum: true,
+  },
+  {
+    slug: "pelatihan-guru-tahfizh",
+    judul: "Pelatihan Metode Tahfizh untuk Pengampu",
+    mulai: "2026-09-05T08:00:00+07:00",
+    selesai: "2026-09-06T16:00:00+07:00",
+    tempat: "Gedung STIU, Kampus Bogor",
+    lokasi: "bogor",
+    unit: ["stiu-wadi-mubarak"],
+    ringkasan: "Pelatihan dua hari bagi pengampu halaqah internal dan lembaga mitra.",
+    terbuka_umum: false,
+  },
+  {
+    slug: "wisuda-taud-sleman",
+    judul: "Wisuda dan Pentas Akhir Tahun TAUD SAQU Sleman",
+    mulai: "2026-09-13T08:00:00+07:00",
+    selesai: null,
+    tempat: "Kampus Sleman",
+    lokasi: "sleman",
+    unit: ["taud-saqu-sleman"],
+    ringkasan: "Penutupan tahun ajaran bersama wali santri cabang Sleman.",
+    terbuka_umum: false,
+  },
+];
+
+export const faqMentah: unknown[] = [
+  {
+    slug: "kapan-ppdb-dibuka",
+    pertanyaan: "Kapan pendaftaran santri baru dibuka?",
+    jawaban:
+      "Jadwal berbeda per unit. SMP dan SMA umumnya membuka gelombang pertama pada Oktober, SD pada November, sedangkan PKM menerima pendaftaran sepanjang tahun. Periode terkini setiap unit tercantum pada halaman program.",
+    kelompok: "pendaftaran",
+    urutan: 1,
+  },
+  {
+    slug: "apakah-harus-hafal-dulu",
+    pertanyaan: "Apakah anak harus sudah punya hafalan sebelum mendaftar?",
+    jawaban:
+      "Untuk TAUD dan SDIT tidak ada syarat hafalan awal. SMP mensyaratkan minimal 1 juz dan SMA minimal 5 juz, karena target hafalan jenjang tersebut disusun bertingkat.",
+    kelompok: "pendaftaran",
+    urutan: 2,
+  },
+  {
+    slug: "bisa-daftar-dari-luar-kota",
+    pertanyaan: "Kami tinggal di luar Jawa. Apakah bisa mendaftar?",
+    jawaban:
+      "Bisa. Seluruh unit boarding menerima santri dari seluruh Indonesia. Tes seleksi dapat dilakukan secara daring, kecuali tes kesehatan yang dijadwalkan saat kedatangan.",
+    kelompok: "pendaftaran",
+    urutan: 3,
+  },
+  {
+    slug: "berapa-biaya-pendidikan",
+    pertanyaan: "Berapa biaya pendidikan di Wadi Mubarak?",
+    jawaban:
+      "Kisaran biaya berbeda per unit dan tercantum pada setiap halaman profil unit. Rincian resmi disampaikan panitia PPDB unit terkait, karena komponen biaya dapat berubah setiap tahun ajaran.",
+    kelompok: "biaya",
+    urutan: 4,
+  },
+  {
+    slug: "ada-beasiswa",
+    pertanyaan: "Apakah tersedia beasiswa?",
+    jawaban:
+      "Ada. LAZIS Wadi Mubarak menyediakan beasiswa untuk santri yatim dan dhuafa di seluruh unit, serta beasiswa penuh bagi hafizh 30 juz yang melanjutkan ke STIU. Pengajuan dilakukan bersamaan dengan pendaftaran.",
+    kelompok: "biaya",
+    urutan: 5,
+  },
+  {
+    slug: "bagaimana-santri-dibina-di-asrama",
+    pertanyaan: "Bagaimana pembinaan santri di asrama?",
+    jawaban:
+      "Setiap 12 santri didampingi satu musyrif atau musyrifah yang tinggal di gedung yang sama. Pendamping mencatat perkembangan hafalan, adab, dan kesehatan santri, serta menghubungi wali santri secara berkala.",
+    kelompok: "kehidupan-santri",
+    urutan: 6,
+  },
+  {
+    slug: "kapan-santri-boleh-dijenguk",
+    pertanyaan: "Kapan santri boleh dijenguk atau pulang?",
+    jawaban:
+      "Kunjungan wali santri dijadwalkan sebulan sekali pada akhir pekan. Santri pulang saat libur semester dan libur Idulfitri. Jadwal rinci dibagikan pada awal tahun ajaran.",
+    kelompok: "kehidupan-santri",
+    urutan: 7,
+  },
+  {
+    slug: "bagaimana-jika-santri-sakit",
+    pertanyaan: "Bagaimana jika santri sakit?",
+    jawaban:
+      "Klinik kampus beroperasi 24 jam dengan perawat menetap. Untuk kasus yang memerlukan penanganan lanjutan, santri dirujuk ke rumah sakit mitra dan wali santri segera dihubungi.",
+    kelompok: "kehidupan-santri",
+    urutan: 8,
+  },
+  {
+    slug: "bagaimana-cara-berdonasi",
+    pertanyaan: "Bagaimana cara berdonasi?",
+    jawaban:
+      "Donasi disalurkan melalui transfer ke rekening resmi LAZIS Wadi Mubarak sesuai jenis dana (zakat, infak, sedekah, atau wakaf). Nomor rekening dan alur konfirmasi tersedia pada halaman donasi.",
+    kelompok: "donasi",
+    urutan: 9,
+  },
+  {
+    slug: "apakah-donasi-dilaporkan",
+    pertanyaan: "Apakah donasi saya dilaporkan?",
+    jawaban:
+      "Ya. Laporan penyaluran diterbitkan setiap semester dan laporan keuangan tahunan ditelaah akuntan publik. Seluruh dokumen dapat diunduh bebas pada halaman transparansi.",
+    kelompok: "donasi",
+    urutan: 10,
+  },
+  {
+    slug: "apakah-menerima-kunjungan",
+    pertanyaan: "Apakah yayasan menerima kunjungan lembaga?",
+    jawaban:
+      "Menerima. Pengajuan kunjungan studi banding atau penjajakan kerja sama dapat disampaikan lewat halaman kerja sama, sebaiknya dua pekan sebelum tanggal yang direncanakan.",
+    kelompok: "umum",
+    urutan: 11,
+  },
+  {
+    slug: "bagaimana-menghubungi-alumni",
+    pertanyaan: "Bagaimana alumni dapat terhubung kembali?",
+    jawaban:
+      "Ikatan Alumni Wadi Mubarak mengelola pendataan dan kegiatan alumni. Hubungi sekretariat yayasan lewat halaman kontak untuk didaftarkan ke kanal alumni angkatan Anda.",
+    kelompok: "umum",
+    urutan: 12,
+  },
+];
+
+export const galeriMentah: unknown[] = [
+  { src: "/img/galeri-1.svg", alt: "Santri mengikuti halaqah pagi di masjid kampus", width: 1200, height: 900 },
+  { src: "/img/galeri-2.svg", alt: "Suasana kelas SDIT saat pekan proyek", width: 1200, height: 900 },
+  { src: "/img/galeri-3.svg", alt: "Prosesi wisuda tahfizh angkatan ke-12", width: 1200, height: 1500 },
+  { src: "/img/galeri-4.svg", alt: "Santri berlatih panahan di lapangan kampus", width: 1200, height: 900 },
+  { src: "/img/galeri-5.svg", alt: "Kegiatan tahsin dewasa bersama warga sekitar", width: 1200, height: 900 },
+  { src: "/img/galeri-6.svg", alt: "Masjid utama kampus Bogor menjelang magrib", width: 1200, height: 1500 },
+  { src: "/img/galeri-7.svg", alt: "Santriwati mengikuti kelas keterampilan", width: 1200, height: 900 },
+  { src: "/img/galeri-8.svg", alt: "Penyaluran beasiswa LAZIS kepada santri yatim", width: 1200, height: 900 },
+  { src: "/img/galeri-9.svg", alt: "Perpustakaan kitab berbahasa Arab", width: 1200, height: 1500 },
+  { src: "/img/galeri-10.svg", alt: "Kunjungan belajar santri TAUD ke luar kampus", width: 1200, height: 900 },
+  { src: "/img/galeri-11.svg", alt: "Buka puasa bersama warga sekitar kampus", width: 1200, height: 900 },
+  { src: "/img/galeri-12.svg", alt: "Asrama santri putra pada pagi hari", width: 1200, height: 1500 },
+];

@@ -1,0 +1,18 @@
+import { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+import { FlatCompat } from "@eslint/eslintrc";
+
+const compat = new FlatCompat({
+  baseDirectory: dirname(fileURLToPath(import.meta.url)),
+});
+
+const eslintConfig = [
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    // `next-env.d.ts` dibangkitkan Next.js dan tidak boleh disunting.
+    ignores: [".next/**", "node_modules/**", "public/**", "next-env.d.ts"],
+  },
+];
+
+export default eslintConfig;

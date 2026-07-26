@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#143f30"/>
+      <stop offset="55%" stop-color="#2e7d5b"/>
+      <stop offset="100%" stop-color="#143f30"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="22%" cy="58%" r="70%">
+      <stop offset="0%" stop-color="#e2d0b5" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#e2d0b5" stop-opacity="0"/>
+    </radialGradient>
+    
+  <pattern id="p" width="120" height="120" patternUnits="userSpaceOnUse" patternTransform="rotate(0)">
+    <g fill="none" stroke="#e2d0b5" stroke-opacity="0.22" stroke-width="1.5">
+      <path d="M60 6 L79 27 L108 27 L108 56 L129 75 L108 94 L108 123 L79 123 L60 144 L41 123 L12 123 L12 94 L-9 75 L12 56 L12 27 L41 27 Z" transform="translate(0,-15) scale(0.82) translate(13,13)"/>
+      <rect x="30" y="30" width="60" height="60" transform="rotate(45 60 60)"/>
+      <rect x="30" y="30" width="60" height="60"/>
+      <circle cx="60" cy="60" r="10"/>
+      <circle cx="0" cy="0" r="6"/>
+      <circle cx="120" cy="0" r="6"/>
+      <circle cx="0" cy="120" r="6"/>
+      <circle cx="120" cy="120" r="6"/>
+    </g>
+  </pattern>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.35"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#g)"/>
+  <rect width="1200" height="900" fill="url(#p)"/>
+  <rect width="1200" height="900" fill="url(#glow)"/>
+  <g fill="none" stroke="#e2d0b5" stroke-opacity="0.5" stroke-width="2">
+    <path d="M600 288
+             a 156 156 0 1 1 1.2 0 Z"/>
+  </g>
+  <rect width="1200" height="900" fill="url(#fade)"/>
+  
+</svg>
