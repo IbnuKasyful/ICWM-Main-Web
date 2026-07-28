@@ -32,7 +32,7 @@ export function AccordionItem({
         className={cn(
           "flex cursor-pointer list-none items-start justify-between gap-4 px-5 py-5 md:px-6",
           "font-display text-base leading-snug font-semibold text-ink transition-colors",
-          "hover:bg-sand-50 group-open:bg-sand-50",
+          "hover:bg-mist-50 group-open:bg-mist-50",
           "[&::-webkit-details-marker]:hidden",
         )}
       >

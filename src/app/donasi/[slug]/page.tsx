@@ -74,7 +74,7 @@ export default async function HalamanProgramDonasi({
       <section className="py-12 md:py-16">
         <div className="container-page grid gap-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-14">
           <div>
-            <div className="overflow-hidden rounded-3xl bg-sand-100">
+            <div className="overflow-hidden rounded-3xl bg-mist-100">
               <Image
                 src={program.gambar.src}
                 alt={program.gambar.alt}
@@ -112,7 +112,7 @@ export default async function HalamanProgramDonasi({
               <Progress terkumpul={program.terkumpul} target={program.target} />
 
               {program.target > 0 ? (
-                <p className="mt-4 rounded-xl bg-sand-50 p-4 text-xs leading-relaxed text-ink-muted">
+                <p className="mt-4 rounded-xl bg-mist-50 p-4 text-xs leading-relaxed text-ink-muted">
                   Kekurangan saat ini{" "}
                   <span className="font-semibold text-ink">
                     {rupiah(Math.max(0, program.target - program.terkumpul))}
@@ -154,7 +154,7 @@ export default async function HalamanProgramDonasi({
       </section>
 
       {lain.length > 0 ? (
-        <section className="bg-sand-50 py-14 md:py-20">
+        <section className="bg-mist-50 py-14 md:py-20">
           <div className="container-page">
             <h2 className="font-display text-display-md text-ink">
               Program <span className="text-brand-600">lainnya</span>
@@ -165,7 +165,7 @@ export default async function HalamanProgramDonasi({
                   key={p.slug}
                   className="group relative rounded-2xl border border-line bg-white p-5 transition-colors hover:border-brand-200"
                 >
-                  <Badge nada="emas">{labelJenisDonasi[p.jenis]}</Badge>
+                  <Badge nada="aksen">{labelJenisDonasi[p.jenis]}</Badge>
                   <h3 className="mt-3 font-display text-base leading-snug font-semibold text-ink">
                     <a href={`/donasi/${p.slug}`} className="after:absolute after:inset-0">
                       {p.judul}

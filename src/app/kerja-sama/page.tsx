@@ -85,7 +85,7 @@ export default function HalamanKerjaSama() {
       </Section>
 
       {/* Mitra */}
-      <Section nada="pasir" className="py-14 md:py-20">
+      <Section nada="sejuk" className="py-14 md:py-20">
         <div className="container-page">
           <JudulSeksi atas="Mitra" judul="Lembaga yang" sorot="bekerja bersama kami" />
           {mitra.length === 0 ? (
@@ -139,7 +139,7 @@ export default function HalamanKerjaSama() {
               ))}
             </ol>
 
-            <div className="mt-8 rounded-2xl border border-line bg-sand-50 p-6">
+            <div className="mt-8 rounded-2xl border border-line bg-mist-50 p-6">
               <p className="text-xs font-semibold tracking-[0.1em] text-ink-subtle uppercase">
                 Surel kerja sama
               </p>

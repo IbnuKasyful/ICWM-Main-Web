@@ -38,7 +38,11 @@ export function StatBlock({
           >
             {angka(item.nilai)}
             {item.satuan ? <span className="text-[0.6em]">{item.satuan}</span> : null}
-            {item.nilai >= 100 ? <span className="text-accent-400">+</span> : null}
+            {item.nilai >= 100 ? (
+              /* Sian muda hanya lolos kontras di latar gelap; di latar terang
+                 pakai accent-700. */
+              <span className={terang ? "text-accent-400" : "text-accent-700"}>+</span>
+            ) : null}
           </dd>
           <dt
             className={cn(

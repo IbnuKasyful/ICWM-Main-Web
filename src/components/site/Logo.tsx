@@ -1,16 +1,42 @@
+import Image from "next/image";
+
 import { cn } from "@/lib/cn";
 
-/** Lambang yayasan: bintang delapan — motif geometri yang dipakai di seluruh situs. */
-export function Lambang({ className }: { className?: string }) {
+/* Rasio simbol lambang, diukur dari kotak batas alfa berkas induk
+   (1139 × 1608 piksel). Dipakai agar tinggi/lebar selalu sepadan. */
+const RASIO = 512 / 723;
+
+/**
+ * Lambang yayasan.
+ *
+ * Memakai varian *simbol* (tanpa kaligrafi Arab) sesuai panduan identitas:
+ * pada ukuran header, kaligrafi pada lambang utama sudah tidak terbaca.
+ * Varian `terang` adalah reproduksi negatif putih — wajib di latar gelap,
+ * sebab bilah biru tua lambang berwarna praktis lenyap di sana.
+ */
+export function Lambang({
+  className,
+  terang = false,
+  tinggi = 36,
+  prioritas = false,
+}: {
+  className?: string;
+  terang?: boolean;
+  tinggi?: number;
+  /** Hanya untuk lambang di header; lambang kaki halaman ada di bawah lipatan
+      sehingga tidak perlu ikut di-preload. */
+  prioritas?: boolean;
+}) {
   return (
-    <svg viewBox="0 0 40 40" aria-hidden="true" className={cn("size-9", className)}>
-      <rect width="40" height="40" rx="11" fill="currentColor" />
-      <g stroke="#fff" strokeWidth="1.6" fill="none" strokeLinejoin="round">
-        <rect x="11" y="11" width="18" height="18" />
-        <rect x="11" y="11" width="18" height="18" transform="rotate(45 20 20)" />
-        <circle cx="20" cy="20" r="3.4" />
-      </g>
-    </svg>
+    <Image
+      src={terang ? "/img/logo-wm-simbol-putih.png" : "/img/logo-wm-simbol.png"}
+      alt=""
+      aria-hidden="true"
+      width={Math.round(tinggi * RASIO)}
+      height={tinggi}
+      priority={prioritas}
+      className={cn("w-auto", className)}
+    />
   );
 }
 
@@ -18,16 +44,18 @@ export function Wordmark({
   nama,
   keterangan,
   terang = false,
+  prioritas = false,
   className,
 }: {
   nama: string;
   keterangan?: string;
   terang?: boolean;
+  prioritas?: boolean;
   className?: string;
 }) {
   return (
     <span className={cn("flex items-center gap-2.5", className)}>
-      <Lambang className={terang ? "text-brand-600" : "text-brand-700"} />
+      <Lambang terang={terang} tinggi={36} prioritas={prioritas} className="h-9" />
       <span className="flex flex-col leading-none">
         <span
           className={cn(

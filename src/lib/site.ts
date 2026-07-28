@@ -5,6 +5,19 @@
  * (PRD §1 poin 1). Tidak ada singkatan internal di label menu.
  */
 
+/**
+ * Mode pratinjau.
+ *
+ * Selama seluruh isi situs masih berupa data contoh — termasuk nomor rekening,
+ * nomor legalitas, dan nama pengurus — penayangan publik diberi dua pengaman:
+ * perayap mesin pencari ditolak (`src/app/robots.ts`, metadata `robots` pada
+ * layout) dan sebuah pita penanda ditampilkan di atas kepala halaman.
+ *
+ * Matikan dengan menghapus `NEXT_PUBLIC_MODE_PRATINJAU` dari environment —
+ * lakukan hanya setelah data Tier 1 pada audit diganti dengan data resmi.
+ */
+export const modePratinjau = process.env["NEXT_PUBLIC_MODE_PRATINJAU"] === "1";
+
 export const site = {
   nama: "Islamic Center Wadi Mubarak",
   namaPendek: "Wadi Mubarak",

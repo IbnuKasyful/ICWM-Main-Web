@@ -10,7 +10,7 @@ import type { ProgramDonasi } from "@/lib/schemas";
 export function ProgramDonasiCard({ program }: { program: ProgramDonasi }) {
   return (
     <li className="group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-soft transition duration-200 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-card focus-within:shadow-card">
-      <div className="relative aspect-[3/2] overflow-hidden bg-sand-100">
+      <div className="relative aspect-[3/2] overflow-hidden bg-mist-100">
         <Image
           src={program.gambar.src}
           alt={program.gambar.alt}
@@ -20,11 +20,12 @@ export function ProgramDonasiCard({ program }: { program: ProgramDonasi }) {
           className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
         <span className="absolute top-3 left-3 flex gap-2">
-          <Badge nada="emas" className="bg-white/95 backdrop-blur-sm">
+          <Badge nada="aksen" className="bg-white/95 backdrop-blur-sm">
             {labelJenisDonasi[program.jenis]}
           </Badge>
+          {/* Putih di atas accent-500 hanya 2,9:1 — pakai accent-800. */}
           {program.mendesak ? (
-            <Badge nada="peringatan" className="bg-accent-500 text-white">
+            <Badge nada="peringatan" className="border-accent-800 bg-accent-800 text-white">
               Mendesak
             </Badge>
           ) : null}

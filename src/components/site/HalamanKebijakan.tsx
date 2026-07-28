@@ -32,7 +32,7 @@ export function HalamanKebijakan({
       <Section className="py-12 md:py-16">
         <div className="container-page">
           <div className="mx-auto max-w-3xl">
-            <p className="rounded-xl border border-line bg-sand-50 px-4 py-3 text-sm text-ink-muted">
+            <p className="rounded-xl border border-line bg-mist-50 px-4 py-3 text-sm text-ink-muted">
               Terakhir diperbarui {tanggal(diperbarui)}.
             </p>
 

@@ -113,7 +113,7 @@ export default function HalamanDampak() {
         </div>
       </Section>
 
-      <Section nada="pasir" className="py-14 md:py-20">
+      <Section nada="sejuk" className="py-14 md:py-20">
         <div className="container-page">
           <JudulSeksi
             atas="Di balik angka"
@@ -143,7 +143,7 @@ export default function HalamanDampak() {
       <Section className="py-14 md:py-20">
         <div className="container-page grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
           <div>
-            <div className="overflow-hidden rounded-3xl bg-sand-100">
+            <div className="overflow-hidden rounded-3xl bg-mist-100">
               <Image
                 src="/img/hero-dampak.svg"
                 alt="Santri penerima beasiswa mengikuti kelas bersama santri lain tanpa pembeda"

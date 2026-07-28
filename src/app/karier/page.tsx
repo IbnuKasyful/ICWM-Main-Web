@@ -159,7 +159,7 @@ export default function HalamanKarier() {
         </div>
       </Section>
 
-      <Section nada="pasir" className="py-14 md:py-20">
+      <Section nada="sejuk" className="py-14 md:py-20">
         <div className="container-page">
           <JudulSeksi atas="Mengapa di sini" judul="Yang kami" sorot="tawarkan" />
           <ul className="mt-12 grid gap-5 md:grid-cols-3">

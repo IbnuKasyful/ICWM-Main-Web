@@ -12,12 +12,12 @@ export function Section({
 }: {
   children: ReactNode;
   className?: string;
-  nada?: "putih" | "pasir" | "gelap";
+  nada?: "putih" | "sejuk" | "gelap";
   id?: string;
   as?: "section" | "div";
 }) {
   const nadaKelas =
-    nada === "pasir" ? "bg-sand-50" : nada === "gelap" ? "bg-brand-950 text-white" : "bg-white";
+    nada === "sejuk" ? "bg-mist-50" : nada === "gelap" ? "bg-brand-950 text-white" : "bg-white";
   return (
     <Tag id={id} className={cn("py-16 md:py-24", nadaKelas, className)}>
       {children}

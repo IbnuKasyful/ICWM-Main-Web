@@ -30,7 +30,7 @@ export function PostCard({
         className,
       )}
     >
-      <div className="relative aspect-[3/2] overflow-hidden bg-sand-100">
+      <div className="relative aspect-[3/2] overflow-hidden bg-mist-100">
         <Image
           src={post.gambar.src}
           alt={post.gambar.alt}

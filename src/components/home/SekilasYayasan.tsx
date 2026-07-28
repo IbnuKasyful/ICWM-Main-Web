@@ -1,5 +1,4 @@
-import Image from "next/image";
-
+import { BentoBerjalan } from "@/components/home/BentoBerjalan";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Section } from "@/components/ui/Section";
@@ -15,27 +14,8 @@ export function SekilasYayasan() {
   return (
     <Section>
       <div className="container-page">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <div className="relative order-2 lg:order-1">
-            <div className="overflow-hidden rounded-3xl bg-sand-100">
-              <Image
-                src="/img/sekilas.svg"
-                alt="Halaman masjid utama Kampus Wadi Mubarak menjelang waktu asar"
-                width={1200}
-                height={1000}
-                sizes="(min-width: 1024px) 560px, 100vw"
-                className="size-full object-cover"
-              />
-            </div>
-            <div className="absolute -right-2 -bottom-6 hidden max-w-[15rem] rounded-2xl border border-line bg-white p-5 shadow-lift md:block lg:-right-6">
-              <p className="font-display text-display-sm text-brand-700">28 tahun</p>
-              <p className="mt-1 text-xs leading-relaxed text-ink-muted">
-                mendampingi santri dan keluarganya di Bogor dan Yogyakarta.
-              </p>
-            </div>
-          </div>
-
-          <div className="order-1 lg:order-2">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div>
             <span className="inline-flex items-center rounded-full border border-accent-200 bg-accent-50 px-3 py-1 text-xs font-semibold tracking-[0.14em] text-accent-700 uppercase">
               Sekilas yayasan
             </span>
@@ -74,6 +54,20 @@ export function SekilasYayasan() {
               <ButtonLink href="/transparansi" varian="garis">
                 Lihat laporan
               </ButtonLink>
+            </div>
+          </div>
+
+          {/* Dinding foto berjalan — ditaruh di kanan agar teks tetap yang
+              pertama dibaca, baik pada satu kolom maupun dua kolom. */}
+          <div className="relative">
+            <BentoBerjalan />
+            {/* Disembunyikan di layar sempit: di sana keping ini menutupi
+                hampir seluruh lebar dinding foto. */}
+            <div className="absolute -bottom-4 -left-2 hidden max-w-[15rem] rounded-2xl border border-line bg-white p-5 shadow-lift md:block lg:-left-8">
+              <p className="font-display text-display-sm text-brand-700">28 tahun</p>
+              <p className="mt-1 text-xs leading-relaxed text-ink-muted">
+                mendampingi santri dan keluarganya di Bogor dan Yogyakarta.
+              </p>
             </div>
           </div>
         </div>

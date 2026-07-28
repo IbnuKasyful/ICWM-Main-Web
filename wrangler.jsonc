@@ -1,0 +1,46 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "icwm-main-web",
+	"main": ".open-next/worker.js",
+	"compatibility_date": "2026-07-01",
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+
+	// Berkas statis hasil build (HTML prerender, CSS, JS, gambar di public/).
+	"assets": {
+		"directory": ".open-next/assets",
+		"binding": "ASSETS"
+	},
+
+	// Pengoptimal gambar bawaan Cloudflare — menggantikan peran `sharp` yang
+	// dipakai next/image di server Node. Tidak perlu dibuat lebih dulu.
+	"images": {
+		"binding": "IMAGES"
+	},
+
+	"observability": {
+		"enabled": true
+	}
+
+	// CATATAN — cache ISR belum diaktifkan.
+	//
+	// Seluruh konten situs masih berasal dari berkas statis di `src/data/`, jadi
+	// `export const revalidate` di 14 halaman belum punya sumber data yang bisa
+	// berubah: isinya baru berganti ketika build dijalankan ulang. Cache
+	// inkremental baru diperlukan pada Tahap 0, saat WPGraphQL tersambung.
+	//
+	// Ketika saat itu tiba, tambahkan blok berikut lalu buat bucketnya dengan
+	// `npx wrangler r2 bucket create icwm-main-web-opennext-cache`:
+	//
+	//   "services": [
+	//     { "binding": "WORKER_SELF_REFERENCE", "service": "icwm-main-web" }
+	//   ],
+	//   "r2_buckets": [
+	//     {
+	//       "binding": "NEXT_INC_CACHE_R2_BUCKET",
+	//       "bucket_name": "icwm-main-web-opennext-cache"
+	//     }
+	//   ]
+	//
+	// dan aktifkan `incrementalCache: r2IncrementalCache` di open-next.config.ts.
+	// Rujukan: https://opennext.js.org/cloudflare/caching
+}

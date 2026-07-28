@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200" fill="none" role="img">
+  <!-- Figur potong (cutout) untuk hero beranda: latar transparan agar bisa
+       menumpuk judul raksasa. Ganti berkas ini dengan foto santri berlatar
+       transparan (PNG/WebP) tanpa perlu mengubah komponen Hero. -->
+  <defs>
+    <linearGradient id="jubah" x1="0.2" y1="0" x2="0.85" y2="1">
+      <stop offset="0%" stop-color="#f6f8fc"/>
+      <stop offset="100%" stop-color="#cbd7e6"/>
+    </linearGradient>
+    <linearGradient id="kerudung" x1="0.15" y1="0" x2="0.9" y2="1">
+      <stop offset="0%" stop-color="#3054a6"/>
+      <stop offset="100%" stop-color="#243c70"/>
+    </linearGradient>
+    <linearGradient id="rompi" x1="0.2" y1="0" x2="0.9" y2="1">
+      <stop offset="0%" stop-color="#243c70"/>
+      <stop offset="100%" stop-color="#101d39"/>
+    </linearGradient>
+  </defs>
+
+  <!-- leher & wajah -->
+  <path d="M405 420h90v130h-90z" fill="#e6bf9f"/>
+  <ellipse cx="450" cy="360" rx="124" ry="144" fill="#f2d3b8"/>
+
+  <!-- badan -->
+  <path d="M450 540c-152 0-254 72-274 184L140 1200h620l-36-476c-20-112-122-184-274-184z" fill="url(#jubah)"/>
+  <path d="M450 545c-42 0-78 11-99 27l-23 628h244l-23-628c-21-16-57-27-99-27z" fill="url(#rompi)"/>
+  <path d="M372 700h156M366 780h168" stroke="#00a2e9" stroke-opacity="0.55" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- lengan yang memegang kitab -->
+  <path d="M322 660c-58 96-50 232 14 316" stroke="url(#jubah)" stroke-width="112" stroke-linecap="round"/>
+  <path d="M578 660c58 96 50 232-14 316" stroke="url(#jubah)" stroke-width="112" stroke-linecap="round"/>
+
+  <!-- kerudung: bentuk luar dengan lubang wajah (evenodd) -->
+  <path fill-rule="evenodd" clip-rule="evenodd" fill="url(#kerudung)"
+        d="M450 118c142 0 218 106 218 242 0 112-26 162-26 242 52 22 62 62 62 104h-62c-22-62-84-94-146-104H404c-62 10-124 42-146 104h-62c0-42 10-82 62-104 0-80-26-130-26-242 0-136 76-242 218-242zm0 108a114 134 0 1 0 0.1 0z"/>
+  <path d="M262 560c40 26 96 40 188 40s148-14 188-40" stroke="#101d39" stroke-opacity="0.22" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- wajah -->
+  <ellipse cx="404" cy="366" rx="11" ry="14" fill="#0b1524"/>
+  <ellipse cx="496" cy="366" rx="11" ry="14" fill="#0b1524"/>
+  <path d="M382 326c14-10 32-10 44-2M474 324c12-8 30-8 44 2" stroke="#0b1524" stroke-opacity="0.55" stroke-width="8" stroke-linecap="round"/>
+  <path d="M428 424c14 12 30 12 44 0" stroke="#b4695f" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="360" cy="404" r="20" fill="#e0a487" fill-opacity="0.45"/>
+  <circle cx="540" cy="404" r="20" fill="#e0a487" fill-opacity="0.45"/>
+
+  <!-- kitab -->
+  <g transform="rotate(-7 450 910)">
+    <rect x="278" y="792" width="344" height="252" rx="18" fill="#243c70"/>
+    <rect x="296" y="810" width="308" height="216" rx="10" fill="#f6f8fc"/>
+    <rect x="310" y="824" width="280" height="188" rx="5" fill="none" stroke="#00a2e9" stroke-opacity="0.6" stroke-width="4"/>
+    <path d="M450 810v216" stroke="#cbd7e6" stroke-width="5"/>
+    <g stroke="#a8bad2" stroke-width="8" stroke-linecap="round">
+      <path d="M330 862h96M330 902h96M330 942h72M474 862h96M474 902h96M474 942h72"/>
+    </g>
+  </g>
+
+  <!-- tangan -->
+  <ellipse cx="322" cy="990" rx="44" ry="34" transform="rotate(-14 322 990)" fill="#f2d3b8"/>
+  <ellipse cx="586" cy="962" rx="44" ry="34" transform="rotate(14 586 962)" fill="#f2d3b8"/>
+</svg>

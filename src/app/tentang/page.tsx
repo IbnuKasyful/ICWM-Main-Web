@@ -76,7 +76,7 @@ export default function HalamanTentang() {
 
       <Section className="py-12 md:py-16">
         <div className="container-page">
-          <div className="overflow-hidden rounded-3xl bg-sand-100">
+          <div className="overflow-hidden rounded-3xl bg-mist-100">
             <Image
               src="/img/hero-tentang.svg"
               alt="Kompleks Kampus Wadi Mubarak di Megamendung, Bogor, dilihat dari halaman masjid"
@@ -92,7 +92,7 @@ export default function HalamanTentang() {
       </Section>
 
       {/* Visi & misi */}
-      <Section nada="pasir" className="py-14 md:py-20">
+      <Section nada="sejuk" className="py-14 md:py-20">
         <div className="container-page grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-16">
           <JudulSeksi
             atas="Arah gerak"
@@ -157,10 +157,10 @@ export default function HalamanTentang() {
       </Section>
 
       {/* Perjalanan */}
-      <Section nada="pasir" className="py-14 md:py-20">
+      <Section nada="sejuk" className="py-14 md:py-20">
         <div className="container-page">
           <JudulSeksi atas="Perjalanan" judul="Dari satu halaqah" sorot="ke sepuluh unit" />
-          <ol className="relative mt-12 ml-3 border-l border-line-warm pl-8">
+          <ol className="relative mt-12 ml-3 border-l border-line-strong pl-8">
             {perjalanan.map((p) => (
               <li key={p.tahun} className="relative pb-8 last:pb-0">
                 <span
@@ -189,7 +189,7 @@ export default function HalamanTentang() {
             <ul className="mt-12 grid gap-5 md:grid-cols-3">
               {testimoni.map((t) => (
                 <li key={t.slug} className="flex flex-col rounded-2xl border border-line bg-white p-6">
-                  <Icon nama="quran" className="size-6 text-accent-400" />
+                  <Icon nama="quran" className="size-6 text-accent-700" />
                   <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-pretty text-ink italic">
                     &ldquo;{t.kutipan}&rdquo;
                   </blockquote>
@@ -217,7 +217,7 @@ export default function HalamanTentang() {
       ) : null}
 
       {/* Tautan lanjut */}
-      <Section nada="pasir" className="py-14 md:py-20">
+      <Section nada="sejuk" className="py-14 md:py-20">
         <div className="container-page">
           <ul className="grid gap-4 md:grid-cols-3">
             {[

@@ -40,7 +40,7 @@ export function Progress({
             aria-valuemin={0}
             aria-valuemax={100}
             aria-label={`Progres penghimpunan ${capaian} persen`}
-            className="h-2 w-full overflow-hidden rounded-full bg-sand-200"
+            className="h-2 w-full overflow-hidden rounded-full bg-mist-200"
           >
             <div
               className={cn("h-full rounded-full", tuntas ? "bg-brand-600" : "bg-accent-400")}

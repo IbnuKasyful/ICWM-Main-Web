@@ -13,7 +13,7 @@ export function JaringanUnit({ units }: { units: readonly Unit[] }) {
     .filter((k) => k.isi.length > 0);
 
   return (
-    <Section nada="pasir">
+    <Section nada="sejuk">
       <div className="container-page">
         <KepalaDaftar
           judul="Sepuluh unit,"

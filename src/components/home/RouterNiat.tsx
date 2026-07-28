@@ -14,7 +14,7 @@ import { cn } from "@/lib/cn";
  */
 export function RouterNiat() {
   return (
-    <Section nada="pasir">
+    <Section nada="sejuk">
       <div className="container-page">
         <JudulSeksi
           atas="Mulai dari sini"

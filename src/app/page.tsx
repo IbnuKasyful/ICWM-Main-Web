@@ -41,8 +41,9 @@ export default function Beranda() {
       />
 
       <Kutipan
-        teks="Sebaik-baik kalian adalah orang yang mempelajari Al-Qur'an dan mengajarkannya."
-        sumber="HR. Bukhari"
+        teks="لَوْ طَهُرَتْ قُلُوبُنَا مَا شَبِعَتْ مِنْ كَلاَمِ اللَّهِ"
+        sumber="&quot;Seandainya hati kita suci bersih, niscaya kita tidak akan pernah kenyang (bosan) dari membaca kalam Allah (Al-Qur'an).&quot;"
+        arab
       />
 
       <RouterNiat />
@@ -67,7 +68,7 @@ export default function Beranda() {
       <AjakanDonasi sorot={programSorot} />
 
       {/* PRD §9.1 blok 7 — tepat 6 kartu, lalu tautan "lihat semua" */}
-      <Section nada="pasir" className="py-16 md:py-20">
+      <Section nada="sejuk" className="py-16 md:py-20">
         <div className="container-page">
           <KepalaDaftar
             judul="Kabar terbaru dari"

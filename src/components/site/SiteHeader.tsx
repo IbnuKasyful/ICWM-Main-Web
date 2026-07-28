@@ -52,7 +52,7 @@ export function SiteHeader({ units }: { units: readonly Unit[] }) {
       <div className="container-page">
         <div className="flex h-16 items-center justify-between gap-4 md:h-18">
           <Link href="/" className="shrink-0 rounded-lg" aria-label={`${site.nama} — beranda`}>
-            <Wordmark nama={site.namaPendek} keterangan="Islamic Center" />
+            <Wordmark nama={site.namaPendek} keterangan="Islamic Center" prioritas />
           </Link>
 
           {/* Navigasi desktop */}
@@ -67,7 +67,7 @@ export function SiteHeader({ units }: { units: readonly Unit[] }) {
                       "inline-flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-semibold transition-colors",
                       aktifDi(item.href)
                         ? "bg-brand-50 text-brand-800"
-                        : "text-ink-muted hover:bg-sand-50 hover:text-ink",
+                        : "text-ink-muted hover:bg-mist-50 hover:text-ink",
                     )}
                   >
                     {item.label}
@@ -92,7 +92,7 @@ export function SiteHeader({ units }: { units: readonly Unit[] }) {
                           <li key={anak.href + anak.label}>
                             <Link
                               href={anak.href}
-                              className="block rounded-xl px-3 py-2.5 transition-colors hover:bg-sand-50"
+                              className="block rounded-xl px-3 py-2.5 transition-colors hover:bg-mist-50"
                             >
                               <span className="block text-sm font-semibold text-ink">
                                 {anak.label}
@@ -117,7 +117,7 @@ export function SiteHeader({ units }: { units: readonly Unit[] }) {
             <Link
               href="/cari"
               aria-label="Cari di situs ini"
-              className="inline-flex size-10 items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-sand-50 hover:text-ink"
+              className="inline-flex size-10 items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-mist-50 hover:text-ink"
             >
               <Icon nama="cari" />
             </Link>
@@ -136,7 +136,7 @@ export function SiteHeader({ units }: { units: readonly Unit[] }) {
               aria-expanded={terbuka}
               aria-controls="menu-ponsel"
               aria-label={terbuka ? "Tutup menu" : "Buka menu"}
-              className="inline-flex size-10 items-center justify-center rounded-full border border-line text-ink transition-colors hover:bg-sand-50 lg:hidden"
+              className="inline-flex size-10 items-center justify-center rounded-full border border-line text-ink transition-colors hover:bg-mist-50 lg:hidden"
             >
               <Icon nama={terbuka ? "tutup" : "menu"} />
             </button>
@@ -167,7 +167,7 @@ export function SiteHeader({ units }: { units: readonly Unit[] }) {
                       <li key={anak.href + anak.label}>
                         <Link
                           href={anak.href}
-                          className="block rounded-lg px-2 py-1.5 text-sm text-ink-muted hover:bg-sand-50"
+                          className="block rounded-lg px-2 py-1.5 text-sm text-ink-muted hover:bg-mist-50"
                         >
                           {anak.label}
                         </Link>

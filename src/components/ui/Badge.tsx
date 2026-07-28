@@ -2,15 +2,15 @@ import type { ReactNode } from "react";
 
 import { cn } from "@/lib/cn";
 
-type Nada = "netral" | "brand" | "emas" | "sukses" | "peringatan" | "mati" | "aksen-unit";
+type Nada = "netral" | "brand" | "aksen" | "sukses" | "peringatan" | "mati" | "aksen-unit";
 
 const nadaKelas: Record<Nada, string> = {
-  netral: "bg-sand-100 text-ink-muted border-line-warm",
+  netral: "bg-mist-100 text-ink-muted border-line-strong",
   brand: "bg-brand-50 text-brand-800 border-brand-100",
-  emas: "bg-accent-50 text-accent-800 border-accent-100",
+  aksen: "bg-accent-50 text-accent-800 border-accent-100",
   sukses: "bg-brand-50 text-brand-700 border-brand-200",
   peringatan: "bg-accent-50 text-accent-700 border-accent-200",
-  mati: "bg-sand-100 text-ink-subtle border-line-warm",
+  mati: "bg-mist-100 text-ink-subtle border-line-strong",
   /** Memakai warna aksen unit yang di-set lewat CSS variable. */
   "aksen-unit": "border-transparent text-white",
 };

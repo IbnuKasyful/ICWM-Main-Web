@@ -9,7 +9,7 @@ export function PageHeader({
   atas,
   judul,
   keterangan,
-  nada = "pasir",
+  nada = "sejuk",
   children,
   aksi,
 }: {
@@ -17,7 +17,7 @@ export function PageHeader({
   atas?: string;
   judul: string;
   keterangan?: string;
-  nada?: "pasir" | "gelap";
+  nada?: "sejuk" | "gelap";
   children?: ReactNode;
   aksi?: ReactNode;
 }) {
@@ -27,7 +27,7 @@ export function PageHeader({
     <div
       className={cn(
         "relative overflow-hidden border-b",
-        gelap ? "border-white/10 bg-brand-950 text-white" : "border-line-warm bg-sand-50",
+        gelap ? "border-white/10 bg-brand-950 text-white" : "border-line-strong bg-mist-50",
       )}
     >
       <span

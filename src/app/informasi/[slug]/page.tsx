@@ -87,7 +87,7 @@ export default async function HalamanTulisan({ params }: { params: Promise<{ slu
       <article className="py-12 md:py-16">
         <div className="container-page">
           <div className="mx-auto max-w-3xl">
-            <div className="overflow-hidden rounded-3xl bg-sand-100">
+            <div className="overflow-hidden rounded-3xl bg-mist-100">
               <Image
                 src={post.gambar.src}
                 alt={post.gambar.alt}
@@ -130,7 +130,7 @@ export default async function HalamanTulisan({ params }: { params: Promise<{ slu
 
             {/* Jalur balik ke unit pemilik tulisan */}
             {unitUtama ? (
-              <div className="mt-10 flex flex-col gap-4 rounded-2xl border border-line bg-sand-50 p-6 sm:flex-row sm:items-center sm:justify-between">
+              <div className="mt-10 flex flex-col gap-4 rounded-2xl border border-line bg-mist-50 p-6 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="text-xs font-semibold tracking-[0.1em] text-ink-subtle uppercase">
                     Tulisan ini milik
@@ -149,7 +149,7 @@ export default async function HalamanTulisan({ params }: { params: Promise<{ slu
       </article>
 
       {terkait.length > 0 ? (
-        <section className="bg-sand-50 py-14 md:py-20">
+        <section className="bg-mist-50 py-14 md:py-20">
           <div className="container-page">
             <h2 className="font-display text-display-md text-ink">
               Tulisan <span className="text-brand-600">terkait</span>

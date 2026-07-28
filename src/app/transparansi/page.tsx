@@ -20,7 +20,7 @@ export const metadata = buatMetadata({
 
 const nadaJenis = {
   keuangan: "brand",
-  program: "emas",
+  program: "aksen",
   dampak: "netral",
 } as const;
 
@@ -78,7 +78,7 @@ export default function HalamanTransparansi() {
                             <a
                               href={l.url}
                               download
-                              className="flex flex-col gap-4 p-5 transition-colors hover:bg-sand-50 sm:flex-row sm:items-center md:p-6"
+                              className="flex flex-col gap-4 p-5 transition-colors hover:bg-mist-50 sm:flex-row sm:items-center md:p-6"
                             >
                               <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-700 ring-1 ring-brand-100 ring-inset">
                                 <Icon nama="dokumen" />

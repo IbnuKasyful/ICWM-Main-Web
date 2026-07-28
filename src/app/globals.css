@@ -4,81 +4,97 @@
    Sistem desain ICWM — PRD §10
    Semua token didefinisikan di sini. Komponen TIDAK BOLEH menulis warna
    mentah (hex/rgb); selalu lewat token di bawah ini.
+
+   Warna diturunkan dari lambang yayasan (public/img/LOGO-WM.png).
+   Nilai bertanda ★ diambil persis dari piksel berkas tersebut dan
+   tidak boleh diubah:
+     ★ #00a2e9  sian bilah kitab (rata, tanpa gradasi)
+     ★ #3054a6  ujung terang gradasi bilah lembah
+     ★ #243c70  inti biru bilah lembah
+     ★ #000c28  tinta kaligrafi الوادي المبارك
    ========================================================================== */
 
 @theme {
-  /* --- Warna: primer yayasan (hijau tua, kredibel & islami) --- */
-  --color-brand-50: #eef6f1;
-  --color-brand-100: #d6eadf;
-  --color-brand-200: #add5bf;
-  --color-brand-300: #7dbb9b;
-  --color-brand-400: #4e9c77;
-  --color-brand-500: #2e7d5b;
-  --color-brand-600: #1f6349;
-  --color-brand-700: #18503c;
-  --color-brand-800: #143f30;
-  --color-brand-900: #0f3126;
-  --color-brand-950: #081c16;
+  /* --- Warna: primer yayasan (biru lembah) --- */
+  --color-brand-50: #f0f4fa;
+  --color-brand-100: #dee7f5;
+  --color-brand-200: #bfcfea;
+  --color-brand-300: #96aeda;
+  --color-brand-400: #6c88c6;
+  --color-brand-500: #4a6bb8;
+  --color-brand-600: #3054a6; /* ★ */
+  --color-brand-700: #243c70; /* ★ */
+  --color-brand-800: #1b2c52;
+  --color-brand-900: #101d39;
+  --color-brand-950: #000c28; /* ★ */
 
-  /* --- Warna: aksen emas (highlight, badge, garis bawah judul) --- */
-  --color-accent-50: #fdf8ed;
-  --color-accent-100: #f9edd0;
-  --color-accent-200: #f2d99e;
-  --color-accent-300: #e8c069;
-  --color-accent-400: #e0a93f;
-  --color-accent-500: #ce8f22;
-  --color-accent-600: #a9701a;
-  --color-accent-700: #85561a;
-  --color-accent-800: #6d451c;
-  --color-accent-900: #5c3b1b;
+  /* --- Warna: aksen sian (highlight, badge, garis bawah judul) ---
+     Perhatian keterbacaan: accent-500 hanya 2,9:1 di atas putih sehingga
+     TIDAK BOLEH dipakai sebagai warna teks pada latar terang. Untuk teks
+     gunakan accent-700 (5,9:1) atau lebih gelap. Pada latar gelap,
+     accent-200/300 justru pilihan yang tepat. */
+  --color-accent-50: #e6f6fe;
+  --color-accent-100: #c7ecfd;
+  --color-accent-200: #94dbfb;
+  --color-accent-300: #5ac6f6;
+  --color-accent-400: #22b2f0;
+  --color-accent-500: #00a2e9; /* ★ bidang & grafis saja */
+  --color-accent-600: #0086c4; /* teks besar saja (4,0:1) */
+  --color-accent-700: #0069a0; /* aman untuk teks biasa (5,9:1) */
+  --color-accent-800: #075882;
+  --color-accent-900: #0c486b;
 
-  /* --- Warna: permukaan hangat (sand) --- */
-  --color-sand-50: #fbf8f3;
-  --color-sand-100: #f6f0e6;
-  --color-sand-200: #eee3d1;
-  --color-sand-300: #e2d0b5;
-  --color-sand-400: #d0b78f;
+  /* --- Warna: permukaan sejuk (mist) --- */
+  --color-mist-50: #f6f8fc;
+  --color-mist-100: #eef2f7;
+  --color-mist-200: #e0e8f1;
+  --color-mist-300: #cbd7e6;
+  --color-mist-400: #a8bad2;
 
-  /* --- Warna: teks & garis --- */
-  --color-ink: #12211b;
-  --color-ink-muted: #55665d;
-  --color-ink-subtle: #7b8a82;
-  --color-line: #e6e9e7;
-  --color-line-warm: #eae2d5;
+  /* --- Warna: teks & garis (netral berbias biru) --- */
+  --color-ink: #0b1524;
+  --color-ink-muted: #33445c;
+  --color-ink-subtle: #5d6e8a;
+  --color-line: #dce3ec;
+  --color-line-strong: #c6d2e1;
 
   /* --- Warna semantik status --- */
-  --color-success: #1f6349;
-  --color-warning: #a9701a;
-  --color-danger: #a3342b;
+  --color-success: #0e8a5f;
+  --color-warning: #b4690e;
+  --color-danger: #c0362c;
 
-  /* --- Tipografi --- */
+  /* --- Tipografi ---
+     Judul memakai Archivo: lockup panjang yayasan sudah disusun dengan
+     grotesk mampat bertulang tebal, dan sisi hurufnya yang rata sejalan
+     dengan bilah lambang yang bersudut tajam. Teks memakai Plus Jakarta
+     Sans — huruf Indonesia untuk lembaga Indonesia. */
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
 
   --text-display-2xl: 4.5rem;
   --text-display-2xl--line-height: 0.94;
-  --text-display-2xl--letter-spacing: -0.03em;
-  --text-display-2xl--font-weight: 700;
+  --text-display-2xl--letter-spacing: -0.02em;
+  --text-display-2xl--font-weight: 800;
 
   --text-display-xl: 3.5rem;
   --text-display-xl--line-height: 0.98;
-  --text-display-xl--letter-spacing: -0.025em;
-  --text-display-xl--font-weight: 700;
+  --text-display-xl--letter-spacing: -0.018em;
+  --text-display-xl--font-weight: 800;
 
   --text-display-lg: 2.75rem;
   --text-display-lg--line-height: 1.05;
-  --text-display-lg--letter-spacing: -0.02em;
-  --text-display-lg--font-weight: 700;
+  --text-display-lg--letter-spacing: -0.015em;
+  --text-display-lg--font-weight: 800;
 
   --text-display-md: 2rem;
   --text-display-md--line-height: 1.15;
-  --text-display-md--letter-spacing: -0.015em;
-  --text-display-md--font-weight: 600;
+  --text-display-md--letter-spacing: -0.012em;
+  --text-display-md--font-weight: 700;
 
   --text-display-sm: 1.5rem;
   --text-display-sm--line-height: 1.25;
-  --text-display-sm--letter-spacing: -0.01em;
-  --text-display-sm--font-weight: 600;
+  --text-display-sm--letter-spacing: -0.008em;
+  --text-display-sm--font-weight: 700;
 
   /* --- Radius --- */
   --radius-xs: 0.375rem;
@@ -89,13 +105,31 @@
   --radius-2xl: 2rem;
   --radius-3xl: 2.5rem;
 
-  /* --- Bayangan (lembut, hangat) --- */
-  --shadow-soft: 0 1px 2px rgba(18, 33, 27, 0.04), 0 2px 8px rgba(18, 33, 27, 0.04);
-  --shadow-card: 0 1px 3px rgba(18, 33, 27, 0.05), 0 8px 24px -8px rgba(18, 33, 27, 0.08);
-  --shadow-lift: 0 2px 4px rgba(18, 33, 27, 0.05), 0 16px 40px -12px rgba(18, 33, 27, 0.14);
+  /* --- Bayangan (dinaungi biru, bukan abu netral) --- */
+  --shadow-soft: 0 1px 2px rgba(11, 21, 36, 0.05), 0 2px 8px rgba(11, 21, 36, 0.05);
+  --shadow-card: 0 1px 3px rgba(11, 21, 36, 0.06), 0 8px 24px -8px rgba(11, 21, 36, 0.1);
+  --shadow-lift: 0 2px 4px rgba(11, 21, 36, 0.06), 0 16px 40px -12px rgba(11, 21, 36, 0.16);
 
   /* --- Lebar kontainer --- */
   --container-page: 78rem;
+
+  /* --- Gerak: dinding foto berjalan (§9.1 blok 4) ---
+     Dua laju berbeda supaya kedua kolom tidak pernah sejajar; yang lebih lambat
+     dibaca sebagai lapisan belakang. Sengaja pelan: ini latar, bukan tontonan. */
+  --animate-bento-lambat: bento-naik 52s linear infinite;
+  --animate-bento-cepat: bento-naik 38s linear infinite;
+
+  @keyframes bento-naik {
+    from {
+      transform: translateY(0);
+    }
+    /* Daftar dirender dua salinan, jadi setengah lintasan = tepat satu salinan.
+       Tambahan 0,5rem menutup satu jarak antar-kartu (gap-4) agar sambungan
+       antar-putaran tidak terlihat meloncat. */
+    to {
+      transform: translateY(calc(-50% - 0.5rem));
+    }
+  }
 }
 
 /* Aksen per unit (PRD §7.2 `warna_aksen`). Nilai dasar = warna yayasan,
@@ -144,9 +178,17 @@
   }
 
   ::selection {
-    background-color: var(--color-brand-100);
+    background-color: var(--color-accent-100);
     color: var(--color-brand-900);
   }
+}
+
+/* Archivo adalah huruf variabel dengan sumbu lebar 62–125%. Utilitas
+   `font-display` bawaan Tailwind hanya menyetel font-family, jadi ragam
+   mampat disetel di sini — properti berbeda, tidak bertabrakan dengan
+   utilitas aslinya. */
+.font-display {
+  font-stretch: 78%;
 }
 
 @utility container-page {

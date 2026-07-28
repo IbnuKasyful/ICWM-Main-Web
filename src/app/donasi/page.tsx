@@ -129,7 +129,7 @@ export default function HalamanDonasi() {
       </Section>
 
       {/* Daftar program */}
-      <Section nada="pasir" className="py-14 md:py-20">
+      <Section nada="sejuk" className="py-14 md:py-20">
         <div className="container-page">
           <JudulSeksi
             atas="Program"
@@ -192,7 +192,7 @@ export default function HalamanDonasi() {
       </Section>
 
       {/* Alur setelah berdonasi */}
-      <Section nada="pasir" className="py-14 md:py-20">
+      <Section nada="sejuk" className="py-14 md:py-20">
         <div className="container-page grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-16">
           <JudulSeksi
             atas="Setelah berdonasi"
@@ -246,7 +246,7 @@ export default function HalamanDonasi() {
                     <li key={l.slug}>
                       <Link
                         href="/transparansi"
-                        className="flex items-center gap-4 p-5 transition-colors hover:bg-sand-50"
+                        className="flex items-center gap-4 p-5 transition-colors hover:bg-mist-50"
                       >
                         <Icon nama="dokumen" className="size-5 shrink-0 text-brand-600" />
                         <span className="min-w-0 flex-1">

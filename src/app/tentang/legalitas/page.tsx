@@ -67,7 +67,7 @@ export default function HalamanLegalitas() {
         </div>
       </Section>
 
-      <Section nada="pasir" className="py-14 md:py-20">
+      <Section nada="sejuk" className="py-14 md:py-20">
         <div className="container-page grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
           <JudulSeksi
             atas="Identitas hukum"

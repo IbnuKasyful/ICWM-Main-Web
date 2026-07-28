@@ -1,25 +1,70 @@
 import Image from "next/image";
-import Link from "next/link";
 
+import { PintasanJenjang } from "@/components/home/PintasanJenjang";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
-import { labelJenjang } from "@/lib/format";
-import type { Jenjang } from "@/lib/schemas";
+import { cn } from "@/lib/cn";
 
 /**
- * PRD §9.1 blok 1 — satu pesan, satu gambar, satu CTA utama. BUKAN carousel:
- * carousel di situs lama menurunkan performa dan nyaris tak pernah diklik
- * melewati slide pertama.
+ * PRD §9.1 blok 1 — satu pesan, satu CTA utama. BUKAN carousel: carousel di
+ * situs lama menurunkan performa dan nyaris tak pernah diklik melewati slide
+ * pertama.
+ *
+ * Susunan dua kolom: pesan + CTA di kiri, kisi empat potret di kanan. Potret
+ * dibaca berurutan (kiri→kanan, atas→bawah) dari anak usia dini sampai dewasa
+ * — itulah cara tercepat menyampaikan bahwa yayasan mendampingi satu anak
+ * sepanjang jenjang, tanpa perlu satu kalimat penjelas pun.
  */
 
-const pintasanJenjang: { jenjang: Jenjang; href: string }[] = [
-  { jenjang: "paud", href: "/program?jenjang=paud" },
-  { jenjang: "sd", href: "/program?jenjang=sd" },
-  { jenjang: "smp", href: "/program?jenjang=smp" },
-  { jenjang: "sma", href: "/program?jenjang=sma" },
-  { jenjang: "tinggi", href: "/program?jenjang=tinggi" },
-  { jenjang: "non-formal", href: "/program?jenjang=non-formal" },
-];
+/**
+ * Urutan potret = urutan usia. Jangan diacak: urutannya yang bercerita.
+ *
+ * `tinggi` menyetel proporsi figur terhadap kartunya. Sengaja tidak seragam:
+ * kalau semua figur dibuat setinggi kartu, anak usia dini tampak sebesar orang
+ * dewasa dan pesan "tumbuh dari kecil sampai dewasa" justru hilang.
+ */
+const tahapan = [
+  {
+    src: "/img/hero1.png",
+    w: 189,
+    h: 336,
+    alt: "Santriwati taman asuh usia dini memeluk mushaf Al-Qur'an",
+    tahap: "Usia dini",
+    usia: "4–6 tahun",
+    latar: "from-accent-50",
+    tinggi: "h-[96%]",
+  },
+  {
+    src: "/img/hero2.png",
+    w: 205,
+    h: 364,
+    alt: "Santri sekolah dasar berpeci memeluk mushaf Al-Qur'an",
+    tahap: "Sekolah dasar",
+    usia: "6–12 tahun",
+    latar: "from-mist-200",
+    tinggi: "h-full",
+  },
+  {
+    src: "/img/hero3.png",
+    w: 373,
+    h: 669,
+    alt: "Santriwati jenjang menengah membawa mushaf Al-Qur'an",
+    tahap: "Remaja",
+    usia: "12–18 tahun",
+    latar: "from-brand-100",
+    tinggi: "h-full",
+  },
+  {
+    src: "/img/hero4.png",
+    w: 373,
+    h: 669,
+    alt: "Mahasantri dewasa membawa mushaf Al-Qur'an",
+    tahap: "Dewasa",
+    usia: "Lulusan SMA",
+    latar: "from-accent-100",
+    tinggi: "h-full",
+  },
+] as const;
 
 export function Hero({
   jumlahUnit,
@@ -29,99 +74,135 @@ export function Hero({
   jumlahSantri: string;
 }) {
   return (
-    <section className="relative overflow-hidden bg-white pt-10 pb-16 md:pt-14 md:pb-24">
+    <section className="relative overflow-hidden bg-white pt-8 pb-16 md:pt-12 md:pb-24">
       <span
         aria-hidden="true"
         className="pointer-events-none absolute -top-32 -left-24 size-96 rounded-full bg-brand-100/50 blur-3xl"
       />
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute top-40 -right-32 size-[28rem] rounded-full bg-accent-50/70 blur-3xl"
+      />
 
       <div className="container-page relative">
-        <div className="flex flex-col items-start gap-4">
-          <span className="inline-flex items-center gap-2 rounded-full border border-accent-200 bg-accent-50 px-3.5 py-1.5 text-xs font-semibold tracking-[0.12em] text-accent-700 uppercase">
-            <Icon nama="bintang" className="size-3.5" />
-            Sejak 1998 · Bogor & Sleman
-          </span>
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_28rem] lg:gap-14 xl:grid-cols-[minmax(0,1fr)_32rem]">
+          {/* ---------- Kolom kiri: pesan, CTA, bukti ---------- */}
+          <div className="max-w-xl">
+            <h1 className="font-display text-[clamp(3.2rem,6.5vw,5rem)] leading-[1.04] font-extrabold tracking-[-0.03em] text-balance text-ink">
+              Pendidikan Qur&apos;ani
+              <br />
+              <span className="text-brand-600">dari usia dini</span>
+              <br />
+              sampai dewasa
+            </h1>
 
-          <h1 className="max-w-4xl font-display text-display-lg text-balance text-ink md:text-display-xl lg:text-display-2xl">
-            Menemani anak Anda tumbuh bersama{" "}
-            <span className="relative text-brand-700">
-              Al-Qur&apos;an
-              <span
-                aria-hidden="true"
-                className="absolute inset-x-0 -bottom-1 h-2 rounded-full bg-accent-200/70 md:-bottom-2 md:h-3"
-              />
-            </span>
-          </h1>
-        </div>
+            <p className="mt-6 text-base leading-relaxed text-pretty text-ink-muted">
+              Sepuluh unit pendidikan — dari taman asuh usia dini sampai perguruan tinggi —
+              beserta lembaga amil zakat resmi, dalam satu naungan. Temukan unit yang
+              benar-benar cocok untuk anak Anda sebelum menghubungi siapa pun.
+            </p>
 
-        <div className="mt-10 grid items-stretch gap-6 lg:mt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
-          {/* Panel hangat berisi pesan utama & CTA */}
-          <div className="flex flex-col justify-between rounded-3xl bg-gradient-to-br from-sand-100 via-sand-50 to-accent-50 p-7 md:p-10">
-            <div>
-              <p className="max-w-lg text-base leading-relaxed text-pretty text-ink-muted md:text-lg">
-                Sepuluh unit pendidikan — dari taman asuh usia dini sampai perguruan tinggi —
-                beserta lembaga amil zakat resmi, dalam satu naungan. Temukan unit yang benar-benar
-                cocok untuk anak Anda sebelum menghubungi siapa pun.
-              </p>
-
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <ButtonLink href="/program" ukuran="lg">
-                  Cari unit yang cocok
-                  <Icon nama="panah" className="size-4" />
-                </ButtonLink>
-                <ButtonLink href="/tentang" varian="garis" ukuran="lg">
-                  Kenali yayasan
-                </ButtonLink>
-              </div>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <ButtonLink href="/program" varian="kedua" ukuran="lg">
+                Cari unit yang cocok
+                <Icon nama="panah" className="size-4" />
+              </ButtonLink>
+              <ButtonLink href="/tentang" varian="garis" ukuran="lg">
+                Kenali yayasan
+              </ButtonLink>
             </div>
 
-            <div className="mt-10 border-t border-ink/10 pt-6">
-              <p className="text-xs font-semibold tracking-[0.12em] text-ink-subtle uppercase">
-                Langsung ke jenjang
-              </p>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {pintasanJenjang.map((p) => (
-                  <li key={p.jenjang}>
-                    <Link
-                      href={p.href}
-                      className="inline-flex rounded-full border border-ink/10 bg-white/70 px-3.5 py-1.5 text-xs font-semibold text-ink transition-colors hover:border-brand-300 hover:bg-white"
-                    >
-                      {labelJenjang[p.jenjang]}
-                    </Link>
+            {/* Bukti sosial: tumpukan wajah + angka, pola dari referensi. */}
+            <div className="mt-10 flex items-center gap-4 border-t border-ink/10 pt-6">
+              <ul aria-hidden="true" className="flex shrink-0 -space-x-3">
+                {tahapan.map((t) => (
+                  <li
+                    key={t.src}
+                    className={cn(
+                      "size-11 overflow-hidden rounded-full bg-gradient-to-b to-white ring-2 ring-white",
+                      t.latar,
+                    )}
+                  >
+                    <Image
+                      src={t.src}
+                      alt=""
+                      width={t.w}
+                      height={t.h}
+                      className="size-full object-cover object-top"
+                    />
                   </li>
                 ))}
               </ul>
+              <p className="text-sm leading-snug text-ink-muted">
+                <span className="font-display text-display-sm text-brand-700">
+                  {jumlahSantri}
+                </span>{" "}
+                santri aktif di {jumlahUnit} unit &amp; lembaga
+              </p>
+            </div>
+
+            <div className="mt-8">
+              <p className="text-xs font-semibold tracking-[0.12em] text-ink-subtle uppercase">
+                Langsung ke jenjang
+              </p>
+              <PintasanJenjang />
             </div>
           </div>
 
-          {/* Satu gambar, bukan carousel */}
-          <div className="relative">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-brand-900 lg:aspect-auto lg:h-full">
-              <Image
-                src="/img/hero-utama.svg"
-                alt="Suasana halaqah santri di masjid utama Kampus Wadi Mubarak, Bogor"
-                width={1600}
-                height={1200}
-                priority
-                fetchPriority="high"
-                sizes="(min-width: 1024px) 620px, 100vw"
-                className="size-full object-cover"
-              />
-            </div>
-
-            <div className="absolute right-4 bottom-4 left-4 flex flex-wrap items-center gap-x-6 gap-y-3 rounded-2xl border border-white/15 bg-white/95 px-5 py-4 shadow-lift backdrop-blur-sm md:right-6 md:bottom-6 md:left-auto md:max-w-xs md:flex-col md:items-start">
-              <div>
-                <p className="font-display text-display-sm text-brand-700">{jumlahSantri}</p>
-                <p className="text-xs text-ink-muted">santri aktif tahun ini</p>
-              </div>
-              <div className="md:mt-1 md:border-t md:border-line md:pt-3">
-                <p className="font-display text-display-sm text-brand-700">{jumlahUnit}</p>
-                <p className="text-xs text-ink-muted">unit pendidikan & lembaga</p>
-              </div>
-            </div>
-          </div>
+          {/* ---------- Kolom kanan: kisi empat potret ---------- */}
+          <KisiTahapan />
         </div>
       </div>
     </section>
+  );
+}
+
+/**
+ * Empat potret dalam kisi 2×2. Kolom kanan digeser turun sedikit pada layar
+ * lebar supaya kisi tidak terbaca sebagai tabel kaku. Gambar berlatar
+ * transparan, jadi tiap kartu memberi bidang warna lembut sebagai alasnya.
+ */
+function KisiTahapan() {
+  return (
+    <div className="relative mx-auto w-full max-w-[26rem] lg:mx-0 lg:max-w-none">
+      <ol className="grid grid-cols-2 gap-3 sm:gap-4">
+        {tahapan.map((t, i) => (
+          <li key={t.src} className={cn(i % 2 === 1 && "lg:translate-y-8")}>
+            <figure
+              className={cn(
+                // Padding atas menyisakan jalur bebas untuk keping keterangan:
+                // tinggi figur dihitung terhadap ruang di bawahnya, jadi figur
+                // tertinggi sekalipun tidak pernah menabrak keping itu.
+                "relative flex aspect-[4/5] items-end overflow-hidden rounded-[1.75rem] bg-gradient-to-b to-white pt-10 ring-1 ring-ink/5 sm:pt-12",
+                t.latar,
+              )}
+            >
+              <Image
+                src={t.src}
+                alt={t.alt}
+                width={t.w}
+                height={t.h}
+                priority={i < 2}
+                fetchPriority={i === 0 ? "high" : undefined}
+                sizes="(min-width: 1280px) 15rem, (min-width: 1024px) 13rem, (min-width: 640px) 12rem, 42vw"
+                className={cn("w-full object-contain object-bottom select-none", t.tinggi)}
+              />
+              {/* Keterangan usia disembunyikan di layar sempit agar keping tetap
+                  satu baris; nama tahapnya sudah cukup bercerita. */}
+              <figcaption className="absolute inset-x-3 top-3 flex items-baseline gap-x-1.5 rounded-full bg-white/85 px-3 py-1.5 text-[0.7rem] leading-tight font-semibold text-ink shadow-soft backdrop-blur-sm">
+                {t.tahap}
+                <span className="hidden font-normal text-ink-subtle sm:inline">{t.usia}</span>
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ol>
+
+      {/* Keping mengambang — penanda bahwa keempat tahap ada di satu naungan. */}
+      <p className="absolute -top-4 right-2 z-20 hidden items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-semibold text-ink shadow-card sm:inline-flex lg:-right-2">
+        <Icon nama="quran" className="size-4 text-accent-700" />
+        Tahfizh berjenjang, satu naungan
+      </p>
+    </div>
   );
 }

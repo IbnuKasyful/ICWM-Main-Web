@@ -50,7 +50,7 @@ export default function HalamanGaleri() {
               {galeri.map((g, i) => (
                 <figure
                   key={g.src}
-                  className="break-inside-avoid overflow-hidden rounded-2xl bg-sand-100"
+                  className="break-inside-avoid overflow-hidden rounded-2xl bg-mist-100"
                 >
                   <Image
                     src={g.src}

@@ -53,7 +53,7 @@ export default function HalamanAgenda() {
       </Section>
 
       {lampau.length > 0 ? (
-        <Section nada="pasir" className="py-14 md:py-20">
+        <Section nada="sejuk" className="py-14 md:py-20">
           <div className="container-page">
             <h2 className="font-display text-display-md text-ink">
               Kegiatan <span className="text-brand-600">yang sudah berlalu</span>

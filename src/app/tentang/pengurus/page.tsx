@@ -73,7 +73,7 @@ export default function HalamanPengurus() {
                         key={p.slug}
                         className="flex flex-col overflow-hidden rounded-2xl border border-line bg-white transition-colors hover:border-brand-200"
                       >
-                        <div className="aspect-square bg-sand-100">
+                        <div className="aspect-square bg-mist-100">
                           {p.foto ? (
                             <Image
                               src={p.foto.src}

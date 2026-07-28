@@ -94,7 +94,7 @@ export default async function HalamanProfilUnit({
       {/* Identitas unit */}
       <section className="py-12 md:py-16">
         <div className="container-page">
-          <div className="overflow-hidden rounded-3xl bg-sand-100">
+          <div className="overflow-hidden rounded-3xl bg-mist-100">
             <Image
               src={profil.hero.src}
               alt={profil.hero.alt}
@@ -126,7 +126,7 @@ export default async function HalamanProfilUnit({
       </section>
 
       {/* Untuk siapa unit ini */}
-      <section className="bg-sand-50 py-14 md:py-20">
+      <section className="bg-mist-50 py-14 md:py-20">
         <div className="container-page grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-16">
           <JudulSeksi
             atas="Untuk siapa"
@@ -183,7 +183,7 @@ export default async function HalamanProfilUnit({
       </section>
 
       {/* Kurikulum & fasilitas */}
-      <section className="bg-sand-50 py-14 md:py-20">
+      <section className="bg-mist-50 py-14 md:py-20">
         <div className="container-page grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <h2 className="font-display text-display-md text-ink">
@@ -227,7 +227,7 @@ export default async function HalamanProfilUnit({
             </h2>
             <ul className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
               {profil.galeri.map((g, i) => (
-                <li key={`${g.src}-${i}`} className="overflow-hidden rounded-xl bg-sand-100">
+                <li key={`${g.src}-${i}`} className="overflow-hidden rounded-xl bg-mist-100">
                   <Image
                     src={g.src}
                     alt={g.alt}
@@ -270,7 +270,7 @@ export default async function HalamanProfilUnit({
               </ol>
             </div>
 
-            <div className="flex flex-col gap-5 rounded-2xl bg-sand-50 p-6">
+            <div className="flex flex-col gap-5 rounded-2xl bg-mist-50 p-6">
               <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-between gap-3">
                   <span className="text-xs font-semibold tracking-[0.1em] text-ink-subtle uppercase">
@@ -280,7 +280,7 @@ export default async function HalamanProfilUnit({
                     {labelStatusPpdb[unit.status_ppdb]}
                   </Badge>
                 </div>
-                <div className="flex items-baseline justify-between gap-3 border-t border-line-warm pt-3">
+                <div className="flex items-baseline justify-between gap-3 border-t border-line-strong pt-3">
                   <span className="text-xs font-semibold tracking-[0.1em] text-ink-subtle uppercase">
                     Periode
                   </span>
@@ -288,7 +288,7 @@ export default async function HalamanProfilUnit({
                     {unit.periode_ppdb}
                   </span>
                 </div>
-                <div className="flex items-baseline justify-between gap-3 border-t border-line-warm pt-3">
+                <div className="flex items-baseline justify-between gap-3 border-t border-line-strong pt-3">
                   <span className="text-xs font-semibold tracking-[0.1em] text-ink-subtle uppercase">
                     Biaya
                   </span>
@@ -300,7 +300,7 @@ export default async function HalamanProfilUnit({
 
               {/* PRD §9.3 — CTA keluar hanya bila url_subdomain terisi; bila kosong,
                   tampilkan tombol WhatsApp unit. Bila PPDB tutup, CTA menyesuaikan. */}
-              <div className="mt-1 flex flex-col gap-3 border-t border-line-warm pt-5">
+              <div className="mt-1 flex flex-col gap-3 border-t border-line-strong pt-5">
                 {ppdbTutup ? (
                   <>
                     <p className="text-sm leading-relaxed text-ink-muted">
@@ -367,7 +367,7 @@ export default async function HalamanProfilUnit({
       </section>
 
       {/* Berita terkait unit ini */}
-      <section className="bg-sand-50 py-14 md:py-20">
+      <section className="bg-mist-50 py-14 md:py-20">
         <div className="container-page">
           <h2 className="font-display text-display-md text-ink">
             Kabar dari <span className="text-brand-600">{unit.nama_pendek}</span>

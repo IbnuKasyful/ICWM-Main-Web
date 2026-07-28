@@ -76,10 +76,10 @@ export function IconChip({
 }: {
   nama: NamaIkon;
   className?: string;
-  nada?: "brand" | "emas" | "terang";
+  nada?: "brand" | "aksen" | "terang";
 }) {
   const nadaKelas =
-    nada === "emas"
+    nada === "aksen"
       ? "bg-accent-50 text-accent-700 ring-accent-100"
       : nada === "terang"
         ? "bg-white/10 text-white ring-white/15"

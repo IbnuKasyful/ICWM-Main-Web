@@ -35,7 +35,7 @@ export function DaftarRekening({ rekening }: { rekening: readonly Rekening[] }) 
             </div>
           </div>
 
-          <div className="mt-5 rounded-xl bg-sand-50 p-4">
+          <div className="mt-5 rounded-xl bg-mist-50 p-4">
             <p className="text-xs text-ink-subtle">{r.bank}</p>
             <p className="mt-1 font-display text-xl font-bold tracking-tight tabular-nums text-ink">
               {r.nomor}

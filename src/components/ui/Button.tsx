@@ -15,7 +15,7 @@ const varianKelas: Record<Varian, string> = {
     "border border-brand-700/25 bg-white text-brand-800 hover:border-brand-700/50 hover:bg-brand-50",
   hantu: "text-brand-800 hover:bg-brand-50",
   terang:
-    "bg-white text-brand-900 hover:bg-sand-100 shadow-soft",
+    "bg-white text-brand-900 hover:bg-mist-100 shadow-soft",
 };
 
 const ukuranKelas: Record<Ukuran, string> = {

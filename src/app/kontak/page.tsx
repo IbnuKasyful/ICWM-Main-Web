@@ -141,7 +141,7 @@ export default function HalamanKontak() {
       </Section>
 
       {/* Narahubung per unit */}
-      <Section nada="pasir" className="py-14 md:py-20">
+      <Section nada="sejuk" className="py-14 md:py-20">
         <div className="container-page">
           <h2 className="font-display text-display-md text-ink">
             Narahubung <span className="text-brand-600">setiap unit</span>

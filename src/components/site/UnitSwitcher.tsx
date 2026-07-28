@@ -67,7 +67,7 @@ export function UnitSwitcher({
       >
         <Link
           href={hrefSitusIni}
-          className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-ink hover:bg-sand-50"
+          className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-ink hover:bg-mist-50"
         >
           <Icon nama="yayasan" className="size-4 text-brand-600" />
           {labelSitusIni}
@@ -85,7 +85,7 @@ export function UnitSwitcher({
                     href={`/program/${u.slug}`}
                     aria-current={u.slug === unitAktif ? "page" : undefined}
                     className={cn(
-                      "flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition-colors hover:bg-sand-50",
+                      "flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition-colors hover:bg-mist-50",
                       u.slug === unitAktif ? "bg-brand-50 font-semibold text-brand-800" : "text-ink-muted",
                     )}
                   >

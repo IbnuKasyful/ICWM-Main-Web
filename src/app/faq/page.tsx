@@ -98,7 +98,7 @@ export default function HalamanFaq() {
               </div>
             )}
 
-            <div className="mt-12 flex flex-col gap-5 rounded-2xl border border-line bg-sand-50 p-7 sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-12 flex flex-col gap-5 rounded-2xl border border-line bg-mist-50 p-7 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-start gap-3">
                 <Icon nama="info" className="mt-0.5 size-5 shrink-0 text-brand-700" />
                 <div>
