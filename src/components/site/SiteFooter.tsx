@@ -151,9 +151,7 @@ export function SiteFooter({
           <p>
             © {tahun} {nama}. Seluruh hak cipta dilindungi.
           </p>
-          <p>
-            {lazis.nama} — {lazis.nomorIzin}
-          </p>
+          <p>{lazis.nama}</p>
         </div>
       </div>
 

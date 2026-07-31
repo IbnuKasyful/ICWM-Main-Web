@@ -96,8 +96,7 @@ const berkas = [
 
 /** Unit — hero profil + logo. */
 const units = [
-  "taud-saqu-bogor",
-  "taud-saqu-sleman",
+  "taud-saqu",
   "sdit-wadi-mubarak",
   "smp-tahfizh-putra",
   "smp-tahfizh-putri",

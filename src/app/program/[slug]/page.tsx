@@ -88,6 +88,9 @@ export default async function HalamanProfilUnit({
           <Badge nada="netral">{labelGender[unit.gender]}</Badge>
           <Badge nada="netral">{labelModel[unit.model_belajar]}</Badge>
           <Badge nada="netral">Kampus {labelLokasi[unit.lokasi_kampus]}</Badge>
+          {unit.cabang.length > 0 ? (
+            <Badge nada="netral">{unit.cabang.length} cabang</Badge>
+          ) : null}
         </div>
       </PageHeader>
 
@@ -217,6 +220,59 @@ export default async function HalamanProfilUnit({
           </div>
         </div>
       </section>
+
+      {/* Cabang */}
+      {unit.cabang.length > 0 ? (
+        <section className="py-14 md:py-20">
+          <div className="container-page">
+            <JudulSeksi
+              atas="Cabang"
+              judul={`${unit.nama_pendek} hadir di`}
+              sorot={`${unit.cabang.length} kota`}
+              rata="kiri"
+              keterangan="Kurikulum, target hafalan, dan penilaian sama di setiap cabang. Hubungi panitia cabang terdekat untuk jadwal kunjungan."
+            />
+            <ul className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {unit.cabang.map((c) => {
+                const nadaCabang = nadaStatus(c.status_ppdb);
+                return (
+                  <li
+                    key={c.slug}
+                    className="flex flex-col gap-3 rounded-2xl border border-line bg-white p-5 shadow-soft"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <h3 className="font-display text-base leading-snug font-semibold text-ink">
+                          {c.nama}
+                        </h3>
+                        <p className="mt-0.5 text-xs font-semibold tracking-[0.1em] text-ink-subtle uppercase">
+                          {c.kota}
+                        </p>
+                      </div>
+                      <Badge nada={nadaCabang.badge} ikon={<TitikStatus nada={nadaCabang.titik} />}>
+                        {labelStatusPpdb[c.status_ppdb]}
+                      </Badge>
+                    </div>
+                    <p className="text-sm leading-relaxed text-ink-muted">{c.alamat}</p>
+                    <a
+                      href={tautanWhatsApp(
+                        c.kontak_wa,
+                        `Assalamu'alaikum. Saya ingin bertanya mengenai pendaftaran di ${c.nama}.`,
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:text-brand-800"
+                    >
+                      Hubungi panitia cabang
+                      <Icon nama="panahKanan" className="size-3.5" tebal={2.4} />
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </section>
+      ) : null}
 
       {/* Galeri */}
       {profil.galeri.length > 0 ? (

@@ -15,7 +15,7 @@ export const dynamic = "force-static";
 export const metadata = buatMetadata({
   judul: "Tentang Islamic Center Wadi Mubarak",
   deskripsi:
-    "Sejarah, visi, nilai, dan arah gerak Islamic Center Wadi Mubarak — yayasan yang menaungi sepuluh unit pendidikan dan lembaga amil zakat di Bogor dan Sleman.",
+    "Sejarah, visi, nilai, dan arah gerak Islamic Center Wadi Mubarak — yayasan yang menaungi sembilan unit pendidikan dan lembaga amil zakat di Bogor dan Sleman.",
   path: "/tentang",
   gambar: "/img/hero-tentang.svg",
 });
@@ -33,7 +33,7 @@ const nilai: { judul: string; isi: string; ikon: NamaIkon }[] = [
   },
   {
     judul: "Terbuka untuk diperiksa",
-    isi: "Legalitas, struktur pengurus, dan laporan keuangan kami publikasikan tanpa diminta. Amanah yang tidak bisa diperiksa bukanlah amanah.",
+    isi: "Laporan keuangan dan capaian program kami publikasikan tanpa diminta. Amanah yang tidak bisa diperiksa bukanlah amanah.",
     ikon: "perisai",
   },
   {
@@ -63,13 +63,13 @@ export default function HalamanTentang() {
         jejak={[{ label: "Tentang", href: "/tentang" }]}
         atas="Profil yayasan"
         judul="Dua puluh delapan tahun menemani santri dan keluarganya"
-        keterangan="Bermula dari satu halaqah kecil di Megamendung, hari ini Islamic Center Wadi Mubarak menaungi sepuluh unit pendidikan, dua kampus, dan sebuah lembaga amil zakat berizin resmi."
+        keterangan="Bermula dari satu halaqah kecil di Megamendung, hari ini Islamic Center Wadi Mubarak menaungi sembilan unit pendidikan, dua kampus, dan sebuah lembaga amil zakat berizin resmi."
         aksi={
           <>
-            <ButtonLink href="/tentang/legalitas" varian="garis">
-              Legalitas
+            <ButtonLink href="/transparansi" varian="garis">
+              Laporan & dokumen
             </ButtonLink>
-            <ButtonLink href="/tentang/pengurus">Struktur pengurus</ButtonLink>
+            <ButtonLink href="/dampak">Dampak</ButtonLink>
           </>
         }
       />
@@ -159,7 +159,7 @@ export default function HalamanTentang() {
       {/* Perjalanan */}
       <Section nada="sejuk" className="py-14 md:py-20">
         <div className="container-page">
-          <JudulSeksi atas="Perjalanan" judul="Dari satu halaqah" sorot="ke sepuluh unit" />
+          <JudulSeksi atas="Perjalanan" judul="Dari satu halaqah" sorot="ke sembilan unit" />
           <ol className="relative mt-12 ml-3 border-l border-line-strong pl-8">
             {perjalanan.map((p) => (
               <li key={p.tahun} className="relative pb-8 last:pb-0">
@@ -221,9 +221,9 @@ export default function HalamanTentang() {
         <div className="container-page">
           <ul className="grid gap-4 md:grid-cols-3">
             {[
-              { judul: "Legalitas", isi: "Akta, izin operasional, dan akreditasi.", href: "/tentang/legalitas" },
-              { judul: "Pengurus", isi: "Pembina, pengawas, dan pelaksana harian.", href: "/tentang/pengurus" },
               { judul: "Transparansi", isi: "Laporan keuangan dan penyaluran dana.", href: "/transparansi" },
+              { judul: "Dampak", isi: "Angka capaian dan cerita di baliknya.", href: "/dampak" },
+              { judul: "Unit pendidikan", isi: "Sembilan unit dari taman asuh sampai perguruan tinggi.", href: "/program" },
             ].map((t) => (
               <li key={t.href}>
                 <Link

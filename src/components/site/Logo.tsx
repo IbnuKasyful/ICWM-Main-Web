@@ -40,6 +40,40 @@ export function Lambang({
   );
 }
 
+/* Rasio lockup panjang resmi (lambang + kaligrafi + nama lembaga), diukur dari
+   berkas induk 1760 × 513 piksel. */
+const RASIO_LOCKUP = 1760 / 513;
+
+/**
+ * Lockup panjang resmi — dipakai di kepala halaman.
+ *
+ * Berkas ini sudah memuat nama lembaga, jadi tidak boleh dipasangkan dengan
+ * teks nama lagi. Tulisannya hitam, karena itu lockup HANYA untuk latar terang;
+ * di latar gelap (kaki halaman) pakai `Wordmark terang` yang memakai lambang
+ * negatif putih.
+ */
+export function Lockup({
+  tinggi = 40,
+  prioritas = false,
+  className,
+}: {
+  tinggi?: number;
+  prioritas?: boolean;
+  className?: string;
+}) {
+  return (
+    <Image
+      src="/img/logo-wm-lockup.png"
+      alt=""
+      aria-hidden="true"
+      width={Math.round(tinggi * RASIO_LOCKUP)}
+      height={tinggi}
+      priority={prioritas}
+      className={cn("w-auto", className)}
+    />
+  );
+}
+
 export function Wordmark({
   nama,
   keterangan,

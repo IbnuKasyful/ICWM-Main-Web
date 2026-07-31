@@ -29,7 +29,7 @@ export default async function HalamanCari({
   const sp = await searchParams;
   const mentah = sp["q"];
   const kueri = (Array.isArray(mentah) ? mentah[0] : mentah)?.slice(0, 120) ?? "";
-  const hasil = kueri ? cari(kueri) : [];
+  const hasil = kueri ? await cari(kueri) : [];
 
   return (
     <>

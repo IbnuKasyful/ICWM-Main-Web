@@ -5,7 +5,7 @@ import { Kutipan } from "@/components/home/Kutipan";
 import { RouterNiat } from "@/components/home/RouterNiat";
 import { SekilasYayasan } from "@/components/home/SekilasYayasan";
 import { AgendaCard } from "@/components/ui/AgendaCard";
-import { PostCard } from "@/components/ui/PostCard";
+import { PostCardKabar } from "@/components/ui/PostCard";
 import { JudulSeksi, KepalaDaftar, Section } from "@/components/ui/Section";
 import { StatBlock } from "@/components/ui/StatBlock";
 import {
@@ -21,15 +21,17 @@ import { angka } from "@/lib/format";
 /** PRD §8 — beranda memakai ISR 5 menit. */
 export const revalidate = 300;
 
-export default function Beranda() {
+export default async function Beranda() {
   const units = getUnitsAktif();
   const capaian = getCapaian();
   const namaUnit = getPetaNamaUnit();
 
   // PRD §9.1 — TEPAT 6 kartu, tanpa elemen pagination apa pun di beranda.
+  // Keenamnya seragam dan mengisi kisi dua kolom.
   const tulisan = getPostsInduk().slice(0, 6);
   const agenda = getAgendaMendatang(3);
-  const programSorot = getProgramDonasi().find((p) => p.mendesak) ?? getProgramDonasi()[0];
+  const program = await getProgramDonasi();
+  const programSorot = program.find((p) => p.mendesak) ?? program[0];
 
   const santri = capaian.find((c) => c.label === "Santri aktif");
 
@@ -78,14 +80,10 @@ export default function Beranda() {
             labelTautan="Lihat semua"
           />
 
-          <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Keenam kartu seragam dalam kisi dua kolom. */}
+          <ul className="mt-12 grid gap-5 lg:grid-cols-2">
             {tulisan.map((post, i) => (
-              <PostCard
-                key={post.slug}
-                post={post}
-                namaUnit={namaUnit.get(post.unit_utama)}
-                prioritas={i < 3}
-              />
+              <PostCardKabar key={post.slug} post={post} prioritas={i < 2} />
             ))}
           </ul>
         </div>

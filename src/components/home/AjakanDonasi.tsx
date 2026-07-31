@@ -27,12 +27,7 @@ export function AjakanDonasi({ sorot }: { sorot: ProgramDonasi | undefined }) {
 
           <div className="relative grid gap-10 p-8 md:p-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-center lg:p-16">
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold tracking-[0.12em] text-accent-200 uppercase">
-                <Icon nama="perisai" className="size-3.5" />
-                {site.lazis.nomorIzin}
-              </span>
-
-              <h2 className="mt-5 max-w-xl font-display text-display-md text-balance text-white md:text-display-lg">
+              <h2 className="max-w-xl font-display text-display-md text-balance text-white md:text-display-lg">
                 Titipkan zakat Anda pada lembaga yang{" "}
                 <span className="text-accent-300">melaporkan penggunaannya</span>
               </h2>

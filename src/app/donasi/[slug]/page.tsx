@@ -17,13 +17,13 @@ import { site } from "@/lib/site";
 /** PRD §8 — ISR 15 menit. */
 export const revalidate = 900;
 
-export function generateStaticParams() {
-  return getProgramDonasi().map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  return (await getProgramDonasi()).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const program = getProgramDonasiSlug(slug);
+  const program = await getProgramDonasiSlug(slug);
   if (!program) {
     return buatMetadata({ judul: "Program tidak ditemukan", deskripsi: "", path: "/donasi", noIndex: true });
   }
@@ -41,11 +41,11 @@ export default async function HalamanProgramDonasi({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const program = getProgramDonasiSlug(slug);
+  const program = await getProgramDonasiSlug(slug);
   if (!program) notFound();
 
   const rekening = getRekening().filter((r) => r.jenis === program.jenis);
-  const lain = getProgramDonasi()
+  const lain = (await getProgramDonasi())
     .filter((p) => p.slug !== program.slug)
     .slice(0, 3);
 

@@ -66,13 +66,6 @@ export const labelJenisLaporan = {
   dampak: "Dampak",
 } as const;
 
-export const labelDewan = {
-  pembina: "Dewan Pembina",
-  pengawas: "Dewan Pengawas",
-  pengurus: "Pengurus Yayasan",
-  pelaksana: "Pelaksana Harian",
-} as const;
-
 export const labelJenisMitra = {
   pendidikan: "Pendidikan",
   pemerintah: "Pemerintah",

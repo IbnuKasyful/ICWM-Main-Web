@@ -2,9 +2,8 @@ import { FilterBar, type NilaiFilter } from "@/components/informasi/FilterBar";
 import { Pagination } from "@/components/informasi/Pagination";
 import { PageHeader } from "@/components/site/PageHeader";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { PostCard } from "@/components/ui/PostCard";
+import { PostCardKabar } from "@/components/ui/PostCard";
 import {
-  getPetaNamaUnit,
   getTahunPost,
   getUnitsAktif,
   saringPosts,
@@ -16,7 +15,7 @@ import { buatMetadata } from "@/lib/seo";
 /** PRD §8 — ISR 5 menit. */
 export const revalidate = 300;
 
-const PER_HALAMAN = 12;
+const PER_HALAMAN = 6;
 
 export const metadata = buatMetadata({
   judul: "Berita, pengumuman, dan artikel",
@@ -64,7 +63,6 @@ export default async function HalamanInformasi({ searchParams }: { searchParams:
     : 1;
 
   const tampil = hasil.slice((halaman - 1) * PER_HALAMAN, halaman * PER_HALAMAN);
-  const namaUnit = getPetaNamaUnit();
 
   const nilaiBersih: NilaiFilter = {
     category: filter.category,
@@ -119,14 +117,11 @@ export default async function HalamanInformasi({ searchParams }: { searchParams:
               />
             ) : (
               <>
-                <ul className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+                {/* Satu kolom: kolom isi di sini lebih sempit dari beranda karena
+                    berbagi baris dengan penyaring, jadi kartu melebar butuh lebar penuh. */}
+                <ul className="mt-8 grid gap-5">
                   {tampil.map((post, i) => (
-                    <PostCard
-                      key={post.slug}
-                      post={post}
-                      namaUnit={namaUnit.get(post.unit_utama)}
-                      prioritas={i < 3}
-                    />
+                    <PostCardKabar key={post.slug} post={post} prioritas={i < 2} />
                   ))}
                 </ul>
 

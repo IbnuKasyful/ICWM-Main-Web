@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { Badge, TitikStatus } from "@/components/ui/Badge";
@@ -90,11 +91,22 @@ export function UnitCardRingkas({ unit }: { unit: Unit }) {
       className="group relative flex items-center gap-4 rounded-xl border border-line bg-white p-4 transition-colors hover:border-brand-200 hover:bg-brand-50/40"
       style={{ ["--unit-accent" as string]: unit.warna_aksen }}
     >
-      <span
-        aria-hidden="true"
-        className="size-9 shrink-0 rounded-lg opacity-90"
-        style={{ backgroundColor: "var(--unit-accent)" }}
-      />
+      {unit.logo ? (
+        <Image
+          src={unit.logo.src}
+          alt=""
+          width={unit.logo.width}
+          height={unit.logo.height}
+          sizes="36px"
+          className="size-9 shrink-0 object-contain"
+        />
+      ) : (
+        <span
+          aria-hidden="true"
+          className="size-9 shrink-0 rounded-lg opacity-90"
+          style={{ backgroundColor: "var(--unit-accent)" }}
+        />
+      )}
       <div className="min-w-0">
         <h3 className="truncate text-sm font-semibold text-ink">
           <Link href={`/program/${unit.slug}`} className="after:absolute after:inset-0">

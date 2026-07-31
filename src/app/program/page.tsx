@@ -11,7 +11,7 @@ export const revalidate = 3600;
 export const metadata = buatMetadata({
   judul: "Cari unit pendidikan yang cocok",
   deskripsi:
-    "Bandingkan sepuluh unit pendidikan Islamic Center Wadi Mubarak berdasarkan jenjang, gender, model belajar, dan lokasi kampus — lengkap dengan status PPDB dan kisaran biaya.",
+    "Bandingkan sembilan unit pendidikan Islamic Center Wadi Mubarak berdasarkan jenjang, gender, model belajar, dan lokasi kampus — lengkap dengan status PPDB dan kisaran biaya.",
   path: "/program",
 });
 

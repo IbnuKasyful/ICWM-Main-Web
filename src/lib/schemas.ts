@@ -66,6 +66,22 @@ export type ImageData = z.infer<typeof imageSchema>;
 /* Taksonomi `unit` + term meta (PRD §7.2)                                     */
 /* -------------------------------------------------------------------------- */
 
+/**
+ * Cabang sebuah unit. Satu unit (mis. TAUD SAQU) dapat memiliki banyak cabang
+ * di kota berbeda dengan kurikulum yang sama; `lokasi_kampus` menandai kampus
+ * induknya.
+ */
+export const cabangSchema = z.object({
+  slug: z.string().min(1),
+  nama: z.string().min(1),
+  kota: z.string().min(1),
+  alamat: z.string().min(1),
+  kontak_wa: z.string(),
+  status_ppdb: statusPpdbSchema,
+});
+
+export type Cabang = z.infer<typeof cabangSchema>;
+
 export const unitSchema = z.object({
   slug: z.string().min(1),
   nama_lengkap: z.string().min(1),
@@ -79,6 +95,8 @@ export const unitSchema = z.object({
   gender: genderSchema,
   model_belajar: modelBelajarSchema,
   lokasi_kampus: lokasiSchema,
+  /** Larik kosong berarti unit hanya berjalan di kampus induk. */
+  cabang: z.array(cabangSchema),
   status_ppdb: statusPpdbSchema,
   periode_ppdb: z.string(),
   kisaran_biaya: z.string(),
@@ -140,17 +158,6 @@ export type Post = z.infer<typeof postSchema>;
 /* -------------------------------------------------------------------------- */
 /* CPT lainnya (PRD §7.3)                                                      */
 /* -------------------------------------------------------------------------- */
-
-export const pengurusSchema = z.object({
-  slug: z.string().min(1),
-  nama: z.string().min(1),
-  jabatan: z.string().min(1),
-  /** Pengelompokan pada /tentang/pengurus. */
-  dewan: z.enum(["pembina", "pengawas", "pengurus", "pelaksana"]),
-  foto: imageSchema.nullable(),
-  bio: z.string(),
-  urutan: z.number().int(),
-});
 
 export const programDonasiSchema = z.object({
   slug: z.string().min(1),
@@ -218,7 +225,6 @@ export const mitraSchema = z.object({
   sejak: z.number().int(),
 });
 
-export type Pengurus = z.infer<typeof pengurusSchema>;
 export type ProgramDonasi = z.infer<typeof programDonasiSchema>;
 export type Laporan = z.infer<typeof laporanSchema>;
 export type Faq = z.infer<typeof faqSchema>;
@@ -237,13 +243,6 @@ export const capaianSchema = z.object({
   keterangan: z.string(),
 });
 
-export const legalitasSchema = z.object({
-  nama_dokumen: z.string().min(1),
-  nomor: z.string().min(1),
-  penerbit: z.string().min(1),
-  tahun: z.number().int(),
-});
-
 export const rekeningSchema = z.object({
   jenis: z.enum(["zakat", "infak", "sedekah", "wakaf"]),
   bank: z.string().min(1),
@@ -252,7 +251,6 @@ export const rekeningSchema = z.object({
 });
 
 export type Capaian = z.infer<typeof capaianSchema>;
-export type Legalitas = z.infer<typeof legalitasSchema>;
 export type Rekening = z.infer<typeof rekeningSchema>;
 
 /* -------------------------------------------------------------------------- */

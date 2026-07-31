@@ -1,157 +1,14 @@
-/** Data contoh profil yayasan: capaian, legalitas, pengurus, mitra, laporan. */
+/** Data contoh profil yayasan: capaian, mitra, laporan. */
 
 export const capaianMentah: unknown[] = [
   { label: "Santri aktif", nilai: 2140, satuan: "", keterangan: "Seluruh unit, tahun ajaran 2025/2026" },
   { label: "Alumni", nilai: 6800, satuan: "", keterangan: "Sejak 1998" },
   { label: "Hafizh 30 juz", nilai: 512, satuan: "", keterangan: "Lulusan program tahfizh" },
   { label: "Pengajar & pengasuh", nilai: 286, satuan: "", keterangan: "Guru, musyrif, dan tenaga kependidikan" },
-  { label: "Unit pendidikan", nilai: 10, satuan: "", keterangan: "Dari PAUD hingga perguruan tinggi" },
+  { label: "Unit pendidikan", nilai: 9, satuan: "", keterangan: "Dari PAUD hingga perguruan tinggi" },
   { label: "Kampus", nilai: 2, satuan: "", keterangan: "Bogor dan Sleman" },
 ];
 
-export const legalitasMentah: unknown[] = [
-  {
-    nama_dokumen: "Akta Pendirian Yayasan",
-    nomor: "No. 42 / 1998",
-    penerbit: "Notaris Kabupaten Bogor",
-    tahun: 1998,
-  },
-  {
-    nama_dokumen: "Surat Keputusan Kemenkumham",
-    nomor: "AHU-0001234.AH.01.04.Tahun 2014",
-    penerbit: "Kementerian Hukum dan HAM RI",
-    tahun: 2014,
-  },
-  {
-    nama_dokumen: "Nomor Pokok Wajib Pajak",
-    nomor: "01.234.567.8-403.000",
-    penerbit: "Direktorat Jenderal Pajak",
-    tahun: 2014,
-  },
-  {
-    nama_dokumen: "Izin Operasional LAZIS",
-    nomor: "SK No. 118 Tahun 2021",
-    penerbit: "Kementerian Agama RI",
-    tahun: 2021,
-  },
-  {
-    nama_dokumen: "Izin Operasional Satuan Pendidikan",
-    nomor: "421.2/Kpts.089/Disdik",
-    penerbit: "Dinas Pendidikan Kabupaten Bogor",
-    tahun: 2016,
-  },
-  {
-    nama_dokumen: "Akreditasi Perguruan Tinggi",
-    nomor: "No. 3021/SK/BAN-PT/Ak/STIU/2023",
-    penerbit: "BAN-PT",
-    tahun: 2023,
-  },
-];
-
-type PengurusInput = {
-  slug: string;
-  nama: string;
-  jabatan: string;
-  dewan: string;
-  bio: string;
-  foto: number | null;
-};
-
-const pengurusInput: PengurusInput[] = [
-  {
-    slug: "kh-ahmad-syaifuddin",
-    nama: "KH. Ahmad Syaifuddin, Lc., M.A.",
-    jabatan: "Ketua Dewan Pembina",
-    dewan: "pembina",
-    bio: "Pendiri Islamic Center Wadi Mubarak. Alumnus Universitas Islam Madinah, mengasuh halaqah tahfizh sejak 1996.",
-    foto: 1,
-  },
-  {
-    slug: "hj-siti-maryam",
-    nama: "Hj. Siti Maryam, S.Pd.I.",
-    jabatan: "Anggota Dewan Pembina",
-    dewan: "pembina",
-    bio: "Mendampingi pengembangan pendidikan keputrian yayasan sejak berdirinya asrama putri pertama.",
-    foto: 2,
-  },
-  {
-    slug: "drs-h-mustofa-kamal",
-    nama: "Drs. H. Mustofa Kamal",
-    jabatan: "Ketua Dewan Pengawas",
-    dewan: "pengawas",
-    bio: "Berlatar audit internal lembaga pendidikan; mengawasi kepatuhan tata kelola dan pelaporan keuangan yayasan.",
-    foto: 3,
-  },
-  {
-    slug: "ir-nurhayati-rahman",
-    nama: "Ir. Nurhayati Rahman, M.M.",
-    jabatan: "Anggota Dewan Pengawas",
-    dewan: "pengawas",
-    bio: "Fokus pada pengawasan pengelolaan aset dan pembangunan sarana prasarana kampus.",
-    foto: 4,
-  },
-  {
-    slug: "ust-abdurrahman-hakim",
-    nama: "Ust. Abdurrahman Hakim, Lc.",
-    jabatan: "Ketua Yayasan",
-    dewan: "pengurus",
-    bio: "Memimpin operasional yayasan sejak 2019. Mengampu kajian ushul fikih di STIU Wadi Mubarak.",
-    foto: 5,
-  },
-  {
-    slug: "ahmad-fauzan",
-    nama: "Ahmad Fauzan, S.E.",
-    jabatan: "Sekretaris Yayasan",
-    dewan: "pengurus",
-    bio: "Menangani administrasi, legalitas, dan hubungan kelembagaan yayasan.",
-    foto: 6,
-  },
-  {
-    slug: "hana-fadhilah",
-    nama: "Hana Fadhilah, S.Ak.",
-    jabatan: "Bendahara Yayasan",
-    dewan: "pengurus",
-    bio: "Menyusun laporan keuangan tahunan dan mengoordinasikan audit eksternal.",
-    foto: 7,
-  },
-  {
-    slug: "ust-ridwan-maulana",
-    nama: "Ust. Ridwan Maulana, Lc., M.Pd.",
-    jabatan: "Direktur Pendidikan",
-    dewan: "pelaksana",
-    bio: "Mengoordinasikan kurikulum tahfizh dan diniyah lintas unit dari PAUD hingga perguruan tinggi.",
-    foto: 8,
-  },
-  {
-    slug: "faridah-nur-aini",
-    nama: "Faridah Nur Aini, S.Psi.",
-    jabatan: "Direktur Kesantrian",
-    dewan: "pelaksana",
-    bio: "Menangani pembinaan santri, layanan konseling, dan perlindungan anak di lingkungan pesantren.",
-    foto: 9,
-  },
-  {
-    slug: "muhammad-iqbal",
-    nama: "Muhammad Iqbal, S.Sos.",
-    jabatan: "Direktur LAZIS",
-    dewan: "pelaksana",
-    bio: "Mengelola penghimpunan dan penyaluran zakat, infak, sedekah, serta wakaf yayasan.",
-    foto: 10,
-  },
-];
-
-export const pengurusMentah: unknown[] = pengurusInput.map((p, i) => ({
-  slug: p.slug,
-  nama: p.nama,
-  jabatan: p.jabatan,
-  dewan: p.dewan,
-  foto:
-    p.foto === null
-      ? null
-      : { src: `/img/orang-${p.foto}.svg`, alt: `Potret ${p.nama}`, width: 800, height: 800 },
-  bio: p.bio,
-  urutan: i + 1,
-}));
 
 export const laporanMentah: unknown[] = [
   {
@@ -349,7 +206,7 @@ export const agendaMentah: unknown[] = [
     selesai: null,
     tempat: "Kampus Sleman",
     lokasi: "sleman",
-    unit: ["taud-saqu-sleman"],
+    unit: ["taud-saqu"],
     ringkasan: "Penutupan tahun ajaran bersama wali santri cabang Sleman.",
     terbuka_umum: false,
   },
@@ -454,17 +311,82 @@ export const faqMentah: unknown[] = [
   },
 ];
 
+/**
+ * Foto dokumentasi yayasan. Urutannya menentukan pembagian kolom pada dinding
+ * foto beranda (`BentoBerjalan` mengambil indeks genap untuk kolom kiri dan
+ * ganjil untuk kolom kanan), jadi potret dan lanskap sengaja diselang-seling.
+ */
 export const galeriMentah: unknown[] = [
-  { src: "/img/galeri-1.svg", alt: "Santri mengikuti halaqah pagi di masjid kampus", width: 1200, height: 900 },
-  { src: "/img/galeri-2.svg", alt: "Suasana kelas SDIT saat pekan proyek", width: 1200, height: 900 },
-  { src: "/img/galeri-3.svg", alt: "Prosesi wisuda tahfizh angkatan ke-12", width: 1200, height: 1500 },
-  { src: "/img/galeri-4.svg", alt: "Santri berlatih panahan di lapangan kampus", width: 1200, height: 900 },
-  { src: "/img/galeri-5.svg", alt: "Kegiatan tahsin dewasa bersama warga sekitar", width: 1200, height: 900 },
-  { src: "/img/galeri-6.svg", alt: "Masjid utama kampus Bogor menjelang magrib", width: 1200, height: 1500 },
-  { src: "/img/galeri-7.svg", alt: "Santriwati mengikuti kelas keterampilan", width: 1200, height: 900 },
-  { src: "/img/galeri-8.svg", alt: "Penyaluran beasiswa LAZIS kepada santri yatim", width: 1200, height: 900 },
-  { src: "/img/galeri-9.svg", alt: "Perpustakaan kitab berbahasa Arab", width: 1200, height: 1500 },
-  { src: "/img/galeri-10.svg", alt: "Kunjungan belajar santri TAUD ke luar kampus", width: 1200, height: 900 },
-  { src: "/img/galeri-11.svg", alt: "Buka puasa bersama warga sekitar kampus", width: 1200, height: 900 },
-  { src: "/img/galeri-12.svg", alt: "Asrama santri putra pada pagi hari", width: 1200, height: 1500 },
+  {
+    src: "/img/galeri-wisudawati-mahabbah.jpg",
+    alt: "Wisudawati Mahabbah Boarding School mengenakan selempang kelulusan",
+    width: 775,
+    height: 1200,
+  },
+  {
+    src: "/img/galeri-taud-mewarnai.jpg",
+    alt: "Santri TAUD mewarnai bersama di meja kelas",
+    width: 1600,
+    height: 2133,
+  },
+  {
+    src: "/img/galeri-dauroh-fikih.jpg",
+    alt: "Peserta dauroh fikih menyimak kajian di masjid kampus",
+    width: 1200,
+    height: 675,
+  },
+  {
+    src: "/img/galeri-haflah-akhirussanah.jpg",
+    alt: "Santri TAUD dan SD SaQu memegang piagam pada haflah akhirussanah",
+    width: 1600,
+    height: 1066,
+  },
+  {
+    src: "/img/galeri-buka-puasa-bersama.jpg",
+    alt: "Santri mengikuti buka puasa bersama di aula kampus",
+    width: 1200,
+    height: 675,
+  },
+  {
+    src: "/img/galeri-wisuda-huffazh.jpg",
+    alt: "Foto bersama pada Wisuda Akbar Huffazhul Qur'an ke-5",
+    width: 1280,
+    height: 720,
+  },
+  {
+    src: "/img/galeri-taud-panggung.jpg",
+    alt: "Santri TAUD menunggu giliran tampil di panggung acara",
+    width: 1200,
+    height: 675,
+  },
+  {
+    src: "/img/galeri-cendera-mata-masyayikh.jpg",
+    alt: "Penyerahan cendera mata kepada masyayikh tamu di kampus",
+    width: 1200,
+    height: 675,
+  },
+  {
+    src: "/img/galeri-wisuda-haafizhaat.jpg",
+    alt: "Wisuda ke-2 haafizhaatul Qur'an Mahabbah Boarding School",
+    width: 1600,
+    height: 1067,
+  },
+  {
+    src: "/img/galeri-dauroh-tadabur.jpg",
+    alt: "Dauroh tadabur Al-Qur'an bersama syaikh tamu di kampus STIU",
+    width: 1280,
+    height: 720,
+  },
+  {
+    src: "/img/galeri-santriwati-halaqah.jpg",
+    alt: "Foto bersama santriwati seusai halaqah di aula asrama",
+    width: 1600,
+    height: 901,
+  },
+  {
+    src: "/img/galeri-wisuda-taud-mit.jpg",
+    alt: "Foto bersama wisuda TAUD dan MIT SaQu",
+    width: 1200,
+    height: 675,
+  },
 ];

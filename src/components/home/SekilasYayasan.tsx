@@ -20,21 +20,21 @@ export function SekilasYayasan() {
               Sekilas yayasan
             </span>
             <h2 className="mt-4 font-display text-display-md text-balance text-ink md:text-display-lg">
-              Satu naungan untuk sepuluh unit,{" "}
+              Satu naungan untuk sembilan unit,{" "}
               <span className="text-brand-600">satu standar pembinaan</span>
             </h2>
 
             <div className="mt-5 flex flex-col gap-4 text-base leading-relaxed text-pretty text-ink-muted">
               <p>
                 Islamic Center Wadi Mubarak berdiri pada 1998 dari satu halaqah kecil di Megamendung,
-                Bogor. Hari ini yayasan menaungi sepuluh unit pendidikan dari taman asuh usia dini
+                Bogor. Hari ini yayasan menaungi sembilan unit pendidikan dari taman asuh usia dini
                 hingga perguruan tinggi, dua kampus, dan sebuah lembaga amil zakat yang berizin resmi.
               </p>
               <p>
                 Yang tidak berubah sejak awal adalah cara kami bekerja: kelompok belajar dibatasi
                 supaya setiap santri disimak namanya, dan setiap rupiah yang dititipkan kepada kami
-                dilaporkan secara terbuka. Bila Anda ingin memeriksanya sendiri, seluruh dokumen
-                legalitas dan laporan keuangan kami terbuka untuk diunduh.
+                dilaporkan secara terbuka. Bila Anda ingin memeriksanya sendiri, seluruh laporan
+                keuangan dan dokumen program kami terbuka untuk diunduh.
               </p>
             </div>
 

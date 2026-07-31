@@ -9,9 +9,7 @@ import {
   faqMentah,
   galeriMentah,
   laporanMentah,
-  legalitasMentah,
   mitraMentah,
-  pengurusMentah,
   testimoniMentah,
 } from "@/data/yayasan";
 import {
@@ -20,10 +18,8 @@ import {
   faqSchema,
   imageSchema,
   laporanSchema,
-  legalitasSchema,
   mitraSchema,
   parseOrThrow,
-  pengurusSchema,
   postSchema,
   programDonasiSchema,
   rekeningSchema,
@@ -35,8 +31,10 @@ import {
   type Faq,
   type Lokasi,
   type Post,
+  type ProgramDonasi,
   type Unit,
 } from "@/lib/schemas";
+import { ambilProgramDonasiWp, wpAktif } from "@/lib/wp";
 
 /**
  * Batas API (PRD §18): satu-satunya tempat data mentah masuk ke aplikasi, dan
@@ -147,9 +145,7 @@ export function getPostsUnit(unitSlug: string, batas: number): readonly Post[] {
 /* Yayasan                                                                     */
 /* -------------------------------------------------------------------------- */
 
-const pengurus = daftar(pengurusSchema, pengurusMentah, "pengurus");
 const capaian = daftar(capaianSchema, capaianMentah, "capaian");
-const legalitas = daftar(legalitasSchema, legalitasMentah, "legalitas");
 const laporan = daftar(laporanSchema, laporanMentah, "laporan");
 const mitra = daftar(mitraSchema, mitraMentah, "mitra");
 const testimoni = daftar(testimoniSchema, testimoniMentah, "testimoni");
@@ -157,16 +153,8 @@ const agenda = daftar(agendaSchema, agendaMentah, "agenda");
 const faq = daftar(faqSchema, faqMentah, "faq");
 const galeri = daftar(imageSchema, galeriMentah, "galeri");
 
-export function getPengurus() {
-  return pengurus.slice().sort((a, b) => a.urutan - b.urutan);
-}
-
 export function getCapaian() {
   return capaian;
-}
-
-export function getLegalitas() {
-  return legalitas;
 }
 
 /** PRD §9.5 — dikelompokkan per tahun, terbaru dahulu. */
@@ -219,17 +207,50 @@ export function getAgendaLampau(): readonly Agenda[] {
 /* Donasi                                                                      */
 /* -------------------------------------------------------------------------- */
 
-const programDonasi = daftar(programDonasiSchema, programDonasiMentah, "program_donasi");
+/**
+ * Angka rekapitulasi yang ikut build — dipakai selama `WPGRAPHQL_ENDPOINT`
+ * belum diisi (mis. pratinjau di Cloudflare) dan sebagai jaring bila WordPress
+ * sedang tidak dapat dihubungi.
+ */
+const programDonasiStatis = daftar(programDonasiSchema, programDonasiMentah, "program_donasi");
 const rekening = daftar(rekeningSchema, rekeningMentah, "rekening");
 
-export function getProgramDonasi() {
-  return programDonasi
+/**
+ * Sumber tunggal program donasi: WordPress bila tersambung, data statis bila
+ * tidak. Validasi Zod dijalankan pada kedua jalur dengan skema yang sama.
+ *
+ * Hasil `fetch`-nya di-cache Next.js, jadi memanggil fungsi ini beberapa kali
+ * dalam satu render tidak menambah kueri ke WordPress.
+ */
+async function muatProgramDonasi(): Promise<readonly ProgramDonasi[]> {
+  if (!wpAktif()) return programDonasiStatis;
+
+  const mentah = await ambilProgramDonasiWp();
+  if (!mentah) return programDonasiStatis;
+
+  // Kebun kosong bukan alasan mengosongkan halaman: kalau CMS baru dipasang dan
+  // belum ada satu pun program terbit, angka lama masih lebih berguna.
+  if (mentah.length === 0) return programDonasiStatis;
+
+  try {
+    return daftar(programDonasiSchema, mentah, "program_donasi(wp)");
+  } catch (galat) {
+    // Satu program cacat di CMS tidak boleh menjatuhkan halaman donasi. Pesannya
+    // menyebut indeks dan field yang salah supaya admin bisa diberi tahu.
+    console.error(`[donasi] data CMS ditolak skema, memakai data statis: ${String(galat)}`);
+    return programDonasiStatis;
+  }
+}
+
+export async function getProgramDonasi(): Promise<readonly ProgramDonasi[]> {
+  const program = await muatProgramDonasi();
+  return program
     .slice()
     .sort((a, b) => Number(b.mendesak) - Number(a.mendesak) || a.judul.localeCompare(b.judul));
 }
 
-export function getProgramDonasiSlug(slug: string) {
-  return programDonasi.find((p) => p.slug === slug);
+export async function getProgramDonasiSlug(slug: string): Promise<ProgramDonasi | undefined> {
+  return (await muatProgramDonasi()).find((p) => p.slug === slug);
 }
 
 export function getRekening() {
@@ -247,7 +268,7 @@ export type HasilCari = {
   jenis: "Tulisan" | "Unit" | "Program donasi" | "Agenda" | "Pertanyaan umum";
 };
 
-export function cari(kueri: string): HasilCari[] {
+export async function cari(kueri: string): Promise<HasilCari[]> {
   const q = kueri.trim().toLowerCase();
   if (q.length < 2) return [];
 
@@ -276,7 +297,7 @@ export function cari(kueri: string): HasilCari[] {
     }
   }
 
-  for (const d of getProgramDonasi()) {
+  for (const d of await getProgramDonasi()) {
     if (cocok(d.judul, d.ringkasan)) {
       hasil.push({
         judul: d.judul,

@@ -55,8 +55,8 @@ const alurSetelahDonasi = [
   "Laporan penyaluran diterbitkan setiap semester dan dapat diunduh siapa pun.",
 ];
 
-export default function HalamanDonasi() {
-  const program = getProgramDonasi();
+export default async function HalamanDonasi() {
+  const program = await getProgramDonasi();
   const rekening = getRekening();
   const laporanPenyaluran = getLaporan().filter((l) => l.jenis === "program");
 
@@ -64,8 +64,6 @@ export default function HalamanDonasi() {
     <>
       <JsonLd data={jsonldNgo()} />
 
-      {/* PRD §9.4 — nomor registrasi LAZIS wajib tampil tanpa menggulir di 390px.
-          Karena itu blok legalitas diletakkan paling atas, sebelum apa pun. */}
       <div className="relative overflow-hidden border-b border-white/10 bg-brand-950 text-white">
         <span
           aria-hidden="true"
@@ -73,13 +71,6 @@ export default function HalamanDonasi() {
         />
         <div className="container-page relative py-8 md:py-14">
           <Breadcrumb jejak={[{ label: "Donasi", href: "/donasi" }]} terang />
-
-          <div className="mt-5 inline-flex flex-wrap items-center gap-2 rounded-xl border border-accent-300/30 bg-accent-400/10 px-4 py-3">
-            <Icon nama="perisai" className="size-4 text-accent-300" />
-            <p className="text-sm font-semibold text-accent-100">
-              {site.lazis.nama} — {site.lazis.nomorIzin}
-            </p>
-          </div>
 
           <h1 className="mt-5 max-w-3xl font-display text-display-md text-balance text-white md:text-display-lg">
             Titipkan zakat Anda pada lembaga yang{" "}

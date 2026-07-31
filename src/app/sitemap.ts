@@ -4,7 +4,7 @@ import { getPostsInduk, getProgramDonasi, getUnitsAktif } from "@/lib/content";
 import { site } from "@/lib/site";
 
 /** PRD §13 — sitemap dibangkitkan otomatis dari sumber konten. */
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sekarang = new Date();
 
   const statis: { path: string; prioritas: number; frekuensi: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
@@ -12,8 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/program", prioritas: 0.9, frekuensi: "weekly" },
     { path: "/donasi", prioritas: 0.9, frekuensi: "weekly" },
     { path: "/tentang", prioritas: 0.8, frekuensi: "monthly" },
-    { path: "/tentang/legalitas", prioritas: 0.6, frekuensi: "yearly" },
-    { path: "/tentang/pengurus", prioritas: 0.6, frekuensi: "monthly" },
     { path: "/transparansi", prioritas: 0.8, frekuensi: "monthly" },
     { path: "/dampak", prioritas: 0.7, frekuensi: "monthly" },
     { path: "/informasi", prioritas: 0.8, frekuensi: "daily" },
@@ -49,7 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  const halamanDonasi: MetadataRoute.Sitemap = getProgramDonasi().map((d) => ({
+  const halamanDonasi: MetadataRoute.Sitemap = (await getProgramDonasi()).map((d) => ({
     url: `${site.url}/donasi/${d.slug}`,
     lastModified: sekarang,
     changeFrequency: "weekly",

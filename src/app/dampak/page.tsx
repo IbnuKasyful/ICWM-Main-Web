@@ -60,9 +60,9 @@ const metodologi = [
   },
 ];
 
-export default function HalamanDampak() {
+export default async function HalamanDampak() {
   const capaian = getCapaian();
-  const program = getProgramDonasi();
+  const program = await getProgramDonasi();
   const totalTerkumpul = program.reduce((jml, p) => jml + p.terkumpul, 0);
   const totalPenerima = program.length;
 

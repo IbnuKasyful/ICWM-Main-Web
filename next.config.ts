@@ -20,6 +20,12 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  /* Sasaran penempatan produksi adalah cPanel (Node.js App / Passenger), yang
+     menjalankan berkas hasil `output: "standalone"`. Cloudflare Workers dipakai
+     hanya untuk pratinjau ke pihak yayasan dan dibangun lewat OpenNext, yang
+     mengurus pembungkusannya sendiri — karena itu mode ini dinyalakan lewat
+     variabel, bukan dipasang permanen. Lihat docs/deploy-cpanel.md. */
+  ...(process.env["BUILD_TARGET"] === "cpanel" ? { output: "standalone" as const } : {}),
   // Ada lockfile lain di direktori induk; kunci akar penelusuran ke proyek ini.
   outputFileTracingRoot: process.cwd(),
   images: {

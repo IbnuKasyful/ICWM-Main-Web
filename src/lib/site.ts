@@ -8,8 +8,8 @@
 /**
  * Mode pratinjau.
  *
- * Selama seluruh isi situs masih berupa data contoh — termasuk nomor rekening,
- * nomor legalitas, dan nama pengurus — penayangan publik diberi dua pengaman:
+ * Selama seluruh isi situs masih berupa data contoh — termasuk nomor rekening —
+ * penayangan publik diberi dua pengaman:
  * perayap mesin pencari ditolak (`src/app/robots.ts`, metadata `robots` pada
  * layout) dan sebuah pita penanda ditampilkan di atas kepala halaman.
  *
@@ -23,7 +23,7 @@ export const site = {
   namaPendek: "Wadi Mubarak",
   tagline: "Menemani anak Anda tumbuh bersama Al-Qur'an",
   deskripsi:
-    "Islamic Center Wadi Mubarak menaungi sepuluh unit pendidikan dari PAUD hingga perguruan tinggi serta lembaga amil zakat, infak, sedekah, dan wakaf di Bogor dan Sleman.",
+    "Islamic Center Wadi Mubarak menaungi sembilan unit pendidikan dari PAUD hingga perguruan tinggi serta lembaga amil zakat, infak, sedekah, dan wakaf di Bogor dan Sleman.",
   url: process.env["NEXT_PUBLIC_SITE_URL"] ?? "https://wadimubarak.com",
   bahasa: "id",
   alamat: {
@@ -97,8 +97,6 @@ export const navUtama: NavGrup[] = [
     href: "/tentang",
     anak: [
       { label: "Profil yayasan", href: "/tentang", deskripsi: "Sejarah, visi, dan arah gerak" },
-      { label: "Legalitas", href: "/tentang/legalitas", deskripsi: "Akta, izin, dan akreditasi" },
-      { label: "Pengurus", href: "/tentang/pengurus", deskripsi: "Pembina, pengawas, dan pelaksana" },
       { label: "Transparansi", href: "/transparansi", deskripsi: "Laporan keuangan dan program" },
       { label: "Dampak", href: "/dampak", deskripsi: "Angka capaian dan cerita di baliknya" },
     ],
@@ -131,8 +129,6 @@ export const navFooter: { judul: string; tautan: NavItem[] }[] = [
     judul: "Yayasan",
     tautan: [
       { label: "Tentang kami", href: "/tentang" },
-      { label: "Legalitas", href: "/tentang/legalitas" },
-      { label: "Pengurus", href: "/tentang/pengurus" },
       { label: "Dampak", href: "/dampak" },
       { label: "Karier", href: "/karier" },
     ],
@@ -161,41 +157,57 @@ export const navKepatuhan: NavItem[] = [
   { label: "Perlindungan anak", href: "/perlindungan-anak" },
 ];
 
-/** PRD §5.3 — lima pintu router niat di beranda. */
+/**
+ * PRD §5.3 — lima pintu router niat di beranda.
+ *
+ * `gambar` dan `ringkas` dipakai sisi depan kartu (foto + label kaca), sedangkan
+ * `deskripsi` dan `aksi` muncul di sisi belakang saat kartu dibalik. Kelima
+ * `gambar` wajib berupa foto, bukan logo: sisi depan memangkasnya (`object-cover`).
+ */
 export const routerNiat = [
   {
     label: "Menyekolahkan anak",
-    deskripsi: "Bandingkan sepuluh unit berdasarkan jenjang, gender, model belajar, dan lokasi.",
+    ringkas: "SDIT, SMP, SMA, MBS, sembilan unit",
+    deskripsi: "Bandingkan sembilan unit berdasarkan jenjang, gender, model belajar, dan lokasi.",
     href: "/program",
     aksi: "Cari unit yang cocok",
     ikon: "sekolah",
+    gambar: "/img/niat-menyekolahkan-anak.jpg",
   },
   {
     label: "Belajar Al-Qur'an",
+    ringkas: "Tahsin & tahfizh untuk umum",
     deskripsi: "Kelas tahsin dan tahfizh untuk umum — dewasa maupun lansia, luring dan daring.",
     href: "/program/pkm-wadi-mubarak",
     aksi: "Lihat kelas terbuka",
     ikon: "quran",
+    gambar: "/img/niat-belajar-quran.jpg",
   },
   {
     label: "Berdonasi",
+    ringkas: "Zakat, infak, sedekah, wakaf",
     deskripsi: "Zakat, infak, sedekah, dan wakaf lewat LAZIS resmi berizin Kementerian Agama.",
     href: "/donasi",
     aksi: "Lihat program donasi",
     ikon: "donasi",
+    gambar: "/img/niat-berdonasi.jpg",
   },
   {
     label: "Menjajaki kerja sama",
+    ringkas: "Kemitraan & kunjungan lembaga",
     deskripsi: "Kemitraan pendidikan, program sosial, dan kunjungan lembaga.",
     href: "/kerja-sama",
     aksi: "Ajukan kerja sama",
     ikon: "kerjasama",
+    gambar: "/img/niat-kerja-sama.jpg",
   },
   {
     label: "Mengenal yayasan",
-    deskripsi: "Legalitas, struktur pengurus, laporan keuangan, dan capaian yang bisa diperiksa.",
+    ringkas: "Profil, laporan, capaian",
+    deskripsi: "Sejarah, arah gerak, laporan keuangan, dan capaian yang bisa diperiksa.",
     href: "/tentang",
     aksi: "Kenali kami",
     ikon: "yayasan",
+    gambar: "/img/niat-mengenal-yayasan.webp",
   },
 ] as const;

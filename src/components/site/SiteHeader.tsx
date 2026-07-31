@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { Wordmark } from "@/components/site/Logo";
+import { Lockup } from "@/components/site/Logo";
 import { UnitSwitcher } from "@/components/site/UnitSwitcher";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
@@ -52,7 +52,7 @@ export function SiteHeader({ units }: { units: readonly Unit[] }) {
       <div className="container-page">
         <div className="flex h-16 items-center justify-between gap-4 md:h-18">
           <Link href="/" className="shrink-0 rounded-lg" aria-label={`${site.nama} — beranda`}>
-            <Wordmark nama={site.namaPendek} keterangan="Islamic Center" prioritas />
+            <Lockup prioritas className="h-8 md:h-10" />
           </Link>
 
           {/* Navigasi desktop */}

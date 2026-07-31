@@ -66,7 +66,7 @@ const lowongan: {
   },
   {
     judul: "Guru Pendamping TAUD",
-    unit: "TAUD SAQU Sleman",
+    unit: "TAUD SAQU — Cabang Sleman",
     lokasi: "sleman",
     jenis: "Penuh waktu",
     syarat: [

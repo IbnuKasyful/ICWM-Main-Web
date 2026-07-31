@@ -193,7 +193,7 @@ const daftar: PostInput[] = [
       "Santri TAUD SAQU Sleman mengikuti kunjungan belajar tematik bersama wali santri sebagai penutup semester.",
     tanggal: "2026-04-29",
     category: "kegiatan",
-    unit_utama: "taud-saqu-sleman",
+    unit_utama: "taud-saqu",
     lokasi: "sleman",
     topik: ["pembelajaran"],
     gambar: 10,

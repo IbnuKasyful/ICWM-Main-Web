@@ -16,7 +16,7 @@ export function JaringanUnit({ units }: { units: readonly Unit[] }) {
     <Section nada="sejuk">
       <div className="container-page">
         <KepalaDaftar
-          judul="Sepuluh unit,"
+          judul="Sembilan unit,"
           sorot="satu jaringan"
           keterangan="Setiap unit berdiri sendiri dengan pengelola dan narahubungnya masing-masing, namun memakai standar pembinaan yang sama."
           tautan="/program"
