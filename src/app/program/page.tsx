@@ -2,7 +2,7 @@ import { Suspense } from "react";
 
 import { PageHeader } from "@/components/site/PageHeader";
 import { PencariProgram } from "@/components/program/PencariProgram";
-import { getUnitsAktif } from "@/lib/content";
+import { getPetaHeroUnit, getUnitsAktif } from "@/lib/content";
 import { buatMetadata } from "@/lib/seo";
 
 /** PRD §8 — ISR 1 jam. */
@@ -18,6 +18,7 @@ export const metadata = buatMetadata({
 export default function HalamanProgram() {
   // Seluruh data unit diambil saat build; penyaringan berjalan di klien.
   const units = getUnitsAktif();
+  const hero = getPetaHeroUnit();
 
   return (
     <>
@@ -35,7 +36,7 @@ export default function HalamanProgram() {
               <p className="py-20 text-center text-sm text-ink-subtle">Memuat daftar unit…</p>
             }
           >
-            <PencariProgram units={units} />
+            <PencariProgram units={units} hero={hero} />
           </Suspense>
         </div>
       </section>

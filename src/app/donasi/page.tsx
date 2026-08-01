@@ -105,14 +105,35 @@ export default async function HalamanDonasi() {
             sorot="menitipkan harta"
             keterangan="Pastikan Anda memilih jenis yang tepat: zakat memiliki ketentuan penerima yang mengikat, sedangkan infak, sedekah, dan wakaf lebih lapang peruntukannya."
           />
-          <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Kartu melebar (dua kolom, isi berjajar) agar penjelasan tiap jenis
+              dana terbaca sebagai satu baris utuh, bukan kolom sempit. Ornamen
+              geometri islami mengisi sisi kanan kartu dan meredup ke kiri
+              supaya tidak pernah bertabrakan dengan teks. */}
+          <ul className="mt-12 grid gap-4 sm:grid-cols-2">
             {jenisDana.map((j) => (
-              <li key={j.nama} className="rounded-2xl border border-line bg-white p-6">
-                <span className="inline-flex size-11 items-center justify-center rounded-xl bg-accent-50 text-accent-700 ring-1 ring-accent-100 ring-inset">
-                  <Icon nama={j.ikon} />
+              <li
+                key={j.nama}
+                className="group relative flex items-start gap-5 overflow-hidden rounded-2xl border border-line bg-white p-6 shadow-soft transition duration-300 ease-out hover:-translate-y-1 hover:border-accent-200 hover:shadow-card"
+              >
+                {/* Pembungkus ornamen: mask gradien meredupkannya ke arah kiri,
+                    tempat ikon dan teks berada. */}
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_left,black,transparent_62%)]"
+                >
+                  <span className="ornamen-islami absolute -inset-8 text-brand-600 opacity-[0.07] transition duration-500 ease-out group-hover:scale-[1.06] group-hover:opacity-[0.13]" />
                 </span>
-                <h3 className="mt-5 font-display text-lg font-semibold text-ink">{j.nama}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-pretty text-ink-muted">{j.isi}</p>
+
+                <span className="relative inline-flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent-50 text-accent-700 ring-1 ring-accent-100 ring-inset transition duration-300 ease-out group-hover:bg-accent-100 group-hover:ring-accent-200">
+                  <Icon nama={j.ikon} className="size-5.5" />
+                </span>
+
+                <div className="relative min-w-0">
+                  <h3 className="font-display text-lg font-semibold text-ink">{j.nama}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-pretty text-ink-muted">
+                    {j.isi}
+                  </p>
+                </div>
               </li>
             ))}
           </ul>

@@ -8,7 +8,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { Icon } from "@/components/ui/Icon";
 import { UnitCard } from "@/components/ui/UnitCard";
 import { labelGender, labelJenjang, labelLokasi, labelModel } from "@/lib/format";
-import type { Gender, Jenjang, Lokasi, ModelBelajar, Unit } from "@/lib/schemas";
+import type { Gender, ImageData, Jenjang, Lokasi, ModelBelajar, Unit } from "@/lib/schemas";
 import { cn } from "@/lib/cn";
 
 /**
@@ -49,7 +49,14 @@ function bacaNilai(params: URLSearchParams, kunci: KunciFilter): string[] {
   return mentah.split(",").filter(Boolean);
 }
 
-export function PencariProgram({ units }: { units: readonly Unit[] }) {
+export function PencariProgram({
+  units,
+  hero,
+}: {
+  units: readonly Unit[];
+  /** Gambar kartu per slug unit; kunci yang absen berarti kartu tanpa foto. */
+  hero: Record<string, ImageData>;
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -179,8 +186,13 @@ export function PencariProgram({ units }: { units: readonly Unit[] }) {
           </EmptyState>
         ) : (
           <ul className="mt-8 grid gap-5 sm:grid-cols-2">
-            {hasil.map((unit) => (
-              <UnitCard key={unit.slug} unit={unit} />
+            {hasil.map((unit, i) => (
+              <UnitCard
+                key={unit.slug}
+                unit={unit}
+                gambar={hero[unit.slug] ?? null}
+                prioritas={i < 2}
+              />
             ))}
           </ul>
         )}

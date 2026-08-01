@@ -96,10 +96,21 @@ function SisiBelakang({ pintu }: { pintu: Pintu }) {
   return (
     <div
       className={cn(
-        "absolute inset-0 flex flex-col rounded-3xl bg-brand-950 p-6 text-white ring-1 ring-ink/10",
+        "absolute inset-0 isolate flex flex-col overflow-hidden rounded-3xl bg-brand-950 p-6 text-white ring-1 ring-ink/10",
         "[backface-visibility:hidden] [transform:rotateY(180deg)]",
       )}
     >
+      {/* Ornamen geometri islami yang sama seperti kartu jenis dana di /donasi,
+          dipakai di sisi belakang saja — sisi depan sudah penuh foto. Meredup
+          dari sudut kanan atas supaya tidak mengurangi kontras teks, dan
+          `-z-10` menahannya di bawah isi kartu (di atas latar brand-950). */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -z-10 inset-0 [mask-image:radial-gradient(circle_at_top_right,black,transparent_72%)]"
+      >
+        <span className="ornamen-islami absolute -inset-8 text-accent-200 opacity-[0.14] transition-transform duration-700 ease-out group-hover:scale-[1.08]" />
+      </span>
+
       <span className="inline-flex size-11 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20">
         <Icon nama={pintu.ikon as NamaIkon} className="size-5 text-accent-200" tebal={1.8} />
       </span>

@@ -43,8 +43,8 @@ function pattern(id, stroke, opacity) {
   </pattern>`;
 }
 
-function svg({ w, h, palette, seed = 0, label = "" }) {
-  const [gelap, sedang, terang] = palettes[palette] ?? palettes.hijau;
+function svg({ w, h, palette, warna, seed = 0, label = "" }) {
+  const [gelap, sedang, terang] = warna ?? palettes[palette] ?? palettes.hijau;
   const a = 20 + ((seed * 37) % 60);
   const b = 30 + ((seed * 53) % 50);
   const teks = label
@@ -94,25 +94,32 @@ const berkas = [
   { nama: "kampus-sleman", w: 1200, h: 900, palette: "pasir", label: "Kampus Sleman" },
 ];
 
-/** Unit — hero profil + logo. */
+/**
+ * Unit — hero profil.
+ *
+ * Warnanya diturunkan dari `warna_aksen` masing-masing unit di
+ * `src/data/units.ts` (gelap – sedang – terang), bukan dari palet umum di atas:
+ * gambar contoh pada kartu pencari program duduk tepat di atas garis aksen unit,
+ * jadi keduanya harus sewarna.
+ */
 const units = [
-  "taud-saqu",
-  "sdit-wadi-mubarak",
-  "smp-tahfizh-putra",
-  "smp-tahfizh-putri",
-  "sma-tahfizh-putra",
-  "sma-tahfizh-putri",
-  "mbs-wadi-mubarak",
-  "stiu-wadi-mubarak",
-  "pkm-wadi-mubarak",
+  ["taud-saqu", ["#0c486b", "#0086c4", "#94dbfb"]],
+  ["sdit-wadi-mubarak", ["#101d39", "#3054a6", "#96aeda"]],
+  ["smp-tahfizh-putra", ["#0b1524", "#243c70", "#6c88c6"]],
+  ["smp-tahfizh-putri", ["#08313d", "#0e7490", "#7dd3ec"]],
+  ["sma-tahfizh-putra", ["#000c28", "#1b2c52", "#4a6bb8"]],
+  ["sma-tahfizh-putri", ["#1b2c52", "#4a6bb8", "#bfcfea"]],
+  ["mbs-wadi-mubarak", ["#0a3550", "#0369a1", "#7cc7ec"]],
+  ["stiu-wadi-mubarak", ["#000c28", "#243c70", "#5ac6f6"]],
+  ["pkm-wadi-mubarak", ["#0069a0", "#22b2f0", "#c7ecfd"]],
 ];
 
-units.forEach((slug, i) => {
+units.forEach(([slug, warna], i) => {
   berkas.push({
     nama: `unit-${slug}`,
     w: 1600,
     h: 1000,
-    palette: Object.keys(palettes)[i % 6],
+    warna,
     seed: i + 3,
     label: "",
   });

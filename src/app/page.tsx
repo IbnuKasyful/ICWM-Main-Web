@@ -59,7 +59,7 @@ export default async function Beranda() {
             sorot="sejauh ini"
             keterangan="Diperbarui setiap awal tahun ajaran. Rincian dan metodologi penghitungannya tersedia pada halaman dampak."
           />
-          <StatBlock data={capaian} className="mt-10" />
+          <StatBlock data={capaian} tautan="/dampak" className="mt-10" />
         </div>
       </Section>
 

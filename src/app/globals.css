@@ -130,6 +130,36 @@
       transform: translateY(calc(-50% - 0.5rem));
     }
   }
+
+  /* --- Gerak: bilah progres donasi (§9.4) ---
+     Bilah terisi dari nol saat pertama kali dirender, supaya capaian terbaca
+     sebagai sesuatu yang bertumbuh, bukan grafik mati. Yang dianimasikan
+     adalah `width`, bukan `transform: scaleX` — scaleX ikut memelintir sudut
+     bilah yang membulat. Elemennya setipis 10px dan animasinya sekali jalan,
+     jadi biaya layout-nya tidak berarti. Tanpa kata kunci `to`, nilai akhirnya
+     otomatis lebar yang disetel inline per program. */
+  --animate-progres-isi: progres-isi 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @keyframes progres-isi {
+    from {
+      width: 0;
+    }
+  }
+
+  /* Kilau yang melintasi bilah. Sengaja hanya dipasang saat kartu induknya
+     disentuh kursor (`group-hover`), jadi tidak ada gerak yang berjalan terus
+     tanpa diminta — sejalan dengan dinding foto di atas: ini respons, bukan
+     tontonan. */
+  --animate-progres-kilau: progres-kilau 1.5s ease-in-out infinite;
+
+  @keyframes progres-kilau {
+    from {
+      transform: translateX(-150%);
+    }
+    to {
+      transform: translateX(320%);
+    }
+  }
 }
 
 /* Aksen per unit (PRD §7.2 `warna_aksen`). Nilai dasar = warna yayasan,
@@ -200,6 +230,22 @@
   @media (width >= 768px) {
     padding-inline: 2rem;
   }
+}
+
+/* Ornamen geometri islami — tesela bintang delapan (khatam) yang bersambung
+   ke segala arah: persegi lurus ditumpuk persegi terputar 45°, dengan belah
+   ketupat di keempat sudut petak sehingga sambungan antar-petak tidak terlihat.
+
+   Digambar sebagai `mask` alih-alih `background-image`, dengan dua alasan:
+   warnanya tetap datang dari token lewat utilitas `text-*` (aturan §10: tidak
+   ada warna mentah di komponen), dan tidak ada permintaan jaringan tambahan
+   (PRD §12). Pemakaian: satu span dekoratif berposisi absolut, diberi warna
+   dan opasitas rendah — ini latar, bukan gambar. */
+@utility ornamen-islami {
+  background-color: currentColor;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' fill='none' stroke='%23000' stroke-width='1'%3E%3Cpath d='M7 7h30v30H7z'/%3E%3Cpath d='M22 0L44 22L22 44L0 22Z'/%3E%3Cpath d='M22 14L30 22L22 30L14 22Z'/%3E%3Cpath d='M0 -7L7 0L0 7L-7 0Z'/%3E%3Cpath d='M44 -7L51 0L44 7L37 0Z'/%3E%3Cpath d='M0 37L7 44L0 51L-7 44Z'/%3E%3Cpath d='M44 37L51 44L44 51L37 44Z'/%3E%3C/svg%3E");
+  mask-size: 44px 44px;
+  mask-repeat: repeat;
 }
 
 /* Garis bawah dekoratif untuk kata yang di-highlight pada judul dua nada. */

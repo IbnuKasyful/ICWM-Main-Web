@@ -29,6 +29,7 @@ import {
   type Agenda,
   type Category,
   type Faq,
+  type ImageData,
   type Lokasi,
   type Post,
   type ProgramDonasi,
@@ -79,6 +80,15 @@ export function getUnitProfil(slug: string) {
 /** Peta slug → nama pendek, untuk melabeli kartu dan penyaring. */
 export function getPetaNamaUnit(): ReadonlyMap<string, string> {
   return new Map(units.map((u) => [u.slug, u.nama_pendek]));
+}
+
+/**
+ * Peta slug → hero `unit_profil`, sebagai gambar kartu di pencari program.
+ * Objek biasa, bukan `Map`, sebab nilainya menyeberang ke komponen klien.
+ * Unit tanpa profil sekadar tidak punya kunci di sini.
+ */
+export function getPetaHeroUnit(): Record<string, ImageData> {
+  return Object.fromEntries(unitProfil.map((p) => [p.unit, p.hero]));
 }
 
 /* -------------------------------------------------------------------------- */
