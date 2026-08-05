@@ -131,6 +131,23 @@
     }
   }
 
+  /* --- Gerak: dinding foto hero berjalan mendatar (§9.1 blok 1) ---
+     Satu putaran penuh sekitar 136rem, jadi durasi ini menghasilkan laju
+     ~1,5rem/detik: cukup pelan untuk sempat menatap satu foto, dan tetap
+     terbaca sebagai aliran, bukan tayangan yang menuntut ditonton. */
+  --animate-bento-jalan: bento-jalan 92s linear infinite;
+
+  @keyframes bento-jalan {
+    from {
+      transform: translateX(0);
+    }
+    /* Lihat catatan pada `bento-naik`: setengah lintasan = tepat satu salinan,
+       tambahan 0,5rem menutup satu jarak antar-kolom (gap-4). */
+    to {
+      transform: translateX(calc(-50% - 0.5rem));
+    }
+  }
+
   /* --- Gerak: bilah progres donasi (§9.4) ---
      Bilah terisi dari nol saat pertama kali dirender, supaya capaian terbaca
      sebagai sesuatu yang bertumbuh, bukan grafik mati. Yang dianimasikan

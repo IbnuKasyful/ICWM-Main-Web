@@ -27,11 +27,11 @@ const pintasan: { jenjang: Jenjang; href: string }[] = [
  * apa pun begitu kursor menjauh. Sorotan ikut berpindah saat keping menerima
  * fokus papan tik supaya perilakunya sama bagi yang tidak memakai tetikus.
  */
-export function PintasanJenjang() {
+export function PintasanJenjang({ className }: { className?: string }) {
   const [aktif, setAktif] = useState(0);
 
   return (
-    <ul className="mt-3 flex flex-wrap gap-2">
+    <ul className={cn("mt-3 flex flex-wrap gap-2", className)}>
       {pintasan.map((p, i) => (
         <li key={p.jenjang}>
           <Link

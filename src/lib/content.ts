@@ -2,6 +2,7 @@ import { z } from "zod";
 
 import { programDonasiMentah, rekeningMentah } from "@/data/donasi";
 import { postsMentah } from "@/data/posts";
+import { programQuranMentah } from "@/data/program-quran";
 import { unitProfilMentah, unitsMentah } from "@/data/units";
 import {
   agendaMentah,
@@ -22,6 +23,7 @@ import {
   parseOrThrow,
   postSchema,
   programDonasiSchema,
+  programQuranSchema,
   rekeningSchema,
   testimoniSchema,
   unitProfilSchema,
@@ -33,6 +35,7 @@ import {
   type Lokasi,
   type Post,
   type ProgramDonasi,
+  type ProgramQuran,
   type Unit,
 } from "@/lib/schemas";
 import { ambilProgramDonasiWp, wpAktif } from "@/lib/wp";
@@ -89,6 +92,16 @@ export function getPetaNamaUnit(): ReadonlyMap<string, string> {
  */
 export function getPetaHeroUnit(): Record<string, ImageData> {
   return Object.fromEntries(unitProfil.map((p) => [p.unit, p.hero]));
+}
+
+/* -------------------------------------------------------------------------- */
+/* Program Al-Qur'an untuk umum                                                */
+/* -------------------------------------------------------------------------- */
+
+const programQuran = daftar(programQuranSchema, programQuranMentah, "program_quran");
+
+export function getProgramQuran(): readonly ProgramQuran[] {
+  return programQuran;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -275,7 +288,13 @@ export type HasilCari = {
   judul: string;
   ringkasan: string;
   href: string;
-  jenis: "Tulisan" | "Unit" | "Program donasi" | "Agenda" | "Pertanyaan umum";
+  jenis:
+    | "Tulisan"
+    | "Unit"
+    | "Program Al-Qur'an"
+    | "Program donasi"
+    | "Agenda"
+    | "Pertanyaan umum";
 };
 
 export async function cari(kueri: string): Promise<HasilCari[]> {
@@ -292,6 +311,17 @@ export async function cari(kueri: string): Promise<HasilCari[]> {
         ringkasan: u.deskripsi_singkat,
         href: `/program/${u.slug}`,
         jenis: "Unit",
+      });
+    }
+  }
+
+  for (const p of getProgramQuran()) {
+    if (cocok(p.nama, p.nama_pendek, p.ringkasan)) {
+      hasil.push({
+        judul: p.nama,
+        ringkasan: p.ringkasan,
+        href: `/program-quran#${p.slug}`,
+        jenis: "Program Al-Qur'an",
       });
     }
   }

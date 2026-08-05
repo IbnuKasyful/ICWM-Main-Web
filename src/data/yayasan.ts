@@ -2,10 +2,10 @@
 
 export const capaianMentah: unknown[] = [
   { label: "Santri aktif", nilai: 2140, satuan: "", keterangan: "Seluruh unit, tahun ajaran 2025/2026" },
-  { label: "Alumni", nilai: 6800, satuan: "", keterangan: "Sejak 1998" },
+  { label: "Alumni", nilai: 6800, satuan: "", keterangan: "Sejak 2008" },
   { label: "Hafizh 30 juz", nilai: 512, satuan: "", keterangan: "Lulusan program tahfizh" },
   { label: "Pengajar & pengasuh", nilai: 286, satuan: "", keterangan: "Guru, musyrif, dan tenaga kependidikan" },
-  { label: "Unit pendidikan", nilai: 9, satuan: "", keterangan: "Dari PAUD hingga perguruan tinggi" },
+  { label: "Unit pendidikan", nilai: 11, satuan: "", keterangan: "Dari TAUD hingga perguruan tinggi" },
   { label: "Kampus", nilai: 2, satuan: "", keterangan: "Bogor dan Sleman" },
 ];
 
@@ -126,43 +126,43 @@ export const mitraMentah: unknown[] = [
 
 export const testimoniMentah: unknown[] = [
   {
-    slug: "testimoni-wali-santri-smp",
+    slug: "testimoni-wali-santri-mts",
     nama: "Bapak Hendra Wijaya",
-    peran: "Wali santri SMP Tahfizh Putra",
-    unit: "smp-tahfizh-putra",
+    peran: "Wali santri MTs Tahfizh Putra",
+    unit: "mts-tahfizh-putra",
     kutipan:
       "Yang membuat kami tenang bukan janji jumlah juz, tapi karena musyrif tahu betul karakter anak kami dan mengabari kalau ada yang perlu dibicarakan.",
     foto: { src: "/img/orang-3.svg", alt: "", width: 800, height: 800 },
   },
   {
-    slug: "testimoni-alumni-sma",
+    slug: "testimoni-alumni-ma",
     nama: "Fatimah Az-Zahra",
-    peran: "Alumni SMA Tahfizh Putri, angkatan 2022",
-    unit: "sma-tahfizh-putri",
+    peran: "Alumni MA Mahabbah Boarding School, angkatan 2022",
+    unit: "ma-mbs-putri",
     kutipan:
       "Kebiasaan muraja'ah sebelum subuh yang dibentuk di asrama masih saya jalankan sampai sekarang di bangku kuliah.",
     foto: { src: "/img/orang-6.svg", alt: "", width: 800, height: 800 },
   },
   {
     slug: "testimoni-peserta-pkm",
-    nama: "Ibu Suryani",
-    peran: "Peserta kelas tahsin dewasa",
+    nama: "Ustaz Ridwan Maulana",
+    peran: "Peserta Program Kaderisasi Muhaffizh, angkatan 2024",
     unit: "pkm-wadi-mubarak",
     kutipan:
-      "Usia saya 58 tahun dan baru belajar tajwid dari nol. Pengampunya sabar dan tidak pernah membuat saya merasa terlambat.",
+      "Saya masuk dengan hafalan 20 juz dan mengira tinggal menambah. Ternyata setahun pertama justru dipakai membetulkan bacaan sebelum saya diizinkan menyimak santri.",
     foto: { src: "/img/orang-9.svg", alt: "", width: 800, height: 800 },
   },
 ];
 
 export const agendaMentah: unknown[] = [
   {
-    slug: "tasmi-akbar-santri-sma",
-    judul: "Tasmi' Akbar Santri SMA Tahfizh",
+    slug: "tasmi-akbar-santri-ma",
+    judul: "Tasmi' Akbar Santri MA Tahfizh",
     mulai: "2026-08-09T07:00:00+07:00",
     selesai: "2026-08-09T15:00:00+07:00",
     tempat: "Masjid Utama, Kampus Bogor",
     lokasi: "bogor",
-    unit: ["sma-tahfizh-putra", "sma-tahfizh-putri"],
+    unit: ["ma-tahfizh-putra", "ma-mbs-putri"],
     ringkasan: "Ujian tasmi' terbuka 30 juz yang dapat disaksikan wali santri dan masyarakat umum.",
     terbuka_umum: true,
   },
@@ -173,7 +173,7 @@ export const agendaMentah: unknown[] = [
     selesai: "2026-08-16T12:00:00+07:00",
     tempat: "Aula Yayasan, Kampus Bogor",
     lokasi: "bogor",
-    unit: ["sdit-wadi-mubarak", "smp-tahfizh-putra", "sma-tahfizh-putra"],
+    unit: ["mit-saqu", "mts-tahfizh-putra", "ma-tahfizh-putra"],
     ringkasan: "Sesi tanya jawab bersama kepala unit, tur kampus, dan penjelasan alur pendaftaran.",
     terbuka_umum: true,
   },
@@ -184,7 +184,7 @@ export const agendaMentah: unknown[] = [
     selesai: "2026-08-22T17:30:00+07:00",
     tempat: "Masjid Utama, Kampus Bogor",
     lokasi: "bogor",
-    unit: ["pkm-wadi-mubarak"],
+    unit: ["stiu-wadi-mubarak"],
     ringkasan: "Kajian rutin terbuka untuk umum, disiarkan juga melalui kanal daring yayasan.",
     terbuka_umum: true,
   },
@@ -217,7 +217,7 @@ export const faqMentah: unknown[] = [
     slug: "kapan-ppdb-dibuka",
     pertanyaan: "Kapan pendaftaran santri baru dibuka?",
     jawaban:
-      "Jadwal berbeda per unit. SMP dan SMA umumnya membuka gelombang pertama pada Oktober, SD pada November, sedangkan PKM menerima pendaftaran sepanjang tahun. Periode terkini setiap unit tercantum pada halaman program.",
+      "Jadwal berbeda per unit. MTs dan MA umumnya membuka gelombang pertama pada Oktober, MIT pada November, TAUD pada Januari, sedangkan PKM membuka pendaftaran sekali setahun pada April. Program kaderisasi guru — PG TAUD SAQU, I'dad Mu'allimat, dan Imtiaz Putri — memiliki jadwal angkatannya sendiri. Periode terkini setiap unit tercantum pada halaman program.",
     kelompok: "pendaftaran",
     urutan: 1,
   },
@@ -225,7 +225,7 @@ export const faqMentah: unknown[] = [
     slug: "apakah-harus-hafal-dulu",
     pertanyaan: "Apakah anak harus sudah punya hafalan sebelum mendaftar?",
     jawaban:
-      "Untuk TAUD dan SDIT tidak ada syarat hafalan awal. SMP mensyaratkan minimal 1 juz dan SMA minimal 5 juz, karena target hafalan jenjang tersebut disusun bertingkat.",
+      "Untuk TAUD dan MIT tidak ada syarat hafalan awal. MTs mensyaratkan minimal 1 juz dan MA minimal 5 juz, karena target hafalan jenjang tersebut disusun bertingkat. PKM, sebagai program kaderisasi muhaffizh, mensyaratkan minimal 15 juz, sedangkan I'dad Mu'allimat mensyaratkan minimal juz 30 atau kesediaan menuntaskannya selama program.",
     kelompok: "pendaftaran",
     urutan: 2,
   },
@@ -278,12 +278,28 @@ export const faqMentah: unknown[] = [
     urutan: 8,
   },
   {
+    slug: "bisa-belajar-quran-tanpa-mondok",
+    pertanyaan: "Saya bukan santri. Bisakah saya belajar Al-Qur'an di Wadi Mubarak?",
+    jawaban:
+      "Bisa. Ada dua program yang terbuka untuk umum. Graha Qur'an berjalan daring lewat Google Meet selama tiga bulan per angkatan dengan empat tingkat, dari Pra Tahsin sampai Matan Jazariyah. Wisata Qur'an berupa short camp beberapa hari di kampus Megamendung untuk rombongan sekolah, instansi, atau komunitas. Keduanya dijelaskan pada halaman program Al-Qur'an untuk umum.",
+    kelompok: "umum",
+    urutan: 9,
+  },
+  {
+    slug: "ingin-jadi-guru-taud",
+    pertanyaan: "Saya ingin menjadi guru tahfizh anak usia dini. Lewat jalur mana?",
+    jawaban:
+      "Ada dua jalur dengan panjang yang berbeda. PG TAUD SAQU berdurasi tiga bulan di asrama dan cocok bagi yang ingin segera merintis TAUD di daerahnya. I'dad Mu'allimat berdurasi dua tahun penuh, membiayai pendidikan dan asrama peserta, serta memberi kepastian penempatan mengajar di jaringan sekolah yayasan setelah lulus.",
+    kelompok: "pendaftaran",
+    urutan: 10,
+  },
+  {
     slug: "bagaimana-cara-berdonasi",
     pertanyaan: "Bagaimana cara berdonasi?",
     jawaban:
       "Donasi disalurkan melalui transfer ke rekening resmi LAZIS Wadi Mubarak sesuai jenis dana (zakat, infak, sedekah, atau wakaf). Nomor rekening dan alur konfirmasi tersedia pada halaman donasi.",
     kelompok: "donasi",
-    urutan: 9,
+    urutan: 11,
   },
   {
     slug: "apakah-donasi-dilaporkan",
@@ -291,7 +307,7 @@ export const faqMentah: unknown[] = [
     jawaban:
       "Ya. Laporan penyaluran diterbitkan setiap semester dan laporan keuangan tahunan ditelaah akuntan publik. Seluruh dokumen dapat diunduh bebas pada halaman transparansi.",
     kelompok: "donasi",
-    urutan: 10,
+    urutan: 12,
   },
   {
     slug: "apakah-menerima-kunjungan",
@@ -299,7 +315,7 @@ export const faqMentah: unknown[] = [
     jawaban:
       "Menerima. Pengajuan kunjungan studi banding atau penjajakan kerja sama dapat disampaikan lewat halaman kerja sama, sebaiknya dua pekan sebelum tanggal yang direncanakan.",
     kelompok: "umum",
-    urutan: 11,
+    urutan: 13,
   },
   {
     slug: "bagaimana-menghubungi-alumni",
@@ -307,7 +323,7 @@ export const faqMentah: unknown[] = [
     jawaban:
       "Ikatan Alumni Wadi Mubarak mengelola pendataan dan kegiatan alumni. Hubungi sekretariat yayasan lewat halaman kontak untuk didaftarkan ke kanal alumni angkatan Anda.",
     kelompok: "umum",
-    urutan: 12,
+    urutan: 14,
   },
 ];
 
@@ -337,7 +353,7 @@ export const galeriMentah: unknown[] = [
   },
   {
     src: "/img/galeri-haflah-akhirussanah.jpg",
-    alt: "Santri TAUD dan SD SaQu memegang piagam pada haflah akhirussanah",
+    alt: "Santri TAUD dan MIT SaQu memegang piagam pada haflah akhirussanah",
     width: 1600,
     height: 1066,
   },

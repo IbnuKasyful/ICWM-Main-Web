@@ -23,23 +23,24 @@ export const site = {
   namaPendek: "Wadi Mubarak",
   tagline: "Menemani anak Anda tumbuh bersama Al-Qur'an",
   deskripsi:
-    "Islamic Center Wadi Mubarak menaungi sembilan unit pendidikan dari PAUD hingga perguruan tinggi serta lembaga amil zakat, infak, sedekah, dan wakaf di Bogor dan Sleman.",
+    "Islamic Center Wadi Mubarak menaungi sebelas unit pendidikan dari tahfizh anak usia dini hingga perguruan tinggi, kaderisasi guru Al-Qur'an, serta lembaga amil zakat, infak, sedekah, dan wakaf.",
   url: process.env["NEXT_PUBLIC_SITE_URL"] ?? "https://wadimubarak.com",
   bahasa: "id",
+  tahunBerdiri: 2008,
   alamat: {
-    jalan: "Jl. Raya Wadi Mubarak No. 1, Megamendung",
+    jalan: "Jl. Raya Puncak Kp. Goleah RT 01 RW 01, Desa Kuta, Kec. Megamendung",
     kota: "Kabupaten Bogor",
     provinsi: "Jawa Barat",
-    kodePos: "16770",
+    kodePos: "16750",
     negara: "Indonesia",
   },
   kontak: {
-    telepon: "+62 251 8250 100",
-    whatsapp: "6281234567800",
-    email: "info@wadimubarak.com",
+    telepon: "+62 858 8357 6234",
+    whatsapp: "6285883576234",
+    email: "psbwadimubarak@gmail.com",
     emailMedia: "media@wadimubarak.com",
     emailKerjaSama: "kerjasama@wadimubarak.com",
-    jamLayanan: "Senin – Jumat, 08.00 – 16.00 WIB",
+    jamLayanan: "Setiap hari, 24 jam",
   },
   lazis: {
     nama: "LAZIS Wadi Mubarak",
@@ -47,10 +48,9 @@ export const site = {
     tahunIzin: 2021,
   },
   sosial: [
-    { label: "Instagram", href: "https://instagram.com/wadimubarak" },
-    { label: "YouTube", href: "https://youtube.com/@wadimubarak" },
-    { label: "Facebook", href: "https://facebook.com/wadimubarak" },
-    { label: "TikTok", href: "https://tiktok.com/@wadimubarak" },
+    { label: "Instagram", href: "https://instagram.com/ic_wadimubarak" },
+    { label: "YouTube", href: "https://youtube.com/@ic_wadimubarak" },
+    { label: "Facebook", href: "https://facebook.com/ic.wadimubarak" },
   ],
 } as const;
 
@@ -76,6 +76,16 @@ export const navUtama: NavGrup[] = [
         label: "Cari unit yang cocok",
         href: "/program",
         deskripsi: "Saring berdasarkan jenjang, gender, model belajar, dan lokasi",
+      },
+      {
+        label: "Kaderisasi guru Al-Qur'an",
+        href: "/program?jenjang=non-formal",
+        deskripsi: "PKM, PG TAUD, I'dad Mu'allimat, dan Imtiaz Putri",
+      },
+      {
+        label: "Program Al-Qur'an untuk umum",
+        href: "/program-quran",
+        deskripsi: "Graha Qur'an daring dan short camp Wisata Qur'an",
       },
       {
         label: "Pertanyaan umum",
@@ -120,6 +130,7 @@ export const navFooter: { judul: string; tautan: NavItem[] }[] = [
     judul: "Pendidikan",
     tautan: [
       { label: "Semua unit", href: "/program" },
+      { label: "Program Al-Qur'an untuk umum", href: "/program-quran" },
       { label: "Pertanyaan umum", href: "/faq" },
       { label: "Agenda", href: "/agenda" },
       { label: "Galeri", href: "/galeri" },
@@ -167,19 +178,19 @@ export const navKepatuhan: NavItem[] = [
 export const routerNiat = [
   {
     label: "Menyekolahkan anak",
-    ringkas: "SDIT, SMP, SMA, MBS, sembilan unit",
-    deskripsi: "Bandingkan sembilan unit berdasarkan jenjang, gender, model belajar, dan lokasi.",
+    ringkas: "TAUD, MIT, MTs, MA, MBS, STIU",
+    deskripsi: "Bandingkan sebelas unit berdasarkan jenjang, gender, model belajar, dan lokasi.",
     href: "/program",
     aksi: "Cari unit yang cocok",
     ikon: "sekolah",
     gambar: "/img/niat-menyekolahkan-anak.jpg",
   },
   {
-    label: "Belajar Al-Qur'an",
-    ringkas: "Tahsin & tahfizh untuk umum",
-    deskripsi: "Kelas tahsin dan tahfizh untuk umum — dewasa maupun lansia, luring dan daring.",
-    href: "/program/pkm-wadi-mubarak",
-    aksi: "Lihat kelas terbuka",
+    label: "Menjadi pengampu Qur'an",
+    ringkas: "PKM, PG TAUD, I'dad Mu'allimat, Imtiaz",
+    deskripsi: "Empat jalur kaderisasi: tashih bacaan, metodologi mengajar, lalu penempatan sebagai pengampu tahfizh.",
+    href: "/program?jenjang=non-formal",
+    aksi: "Lihat program kaderisasi",
     ikon: "quran",
     gambar: "/img/niat-belajar-quran.jpg",
   },

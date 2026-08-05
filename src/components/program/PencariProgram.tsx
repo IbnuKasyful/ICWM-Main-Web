@@ -32,16 +32,16 @@ const grupFilter: {
   opsi: readonly string[];
   label: (v: string) => string;
 }[] = [
-  { kunci: "jenjang", judul: "Jenjang", opsi: jenjangOpsi, label: (v) => labelJenjang[v as Jenjang] },
-  { kunci: "gender", judul: "Peserta didik", opsi: genderOpsi, label: (v) => labelGender[v as Gender] },
-  {
-    kunci: "model",
-    judul: "Model belajar",
-    opsi: modelOpsi,
-    label: (v) => labelModel[v as ModelBelajar],
-  },
-  { kunci: "lokasi", judul: "Lokasi kampus", opsi: lokasiOpsi, label: (v) => labelLokasi[v as Lokasi] },
-];
+    { kunci: "jenjang", judul: "Jenjang", opsi: jenjangOpsi, label: (v) => labelJenjang[v as Jenjang] },
+    { kunci: "gender", judul: "Peserta didik", opsi: genderOpsi, label: (v) => labelGender[v as Gender] },
+    {
+      kunci: "model",
+      judul: "Model belajar",
+      opsi: modelOpsi,
+      label: (v) => labelModel[v as ModelBelajar],
+    },
+    { kunci: "lokasi", judul: "Lokasi kampus", opsi: lokasiOpsi, label: (v) => labelLokasi[v as Lokasi] },
+  ];
 
 function bacaNilai(params: URLSearchParams, kunci: KunciFilter): string[] {
   const mentah = params.get(kunci);

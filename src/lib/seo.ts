@@ -76,6 +76,7 @@ export function jsonldOrganization(): Jsonld {
     url: site.url,
     description: site.deskripsi,
     logo: `${site.url}/img/hero-utama.svg`,
+    foundingDate: String(site.tahunBerdiri),
     address: alamatPos,
     email: site.kontak.email,
     telephone: site.kontak.telepon,

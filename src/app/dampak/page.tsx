@@ -48,7 +48,7 @@ const metodologi = [
   },
   {
     judul: "Alumni",
-    isi: "Akumulasi lulusan sejak 1998 yang menerima ijazah atau sertifikat kelulusan program, tanpa penghitungan ganda antar-jenjang.",
+    isi: "Akumulasi lulusan sejak 2008 yang menerima ijazah atau sertifikat kelulusan program, tanpa penghitungan ganda antar-jenjang.",
   },
   {
     judul: "Hafizh 30 juz",

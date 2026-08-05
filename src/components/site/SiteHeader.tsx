@@ -87,12 +87,12 @@ export function SiteHeader({ units }: { units: readonly Unit[] }) {
                         "group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100",
                       )}
                     >
-                      <ul className="rounded-2xl border border-line bg-white p-2 shadow-lift">
+                      <ul className="rounded-lg border border-line bg-white p-2 shadow-lift">
                         {item.anak.map((anak) => (
                           <li key={anak.href + anak.label}>
                             <Link
                               href={anak.href}
-                              className="block rounded-xl px-3 py-2.5 transition-colors hover:bg-mist-50"
+                              className="block rounded-md px-3 py-2.5 transition-colors hover:bg-mist-50"
                             >
                               <span className="block text-sm font-semibold text-ink">
                                 {anak.label}

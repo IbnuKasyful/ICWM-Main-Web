@@ -15,7 +15,7 @@ export const dynamic = "force-static";
 export const metadata = buatMetadata({
   judul: "Tentang Islamic Center Wadi Mubarak",
   deskripsi:
-    "Sejarah, visi, nilai, dan arah gerak Islamic Center Wadi Mubarak — yayasan yang menaungi sembilan unit pendidikan dan lembaga amil zakat di Bogor dan Sleman.",
+    "Sejarah, visi, misi, dan arah gerak Islamic Center Wadi Mubarak — yayasan yang berdiri sejak 2008 di Megamendung dan kini menaungi sebelas unit pendidikan serta lembaga amil zakat.",
   path: "/tentang",
   gambar: "/img/hero-tentang.svg",
 });
@@ -23,7 +23,7 @@ export const metadata = buatMetadata({
 const nilai: { judul: string; isi: string; ikon: NamaIkon }[] = [
   {
     judul: "Al-Qur'an sebagai poros",
-    isi: "Setiap unit, dari taman asuh sampai perguruan tinggi, menempatkan interaksi harian dengan Al-Qur'an sebagai kegiatan inti — bukan mata pelajaran tambahan.",
+    isi: "Setiap unit, dari tahfizh anak usia dini sampai perguruan tinggi, menempatkan interaksi harian dengan Al-Qur'an sebagai kegiatan inti — bukan mata pelajaran tambahan.",
     ikon: "quran",
   },
   {
@@ -43,14 +43,32 @@ const nilai: { judul: string; isi: string; ikon: NamaIkon }[] = [
   },
 ];
 
+/**
+ * Hanya tonggak yang tercatat di kanal resmi yayasan. Tahun berdirinya unit
+ * menengah, MBS, dan STIU belum dimuat di sini karena tanggalnya belum ada
+ * rujukan resmi — mohon dilengkapi sekretariat sebelum mode pratinjau dimatikan.
+ */
 const perjalanan = [
-  { tahun: "1998", isi: "Halaqah tahfizh pertama dibuka di Megamendung dengan 14 santri dan dua pengajar." },
-  { tahun: "2004", isi: "Asrama putra pertama berdiri; program menengah pertama mulai berjalan." },
-  { tahun: "2012", isi: "SDIT dan asrama putri dibuka, menyusul permintaan wali santri dari luar Bogor." },
-  { tahun: "2016", isi: "Izin operasional satuan pendidikan formal terbit untuk seluruh jenjang." },
-  { tahun: "2019", isi: "Kampus Sleman dibuka sebagai cabang pertama di luar Jawa Barat." },
-  { tahun: "2021", isi: "LAZIS Wadi Mubarak memperoleh izin resmi dari Kementerian Agama RI." },
-  { tahun: "2023", isi: "STIU Wadi Mubarak terakreditasi BAN-PT dan membuka beasiswa penuh bagi hafizh." },
+  {
+    tahun: "2008",
+    isi: "Islamic Center Wadi Mubarak berdiri pada 3 Februari 2008 di Megamendung, Bogor, didirikan oleh Roid Kadir, Awang Djohan, dan KH. Dr. Didik Hariyanto.",
+  },
+  {
+    tahun: "2021",
+    isi: "LAZIS Wadi Mubarak memperoleh izin resmi dari Kementerian Agama RI.",
+  },
+  {
+    tahun: "2025",
+    isi: "Ma'had Tahfizh Intensif Imtiaz Putri membuka tahun ajaran pertamanya bagi lulusan SMA sederajat.",
+  },
+  {
+    tahun: "Juni 2026",
+    isi: "Wisuda Akbar Huffazhul Qur'an ke-5 meluluskan 181 wisudawan dari seluruh unit yayasan.",
+  },
+  {
+    tahun: "Agustus 2026",
+    isi: "I'dad Mu'allimat membuka pendaftaran angkatan pertama: kaderisasi guru TAUD selama dua tahun dengan pembiayaan yayasan.",
+  },
 ];
 
 export default function HalamanTentang() {
@@ -62,8 +80,8 @@ export default function HalamanTentang() {
       <PageHeader
         jejak={[{ label: "Tentang", href: "/tentang" }]}
         atas="Profil yayasan"
-        judul="Dua puluh delapan tahun menemani santri dan keluarganya"
-        keterangan="Bermula dari satu halaqah kecil di Megamendung, hari ini Islamic Center Wadi Mubarak menaungi sembilan unit pendidikan, dua kampus, dan sebuah lembaga amil zakat berizin resmi."
+        judul="Delapan belas tahun menemani santri dan keluarganya"
+        keterangan="Berdiri di Megamendung pada 3 Februari 2008, hari ini Islamic Center Wadi Mubarak menaungi sebelas unit pendidikan — dari tahfizh anak usia dini sampai perguruan tinggi — empat jalur kaderisasi guru Al-Qur'an, dan sebuah lembaga amil zakat berizin resmi."
         aksi={
           <>
             <ButtonLink href="/transparansi" varian="garis">
@@ -104,18 +122,17 @@ export default function HalamanTentang() {
             <div className="rounded-2xl border border-line bg-white p-6 md:p-8">
               <h3 className="font-display text-lg font-semibold text-brand-700">Visi</h3>
               <p className="mt-3 text-base leading-relaxed text-pretty text-ink">
-                Menjadi lembaga pendidikan Islam yang melahirkan generasi penghafal Al-Qur&apos;an
-                yang berakhlak, berilmu, dan bermanfaat bagi masyarakat di sekitarnya.
+                Meraih kebangkitan umat Islam dan mengembalikan kejayaannya melalui Al-Qur&apos;an
+                dan As-Sunnah sebagai pedoman dan motivasi hidup.
               </p>
             </div>
             <div className="rounded-2xl border border-line bg-white p-6 md:p-8">
               <h3 className="font-display text-lg font-semibold text-brand-700">Misi</h3>
               <ol className="mt-4 flex flex-col gap-3">
                 {[
-                  "Menyelenggarakan pendidikan berjenjang yang memadukan hafalan Al-Qur'an, ilmu syar'i, dan kurikulum nasional secara utuh.",
-                  "Menjaga rasio pengampu dan santri agar setiap anak terpantau perkembangannya secara pribadi.",
-                  "Mengelola dana umat secara transparan dan melaporkannya secara berkala kepada publik.",
-                  "Membuka akses pendidikan Al-Qur'an bagi masyarakat luas tanpa memandang kemampuan ekonomi.",
+                  "Mempersiapkan kader imam, dai, dan guru yang menegakkan Al-Qur'an dan As-Sunnah.",
+                  "Menyediakan lembaga pendidikan dan dakwah yang dapat dijangkau seluruh lapisan masyarakat.",
+                  "Mendirikan unit usaha yang menopang berjalannya program pendidikan dan dakwah yayasan.",
                 ].map((m, i) => (
                   <li key={m} className="flex items-start gap-3 text-sm leading-relaxed text-ink-muted">
                     <span
@@ -159,7 +176,7 @@ export default function HalamanTentang() {
       {/* Perjalanan */}
       <Section nada="sejuk" className="py-14 md:py-20">
         <div className="container-page">
-          <JudulSeksi atas="Perjalanan" judul="Dari satu halaqah" sorot="ke sembilan unit" />
+          <JudulSeksi atas="Perjalanan" judul="Dari Megamendung," sorot="sejak 2008" />
           <ol className="relative mt-12 ml-3 border-l border-line-strong pl-8">
             {perjalanan.map((p) => (
               <li key={p.tahun} className="relative pb-8 last:pb-0">
@@ -222,8 +239,8 @@ export default function HalamanTentang() {
           <ul className="grid gap-4 md:grid-cols-3">
             {[
               { judul: "Transparansi", isi: "Laporan keuangan dan penyaluran dana.", href: "/transparansi" },
-              { judul: "Dampak", isi: "Angka capaian dan cerita di baliknya.", href: "/dampak" },
-              { judul: "Unit pendidikan", isi: "Sembilan unit dari taman asuh sampai perguruan tinggi.", href: "/program" },
+              { judul: "Unit pendidikan", isi: "Sebelas unit dari tahfizh anak usia dini sampai perguruan tinggi.", href: "/program" },
+              { judul: "Program Al-Qur'an untuk umum", isi: "Graha Qur'an daring dan short camp Wisata Qur'an.", href: "/program-quran" },
             ].map((t) => (
               <li key={t.href}>
                 <Link

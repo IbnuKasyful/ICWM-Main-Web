@@ -129,6 +129,41 @@ export const unitProfilSchema = z.object({
 export type UnitProfil = z.infer<typeof unitProfilSchema>;
 
 /* -------------------------------------------------------------------------- */
+/* Program Al-Qur'an untuk umum                                                */
+/* -------------------------------------------------------------------------- */
+
+/**
+ * Graha Qur'an dan Wisata Qur'an. Sengaja terpisah dari `unitSchema`: keduanya
+ * tidak punya jenjang, gender peserta, maupun status PPDB, sehingga memaksakan
+ * bentuk unit hanya akan mengisi separuh field dengan nilai kosong — dan membuat
+ * keduanya ikut muncul di penyaring /program.
+ */
+export const programQuranSchema = z.object({
+  slug: z.string().min(1),
+  nama: z.string().min(1),
+  nama_pendek: z.string().min(1),
+  ringkasan: z.string().min(1).max(240),
+  penyelenggaraan: z.enum(["daring", "luring"]),
+  durasi: z.string().min(1),
+  peserta: z.string().min(1),
+  biaya: z.string().min(1),
+  warna_aksen: z.string().regex(/^#[0-9a-fA-F]{6}$/),
+  gambar: imageSchema,
+  untuk_siapa: z.array(z.string().min(1)).min(1),
+  sorotan: z
+    .array(z.object({ judul: z.string().min(1), isi: z.string().min(1) }))
+    .min(2)
+    .max(5),
+  materi: z.array(z.object({ judul: z.string().min(1), isi: z.string().min(1) })).min(1),
+  alur_daftar: z.array(z.string().min(1)).min(1),
+  kontak_wa: z.string().min(1),
+  /** `null` berarti program belum punya kanal Instagram sendiri. */
+  instagram: z.string().url().nullable(),
+});
+
+export type ProgramQuran = z.infer<typeof programQuranSchema>;
+
+/* -------------------------------------------------------------------------- */
 /* `post` (PRD §7.4)                                                           */
 /* -------------------------------------------------------------------------- */
 

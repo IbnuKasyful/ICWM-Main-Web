@@ -4,7 +4,7 @@ import { Icon } from "@/components/ui/Icon";
 import { Section } from "@/components/ui/Section";
 
 const penanda = [
-  { ikon: "perisai", teks: "Berbadan hukum sejak 1998, terdaftar di Kemenkumham" },
+  { ikon: "perisai", teks: "Berdiri sejak 3 Februari 2008 di Megamendung, Bogor" },
   { ikon: "dokumen", teks: "Laporan keuangan tahunan ditelaah akuntan publik" },
   { ikon: "centang", teks: "LAZIS berizin Kementerian Agama RI" },
 ] as const;
@@ -20,15 +20,16 @@ export function SekilasYayasan() {
               Sekilas yayasan
             </span>
             <h2 className="mt-4 font-display text-display-md text-balance text-ink md:text-display-lg">
-              Satu naungan untuk sembilan unit,{" "}
+              Satu naungan untuk sebelas unit,{" "}
               <span className="text-brand-600">satu standar pembinaan</span>
             </h2>
 
             <div className="mt-5 flex flex-col gap-4 text-base leading-relaxed text-pretty text-ink-muted">
               <p>
-                Islamic Center Wadi Mubarak berdiri pada 1998 dari satu halaqah kecil di Megamendung,
-                Bogor. Hari ini yayasan menaungi sembilan unit pendidikan dari taman asuh usia dini
-                hingga perguruan tinggi, dua kampus, dan sebuah lembaga amil zakat yang berizin resmi.
+                Islamic Center Wadi Mubarak berdiri pada 3 Februari 2008 di Megamendung, Bogor. Hari
+                ini yayasan menaungi sebelas unit pendidikan dari tahfizh anak usia dini hingga
+                perguruan tinggi, empat jalur kaderisasi guru Al-Qur&apos;an, dan sebuah lembaga amil
+                zakat yang berizin resmi.
               </p>
               <p>
                 Yang tidak berubah sejak awal adalah cara kami bekerja: kelompok belajar dibatasi
@@ -64,9 +65,9 @@ export function SekilasYayasan() {
             {/* Disembunyikan di layar sempit: di sana keping ini menutupi
                 hampir seluruh lebar dinding foto. */}
             <div className="absolute -bottom-4 -left-2 hidden max-w-[15rem] rounded-2xl border border-line bg-white p-5 shadow-lift md:block lg:-left-8">
-              <p className="font-display text-display-sm text-brand-700">28 tahun</p>
+              <p className="font-display text-display-sm text-brand-700">18 tahun</p>
               <p className="mt-1 text-xs leading-relaxed text-ink-muted">
-                mendampingi santri dan keluarganya di Bogor dan Yogyakarta.
+                mendampingi santri dan keluarganya sejak 2008.
               </p>
             </div>
           </div>

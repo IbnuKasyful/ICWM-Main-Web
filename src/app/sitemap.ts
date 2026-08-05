@@ -10,6 +10,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const statis: { path: string; prioritas: number; frekuensi: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
     { path: "/", prioritas: 1, frekuensi: "daily" },
     { path: "/program", prioritas: 0.9, frekuensi: "weekly" },
+    { path: "/program-quran", prioritas: 0.8, frekuensi: "monthly" },
     { path: "/donasi", prioritas: 0.9, frekuensi: "weekly" },
     { path: "/tentang", prioritas: 0.8, frekuensi: "monthly" },
     { path: "/transparansi", prioritas: 0.8, frekuensi: "monthly" },

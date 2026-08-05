@@ -33,7 +33,7 @@ const lowongan: {
 }[] = [
   {
     judul: "Pengampu Tahfizh Putra",
-    unit: "SMP & SMA Tahfizh Putra",
+    unit: "MTs & MA Tahfizh Putra",
     lokasi: "bogor",
     jenis: "Penuh waktu · menetap di asrama",
     syarat: [
@@ -43,8 +43,8 @@ const lowongan: {
     ],
   },
   {
-    judul: "Guru Kelas SDIT",
-    unit: "SDIT Wadi Mubarak",
+    judul: "Guru Kelas MIT",
+    unit: "MIT Sahabat Al-Qur'an",
     lokasi: "bogor",
     jenis: "Penuh waktu",
     syarat: [
@@ -55,7 +55,7 @@ const lowongan: {
   },
   {
     judul: "Musyrifah Asrama Putri",
-    unit: "SMP & SMA Tahfizh Putri",
+    unit: "MBS Putri (MTs & MA)",
     lokasi: "bogor",
     jenis: "Penuh waktu · menetap di asrama",
     syarat: [
