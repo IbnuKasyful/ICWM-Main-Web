@@ -38,22 +38,27 @@ export const programQuranMentah: unknown[] = [
       {
         judul: "Empat tingkat, bukan satu kelas untuk semua",
         isi: "Pra Tahsin, Tahsin, Matan Tuhfatul Athfal, dan Matan Jazariyah. Peserta ditempatkan sesuai hasil tes bacaan awal, bukan sesuai keinginan.",
+        ikon: "filter",
       },
       {
         judul: "Metode At-Tibyan, 40 persen teori dan 60 persen praktik",
         isi: "Sebagian besar waktu pertemuan dipakai untuk membaca dan disimak, bukan mendengarkan penjelasan.",
+        ikon: "quran",
       },
       {
         judul: "Diampu alumni Wadi Mubarak",
         isi: "Pengampu merupakan lulusan Islamic Center Wadi Mubarak, sebagian di antaranya memegang sanad bacaan.",
+        ikon: "orang",
       },
       {
         judul: "Jadwal dipilih peserta",
         isi: "Pertemuan berlangsung lewat Google Meet dan slot waktunya dipilih sendiri saat pendaftaran.",
+        ikon: "kalender",
       },
       {
         judul: "Modul, sertifikat, dan komunitas",
         isi: "Modul belajar diberikan cuma-cuma, kelulusan disertai sertifikat, dan peserta bergabung ke komunitas alumni program.",
+        ikon: "dokumen",
       },
     ],
     materi: [
@@ -98,18 +103,22 @@ export const programQuranMentah: unknown[] = [
       {
         judul: "Komposisi 50–30–20",
         isi: "Setengah waktu untuk tahfizh, tiga persepuluh untuk ilmu keislaman, sisanya outbound dan penyegaran. Susunan ini yang menjaga peserta tetap betah sampai hari terakhir.",
+        ikon: "filter",
       },
       {
         judul: "Disusun per rombongan",
         isi: "Lama kegiatan, target hafalan, dan jenis materi disepakati dengan pihak sekolah atau instansi sebelum keberangkatan.",
+        ikon: "kerjasama",
       },
       {
         judul: "Di kampus yang sedang berjalan",
         isi: "Peserta menginap di kompleks kampus Megamendung dan melihat langsung keseharian santri tahfizh.",
+        ikon: "sekolah",
       },
       {
         judul: "Pembinaan karakter berbasis Al-Qur'an",
         isi: "Materi adab dan kepemimpinan diambil dari ayat yang dihafal peserta selama kegiatan, bukan dari modul terpisah.",
+        ikon: "perisai",
       },
     ],
     materi: [

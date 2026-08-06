@@ -138,6 +138,24 @@ export type UnitProfil = z.infer<typeof unitProfilSchema>;
  * bentuk unit hanya akan mengisi separuh field dengan nilai kosong — dan membuat
  * keduanya ikut muncul di penyaring /program.
  */
+/**
+ * Ikon kartu sorotan. Sengaja dibatasi pada beberapa nama saja: nilainya kelak
+ * datang dari CMS, dan set tertutup memastikan editor tidak mengisi nama yang
+ * tidak ada di `jalurIkon`.
+ */
+export const ikonSorotanSchema = z.enum([
+  "quran",
+  "orang",
+  "kalender",
+  "dokumen",
+  "filter",
+  "kerjasama",
+  "sekolah",
+  "perisai",
+  "bintang",
+  "jam",
+]);
+
 export const programQuranSchema = z.object({
   slug: z.string().min(1),
   nama: z.string().min(1),
@@ -151,7 +169,13 @@ export const programQuranSchema = z.object({
   gambar: imageSchema,
   untuk_siapa: z.array(z.string().min(1)).min(1),
   sorotan: z
-    .array(z.object({ judul: z.string().min(1), isi: z.string().min(1) }))
+    .array(
+      z.object({
+        judul: z.string().min(1),
+        isi: z.string().min(1),
+        ikon: ikonSorotanSchema,
+      }),
+    )
     .min(2)
     .max(5),
   materi: z.array(z.object({ judul: z.string().min(1), isi: z.string().min(1) })).min(1),
