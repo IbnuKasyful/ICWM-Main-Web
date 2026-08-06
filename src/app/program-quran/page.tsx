@@ -243,18 +243,20 @@ export default function HalamanProgramQuran() {
                   {p.untuk_siapa.map((poin) => (
                     <li
                       key={poin}
-                      className="relative isolate flex items-start gap-3 rounded-xl border border-line bg-white p-4 text-sm leading-relaxed text-ink"
+                      className="group relative isolate flex items-start gap-3 rounded-xl border border-line bg-white p-4 text-sm leading-relaxed text-ink transition duration-300 hover:-translate-y-0.5 hover:border-brand-950 hover:bg-brand-950 hover:shadow-[0_20px_42px_-18px_rgba(0,12,40,0.6)]"
                     >
                       {/* Petaknya kecil, jadi ornamennya dibuat lebih tipis
                           daripada di kartu besar. */}
-                      <OrnamenKartu className="opacity-[0.06]" />
+                      <OrnamenKartu className="opacity-[0.06] transition-opacity duration-300 group-hover:opacity-0" />
                       <span
                         className="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full text-white"
                         style={{ backgroundColor: "var(--program-accent)" }}
                       >
                         <Icon nama="centang" className="size-3" tebal={2.6} />
                       </span>
-                      {poin}
+                      <span className="transition-colors duration-300 group-hover:text-white">
+                        {poin}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -262,21 +264,31 @@ export default function HalamanProgramQuran() {
                 <h3 className="mt-10 font-display text-lg font-semibold text-ink">
                   {p.slug === "graha-quran" ? "Tingkat belajar" : "Materi kegiatan"}
                 </h3>
-                {/* Ornamen ditaruh di pembungkus, bukan di `dl`: `span` bukan
-                    anak yang sah bagi daftar deskripsi, dan `divide-y` akan
-                    menghitungnya sebagai baris pertama. */}
-                <div className="relative isolate mt-4 overflow-hidden rounded-2xl border border-line bg-white">
-                  <OrnamenKartu />
-                  <dl className="divide-y divide-line">
-                    {p.materi.map((m) => (
-                      <div key={m.judul} className="p-5">
-                        <dt className="font-display text-base font-semibold text-ink">{m.judul}</dt>
-                        <dd className="mt-1.5 text-sm leading-relaxed text-ink-muted">{m.isi}</dd>
+                <dl className="mt-4 flex flex-col gap-3">
+                  {p.materi.map((m) => (
+                    <div
+                      key={m.judul}
+                      className="group relative isolate flex items-start justify-between gap-4 rounded-xl border border-line bg-white p-5 transition duration-300 hover:-translate-y-0.5 hover:border-brand-950 hover:bg-brand-950 hover:shadow-[0_20px_42px_-18px_rgba(0,12,40,0.6)]"
+                    >
+                      <OrnamenKartu className="opacity-[0.06] transition-opacity duration-300 group-hover:opacity-0" />
+                      <div>
+                        <dt className="font-display text-base font-semibold text-ink transition-colors duration-300 group-hover:text-white">
+                          {m.judul}
+                        </dt>
+                        <dd className="mt-1.5 text-sm leading-relaxed text-ink-muted transition-colors duration-300 group-hover:text-white/75">
+                          {m.isi}
+                        </dd>
                       </div>
-                    ))}
-                  </dl>
-                </div>
+                      <Icon
+                        nama={m.ikon}
+                        className="size-5 shrink-0 text-ink-subtle transition-colors duration-300 group-hover:text-white"
+                        tebal={1.5}
+                      />
+                    </div>
+                  ))}
+                </dl>
               </div>
+
 
               <div>
                 <div

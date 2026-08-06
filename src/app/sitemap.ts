@@ -1,5 +1,10 @@
 import type { MetadataRoute } from "next";
 
+import {
+  daftarKelompokFaq,
+  kelompokFaqBawaan,
+  tautanKelompokFaq,
+} from "@/components/faq/PanelFaq";
 import { getPostsInduk, getProgramDonasi, getUnitsAktif } from "@/lib/content";
 import { site } from "@/lib/site";
 
@@ -54,5 +59,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...halamanStatis, ...halamanUnit, ...halamanTulisan, ...halamanDonasi];
+  // Kelompok bawaan sudah terwakili oleh `/faq` di daftar statis di atas.
+  const halamanFaq: MetadataRoute.Sitemap = daftarKelompokFaq()
+    .filter((k) => k.kelompok !== kelompokFaqBawaan)
+    .map((k) => ({
+      url: `${site.url}${tautanKelompokFaq(k.kelompok)}`,
+      lastModified: sekarang,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    }));
+
+  return [...halamanStatis, ...halamanUnit, ...halamanTulisan, ...halamanDonasi, ...halamanFaq];
 }

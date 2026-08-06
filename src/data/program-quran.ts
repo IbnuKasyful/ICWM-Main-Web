@@ -62,10 +62,26 @@ export const programQuranMentah: unknown[] = [
       },
     ],
     materi: [
-      { judul: "Pra Tahsin", isi: "Untuk yang belum bisa membaca Al-Qur'an atau perlu membenahi bacaan dari dasar." },
-      { judul: "Tahsin", isi: "Perbaikan bacaan bertajwid: makharijul huruf, sifat huruf, dan hukum bacaan." },
-      { judul: "Matan Tuhfatul Athfal", isi: "Kaidah dasar tajwid dipelajari langsung dari matannya." },
-      { judul: "Matan Jazariyah", isi: "Tajwid lanjutan dengan pembahasan makhraj dan sifat huruf yang lebih dalam." },
+      {
+        judul: "Pra Tahsin",
+        isi: "Untuk yang belum bisa membaca Al-Qur'an atau perlu membenahi bacaan dari dasar.",
+        ikon: "bintang",
+      },
+      {
+        judul: "Tahsin",
+        isi: "Perbaikan bacaan bertajwid: makharijul huruf, sifat huruf, dan hukum bacaan.",
+        ikon: "quran",
+      },
+      {
+        judul: "Matan Tuhfatul Athfal",
+        isi: "Kaidah dasar tajwid dipelajari langsung dari matannya.",
+        ikon: "dokumen",
+      },
+      {
+        judul: "Matan Jazariyah",
+        isi: "Tajwid lanjutan dengan pembahasan makhraj dan sifat huruf yang lebih dalam.",
+        ikon: "perisai",
+      },
     ],
     alur_daftar: [
       "Hubungi panitia lewat WhatsApp untuk jadwal angkatan terdekat",
@@ -122,10 +138,26 @@ export const programQuranMentah: unknown[] = [
       },
     ],
     materi: [
-      { judul: "Tahsin dan tajwid", isi: "Perbaikan bacaan sebagai pembuka, agar hafalan yang ditambahkan tidak menyimpan kesalahan." },
-      { judul: "Tahfizh", isi: "Target hafalan disepakati bersama pendamping rombongan sebelum kegiatan dimulai." },
-      { judul: "Ilmu keislaman", isi: "Adab, akidah dasar, dan sirah disampaikan dalam sesi singkat dan interaktif." },
-      { judul: "Team building dan outbound", isi: "Kegiatan luar ruang di area kampus Megamendung sebagai jeda antar-sesi hafalan." },
+      {
+        judul: "Tahsin dan tajwid",
+        isi: "Perbaikan bacaan sebagai pembuka, agar hafalan yang ditambahkan tidak menyimpan kesalahan.",
+        ikon: "quran",
+      },
+      {
+        judul: "Tahfizh",
+        isi: "Target hafalan disepakati bersama pendamping rombongan sebelum kegiatan dimulai.",
+        ikon: "bintang",
+      },
+      {
+        judul: "Ilmu keislaman",
+        isi: "Adab, akidah dasar, dan sirah disampaikan dalam sesi singkat dan interaktif.",
+        ikon: "dokumen",
+      },
+      {
+        judul: "Team building dan outbound",
+        isi: "Kegiatan luar ruang di area kampus Megamendung sebagai jeda antar-sesi hafalan.",
+        ikon: "kerjasama",
+      },
     ],
     alur_daftar: [
       "Hubungi panitia dengan menyebut jumlah peserta dan rentang tanggal yang diinginkan",

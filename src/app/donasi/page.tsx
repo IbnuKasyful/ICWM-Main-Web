@@ -100,32 +100,43 @@ export default async function HalamanDonasi() {
             sorot="menitipkan harta"
             keterangan="Pastikan Anda memilih jenis yang tepat: zakat memiliki ketentuan penerima yang mengikat, sedangkan infak, sedekah, dan wakaf lebih lapang peruntukannya."
           />
-          {/* Kartu melebar (dua kolom, isi berjajar) agar penjelasan tiap jenis
-              dana terbaca sebagai satu baris utuh, bukan kolom sempit. Ornamen
-              geometri islami mengisi sisi kanan kartu dan meredup ke kiri
-              supaya tidak pernah bertabrakan dengan teks. */}
-          <ul className="mt-12 grid gap-4 sm:grid-cols-2">
+          {/* Kartu memakai bahasa rupa yang sama dengan bilah "Mulai dari sini"
+              di beranda: bidang gelap, ikon melayang di pojok atas, dan
+              penjelasan yang menempel di dasar kartu. Bedanya, empat jenis dana
+              ini bukan tautan — tidak ada halaman tujuan untuk masing-masing —
+              jadi isinya tidak disembunyikan di balik hover, melainkan selalu
+              terbaca utuh. */}
+          <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {jenisDana.map((j) => (
               <li
                 key={j.nama}
-                className="group relative flex items-start gap-5 overflow-hidden rounded-2xl border border-line bg-white p-6 shadow-soft transition duration-300 ease-out hover:-translate-y-1 hover:border-accent-200 hover:shadow-card"
+                className="group relative isolate flex min-h-[15rem] flex-col justify-between overflow-hidden rounded-3xl bg-brand-950 p-6 ring-1 ring-ink/10 transition duration-300 ease-out hover:-translate-y-1 hover:shadow-card"
               >
-                {/* Pembungkus ornamen: mask gradien meredupkannya ke arah kiri,
+                {/* Ornamen geometri islami menggantikan foto yang dipakai di
+                    beranda. Mask gradien meredupkannya ke arah kiri bawah,
                     tempat ikon dan teks berada. */}
                 <span
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_left,black,transparent_62%)]"
+                  className="pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom_left,black,transparent_65%)]"
                 >
-                  <span className="ornamen-islami absolute -inset-8 text-brand-600 opacity-[0.07] transition duration-500 ease-out group-hover:scale-[1.06] group-hover:opacity-[0.13]" />
+                  <span className="ornamen-islami absolute -inset-8 text-accent-200 opacity-[0.12] transition duration-500 ease-out group-hover:scale-[1.06] group-hover:opacity-20" />
+                </span>
+                {/* Gelap berangsur di bawah, sama seperti di beranda, supaya
+                    teks tetap terbaca saat ornamen ikut menyala. */}
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-brand-950/85 to-transparent"
+                />
+
+                <span className="relative inline-flex size-11 shrink-0 items-center justify-center self-start rounded-2xl bg-white/10 ring-1 ring-white/20 ring-inset backdrop-blur-sm transition duration-300 ease-out group-hover:bg-white/15 group-hover:ring-white/30">
+                  <Icon nama={j.ikon} className="size-5 text-accent-200" tebal={1.8} />
                 </span>
 
-                <span className="relative inline-flex size-12 shrink-0 items-center justify-center rounded-xl bg-accent-50 text-accent-700 ring-1 ring-accent-100 ring-inset transition duration-300 ease-out group-hover:bg-accent-100 group-hover:ring-accent-200">
-                  <Icon nama={j.ikon} className="size-5.5" />
-                </span>
-
-                <div className="relative min-w-0">
-                  <h3 className="font-display text-lg font-semibold text-ink">{j.nama}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-pretty text-ink-muted">
+                <div className="relative mt-10 min-w-0">
+                  <h3 className="font-display text-lg font-semibold text-balance text-white">
+                    {j.nama}
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-pretty text-white/75">
                     {j.isi}
                   </p>
                 </div>

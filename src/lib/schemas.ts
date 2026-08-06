@@ -178,7 +178,9 @@ export const programQuranSchema = z.object({
     )
     .min(2)
     .max(5),
-  materi: z.array(z.object({ judul: z.string().min(1), isi: z.string().min(1) })).min(1),
+  materi: z
+    .array(z.object({ judul: z.string().min(1), isi: z.string().min(1), ikon: ikonSorotanSchema }))
+    .min(1),
   alur_daftar: z.array(z.string().min(1)).min(1),
   kontak_wa: z.string().min(1),
   /** `null` berarti program belum punya kanal Instagram sendiri. */

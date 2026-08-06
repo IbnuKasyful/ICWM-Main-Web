@@ -177,6 +177,37 @@
       transform: translateX(320%);
     }
   }
+
+  /* --- Gerak: isi akordeon terbuka (§9 FAQ) ---
+     `<details>` menampilkan isinya seketika; jarak dari pertanyaan ke jawaban
+     jadi terasa meloncat. Satu gerak singkat turun-dan-muncul cukup untuk
+     menyambungkan keduanya. Sengaja hanya opacity + transform: keduanya
+     dianimasikan di compositor, jadi tidak memicu layout ulang pada daftar
+     kartu yang panjang. */
+  --animate-akordeon-buka: akordeon-buka 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @keyframes akordeon-buka {
+    from {
+      opacity: 0;
+      transform: translateY(-0.375rem);
+    }
+  }
+
+  /* --- Gerak: kartu akordeon masuk (§9 FAQ) ---
+     Berpindah kelompok FAQ berarti berpindah halaman, jadi daftar pertanyaan
+     dibangun ulang dari nol. Tanpa apa-apa, isinya berganti dalam satu kedip
+     dan mata kehilangan jejak apa yang berubah. Kartu-kartunya masuk bersusul
+     dengan jeda kecil supaya pergantian terbaca sebagai satu gerakan.
+     Jedanya disetel per kartu lewat `animation-delay` dan dibatasi di
+     pemakainya agar daftar panjang tidak berakhir menunggu lama. */
+  --animate-kartu-masuk: kartu-masuk 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @keyframes kartu-masuk {
+    from {
+      opacity: 0;
+      transform: translateY(0.625rem);
+    }
+  }
 }
 
 /* Aksen per unit (PRD §7.2 `warna_aksen`). Nilai dasar = warna yayasan,
