@@ -2,28 +2,16 @@
 
 export const rekeningMentah: unknown[] = [
   {
-    jenis: "zakat",
-    bank: "Bank Syariah Indonesia",
-    nomor: "7001 2345 678",
-    atas_nama: "LAZIS Wadi Mubarak — Zakat",
+    bank: "Bank Syariah Indonesia (BSI)",
+    nomor: "999-514-2150",
+    atas_nama: "LAZIS SaQu Wadi Mubarak",
+    keterangan: "Rekening LAZIS untuk zakat, infak, sedekah, dan wakaf.",
   },
   {
-    jenis: "infak",
-    bank: "Bank Syariah Indonesia",
-    nomor: "7001 2345 679",
-    atas_nama: "LAZIS Wadi Mubarak — Infak",
-  },
-  {
-    jenis: "sedekah",
-    bank: "Bank Muamalat",
-    nomor: "3210 0098 765",
-    atas_nama: "LAZIS Wadi Mubarak — Sedekah",
-  },
-  {
-    jenis: "wakaf",
-    bank: "Bank Syariah Indonesia",
-    nomor: "7001 2345 680",
-    atas_nama: "LAZIS Wadi Mubarak — Wakaf",
+    bank: "Bank Mandiri",
+    nomor: "133-003-3333-451",
+    atas_nama: "Islamic Center Wadi Mubarak",
+    keterangan: "Rekening yayasan untuk donasi umum dan dukungan operasional.",
   },
 ];
 

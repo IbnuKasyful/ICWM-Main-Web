@@ -291,11 +291,14 @@ export const capaianSchema = z.object({
   keterangan: z.string(),
 });
 
+// Rekening tidak lagi dipecah per jenis dana: LAZIS hanya memakai dua rekening
+// resmi, dan keduanya menerima seluruh jenis donasi. Peruntukan ditulis pada
+// berita transfer, bukan dipilih lewat nomor rekening.
 export const rekeningSchema = z.object({
-  jenis: z.enum(["zakat", "infak", "sedekah", "wakaf"]),
   bank: z.string().min(1),
   nomor: z.string().min(1),
   atas_nama: z.string().min(1),
+  keterangan: z.string().min(1),
 });
 
 export type Capaian = z.infer<typeof capaianSchema>;

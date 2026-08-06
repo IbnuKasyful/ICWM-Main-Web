@@ -43,17 +43,22 @@ export function CopyButton({
     }
   }
 
+  // Ikon telanjang, bukan tombol berbingkai: nomor rekening yang harus dibaca
+  // dulu, aksi salinnya cukup menemani. Tetap elemen <button> agar bisa
+  // dijangkau papan ketik — indikator fokusnya datang dari globals.css.
   return (
     <button
       type="button"
       onClick={salin}
+      aria-label={tersalin ? "Nomor tersalin" : gagal ? "Salin manual" : label}
+      title={gagal ? "Gagal menyalin — salin manual" : label}
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-3 py-1.5 text-xs font-semibold text-brand-800 transition-colors hover:border-brand-300 hover:bg-brand-50",
+        "inline-flex size-8 shrink-0 items-center justify-center rounded-lg text-ink-muted transition-colors hover:bg-white hover:text-brand-700",
+        tersalin && "text-brand-600",
         className,
       )}
     >
-      <Icon nama={tersalin ? "centang" : "salin"} className="size-3.5" />
-      <span>{tersalin ? "Tersalin" : gagal ? "Salin manual" : label}</span>
+      <Icon nama={tersalin ? "centang" : "salin"} className="size-4" />
       <span role="status" aria-live="polite" className="sr-only">
         {tersalin ? `${teks} tersalin ke papan klip` : gagal ? "Gagal menyalin otomatis" : ""}
       </span>

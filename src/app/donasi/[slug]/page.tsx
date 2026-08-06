@@ -44,7 +44,7 @@ export default async function HalamanProgramDonasi({
   const program = await getProgramDonasiSlug(slug);
   if (!program) notFound();
 
-  const rekening = getRekening().filter((r) => r.jenis === program.jenis);
+  const rekening = getRekening();
   const lain = (await getProgramDonasi())
     .filter((p) => p.slug !== program.slug)
     .slice(0, 3);
@@ -142,9 +142,11 @@ export default async function HalamanProgramDonasi({
             </div>
 
             <div className="mt-6">
-              <h2 className="font-display text-base font-semibold text-ink">
-                Rekening {labelJenisDonasi[program.jenis]}
-              </h2>
+              <h2 className="font-display text-base font-semibold text-ink">Rekening resmi</h2>
+              <p className="mt-1 text-xs leading-relaxed text-ink-subtle">
+                Tulis &ldquo;{labelJenisDonasi[program.jenis]} — {program.judul}&rdquo; pada berita
+                transfer agar dana tercatat untuk program ini.
+              </p>
               <div className="mt-3">
                 <DaftarRekening rekening={rekening} />
               </div>

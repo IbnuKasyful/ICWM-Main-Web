@@ -39,7 +39,7 @@ function wm_donasi_kolom(): array
             'jenis'   => 'pilihan',
             'pilihan' => ['zakat' => 'Zakat', 'infak' => 'Infak', 'sedekah' => 'Sedekah', 'wakaf' => 'Wakaf'],
             'tipe'    => 'string',
-            'bantuan' => 'Menentukan nomor rekening mana yang tampil di halaman program.',
+            'bantuan' => 'Menentukan label jenis dana pada halaman program dan anjuran berita transfer. Nomor rekening resmi selalu sama untuk semua jenis.',
         ],
         [
             'meta'    => '_wm_target',

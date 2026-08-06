@@ -99,7 +99,7 @@ export const navUtama: NavGrup[] = [
     href: "/donasi",
     anak: [
       { label: "Program yang bisa didanai", href: "/donasi", deskripsi: "Zakat, infak, sedekah, dan wakaf" },
-      { label: "Rekening resmi LAZIS", href: "/donasi#rekening", deskripsi: "Nomor rekening zakat, infak, sedekah, dan wakaf" },
+      { label: "Rekening resmi LAZIS", href: "/donasi#rekening", deskripsi: "Nomor rekening BSI dan Mandiri atas nama lembaga" },
     ],
   },
   {

@@ -3,9 +3,11 @@ import { ProgramDonasiCard } from "@/components/donasi/ProgramDonasiCard";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { ButtonLink } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
-import { Icon } from "@/components/ui/Icon";
+import { Icon, IconChip } from "@/components/ui/Icon";
 import { JsonLd } from "@/components/ui/JsonLd";
+import { KartuFoto } from "@/components/ui/KartuFoto";
 import { JudulSeksi, Section } from "@/components/ui/Section";
+import { cn } from "@/lib/cn";
 import { getProgramDonasi, getRekening } from "@/lib/content";
 import { buatMetadata, jsonldNgo } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -21,35 +23,79 @@ export const metadata = buatMetadata({
   gambar: "/img/hero-donasi.svg",
 });
 
+/** `gambar` masih menumpang foto dokumentasi galeri sebagai penahan tempat —
+ * menyusul diganti foto yang benar-benar mewakili tiap jenis dana. Sengaja
+ * memakai foto, bukan ilustrasi ornamen: kartunya sekartu dengan bilah beranda,
+ * dan ilustrasi emas membuat warnanya melenceng jauh dari nada foto di sana. */
 const jenisDana = [
   {
     nama: "Zakat",
     isi: "Kewajiban 2,5% atas harta yang telah mencapai nisab dan haul. Kami salurkan hanya kepada delapan asnaf yang berhak.",
     ikon: "perisai" as const,
+    gambar: "/img/galeri-buka-puasa-bersama.jpg",
   },
   {
     nama: "Infak",
     isi: "Pemberian bebas nominal dan bebas waktu, dipakai untuk menutup biaya operasional program pendidikan dan sosial.",
     ikon: "donasi" as const,
+    gambar: "/img/galeri-santriwati-halaqah.jpg",
   },
   {
     nama: "Sedekah",
     isi: "Pemberian sukarela, termasuk sedekah dapur santri dan santunan mendesak bagi keluarga santri.",
     ikon: "orang" as const,
+    gambar: "/img/galeri-taud-mewarnai.jpg",
   },
   {
     nama: "Wakaf",
     isi: "Menahan pokok harta dan mengalirkan manfaatnya — dipakai untuk pembangunan asrama, kelas, dan aset produktif.",
     ikon: "yayasan" as const,
+    gambar: "/img/galeri-cendera-mata-masyayikh.jpg",
   },
 ];
 
+/** `waktu` tampil pada bilah tegak di sisi kiri kartu, jadi tulisannya harus
+ * pendek — bilah itu setinggi kartu dikurangi 2,5rem, bukan lebih. */
 const alurSetelahDonasi = [
-  "Anda mentransfer ke rekening resmi sesuai jenis dana.",
-  "Kirim bukti transfer lewat WhatsApp konfirmasi agar dana tercatat atas nama Anda.",
-  "Amil memverifikasi dan mencatat donasi dalam pembukuan LAZIS dalam 1×24 jam kerja.",
-  "Dana disalurkan sesuai peruntukan program, diverifikasi penerima manfaatnya.",
-  "Anda menerima konfirmasi penyaluran atas donasi yang tercatat atas nama Anda.",
+  {
+    judul: "Transfer",
+    waktu: "Menit ini",
+    ikon: "uang" as const,
+    isi: "Anda mentransfer ke salah satu rekening resmi, dengan jenis dana ditulis pada berita transfer.",
+  },
+  {
+    judul: "Konfirmasi",
+    waktu: "Hari itu juga",
+    ikon: "whatsapp" as const,
+    isi: "Kirim bukti transfer lewat WhatsApp konfirmasi agar dana tercatat atas nama Anda.",
+  },
+  {
+    judul: "Verifikasi amil",
+    waktu: "1×24 jam",
+    ikon: "centang" as const,
+    isi: "Amil memverifikasi dan mencatat donasi dalam pembukuan LAZIS dalam 1×24 jam kerja.",
+  },
+  {
+    judul: "Penyaluran",
+    waktu: "Terjadwal",
+    ikon: "donasi" as const,
+    isi: "Dana disalurkan sesuai peruntukan program, diverifikasi penerima manfaatnya.",
+  },
+  {
+    judul: "Kabar penyaluran",
+    waktu: "Menyusul",
+    ikon: "dokumen" as const,
+    isi: "Anda menerima konfirmasi penyaluran atas donasi yang tercatat atas nama Anda.",
+  },
+];
+
+/** Ditulis utuh, bukan dirakit dari `i`, supaya Tailwind ikut memindainya. */
+const kolomLangkah = [
+  "lg:col-start-1",
+  "lg:col-start-2",
+  "lg:col-start-3",
+  "lg:col-start-4",
+  "lg:col-start-5",
 ];
 
 export default async function HalamanDonasi() {
@@ -100,47 +146,26 @@ export default async function HalamanDonasi() {
             sorot="menitipkan harta"
             keterangan="Pastikan Anda memilih jenis yang tepat: zakat memiliki ketentuan penerima yang mengikat, sedangkan infak, sedekah, dan wakaf lebih lapang peruntukannya."
           />
-          {/* Kartu memakai bahasa rupa yang sama dengan bilah "Mulai dari sini"
-              di beranda: bidang gelap, ikon melayang di pojok atas, dan
-              penjelasan yang menempel di dasar kartu. Bedanya, empat jenis dana
-              ini bukan tautan — tidak ada halaman tujuan untuk masing-masing —
-              jadi isinya tidak disembunyikan di balik hover, melainkan selalu
-              terbaca utuh. */}
-          <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {/* Bilah yang sama persis dengan "Mulai dari sini" di beranda, hanya
+              tanpa tautan — keempat jenis dana ini tidak punya halaman tujuan
+              masing-masing. Susunan barisnya ikut disamakan: blok teksnya
+              dipatok selebar 22rem, jadi ia butuh bilah yang melebar, bukan
+              petak grid yang sempit. */}
+          <ul className="mt-12 flex flex-col gap-3 lg:h-[27rem] lg:flex-row lg:gap-4">
             {jenisDana.map((j) => (
-              <li
+              <KartuFoto
                 key={j.nama}
-                className="group relative isolate flex min-h-[15rem] flex-col justify-between overflow-hidden rounded-3xl bg-brand-950 p-6 ring-1 ring-ink/10 transition duration-300 ease-out hover:-translate-y-1 hover:shadow-card"
-              >
-                {/* Ornamen geometri islami menggantikan foto yang dipakai di
-                    beranda. Mask gradien meredupkannya ke arah kiri bawah,
-                    tempat ikon dan teks berada. */}
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom_left,black,transparent_65%)]"
-                >
-                  <span className="ornamen-islami absolute -inset-8 text-accent-200 opacity-[0.12] transition duration-500 ease-out group-hover:scale-[1.06] group-hover:opacity-20" />
-                </span>
-                {/* Gelap berangsur di bawah, sama seperti di beranda, supaya
-                    teks tetap terbaca saat ornamen ikut menyala. */}
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-brand-950/85 to-transparent"
-                />
-
-                <span className="relative inline-flex size-11 shrink-0 items-center justify-center self-start rounded-2xl bg-white/10 ring-1 ring-white/20 ring-inset backdrop-blur-sm transition duration-300 ease-out group-hover:bg-white/15 group-hover:ring-white/30">
-                  <Icon nama={j.ikon} className="size-5 text-accent-200" tebal={1.8} />
-                </span>
-
-                <div className="relative mt-10 min-w-0">
-                  <h3 className="font-display text-lg font-semibold text-balance text-white">
-                    {j.nama}
-                  </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-pretty text-white/75">
-                    {j.isi}
-                  </p>
-                </div>
-              </li>
+                gambar={j.gambar}
+                ikon={j.ikon}
+                judul={j.nama}
+                keterangan={j.isi}
+                sizes="(min-width: 1024px) 34rem, 92vw"
+                className={cn(
+                  "h-[13rem] sm:h-[15rem]",
+                  "transition-[flex-grow] duration-500 ease-out motion-reduce:transition-none",
+                  "lg:h-auto lg:flex-[1_1_0%] lg:hover:flex-[3.4_1_0%] lg:focus-within:flex-[3.4_1_0%]",
+                )}
+              />
             ))}
           </ul>
         </div>
@@ -178,18 +203,25 @@ export default async function HalamanDonasi() {
         <div className="container-page">
           <JudulSeksi
             atas="Rekening resmi"
-            judul="Hanya empat rekening ini"
+            judul="Hanya dua rekening ini"
             sorot="yang resmi"
-            keterangan="Kami tidak pernah meminta transfer ke rekening pribadi. Bila Anda menerima permintaan atas nama perorangan, mohon laporkan kepada kami."
+            keterangan="Keduanya menerima zakat, infak, sedekah, dan wakaf — tulis peruntukannya pada berita transfer. Kami tidak pernah meminta transfer ke rekening pribadi. Bila Anda menerima permintaan atas nama perorangan, mohon laporkan kepada kami."
           />
           <div className="mt-12">
             <DaftarRekening rekening={rekening} />
           </div>
 
-          <div className="mt-8 flex flex-col gap-3 rounded-2xl border border-accent-200 bg-accent-50 p-6 sm:flex-row sm:items-center sm:justify-between">
+          {/* Nada gelapnya dipinjam dari kartu "Yang membedakan program ini" di
+              /program-quran saat disorot: biru tua merek, bukan hitam netral,
+              dengan bayangan rendah yang mengangkatnya sedikit dari halaman.
+              Di sini nada itu menetap — kartunya memang satu-satunya langkah
+              yang tersisa setelah transfer, jadi ia pantas menonjol sendiri. */}
+          <div className="mt-8 flex flex-col gap-4 rounded-[22px] bg-brand-950 p-6 shadow-[0_22px_45px_-20px_rgba(0,12,40,0.7)] sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-start gap-3">
-              <Icon nama="info" className="mt-0.5 size-5 shrink-0 text-accent-700" />
-              <p className="text-sm leading-relaxed text-accent-900">
+              <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full text-white ring-1 ring-white/30 ring-inset">
+                <Icon nama="info" className="size-4" />
+              </span>
+              <p className="text-sm leading-relaxed text-pretty text-white/75">
                 Setelah transfer, kirim bukti ke WhatsApp konfirmasi agar donasi tercatat atas nama
                 Anda dan konfirmasi penyalurannya bisa kami kirimkan.
               </p>
@@ -199,6 +231,7 @@ export default async function HalamanDonasi() {
                 "Assalamu'alaikum. Saya ingin mengonfirmasi donasi ke LAZIS Wadi Mubarak.",
               )}`}
               eksternal
+              varian="terang"
               ukuran="sm"
               className="shrink-0"
             >
@@ -211,7 +244,7 @@ export default async function HalamanDonasi() {
 
       {/* Alur setelah berdonasi */}
       <Section nada="sejuk" className="py-14 md:py-20">
-        <div className="container-page grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-16">
+        <div className="container-page">
           <JudulSeksi
             atas="Setelah berdonasi"
             judul="Apa yang terjadi"
@@ -219,21 +252,77 @@ export default async function HalamanDonasi() {
             rata="kiri"
             keterangan="Lima langkah ini berlaku untuk semua jenis dana, dari nominal terkecil sampai terbesar."
           />
-          <ol className="flex flex-col gap-4">
-            {alurSetelahDonasi.map((langkah, i) => (
-              <li
-                key={langkah}
-                className="flex items-start gap-4 rounded-xl border border-line bg-white p-5"
-              >
-                <span
-                  aria-hidden="true"
-                  className="inline-flex size-7 shrink-0 items-center justify-center rounded-full bg-brand-600 font-display text-xs font-bold text-white"
+
+          {/* Tangga: tiap langkah bergeser satu kolom ke kanan dan berganti
+              nada terang–gelap, jadi urutannya sudah terbaca dari bentuknya
+              sebelum nomornya dibaca. Kartunya selebar 8 dari 12 kolom dengan
+              lima titik mulai, sehingga langkah terakhir berhenti rata kanan.
+              Garis putus-putus di sela kartu menyambungkan langkah ke langkah:
+              tegak lurus saat kartu bertumpuk, menyiku saat bertangga. */}
+          <ol className="mt-12 grid gap-8 lg:grid-cols-12 lg:gap-10">
+            {alurSetelahDonasi.map((langkah, i) => {
+              const gelap = i % 2 === 1;
+              return (
+                <li
+                  key={langkah.judul}
+                  className={cn("relative flex items-stretch lg:col-span-8", kolomLangkah[i])}
                 >
-                  {i + 1}
-                </span>
-                <p className="text-sm leading-relaxed text-ink">{langkah}</p>
-              </li>
-            ))}
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      "relative z-10 my-5 -mr-6 flex w-11 shrink-0 items-center justify-center rounded-full text-[0.7rem] font-semibold tracking-[0.1em] text-white uppercase",
+                      gelap ? "bg-brand-800" : "bg-brand-700",
+                    )}
+                  >
+                    <span className="rotate-180 [writing-mode:vertical-rl]">{langkah.waktu}</span>
+                  </span>
+
+                  <div
+                    className={cn(
+                      "flex-1 rounded-[22px] p-6 pl-10",
+                      gelap
+                        ? "bg-brand-950 shadow-[0_22px_45px_-20px_rgba(0,12,40,0.7)]"
+                        : "border border-line bg-white shadow-soft",
+                    )}
+                  >
+                    <div className="flex items-center gap-3">
+                      <IconChip nama={langkah.ikon} nada={gelap ? "terang" : "brand"} />
+                      <h3
+                        className={cn(
+                          "font-display text-display-sm",
+                          gelap ? "text-white" : "text-ink",
+                        )}
+                      >
+                        <span className={gelap ? "text-accent-300" : "text-brand-600"}>
+                          {i + 1}
+                        </span>{" "}
+                        {langkah.judul}
+                      </h3>
+                    </div>
+                    <p
+                      className={cn(
+                        "mt-4 text-sm leading-relaxed text-pretty",
+                        gelap ? "text-white/70" : "text-ink-muted",
+                      )}
+                    >
+                      {langkah.isi}
+                    </p>
+                  </div>
+
+                  {i < alurSetelahDonasi.length - 1 ? (
+                    <span
+                      aria-hidden="true"
+                      className="absolute top-full left-5 h-8 border-l-2 border-dashed border-line-strong lg:right-[16%] lg:left-auto lg:h-10 lg:w-[30%] lg:rounded-tr-2xl lg:border-t-2 lg:border-r-2 lg:border-l-0"
+                    >
+                      <Icon
+                        nama="panahBawah"
+                        className="absolute -bottom-1.5 -left-2 size-4 text-line-strong lg:-right-2 lg:left-auto"
+                      />
+                    </span>
+                  ) : null}
+                </li>
+              );
+            })}
           </ol>
         </div>
       </Section>

@@ -234,7 +234,7 @@ export const faqMentah: unknown[] = [
     slug: "bagaimana-cara-berdonasi",
     pertanyaan: "Bagaimana cara berdonasi?",
     jawaban:
-      "Donasi disalurkan melalui transfer ke rekening resmi LAZIS Wadi Mubarak sesuai jenis dana (zakat, infak, sedekah, atau wakaf). Nomor rekening dan alur konfirmasi tersedia pada halaman donasi.",
+      "Donasi disalurkan melalui transfer ke rekening resmi lembaga — BSI a.n. LAZIS SaQu Wadi Mubarak atau Mandiri a.n. Islamic Center Wadi Mubarak. Tulis jenis dana (zakat, infak, sedekah, atau wakaf) pada berita transfer. Nomor rekening dan alur konfirmasi tersedia pada halaman donasi.",
     kelompok: "donasi",
     urutan: 11,
   },
