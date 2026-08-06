@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { DaftarRekening } from "@/components/donasi/DaftarRekening";
 import { ProgramDonasiCard } from "@/components/donasi/ProgramDonasiCard";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
@@ -8,8 +6,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { Icon } from "@/components/ui/Icon";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { JudulSeksi, Section } from "@/components/ui/Section";
-import { getLaporan, getProgramDonasi, getRekening } from "@/lib/content";
-import { tanggalPendek } from "@/lib/format";
+import { getProgramDonasi, getRekening } from "@/lib/content";
 import { buatMetadata, jsonldNgo } from "@/lib/seo";
 import { site } from "@/lib/site";
 
@@ -19,7 +16,7 @@ export const revalidate = 900;
 export const metadata = buatMetadata({
   judul: "Donasi lewat LAZIS Wadi Mubarak",
   deskripsi:
-    "Salurkan zakat, infak, sedekah, dan wakaf lewat LAZIS Wadi Mubarak — lembaga amil berizin Kementerian Agama RI. Setiap program memiliki target, progres, dan laporan penyaluran.",
+    "Salurkan zakat, infak, sedekah, dan wakaf lewat LAZIS Wadi Mubarak — lembaga amil berizin Kementerian Agama RI. Setiap program memiliki target, progres, dan penerima manfaat yang diverifikasi.",
   path: "/donasi",
   gambar: "/img/hero-donasi.svg",
 });
@@ -52,13 +49,12 @@ const alurSetelahDonasi = [
   "Kirim bukti transfer lewat WhatsApp konfirmasi agar dana tercatat atas nama Anda.",
   "Amil memverifikasi dan mencatat donasi dalam pembukuan LAZIS dalam 1×24 jam kerja.",
   "Dana disalurkan sesuai peruntukan program, diverifikasi penerima manfaatnya.",
-  "Laporan penyaluran diterbitkan setiap semester dan dapat diunduh siapa pun.",
+  "Anda menerima konfirmasi penyaluran atas donasi yang tercatat atas nama Anda.",
 ];
 
 export default async function HalamanDonasi() {
   const program = await getProgramDonasi();
   const rekening = getRekening();
-  const laporanPenyaluran = getLaporan().filter((l) => l.jenis === "program");
 
   return (
     <>
@@ -73,13 +69,12 @@ export default async function HalamanDonasi() {
           <Breadcrumb jejak={[{ label: "Donasi", href: "/donasi" }]} terang />
 
           <h1 className="mt-5 max-w-3xl font-display text-display-md text-balance text-white md:text-display-lg">
-            Titipkan zakat Anda pada lembaga yang{" "}
-            <span className="text-accent-300">melaporkan penggunaannya</span>
+            Titipkan zakat Anda pada lembaga amil yang{" "}
+            <span className="text-accent-300">berizin resmi</span>
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-pretty text-white/70">
             Kami lembaga amil resmi berizin Kementerian Agama RI. Setiap program di halaman ini
-            menampilkan target, jumlah terkumpul, dan penerima manfaatnya — dan setiap semester kami
-            terbitkan laporan penyalurannya.
+            menampilkan target, jumlah terkumpul, dan penerima manfaatnya yang diverifikasi tim amil.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-3">
@@ -87,10 +82,10 @@ export default async function HalamanDonasi() {
               Lihat rekening resmi
             </ButtonLink>
             <ButtonLink
-              href="/transparansi"
+              href="#program"
               className="border border-white/25 bg-transparent text-white hover:bg-white/10"
             >
-              Periksa laporan penyaluran
+              Lihat program donasi
             </ButtonLink>
           </div>
         </div>
@@ -141,7 +136,7 @@ export default async function HalamanDonasi() {
       </Section>
 
       {/* Daftar program */}
-      <Section nada="sejuk" className="py-14 md:py-20">
+      <Section id="program" nada="sejuk" className="py-14 md:py-20">
         <div className="container-page">
           <JudulSeksi
             atas="Program"
@@ -185,7 +180,7 @@ export default async function HalamanDonasi() {
               <Icon nama="info" className="mt-0.5 size-5 shrink-0 text-accent-700" />
               <p className="text-sm leading-relaxed text-accent-900">
                 Setelah transfer, kirim bukti ke WhatsApp konfirmasi agar donasi tercatat atas nama
-                Anda dan laporan penyalurannya bisa kami kirimkan.
+                Anda dan konfirmasi penyalurannya bisa kami kirimkan.
               </p>
             </div>
             <ButtonLink
@@ -232,54 +227,6 @@ export default async function HalamanDonasi() {
         </div>
       </Section>
 
-      {/* Tautan ke laporan penyaluran — PRD §9.4 kriteria terakhir */}
-      <Section className="py-14 md:py-20">
-        <div className="container-page">
-          <div className="rounded-3xl border border-line bg-white p-7 shadow-soft md:p-10">
-            <h2 className="font-display text-display-md text-ink">
-              Laporan <span className="text-brand-600">penyaluran</span>
-            </h2>
-
-            {laporanPenyaluran.length === 0 ? (
-              <EmptyState
-                className="mt-6"
-                ikon="dokumen"
-                judul="Laporan penyaluran belum kami terbitkan"
-                keterangan="Kami belum dapat menampilkan laporan penyaluran periode ini. Laporan semester berjalan dijadwalkan terbit paling lambat 31 Januari, dan akan langsung muncul di halaman transparansi begitu tersedia."
-                aksi={{ label: "Hubungi LAZIS", href: "/kontak" }}
-              />
-            ) : (
-              <>
-                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-muted">
-                  Seluruh dokumen di bawah dapat diunduh siapa pun tanpa perlu mendaftar.
-                </p>
-                <ul className="mt-6 divide-y divide-line overflow-hidden rounded-2xl border border-line">
-                  {laporanPenyaluran.map((l) => (
-                    <li key={l.slug}>
-                      <Link
-                        href="/transparansi"
-                        className="flex items-center gap-4 p-5 transition-colors hover:bg-mist-50"
-                      >
-                        <Icon nama="dokumen" className="size-5 shrink-0 text-brand-600" />
-                        <span className="min-w-0 flex-1">
-                          <span className="block text-sm font-semibold text-ink">{l.judul}</span>
-                          <span className="mt-0.5 block text-xs text-ink-subtle">
-                            {l.format} · {l.ukuran} · terbit {l.tahun}
-                          </span>
-                        </span>
-                        <Icon nama="panahKanan" className="size-4 shrink-0 text-ink-subtle" />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-4 text-xs text-ink-subtle">
-                  Diperbarui terakhir {tanggalPendek(`${getLaporan()[0]?.tahun ?? new Date().getFullYear()}-12-31`)}.
-                </p>
-              </>
-            )}
-          </div>
-        </div>
-      </Section>
     </>
   );
 }

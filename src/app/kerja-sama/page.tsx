@@ -13,40 +13,40 @@ import { site } from "@/lib/site";
 export const dynamic = "force-static";
 
 export const metadata = buatMetadata({
-  judul: "Kerja sama & kemitraan",
+  judul: "Kemitraan TAUD & MIT Sahabat Al-Qur'an",
   deskripsi:
-    "Bentuk kerja sama yang terbuka bersama Islamic Center Wadi Mubarak: kemitraan pendidikan, program sosial, kunjungan lembaga, dan tanggung jawab sosial perusahaan.",
+    "Untuk saat ini kemitraan Islamic Center Wadi Mubarak dibuka khusus untuk dua jenjang: TAUD Sahabat Al-Qur'an (tahfizh anak usia dini) dan MIT Sahabat Al-Qur'an (madrasah ibtidaiyah tahfizh).",
   path: "/kerja-sama",
   gambar: "/img/hero-kerja-sama.svg",
 });
 
 const bentukKerjaSama: { judul: string; isi: string; ikon: NamaIkon }[] = [
   {
-    judul: "Kemitraan pendidikan",
-    isi: "Pertukaran kurikulum tahfizh, pelatihan pengampu halaqah, dan penyelenggaraan program bersama untuk lembaga pendidikan lain.",
+    judul: "Pendirian TAUD Sahabat Al-Qur'an",
+    isi: "Merintis unit tahfizh anak usia dini di daerah Anda memakai merek, kurikulum, dan pendampingan pembukaan cabang Sahabat Al-Qur'an.",
     ikon: "sekolah",
   },
   {
-    judul: "Program sosial bersama",
-    isi: "Beasiswa bersama untuk santri yatim dan dhuafa, program pemberdayaan warga sekitar kampus, dan penyaluran bantuan.",
-    ikon: "donasi",
+    judul: "Pendirian MIT Sahabat Al-Qur'an",
+    isi: "Membuka madrasah ibtidaiyah terpadu Sahabat Al-Qur'an dengan kurikulum tahfizh dan standar madrasah Kementerian Agama.",
+    ikon: "sekolah",
   },
   {
-    judul: "Kunjungan & studi banding",
-    isi: "Kunjungan lembaga untuk mempelajari tata kelola pesantren, kurikulum tahfizh, atau pengelolaan lembaga amil zakat.",
-    ikon: "orang",
+    judul: "Adopsi kurikulum & pelatihan guru",
+    isi: "Penggunaan kurikulum tahfizh TAUD dan MIT beserta pelatihan serta tashih bacaan bagi guru lembaga mitra.",
+    ikon: "quran",
   },
   {
-    judul: "Tanggung jawab sosial perusahaan",
-    isi: "Penyaluran dana CSR untuk pembangunan sarana, pengadaan mushaf, atau pembiayaan operasional program masyarakat.",
-    ikon: "kerjasama",
+    judul: "Pendampingan mutu & operasional",
+    isi: "Supervisi berkala, penjaminan mutu, dan pendampingan tata kelola agar TAUD dan MIT mitra berjalan sesuai standar.",
+    ikon: "perisai",
   },
 ];
 
 const alurPengajuan = [
-  "Kirim pengajuan lewat formulir di halaman ini atau surel kerja sama.",
+  "Kirim pengajuan lewat formulir di halaman ini atau surel kemitraan.",
   "Sekretariat menghubungi Anda dalam 2–3 hari kerja untuk penjadwalan pembicaraan awal.",
-  "Penyusunan ruang lingkup, penanggung jawab, dan jangka waktu kerja sama.",
+  "Penyusunan ruang lingkup, penanggung jawab, dan jangka waktu kemitraan.",
   "Penandatanganan nota kesepahaman dan penetapan narahubung kedua pihak.",
 ];
 
@@ -56,19 +56,19 @@ export default function HalamanKerjaSama() {
   return (
     <>
       <PageHeader
-        jejak={[{ label: "Kerja sama", href: "/kerja-sama" }]}
+        jejak={[{ label: "Kemitraan", href: "/kerja-sama" }]}
         atas="Kemitraan"
-        judul="Kerja sama yang kami buka"
-        keterangan="Kami bekerja sama dengan lembaga pendidikan, pemerintah, lembaga sosial, dan perusahaan — selama tujuannya jelas dan dapat dipertanggungjawabkan kepada kedua pihak."
+        judul="Kemitraan yang kami buka untuk TAUD & MIT"
+        keterangan="Untuk saat ini kemitraan Islamic Center Wadi Mubarak difokuskan pada dua jenjang: TAUD Sahabat Al-Qur'an (tahfizh anak usia dini) dan MIT Sahabat Al-Qur'an (madrasah ibtidaiyah tahfizh). Kemitraan di luar kedua jenjang ini untuk sementara belum kami buka."
       />
 
       <Section className="py-12 md:py-16">
         <div className="container-page">
           <JudulSeksi
-            atas="Bentuk kerja sama"
+            atas="Bentuk kemitraan"
             judul="Empat pintu"
-            sorot="kemitraan"
-            keterangan="Bila kebutuhan Anda tidak masuk salah satu kategori ini, tetap sampaikan — kami menilai setiap pengajuan berdasarkan manfaatnya."
+            sorot="kemitraan TAUD & MIT"
+            keterangan="Untuk kunjungan lembaga atau kerja sama di luar TAUD dan MIT, silakan hubungi sekretariat lebih dulu — kami arahkan sesuai ketersediaan."
           />
           <ul className="mt-12 grid gap-5 sm:grid-cols-2">
             {bentukKerjaSama.map((b) => (
@@ -141,7 +141,7 @@ export default function HalamanKerjaSama() {
 
             <div className="mt-8 rounded-2xl border border-line bg-mist-50 p-6">
               <p className="text-xs font-semibold tracking-[0.1em] text-ink-subtle uppercase">
-                Surel kerja sama
+                Surel kemitraan
               </p>
               <a
                 href={`mailto:${site.kontak.emailKerjaSama}`}
@@ -157,9 +157,9 @@ export default function HalamanKerjaSama() {
           </div>
 
           <div className="relative rounded-3xl border border-line bg-white p-6 shadow-soft md:p-8">
-            <h2 className="font-display text-display-sm text-ink">Ajukan kerja sama</h2>
+            <h2 className="font-display text-display-sm text-ink">Ajukan kemitraan</h2>
             <p className="mt-2 text-sm text-ink-muted">
-              Sebutkan nama lembaga, bentuk kerja sama yang diinginkan, dan jangka waktunya.
+              Sebutkan nama lembaga, jenjang yang dituju (TAUD atau MIT), dan rencana lokasinya.
             </p>
             <div className="mt-7">
               <FormKontak keperluanAwal="kerja-sama" />

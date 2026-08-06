@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 import { PageHeader } from "@/components/site/PageHeader";
-import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { JudulSeksi, Section } from "@/components/ui/Section";
 import { StatBlock } from "@/components/ui/StatBlock";
@@ -74,14 +73,6 @@ export default async function HalamanDampak() {
         judul="Angka yang bisa dipertanggungjawabkan"
         keterangan="Setiap angka di halaman ini punya definisi dan cara hitungnya sendiri. Kami cantumkan metodologinya supaya angka ini bisa Anda uji, bukan sekadar dipercaya."
         nada="gelap"
-        aksi={
-          <ButtonLink
-            href="/transparansi"
-            className="border border-white/25 bg-transparent text-white hover:bg-white/10"
-          >
-            Unduh laporan lengkap
-          </ButtonLink>
-        }
       />
 
       <Section className="py-12 md:py-16">
@@ -103,7 +94,7 @@ export default async function HalamanDampak() {
             <div className="rounded-2xl border border-brand-100 bg-brand-50 p-6">
               <p className="font-display text-display-sm text-brand-800">{totalPenerima} program</p>
               <p className="mt-1 text-sm font-semibold text-brand-900">
-                berjalan dengan target dan laporan tersendiri
+                berjalan dengan target dan penerima manfaat tersendiri
               </p>
               <p className="mt-2 text-xs leading-relaxed text-brand-800/80">
                 Masing-masing memiliki penerima manfaat yang diverifikasi tim amil.

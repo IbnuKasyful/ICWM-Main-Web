@@ -5,7 +5,7 @@ import { Icon } from "@/components/ui/Icon";
  *
  * Ditampilkan di atas kepala halaman selama `NEXT_PUBLIC_MODE_PRATINJAU=1`.
  * Tujuannya agar pengunjung yang menerima tautan demo tidak salah mengira
- * nomor rekening dan angka laporan di situs ini sudah resmi.
+ * nomor rekening di situs ini sudah resmi.
  */
 export function PitaPratinjau() {
   return (
@@ -20,7 +20,7 @@ export function PitaPratinjau() {
           &middot;
         </span>
         <span className="font-normal">
-          Seluruh isi halaman ini masih data contoh. Nomor rekening dan angka laporan{" "}
+          Seluruh isi halaman ini masih data contoh. Nomor rekening{" "}
           <strong className="font-semibold">belum resmi</strong> dan tidak boleh dipakai.
         </span>
       </span>

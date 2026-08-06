@@ -99,7 +99,7 @@ export const navUtama: NavGrup[] = [
     href: "/donasi",
     anak: [
       { label: "Program yang bisa didanai", href: "/donasi", deskripsi: "Zakat, infak, sedekah, dan wakaf" },
-      { label: "Laporan penyaluran", href: "/transparansi", deskripsi: "Dokumen yang dapat diunduh publik" },
+      { label: "Rekening resmi LAZIS", href: "/donasi#rekening", deskripsi: "Nomor rekening zakat, infak, sedekah, dan wakaf" },
     ],
   },
   {
@@ -107,7 +107,6 @@ export const navUtama: NavGrup[] = [
     href: "/tentang",
     anak: [
       { label: "Profil yayasan", href: "/tentang", deskripsi: "Sejarah, visi, dan arah gerak" },
-      { label: "Transparansi", href: "/transparansi", deskripsi: "Laporan keuangan dan program" },
       { label: "Dampak", href: "/dampak", deskripsi: "Angka capaian dan cerita di baliknya" },
     ],
   },
@@ -120,7 +119,7 @@ export const navUtama: NavGrup[] = [
       { label: "Galeri", href: "/galeri", deskripsi: "Dokumentasi kegiatan" },
     ],
   },
-  { label: "Kerja sama", href: "/kerja-sama" },
+  { label: "Kemitraan", href: "/kerja-sama" },
   { label: "Kontak", href: "/kontak" },
 ];
 
@@ -145,11 +144,11 @@ export const navFooter: { judul: string; tautan: NavItem[] }[] = [
     ],
   },
   {
-    judul: "Donasi & transparansi",
+    judul: "Donasi & kemitraan",
     tautan: [
       { label: "Cara berdonasi", href: "/donasi" },
-      { label: "Laporan & dokumen", href: "/transparansi" },
-      { label: "Kerja sama", href: "/kerja-sama" },
+      { label: "Rekening resmi LAZIS", href: "/donasi#rekening" },
+      { label: "Kemitraan", href: "/kerja-sama" },
     ],
   },
   {
@@ -204,18 +203,18 @@ export const routerNiat = [
     gambar: "/img/niat-berdonasi.jpg",
   },
   {
-    label: "Menjajaki kerja sama",
-    ringkas: "Kemitraan & kunjungan lembaga",
-    deskripsi: "Kemitraan pendidikan, program sosial, dan kunjungan lembaga.",
+    label: "Menjajaki kemitraan",
+    ringkas: "Kemitraan TAUD & MIT SAQU",
+    deskripsi: "Kemitraan pendirian dan pembinaan TAUD dan MIT Sahabat Al-Qur'an di daerah Anda.",
     href: "/kerja-sama",
-    aksi: "Ajukan kerja sama",
+    aksi: "Ajukan kemitraan",
     ikon: "kerjasama",
     gambar: "/img/niat-kerja-sama.jpg",
   },
   {
     label: "Mengenal yayasan",
-    ringkas: "Profil, laporan, capaian",
-    deskripsi: "Sejarah, arah gerak, laporan keuangan, dan capaian yang bisa diperiksa.",
+    ringkas: "Profil, arah gerak, capaian",
+    deskripsi: "Sejarah, arah gerak, dan capaian program yang bisa diperiksa.",
     href: "/tentang",
     aksi: "Kenali kami",
     ikon: "yayasan",

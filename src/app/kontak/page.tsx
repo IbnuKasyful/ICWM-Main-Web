@@ -44,7 +44,7 @@ const kanal: { ikon: NamaIkon; label: string; nilai: string; href: string; catat
 
 const kanalKhusus = [
   { label: "Media & pers", email: site.kontak.emailMedia },
-  { label: "Kerja sama lembaga", email: site.kontak.emailKerjaSama },
+  { label: "Kemitraan TAUD & MIT", email: site.kontak.emailKerjaSama },
 ];
 
 export default function HalamanKontak() {

@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { PageHeader } from "@/components/site/PageHeader";
-import { ButtonLink } from "@/components/ui/Button";
 import { Icon, type NamaIkon } from "@/components/ui/Icon";
 import { JudulSeksi, Section } from "@/components/ui/Section";
 import { StatBlock } from "@/components/ui/StatBlock";
@@ -33,7 +32,7 @@ const nilai: { judul: string; isi: string; ikon: NamaIkon }[] = [
   },
   {
     judul: "Terbuka untuk diperiksa",
-    isi: "Laporan keuangan dan capaian program kami publikasikan tanpa diminta. Amanah yang tidak bisa diperiksa bukanlah amanah.",
+    isi: "Capaian program dan cara kami menghitungnya kami sampaikan apa adanya, termasuk ketika hasilnya belum sesuai harapan. Amanah yang tidak bisa diperiksa bukanlah amanah.",
     ikon: "perisai",
   },
   {
@@ -82,14 +81,6 @@ export default function HalamanTentang() {
         atas="Profil yayasan"
         judul="Delapan belas tahun menemani santri dan keluarganya"
         keterangan="Berdiri di Megamendung pada 3 Februari 2008, hari ini Islamic Center Wadi Mubarak menaungi sebelas unit pendidikan — dari tahfizh anak usia dini sampai perguruan tinggi — empat jalur kaderisasi guru Al-Qur'an, dan sebuah lembaga amil zakat berizin resmi."
-        aksi={
-          <>
-            <ButtonLink href="/transparansi" varian="garis">
-              Laporan & dokumen
-            </ButtonLink>
-            <ButtonLink href="/dampak">Dampak</ButtonLink>
-          </>
-        }
       />
 
       <Section className="py-12 md:py-16">
@@ -238,7 +229,7 @@ export default function HalamanTentang() {
         <div className="container-page">
           <ul className="grid gap-4 md:grid-cols-3">
             {[
-              { judul: "Transparansi", isi: "Laporan keuangan dan penyaluran dana.", href: "/transparansi" },
+              { judul: "Donasi", isi: "Zakat, infak, sedekah, dan wakaf lewat LAZIS berizin resmi.", href: "/donasi" },
               { judul: "Unit pendidikan", isi: "Sebelas unit dari tahfizh anak usia dini sampai perguruan tinggi.", href: "/program" },
               { judul: "Program Al-Qur'an untuk umum", isi: "Graha Qur'an daring dan short camp Wisata Qur'an.", href: "/program-quran" },
             ].map((t) => (

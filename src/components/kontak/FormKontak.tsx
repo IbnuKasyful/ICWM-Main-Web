@@ -14,7 +14,7 @@ import { cn } from "@/lib/cn";
 const keperluanOpsi = [
   { nilai: "ppdb", label: "Pendaftaran santri baru" },
   { nilai: "donasi", label: "Donasi & LAZIS" },
-  { nilai: "kerja-sama", label: "Kerja sama lembaga" },
+  { nilai: "kerja-sama", label: "Kemitraan TAUD & MIT" },
   { nilai: "media", label: "Media & pers" },
   { nilai: "alumni", label: "Alumni" },
   { nilai: "lainnya", label: "Lainnya" },

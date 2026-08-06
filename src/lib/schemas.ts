@@ -209,18 +209,6 @@ export const programDonasiSchema = z.object({
   mendesak: z.boolean(),
 });
 
-export const laporanSchema = z.object({
-  slug: z.string().min(1),
-  judul: z.string().min(1),
-  tahun: z.number().int(),
-  jenis: z.enum(["keuangan", "program", "dampak"]),
-  /** Ukuran berkas siap tampil, mis. "1,4 MB" (PRD §9.5). */
-  ukuran: z.string().min(1),
-  format: z.string().min(1),
-  url: z.string().min(1),
-  ringkasan: z.string(),
-});
-
 export const faqSchema = z.object({
   slug: z.string().min(1),
   pertanyaan: z.string().min(1),
@@ -261,7 +249,6 @@ export const mitraSchema = z.object({
 });
 
 export type ProgramDonasi = z.infer<typeof programDonasiSchema>;
-export type Laporan = z.infer<typeof laporanSchema>;
 export type Faq = z.infer<typeof faqSchema>;
 export type Testimoni = z.infer<typeof testimoniSchema>;
 export type Agenda = z.infer<typeof agendaSchema>;

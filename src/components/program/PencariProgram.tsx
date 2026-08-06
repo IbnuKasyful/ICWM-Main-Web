@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Icon } from "@/components/ui/Icon";
 import { UnitCard } from "@/components/ui/UnitCard";
-import { labelGender, labelJenjang, labelLokasi, labelModel } from "@/lib/format";
-import type { Gender, ImageData, Jenjang, Lokasi, ModelBelajar, Unit } from "@/lib/schemas";
+import { labelGender, labelJenjang, labelModel } from "@/lib/format";
+import type { Gender, ImageData, Jenjang, ModelBelajar, Unit } from "@/lib/schemas";
 import { cn } from "@/lib/cn";
 
 /**
@@ -19,12 +19,11 @@ import { cn } from "@/lib/cn";
  * penyaring tercermin di URL supaya dapat dibagikan.
  */
 
-type KunciFilter = "jenjang" | "gender" | "model" | "lokasi";
+type KunciFilter = "jenjang" | "gender" | "model";
 
 const jenjangOpsi: Jenjang[] = ["paud", "sd", "smp", "sma", "tinggi", "non-formal"];
 const genderOpsi: Gender[] = ["putra", "putri", "campur"];
 const modelOpsi: ModelBelajar[] = ["boarding", "non-boarding", "hybrid"];
-const lokasiOpsi: Lokasi[] = ["bogor", "sleman"];
 
 const grupFilter: {
   kunci: KunciFilter;
@@ -40,7 +39,6 @@ const grupFilter: {
       opsi: modelOpsi,
       label: (v) => labelModel[v as ModelBelajar],
     },
-    { kunci: "lokasi", judul: "Lokasi kampus", opsi: lokasiOpsi, label: (v) => labelLokasi[v as Lokasi] },
   ];
 
 function bacaNilai(params: URLSearchParams, kunci: KunciFilter): string[] {
@@ -66,12 +64,10 @@ export function PencariProgram({
       jenjang: bacaNilai(params, "jenjang"),
       gender: bacaNilai(params, "gender"),
       model: bacaNilai(params, "model"),
-      lokasi: bacaNilai(params, "lokasi"),
     } satisfies Record<KunciFilter, string[]>;
   }, [searchParams]);
 
-  const jumlahAktif =
-    terpilih.jenjang.length + terpilih.gender.length + terpilih.model.length + terpilih.lokasi.length;
+  const jumlahAktif = terpilih.jenjang.length + terpilih.gender.length + terpilih.model.length;
 
   const perbarui = useCallback(
     (kunci: KunciFilter, nilai: string) => {
@@ -100,7 +96,6 @@ export function PencariProgram({
         if (terpilih.jenjang.length > 0 && !terpilih.jenjang.includes(u.jenjang)) return false;
         if (terpilih.gender.length > 0 && !terpilih.gender.includes(u.gender)) return false;
         if (terpilih.model.length > 0 && !terpilih.model.includes(u.model_belajar)) return false;
-        if (terpilih.lokasi.length > 0 && !terpilih.lokasi.includes(u.lokasi_kampus)) return false;
         return true;
       }),
     [units, terpilih],
@@ -177,7 +172,7 @@ export function PencariProgram({
             className="mt-8"
             ikon="cari"
             judul="Belum ada unit dengan kombinasi ini"
-            keterangan="Kombinasi penyaring yang Anda pilih belum tersedia. Coba longgarkan salah satu penyaring — misalnya lokasi atau model belajar — atau hubungi kami untuk rekomendasi yang sesuai."
+            keterangan="Kombinasi penyaring yang Anda pilih belum tersedia. Coba longgarkan salah satu penyaring — misalnya jenjang atau model belajar — atau hubungi kami untuk rekomendasi yang sesuai."
             aksi={{ label: "Konsultasi lewat kontak", href: "/kontak" }}
           >
             <Button varian="garis" ukuran="sm" onClick={bersihkan}>

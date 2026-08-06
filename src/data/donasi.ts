@@ -111,7 +111,7 @@ const daftar: DonasiInput[] = [
     konten: [
       "Santri penghafal Al-Qur'an membutuhkan asupan yang cukup untuk menopang jadwal belajar yang padat sejak sebelum subuh hingga malam.",
       "Program ini menjaga agar kenaikan harga bahan pangan tidak menurunkan mutu menu harian santri, terutama bagi santri penerima beasiswa.",
-      "Menu disusun dan dievaluasi bersama ahli gizi setiap bulan, dan laporan belanja dapur diterbitkan bersama laporan penyaluran semester.",
+      "Menu disusun dan dievaluasi bersama ahli gizi setiap bulan, dan rincian belanja dapur dapat diminta donatur kepada tim amil.",
     ],
   },
   {

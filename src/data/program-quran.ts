@@ -20,7 +20,7 @@ export const programQuranMentah: unknown[] = [
     penyelenggaraan: "daring",
     durasi: "Tiga bulan per angkatan",
     peserta: "Umum, segala usia; kelas putra dan putri terpisah",
-    biaya: "Rp 450.000 untuk satu angkatan penuh",
+    biaya: "Rincian biaya disampaikan panitia saat pendaftaran",
     warna_aksen: "#0e7490",
     gambar: {
       src: "/img/galeri-dauroh-tadabur.jpg",

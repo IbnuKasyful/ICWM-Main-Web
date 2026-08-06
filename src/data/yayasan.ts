@@ -1,77 +1,14 @@
-/** Data contoh profil yayasan: capaian, mitra, laporan. */
+/** Data contoh profil yayasan: capaian, mitra. */
 
 export const capaianMentah: unknown[] = [
   { label: "Santri aktif", nilai: 2140, satuan: "", keterangan: "Seluruh unit, tahun ajaran 2025/2026" },
   { label: "Alumni", nilai: 6800, satuan: "", keterangan: "Sejak 2008" },
   { label: "Hafizh 30 juz", nilai: 512, satuan: "", keterangan: "Lulusan program tahfizh" },
+  { label: "Hafidz bersanad", nilai: 148, satuan: "", keterangan: "Hafizh dengan sanad bersambung" },
   { label: "Pengajar & pengasuh", nilai: 286, satuan: "", keterangan: "Guru, musyrif, dan tenaga kependidikan" },
   { label: "Unit pendidikan", nilai: 11, satuan: "", keterangan: "Dari TAUD hingga perguruan tinggi" },
-  { label: "Kampus", nilai: 2, satuan: "", keterangan: "Bogor dan Sleman" },
 ];
 
-
-export const laporanMentah: unknown[] = [
-  {
-    slug: "laporan-keuangan-2025",
-    judul: "Laporan Keuangan Yayasan Tahun 2025",
-    tahun: 2025,
-    jenis: "keuangan",
-    ukuran: "2,4 MB",
-    format: "PDF",
-    url: "/dokumen/laporan-keuangan-2025.pdf",
-    ringkasan: "Laporan posisi keuangan, aktivitas, dan arus kas yang telah ditelaah akuntan publik.",
-  },
-  {
-    slug: "laporan-penyaluran-lazis-2025",
-    judul: "Laporan Penyaluran ZIS dan Wakaf 2025",
-    tahun: 2025,
-    jenis: "program",
-    ukuran: "1,8 MB",
-    format: "PDF",
-    url: "/dokumen/laporan-penyaluran-lazis-2025.pdf",
-    ringkasan: "Rincian penghimpunan dan penyaluran per program beserta jumlah penerima manfaat.",
-  },
-  {
-    slug: "laporan-dampak-pendidikan-2025",
-    judul: "Laporan Dampak Program Pendidikan 2025",
-    tahun: 2025,
-    jenis: "dampak",
-    ukuran: "3,1 MB",
-    format: "PDF",
-    url: "/dokumen/laporan-dampak-pendidikan-2025.pdf",
-    ringkasan: "Capaian hafalan, kelulusan, dan sebaran studi lanjut alumni seluruh unit.",
-  },
-  {
-    slug: "laporan-keuangan-2024",
-    judul: "Laporan Keuangan Yayasan Tahun 2024",
-    tahun: 2024,
-    jenis: "keuangan",
-    ukuran: "2,2 MB",
-    format: "PDF",
-    url: "/dokumen/laporan-keuangan-2024.pdf",
-    ringkasan: "Laporan keuangan tahunan beserta catatan atas laporan keuangan.",
-  },
-  {
-    slug: "laporan-penyaluran-lazis-2024",
-    judul: "Laporan Penyaluran ZIS dan Wakaf 2024",
-    tahun: 2024,
-    jenis: "program",
-    ukuran: "1,6 MB",
-    format: "PDF",
-    url: "/dokumen/laporan-penyaluran-lazis-2024.pdf",
-    ringkasan: "Rekapitulasi penyaluran delapan asnaf dan program wakaf produktif.",
-  },
-  {
-    slug: "laporan-keuangan-2023",
-    judul: "Laporan Keuangan Yayasan Tahun 2023",
-    tahun: 2023,
-    jenis: "keuangan",
-    ukuran: "2,0 MB",
-    format: "PDF",
-    url: "/dokumen/laporan-keuangan-2023.pdf",
-    ringkasan: "Laporan keuangan tahunan yayasan periode 1 Januari – 31 Desember 2023.",
-  },
-];
 
 export const mitraMentah: unknown[] = [
   {
@@ -303,9 +240,9 @@ export const faqMentah: unknown[] = [
   },
   {
     slug: "apakah-donasi-dilaporkan",
-    pertanyaan: "Apakah donasi saya dilaporkan?",
+    pertanyaan: "Apakah donasi saya dicatat?",
     jawaban:
-      "Ya. Laporan penyaluran diterbitkan setiap semester dan laporan keuangan tahunan ditelaah akuntan publik. Seluruh dokumen dapat diunduh bebas pada halaman transparansi.",
+      "Ya. Setiap donasi yang dikonfirmasi dicatat atas nama Anda dalam pembukuan LAZIS Wadi Mubarak dan disalurkan sesuai peruntukannya. Konfirmasi penyaluran dapat kami kirimkan kepada donatur yang memintanya lewat halaman kontak.",
     kelompok: "donasi",
     urutan: 12,
   },
@@ -313,7 +250,7 @@ export const faqMentah: unknown[] = [
     slug: "apakah-menerima-kunjungan",
     pertanyaan: "Apakah yayasan menerima kunjungan lembaga?",
     jawaban:
-      "Menerima. Pengajuan kunjungan studi banding atau penjajakan kerja sama dapat disampaikan lewat halaman kerja sama, sebaiknya dua pekan sebelum tanggal yang direncanakan.",
+      "Menerima. Penjajakan kemitraan pendirian TAUD atau MIT Sahabat Al-Qur'an dapat disampaikan lewat halaman kemitraan. Untuk kunjungan studi banding atau kerja sama lain, silakan hubungi sekretariat lewat halaman kontak, sebaiknya dua pekan sebelum tanggal yang direncanakan.",
     kelompok: "umum",
     urutan: 13,
   },

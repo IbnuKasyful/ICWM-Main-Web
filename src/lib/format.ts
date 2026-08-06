@@ -60,12 +60,6 @@ export const labelJenisDonasi = {
   wakaf: "Wakaf",
 } as const;
 
-export const labelJenisLaporan = {
-  keuangan: "Keuangan",
-  program: "Program",
-  dampak: "Dampak",
-} as const;
-
 export const labelJenisMitra = {
   pendidikan: "Pendidikan",
   pemerintah: "Pemerintah",

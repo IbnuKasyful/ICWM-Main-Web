@@ -5,7 +5,7 @@ import { Section } from "@/components/ui/Section";
 
 const penanda = [
   { ikon: "perisai", teks: "Berdiri sejak 3 Februari 2008 di Megamendung, Bogor" },
-  { ikon: "dokumen", teks: "Laporan keuangan tahunan ditelaah akuntan publik" },
+  { ikon: "sekolah", teks: "Sebelas unit dari tahfizh anak usia dini hingga perguruan tinggi" },
   { ikon: "centang", teks: "LAZIS berizin Kementerian Agama RI" },
 ] as const;
 
@@ -33,9 +33,8 @@ export function SekilasYayasan() {
               </p>
               <p>
                 Yang tidak berubah sejak awal adalah cara kami bekerja: kelompok belajar dibatasi
-                supaya setiap santri disimak namanya, dan setiap rupiah yang dititipkan kepada kami
-                dilaporkan secara terbuka. Bila Anda ingin memeriksanya sendiri, seluruh laporan
-                keuangan dan dokumen program kami terbuka untuk diunduh.
+                supaya setiap santri disimak namanya, dan pembinaan berjalan dengan standar yang
+                sama di setiap unit — dari tahfizh anak usia dini hingga perguruan tinggi.
               </p>
             </div>
 
@@ -52,8 +51,8 @@ export function SekilasYayasan() {
 
             <div className="mt-8 flex flex-wrap gap-3">
               <ButtonLink href="/tentang">Profil lengkap yayasan</ButtonLink>
-              <ButtonLink href="/transparansi" varian="garis">
-                Lihat laporan
+              <ButtonLink href="/dampak" varian="garis">
+                Lihat dampak program
               </ButtonLink>
             </div>
           </div>

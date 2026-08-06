@@ -78,7 +78,7 @@ const daftar: PostInput[] = [
     slug: "lazis-salurkan-beasiswa-yatim-semester-ganjil",
     judul: "LAZIS Wadi Mubarak Salurkan Beasiswa untuk 180 Santri Yatim",
     ringkasan:
-      "Penyaluran semester ganjil menjangkau 180 santri yatim dan dhuafa di seluruh unit, dengan laporan rinci yang dapat diunduh publik.",
+      "Penyaluran semester ganjil menjangkau 180 santri yatim dan dhuafa di seluruh unit yayasan.",
     tanggal: "2026-07-02",
     category: "laporan",
     unit_utama: "pkm-wadi-mubarak",
@@ -90,7 +90,7 @@ const daftar: PostInput[] = [
     konten: paragraf(
       "LAZIS Wadi Mubarak menyelesaikan penyaluran beasiswa semester ganjil kepada 180 santri yatim dan dhuafa yang tersebar di seluruh unit pendidikan yayasan.",
       "Beasiswa mencakup biaya pendidikan, asrama, dan kebutuhan harian santri. Penerima ditetapkan lewat verifikasi berkas dan kunjungan rumah oleh tim amil.",
-      "Laporan penyaluran lengkap beserta rincian sumber dana dan alokasinya tersedia untuk diunduh pada halaman transparansi.",
+      "Donatur dapat meminta konfirmasi penyaluran beserta rincian alokasinya kepada tim amil melalui halaman kontak.",
     ),
   },
   {

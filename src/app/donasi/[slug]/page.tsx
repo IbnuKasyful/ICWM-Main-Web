@@ -130,8 +130,8 @@ export default async function HalamanProgramDonasi({
                   <Icon nama="whatsapp" className="size-4" />
                   Donasi untuk program ini
                 </ButtonLink>
-                <ButtonLink href="/transparansi" varian="garis">
-                  Lihat laporan penyaluran
+                <ButtonLink href="/donasi#rekening" varian="garis">
+                  Lihat rekening resmi
                 </ButtonLink>
               </div>
 

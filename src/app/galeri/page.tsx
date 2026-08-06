@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 import { PageHeader } from "@/components/site/PageHeader";
-import { ButtonLink } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Section } from "@/components/ui/Section";
 import { getGaleri } from "@/lib/content";
@@ -27,11 +26,6 @@ export default function HalamanGaleri() {
         atas="Galeri"
         judul="Suasana kampus dan kegiatan santri"
         keterangan="Dokumentasi dipilih dengan memperhatikan perlindungan anak: kami tidak menampilkan wajah santri secara menonjol tanpa izin tertulis wali santri."
-        aksi={
-          <ButtonLink href="/perlindungan-anak" varian="garis">
-            Kebijakan perlindungan anak
-          </ButtonLink>
-        }
       />
 
       <Section className="py-12 md:py-16">

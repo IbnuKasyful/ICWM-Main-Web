@@ -2,7 +2,6 @@ import { Suspense } from "react";
 
 import { PageHeader } from "@/components/site/PageHeader";
 import { PencariProgram } from "@/components/program/PencariProgram";
-import { ButtonLink } from "@/components/ui/Button";
 import { getPetaHeroUnit, getUnitsAktif } from "@/lib/content";
 import { buatMetadata } from "@/lib/seo";
 
@@ -12,7 +11,7 @@ export const revalidate = 3600;
 export const metadata = buatMetadata({
   judul: "Cari unit pendidikan yang cocok",
   deskripsi:
-    "Bandingkan sebelas unit pendidikan Islamic Center Wadi Mubarak berdasarkan jenjang, gender, model belajar, dan lokasi kampus — lengkap dengan status PPDB dan kisaran biaya.",
+    "Bandingkan sebelas unit pendidikan Islamic Center Wadi Mubarak berdasarkan jenjang, gender, model belajar, dan lokasi kampus — lengkap dengan status dan periode PPDB.",
   path: "/program",
 });
 
@@ -27,12 +26,7 @@ export default function HalamanProgram() {
         jejak={[{ label: "Pendidikan", href: "/program" }]}
         atas="Sebelas unit pendidikan"
         judul="Cari unit yang cocok untuk anak Anda"
-        keterangan="Saring berdasarkan jenjang, peserta didik, model belajar, dan lokasi kampus. Setiap kartu membawa Anda ke profil unit — bukan langsung ke pendaftaran, karena keputusan sebaiknya diambil setelah Anda punya cukup gambaran."
-        aksi={
-          <ButtonLink href="/program-quran" varian="garis">
-            Program Al-Qur&apos;an untuk umum
-          </ButtonLink>
-        }
+        keterangan="Saring berdasarkan jenjang, peserta didik, dan model belajar. Setiap kartu membawa Anda ke profil unit — bukan langsung ke pendaftaran, karena keputusan sebaiknya diambil setelah Anda punya cukup gambaran."
       />
 
       <section className="py-12 md:py-16">

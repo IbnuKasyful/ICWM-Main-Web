@@ -9,7 +9,6 @@ import {
   capaianMentah,
   faqMentah,
   galeriMentah,
-  laporanMentah,
   mitraMentah,
   testimoniMentah,
 } from "@/data/yayasan";
@@ -18,7 +17,6 @@ import {
   capaianSchema,
   faqSchema,
   imageSchema,
-  laporanSchema,
   mitraSchema,
   parseOrThrow,
   postSchema,
@@ -169,7 +167,6 @@ export function getPostsUnit(unitSlug: string, batas: number): readonly Post[] {
 /* -------------------------------------------------------------------------- */
 
 const capaian = daftar(capaianSchema, capaianMentah, "capaian");
-const laporan = daftar(laporanSchema, laporanMentah, "laporan");
 const mitra = daftar(mitraSchema, mitraMentah, "mitra");
 const testimoni = daftar(testimoniSchema, testimoniMentah, "testimoni");
 const agenda = daftar(agendaSchema, agendaMentah, "agenda");
@@ -178,15 +175,6 @@ const galeri = daftar(imageSchema, galeriMentah, "galeri");
 
 export function getCapaian() {
   return capaian;
-}
-
-/** PRD §9.5 — dikelompokkan per tahun, terbaru dahulu. */
-export function getLaporan() {
-  return laporan.slice().sort((a, b) => b.tahun - a.tahun || a.judul.localeCompare(b.judul));
-}
-
-export function getTahunLaporan(): number[] {
-  return [...new Set(laporan.map((l) => l.tahun))].sort((a, b) => b - a);
 }
 
 export function getMitra() {

@@ -1,7 +1,4 @@
-import Image from "next/image";
-
 import { PageHeader } from "@/components/site/PageHeader";
-import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { JudulSeksi, Section } from "@/components/ui/Section";
@@ -38,60 +35,52 @@ export default function HalamanProgramQuran() {
         atas="Terbuka untuk umum"
         judul="Belajar Al-Qur'an di Wadi Mubarak tanpa harus mondok"
         keterangan="Tidak semua orang bisa menempuh jenjang bertahun-tahun di asrama. Dua program berikut dibuka untuk siapa saja — satu berjalan daring dari mana pun Anda berada, satu lagi berupa camp singkat di kampus Megamendung."
-        aksi={
-          <>
-            <ButtonLink href="#graha-quran" varian="garis">
-              Graha Qur&apos;an
-            </ButtonLink>
-            <ButtonLink href="#wisata-quran" varian="garis">
-              Wisata Qur&apos;an
-            </ButtonLink>
-          </>
-        }
       />
 
       {/* Ringkasan dua program berdampingan, supaya pengunjung bisa memilih
           sebelum membaca rinciannya. */}
       <Section className="py-12 md:py-16">
         <div className="container-page">
-          <ul className="grid gap-5 md:grid-cols-2">
+          <ul className="grid gap-5 sm:mx-auto sm:max-w-3xl md:max-w-none md:grid-cols-2">
             {program.map((p) => (
               <li
                 key={p.slug}
-                className="flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-soft"
+                className="flex flex-col rounded-[28px] bg-white p-2 shadow-card"
               >
-                <div className="bg-mist-100">
-                  <Image
-                    src={p.gambar.src}
-                    alt={p.gambar.alt}
-                    width={p.gambar.width}
-                    height={p.gambar.height}
-                    priority
-                    sizes="(min-width: 768px) 600px, 100vw"
-                    className="aspect-[16/9] w-full object-cover"
-                  />
-                </div>
-                <div className="flex flex-1 flex-col p-6">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Badge nada="netral">{labelPenyelenggaraan[p.penyelenggaraan]}</Badge>
-                    <Badge nada="netral">{p.durasi}</Badge>
-                  </div>
-                  <h2 className="mt-4 font-display text-display-sm text-ink">{p.nama}</h2>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-pretty text-ink-muted">
-                    {p.ringkasan}
-                  </p>
-                  <a
-                    href={`#${p.slug}`}
-                    className="group mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:text-brand-800"
+                {/* Panel gambar bertumpuk teks — latar masih placeholder sampai
+                    fotonya siap. */}
+                <div className="relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-[22px] bg-gradient-to-br from-mist-200 to-mist-400">
+                  {/* Tombol suka dekoratif di pojok, mengikuti referensi. */}
+                  <span
+                    aria-hidden="true"
+                    className="absolute top-3 right-3 inline-flex size-9 items-center justify-center rounded-full bg-white/25 text-white ring-1 ring-inset ring-white/40 backdrop-blur-sm"
                   >
-                    Baca rinciannya
-                    <Icon
-                      nama="panahBawah"
-                      className="size-3.5 transition-transform group-hover:translate-y-0.5"
-                      tebal={2.2}
-                    />
-                  </a>
+                    <Icon nama="hati" className="size-4" tebal={2} />
+                  </span>
+
+                  {/* Kerudung gelap di bawah supaya teks putih tetap terbaca
+                      begitu foto asli dipasang. */}
+                  <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-ink/75 via-ink/25 to-transparent" />
+
+                  <div className="relative p-4">
+                    <h2 className="font-display text-display-sm text-white">{p.nama}</h2>
+                    <p className="mt-0.5 text-sm text-white/70">
+                      {labelPenyelenggaraan[p.penyelenggaraan]}
+                    </p>
+                    <div className="mt-3 flex items-center gap-2 text-sm font-medium text-white/90">
+                      <Icon nama="jam" className="size-4 text-white/70" />
+                      {p.durasi}
+                    </div>
+                  </div>
                 </div>
+
+                <a
+                  href={`#${p.slug}`}
+                  className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-full bg-ink px-5 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-ink/90"
+                >
+                  Baca rinciannya
+                  <Icon nama="panahBawah" className="size-3.5" tebal={2.2} />
+                </a>
               </li>
             ))}
           </ul>
