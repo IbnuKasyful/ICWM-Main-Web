@@ -18,17 +18,35 @@ import { cn } from "@/lib/cn";
 export function Progress({
   terkumpul,
   target,
+  satuanBiaya,
   className,
   ringkas = false,
 }: {
   terkumpul: number;
   target: number;
+  /** Harga satuan program berkelanjutan, mis. "Rp 13.000 / kg". */
+  satuanBiaya?: string | undefined;
   className?: string;
   /** Varian padat untuk kisi kartu: menyembunyikan kalimat penutup. */
   ringkas?: boolean;
 }) {
   const capaian = persen(terkumpul, target);
   const tuntas = target > 0 && terkumpul >= target;
+
+  /**
+   * Program tanpa target DAN tanpa rekapitulasi dana: menampilkan "Rp 0
+   * terkumpul" di sini akan terbaca sebagai penghimpunan yang gagal, padahal
+   * lembaganya memang tidak pernah menerbitkan angka itu. Yang diumumkan
+   * adalah harga satuannya, jadi itu yang ditampilkan.
+   */
+  if (target === 0 && terkumpul === 0 && satuanBiaya) {
+    return (
+      <div className={cn("flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1", className)}>
+        <span className="font-display text-xl leading-none font-bold text-ink">{satuanBiaya}</span>
+        <span className="shrink-0 text-xs text-ink-subtle">program berkelanjutan</span>
+      </div>
+    );
+  }
 
   return (
     <div className={cn("flex flex-col gap-2.5", className)}>

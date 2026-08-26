@@ -82,7 +82,14 @@ export default async function HalamanProgramDonasi({
                 height={program.gambar.height}
                 priority
                 sizes="(min-width: 1024px) 720px, 100vw"
-                className="aspect-[3/2] w-full object-cover"
+                // Poster kampanye dibiarkan utuh pada rasio aslinya —
+                // tulisannya bagian dari gambar, jadi memangkasnya menghapus
+                // isi. Foto lanskap tetap diseragamkan ke 3:2.
+                className={
+                  program.gambar.height > program.gambar.width
+                    ? "mx-auto h-auto w-full max-w-md"
+                    : "aspect-[3/2] w-full object-cover"
+                }
               />
             </div>
 
@@ -109,7 +116,11 @@ export default async function HalamanProgramDonasi({
           {/* Panel donasi */}
           <aside className="lg:sticky lg:top-24 lg:self-start">
             <div className="rounded-3xl border border-line bg-white p-6 shadow-card">
-              <Progress terkumpul={program.terkumpul} target={program.target} />
+              <Progress
+                terkumpul={program.terkumpul}
+                target={program.target}
+                satuanBiaya={program.satuan_biaya}
+              />
 
               {program.target > 0 ? (
                 <p className="mt-4 rounded-xl bg-mist-50 p-4 text-xs leading-relaxed text-ink-muted">
@@ -123,7 +134,7 @@ export default async function HalamanProgramDonasi({
 
               <div className="mt-6 flex flex-col gap-3">
                 <ButtonLink
-                  href={`https://wa.me/${site.kontak.whatsapp}?text=${encodeURIComponent(pesanWa)}`}
+                  href={`https://wa.me/${site.lazis.whatsapp}?text=${encodeURIComponent(pesanWa)}`}
                   eksternal
                   ukuran="lg"
                 >
@@ -177,6 +188,7 @@ export default async function HalamanProgramDonasi({
                   <Progress
                     terkumpul={p.terkumpul}
                     target={p.target}
+                    satuanBiaya={p.satuan_biaya}
                     className="mt-4"
                     ringkas
                   />

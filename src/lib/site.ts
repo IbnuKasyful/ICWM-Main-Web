@@ -9,9 +9,8 @@
  * Mode pratinjau.
  *
  * Selama seluruh isi situs masih berupa data contoh — termasuk nomor rekening —
- * penayangan publik diberi dua pengaman:
- * perayap mesin pencari ditolak (`src/app/robots.ts`, metadata `robots` pada
- * layout) dan sebuah pita penanda ditampilkan di atas kepala halaman.
+ * penayangan publik ditutup dari perayap mesin pencari (`src/app/robots.ts`
+ * dan metadata `robots` pada layout).
  *
  * Matikan dengan menghapus `NEXT_PUBLIC_MODE_PRATINJAU` dari environment —
  * lakukan hanya setelah data Tier 1 pada audit diganti dengan data resmi.
@@ -23,7 +22,7 @@ export const site = {
   namaPendek: "Wadi Mubarak",
   tagline: "Menemani anak Anda tumbuh bersama Al-Qur'an",
   deskripsi:
-    "Islamic Center Wadi Mubarak menaungi sebelas unit pendidikan dari tahfizh anak usia dini hingga perguruan tinggi, kaderisasi guru Al-Qur'an, serta lembaga amil zakat, infak, sedekah, dan wakaf.",
+    "Islamic Center Wadi Mubarak menaungi sebelas unit pendidikan dari tahfizh anak usia dini hingga perguruan tinggi, jaringan 197 sekolah Sahabat Al-Qur'an di 27 provinsi, kaderisasi guru Al-Qur'an, serta lembaga amil zakat, infak, sedekah, dan wakaf.",
   url: process.env["NEXT_PUBLIC_SITE_URL"] ?? "https://wadimubarak.com",
   bahasa: "id",
   tahunBerdiri: 2008,
@@ -43,9 +42,13 @@ export const site = {
     jamLayanan: "Setiap hari, 24 jam",
   },
   lazis: {
-    nama: "LAZIS Wadi Mubarak",
+    nama: "LAZIS SaQu Wadi Mubarak",
     nomorIzin: "SK Menteri Agama RI No. 118 Tahun 2021",
     tahunIzin: 2021,
+    /** Nomor tim amil, tercetak di seluruh poster kampanye LAZIS. */
+    whatsapp: "6287888821199",
+    instagram: "https://instagram.com/lazis.saqu.wadimubarak",
+    facebook: "https://facebook.com/LazisSaqu",
   },
   sosial: [
     { label: "Instagram", href: "https://instagram.com/ic_wadimubarak" },
@@ -107,7 +110,7 @@ export const navUtama: NavGrup[] = [
     href: "/tentang",
     anak: [
       { label: "Profil yayasan", href: "/tentang", deskripsi: "Sejarah, visi, dan arah gerak" },
-      { label: "Dampak", href: "/dampak", deskripsi: "Angka capaian dan cerita di baliknya" },
+      { label: "Karier", href: "/karier", deskripsi: "Lowongan pengajar dan tenaga kependidikan" },
     ],
   },
   {
@@ -139,7 +142,6 @@ export const navFooter: { judul: string; tautan: NavItem[] }[] = [
     judul: "Yayasan",
     tautan: [
       { label: "Tentang kami", href: "/tentang" },
-      { label: "Dampak", href: "/dampak" },
       { label: "Karier", href: "/karier" },
     ],
   },
@@ -178,7 +180,7 @@ export const routerNiat = [
   {
     label: "Menyekolahkan anak",
     ringkas: "TAUD, MIT, MTs, MA, MBS, STIU",
-    deskripsi: "Bandingkan sebelas unit berdasarkan jenjang, gender, model belajar, dan lokasi.",
+    deskripsi: "Bandingkan sebelas unit berdasarkan jenjang, gender, model belajar, dan lokasi — termasuk jaringan TAUD dan MIT di 27 provinsi.",
     href: "/program",
     aksi: "Cari unit yang cocok",
     ikon: "sekolah",

@@ -47,7 +47,7 @@ const lebar = {
 function bangunKolom(
   galeri: readonly ImageData[],
   jumlahUnit: number,
-  jumlahSantri: string,
+  jumlahAlumni: string,
 ): Kolom[] {
   let n = 0;
   const foto = (): ImageData => {
@@ -64,8 +64,8 @@ function bangunKolom(
         {
           jenis: "angka",
           porsi: "flex-[0_0_42%]",
-          nilai: jumlahSantri,
-          label: "Santri aktif",
+          nilai: jumlahAlumni,
+          label: "Alumni sejak 2008",
           ikon: "orang",
         },
         { jenis: "foto", foto: foto() },
@@ -122,17 +122,17 @@ function bangunKolom(
 
 export function BentoHeroBerjalan({
   jumlahUnit,
-  jumlahSantri,
+  jumlahAlumni,
   className,
 }: {
   jumlahUnit: number;
-  jumlahSantri: string;
+  jumlahAlumni: string;
   className?: string;
 }) {
   const galeri = getGaleri();
   if (galeri.length === 0) return null;
 
-  const kolom = bangunKolom(galeri, jumlahUnit, jumlahSantri);
+  const kolom = bangunKolom(galeri, jumlahUnit, jumlahAlumni);
 
   return (
     <div

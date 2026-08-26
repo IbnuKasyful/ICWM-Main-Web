@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Icon } from "@/components/ui/Icon";
-import { JudulSeksi, Section } from "@/components/ui/Section";
+import { Section } from "@/components/ui/Section";
 import { labelLokasi } from "@/lib/format";
 import { buatMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
@@ -77,21 +77,6 @@ const lowongan: {
   },
 ];
 
-const alasan = [
-  {
-    judul: "Kelas kecil, dampak besar",
-    isi: "Rasio pengampu dan santri dibatasi supaya Anda benar-benar sempat mengenal setiap anak yang Anda ampu.",
-  },
-  {
-    judul: "Pengembangan berkelanjutan",
-    isi: "Pelatihan metode tahfizh, kelas bahasa Arab, dan beasiswa lanjut studi bagi tenaga pendidik tetap.",
-  },
-  {
-    judul: "Tempat tinggal & kebutuhan harian",
-    isi: "Untuk posisi menetap, yayasan menyediakan tempat tinggal, makan, dan layanan kesehatan.",
-  },
-];
-
 export default function HalamanKarier() {
   return (
     <>
@@ -159,27 +144,6 @@ export default function HalamanKarier() {
         </div>
       </Section>
 
-      <Section nada="sejuk" className="py-14 md:py-20">
-        <div className="container-page">
-          <JudulSeksi atas="Mengapa di sini" judul="Yang kami" sorot="tawarkan" />
-          <ul className="mt-12 grid gap-5 md:grid-cols-3">
-            {alasan.map((a) => (
-              <li key={a.judul} className="rounded-2xl border border-line bg-white p-6">
-                <h3 className="font-display text-base font-semibold text-ink">{a.judul}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-pretty text-ink-muted">{a.isi}</p>
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-10 rounded-2xl border border-accent-200 bg-accent-50 p-6">
-            <p className="flex items-start gap-3 text-sm leading-relaxed text-accent-900">
-              <Icon nama="perisai" className="mt-0.5 size-4 shrink-0" />
-              Seluruh calon tenaga pendidik menjalani pemeriksaan latar belakang dan menandatangani
-              komitmen perlindungan anak sebelum mulai bertugas.
-            </p>
-          </div>
-        </div>
-      </Section>
     </>
   );
 }

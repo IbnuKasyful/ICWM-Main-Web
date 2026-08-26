@@ -1,5 +1,6 @@
 import type {
   Category,
+  GaleriKategori,
   Gender,
   Jenjang,
   Lokasi,
@@ -41,6 +42,14 @@ export const labelStatusPpdb: Record<StatusPpdb, string> = {
   buka: "Pendaftaran dibuka",
   segera: "Segera dibuka",
   tutup: "Pendaftaran ditutup",
+};
+
+export const labelGaleriKategori: Record<GaleriKategori, string> = {
+  wisuda: "Wisuda",
+  dauroh: "Dauroh & kajian",
+  halaqah: "Halaqah",
+  anak: "Anak usia dini",
+  kampus: "Kehidupan kampus",
 };
 
 export const labelCategory: Record<Category, string> = {

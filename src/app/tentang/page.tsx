@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { PageHeader } from "@/components/site/PageHeader";
-import { Icon, type NamaIkon } from "@/components/ui/Icon";
+import { Icon } from "@/components/ui/Icon";
 import { JudulSeksi, Section } from "@/components/ui/Section";
 import { StatBlock } from "@/components/ui/StatBlock";
 import { getCapaian, getTestimoni } from "@/lib/content";
@@ -14,33 +14,10 @@ export const dynamic = "force-static";
 export const metadata = buatMetadata({
   judul: "Tentang Islamic Center Wadi Mubarak",
   deskripsi:
-    "Sejarah, visi, misi, dan arah gerak Islamic Center Wadi Mubarak — yayasan yang berdiri sejak 2008 di Megamendung dan kini menaungi sebelas unit pendidikan serta lembaga amil zakat.",
+    "Sejarah, visi, misi, dan arah gerak Islamic Center Wadi Mubarak — yayasan yang berdiri sejak 2008 di Megamendung dan kini menaungi sebelas unit pendidikan, jaringan sekolah Sahabat Al-Qur'an di 27 provinsi, serta lembaga amil zakat.",
   path: "/tentang",
   gambar: "/img/hero-tentang.svg",
 });
-
-const nilai: { judul: string; isi: string; ikon: NamaIkon }[] = [
-  {
-    judul: "Al-Qur'an sebagai poros",
-    isi: "Setiap unit, dari tahfizh anak usia dini sampai perguruan tinggi, menempatkan interaksi harian dengan Al-Qur'an sebagai kegiatan inti — bukan mata pelajaran tambahan.",
-    ikon: "quran",
-  },
-  {
-    judul: "Kelompok kecil, guru yang mengenal",
-    isi: "Kami membatasi jumlah santri per pengampu, meski itu berarti menolak pendaftar. Anak yang tidak dikenal gurunya tidak akan terdidik dengan baik.",
-    ikon: "orang",
-  },
-  {
-    judul: "Terbuka untuk diperiksa",
-    isi: "Capaian program dan cara kami menghitungnya kami sampaikan apa adanya, termasuk ketika hasilnya belum sesuai harapan. Amanah yang tidak bisa diperiksa bukanlah amanah.",
-    ikon: "perisai",
-  },
-  {
-    judul: "Berpijak pada masyarakat sekitar",
-    isi: "Kelas Al-Qur'an gratis, santunan, dan kegiatan sosial untuk warga di sekitar kampus adalah bagian tetap dari anggaran, bukan kegiatan musiman.",
-    ikon: "kerjasama",
-  },
-];
 
 /**
  * Hanya tonggak yang tercatat di kanal resmi yayasan. Tahun berdirinya unit
@@ -80,20 +57,18 @@ export default function HalamanTentang() {
         jejak={[{ label: "Tentang", href: "/tentang" }]}
         atas="Profil yayasan"
         judul="Delapan belas tahun menemani santri dan keluarganya"
-        keterangan="Berdiri di Megamendung pada 3 Februari 2008, hari ini Islamic Center Wadi Mubarak menaungi sebelas unit pendidikan — dari tahfizh anak usia dini sampai perguruan tinggi — empat jalur kaderisasi guru Al-Qur'an, dan sebuah lembaga amil zakat berizin resmi."
+        keterangan="Berdiri di Megamendung pada 3 Februari 2008, hari ini Islamic Center Wadi Mubarak menaungi sebelas unit pendidikan — dari tahfizh anak usia dini sampai perguruan tinggi — empat jalur kaderisasi guru Al-Qur'an, jaringan 197 sekolah Sahabat Al-Qur'an di 27 provinsi, dan sebuah lembaga amil zakat berizin resmi."
       />
 
       <Section className="py-12 md:py-16">
         <div className="container-page">
-          <div className="overflow-hidden rounded-3xl bg-mist-100">
-            <Image
-              src="/img/hero-tentang.svg"
-              alt="Kompleks Kampus Wadi Mubarak di Megamendung, Bogor, dilihat dari halaman masjid"
-              width={1600}
-              height={900}
-              priority
-              sizes="(min-width: 1280px) 1216px, 100vw"
-              className="aspect-[21/9] w-full object-cover"
+          <div className="overflow-hidden rounded-3xl bg-mist-100 pointer-events-none">
+            <iframe
+              className="aspect-video w-full"
+              src="https://www.youtube.com/embed/IWsHfr73kYg?autoplay=1&mute=1&loop=1&playlist=IWsHfr73kYg&controls=0&rel=0"
+              title="Video Profil Yayasan Islamic Center Wadi Mubarak"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
             />
           </div>
           <StatBlock data={capaian} className="mt-10" />
@@ -141,31 +116,8 @@ export default function HalamanTentang() {
         </div>
       </Section>
 
-      {/* Nilai */}
-      <Section className="py-14 md:py-20">
-        <div className="container-page">
-          <JudulSeksi
-            atas="Nilai kerja"
-            judul="Empat hal yang"
-            sorot="tidak kami tawar"
-            keterangan="Nilai-nilai ini yang menentukan keputusan sehari-hari kami — termasuk ketika keputusannya tidak populer."
-          />
-          <ul className="mt-12 grid gap-5 md:grid-cols-2">
-            {nilai.map((n) => (
-              <li key={n.judul} className="rounded-2xl border border-line bg-white p-6 md:p-8">
-                <span className="inline-flex size-11 items-center justify-center rounded-xl bg-brand-50 text-brand-700 ring-1 ring-brand-100 ring-inset">
-                  <Icon nama={n.ikon} />
-                </span>
-                <h3 className="mt-5 font-display text-lg font-semibold text-ink">{n.judul}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-pretty text-ink-muted">{n.isi}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Section>
-
       {/* Perjalanan */}
-      <Section nada="sejuk" className="py-14 md:py-20">
+      <Section className="py-14 md:py-20">
         <div className="container-page">
           <JudulSeksi atas="Perjalanan" judul="Dari Megamendung," sorot="sejak 2008" />
           <ol className="relative mt-12 ml-3 border-l border-line-strong pl-8">
@@ -187,7 +139,7 @@ export default function HalamanTentang() {
 
       {/* Testimoni */}
       {testimoni.length > 0 ? (
-        <Section className="py-14 md:py-20">
+        <Section nada="sejuk" className="py-14 md:py-20">
           <div className="container-page">
             <JudulSeksi
               atas="Kata mereka"
@@ -225,7 +177,7 @@ export default function HalamanTentang() {
       ) : null}
 
       {/* Tautan lanjut */}
-      <Section nada="sejuk" className="py-14 md:py-20">
+      <Section className="py-14 md:py-20">
         <div className="container-page">
           <ul className="grid gap-4 md:grid-cols-3">
             {[

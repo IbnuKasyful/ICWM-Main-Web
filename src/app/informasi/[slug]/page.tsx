@@ -16,13 +16,13 @@ import { buatMetadata, jsonldArticle } from "@/lib/seo";
 /** PRD §8 — revalidasi on-demand lewat webhook; nilai ini menjadi jaring pengaman. */
 export const revalidate = 3600;
 
-export function generateStaticParams() {
-  return getSlugPostInduk().map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  return (await getSlugPostInduk()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPost(slug);
   if (!post) {
     return buatMetadata({ judul: "Tulisan tidak ditemukan", deskripsi: "", path: "/informasi", noIndex: true });
   }
@@ -40,13 +40,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function HalamanTulisan({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPost(slug);
   if (!post) notFound();
 
   const namaUnit = getPetaNamaUnit();
   const unitUtama = getUnit(post.unit_utama);
 
-  const terkait = getPostsInduk()
+  const terkait = (await getPostsInduk())
     .filter((p) => p.slug !== post.slug && p.unit.some((u) => post.unit.includes(u)))
     .slice(0, 3);
 

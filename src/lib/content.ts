@@ -16,7 +16,7 @@ import {
   agendaSchema,
   capaianSchema,
   faqSchema,
-  imageSchema,
+  galeriItemSchema,
   mitraSchema,
   parseOrThrow,
   postSchema,
@@ -36,6 +36,7 @@ import {
   type ProgramQuran,
   type Unit,
 } from "@/lib/schemas";
+import { ambilPostsWp, beritaWpAktif } from "@/lib/wp-berita";
 import { ambilProgramDonasiWp, wpAktif } from "@/lib/wp";
 
 /**
@@ -106,30 +107,67 @@ export function getProgramQuran(): readonly ProgramQuran[] {
 /* Post                                                                        */
 /* -------------------------------------------------------------------------- */
 
-const posts = daftar(postSchema, postsMentah, "post");
+const postsStatis = daftar(postSchema, postsMentah, "post");
 
 function terbaruDahulu(a: Post, b: Post): number {
   return b.tanggal.localeCompare(a.tanggal);
 }
 
 /**
+ * Tulisan dari WordPress, divalidasi dengan skema yang sama seperti data
+ * statis. Tulisan yang tidak lolos validasi dibuang satu per satu, bukan
+ * menggagalkan seluruh halaman: satu tulisan cacat di CMS tidak boleh
+ * menjatuhkan /informasi.
+ */
+function validasiLunak(mentah: unknown[]): Post[] {
+  const hasil: Post[] = [];
+  for (const item of mentah) {
+    const uji = postSchema.safeParse(item);
+    if (uji.success) hasil.push(uji.data);
+    else {
+      const slug = (item as { slug?: unknown })?.slug;
+      console.error(`[content] tulisan WordPress dilewati (${String(slug)}): ${uji.error.message}`);
+    }
+  }
+  return hasil;
+}
+
+/**
+ * Satu pengambilan per permintaan render, dipakai ulang oleh seluruh fungsi
+ * `getPost*` di bawah. `fetch` di dalamnya sudah di-cache Next.js selama satu
+ * jam dan disegarkan lewat tag, jadi ini hanya mencegah beberapa fungsi pada
+ * satu halaman memanggil WordPress berkali-kali.
+ */
+async function muatPosts(): Promise<readonly Post[]> {
+  if (!beritaWpAktif()) return postsStatis;
+
+  const mentah = await ambilPostsWp();
+  if (!mentah) return postsStatis;
+
+  const dariWp = validasiLunak(mentah);
+  return dariWp.length > 0 ? Object.freeze(dariWp) : postsStatis;
+}
+
+/**
  * PRD §9.1 & §9.6 — situs induk HANYA menampilkan tulisan yang dikurasi naik.
  * Semua jalur baca publik wajib melewati fungsi ini.
  */
-export function getPostsInduk(): readonly Post[] {
-  return posts
+export async function getPostsInduk(): Promise<readonly Post[]> {
+  const semua = await muatPosts();
+  return semua
     .filter((p) => p.tampilkan_di_induk)
     .slice()
     .sort(terbaruDahulu);
 }
 
-export function getPost(slug: string): Post | undefined {
-  return posts.find((p) => p.slug === slug && p.tampilkan_di_induk);
+export async function getPost(slug: string): Promise<Post | undefined> {
+  const semua = await muatPosts();
+  return semua.find((p) => p.slug === slug && p.tampilkan_di_induk);
 }
 
 /** Slug untuk `generateStaticParams` — hanya yang tayang di induk. */
-export function getSlugPostInduk(): string[] {
-  return getPostsInduk().map((p) => p.slug);
+export async function getSlugPostInduk(): Promise<string[]> {
+  return (await getPostsInduk()).map((p) => p.slug);
 }
 
 export type FilterInformasi = {
@@ -139,8 +177,8 @@ export type FilterInformasi = {
   tahun?: number | undefined;
 };
 
-export function saringPosts(filter: FilterInformasi): readonly Post[] {
-  return getPostsInduk().filter((p) => {
+export async function saringPosts(filter: FilterInformasi): Promise<readonly Post[]> {
+  return (await getPostsInduk()).filter((p) => {
     if (filter.category && p.category !== filter.category) return false;
     if (filter.unit && !p.unit.includes(filter.unit)) return false;
     if (filter.lokasi && p.lokasi !== filter.lokasi) return false;
@@ -150,14 +188,14 @@ export function saringPosts(filter: FilterInformasi): readonly Post[] {
 }
 
 /** Tahun yang benar-benar punya tulisan — untuk mengisi penyaring. */
-export function getTahunPost(): number[] {
-  const tahun = new Set(getPostsInduk().map((p) => Number(p.tanggal.slice(0, 4))));
+export async function getTahunPost(): Promise<number[]> {
+  const tahun = new Set((await getPostsInduk()).map((p) => Number(p.tanggal.slice(0, 4))));
   return [...tahun].sort((a, b) => b - a);
 }
 
 /** PRD §9.3 — 3 berita terkait pada halaman profil unit. */
-export function getPostsUnit(unitSlug: string, batas: number): readonly Post[] {
-  return getPostsInduk()
+export async function getPostsUnit(unitSlug: string, batas: number): Promise<readonly Post[]> {
+  return (await getPostsInduk())
     .filter((p) => p.unit.includes(unitSlug))
     .slice(0, batas);
 }
@@ -171,7 +209,7 @@ const mitra = daftar(mitraSchema, mitraMentah, "mitra");
 const testimoni = daftar(testimoniSchema, testimoniMentah, "testimoni");
 const agenda = daftar(agendaSchema, agendaMentah, "agenda");
 const faq = daftar(faqSchema, faqMentah, "faq");
-const galeri = daftar(imageSchema, galeriMentah, "galeri");
+const galeri = daftar(galeriItemSchema, galeriMentah, "galeri");
 
 export function getCapaian() {
   return capaian;
@@ -314,7 +352,7 @@ export async function cari(kueri: string): Promise<HasilCari[]> {
     }
   }
 
-  for (const p of getPostsInduk()) {
+  for (const p of await getPostsInduk()) {
     if (cocok(p.judul, p.ringkasan, p.topik.join(" "))) {
       hasil.push({
         judul: p.judul,

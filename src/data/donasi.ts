@@ -1,4 +1,16 @@
-/** Data contoh CPT `program_donasi` + rekening resmi LAZIS (PRD §9.4). */
+/**
+ * Program LAZIS SaQu Wadi Mubarak + rekening resminya (PRD §9.4).
+ *
+ * Isi berkas ini diambil dari materi kampanye resmi LAZIS SaQu di `info/donasi`
+ * (poster Jum'at Berkah, Orang Tua Asuh, Beras, dan Buka Puasa).
+ *
+ * Catatan penting soal angka: LAZIS tidak menerbitkan target maupun jumlah dana
+ * yang sudah terkumpul per program — yang diumumkan adalah harga satuannya
+ * (mis. Rp 13.000 per kilogram beras). Karena itu seluruh program di sini
+ * memakai `target: 0` dan `terkumpul: 0` sehingga tampil sebagai program
+ * berkelanjutan, dengan `satuan_biaya` menggantikan bilah progres. Jangan
+ * mengarang target hanya supaya bilahnya muncul.
+ */
 
 export const rekeningMentah: unknown[] = [
   {
@@ -20,104 +32,126 @@ type DonasiInput = {
   judul: string;
   ringkasan: string;
   jenis: string;
-  gambar: number;
-  target: number;
-  terkumpul: number;
+  gambar: { src: string; width: number; height: number };
+  /** Harga satuan yang diumumkan LAZIS; menggantikan bilah progres. */
+  satuan_biaya: string;
   penerima_manfaat: string;
   batas_waktu: string | null;
   mendesak: boolean;
   konten: string[];
 };
 
+/** Poster kampanye resmi LAZIS SaQu — potret 4:5, teksnya di bagian atas. */
+function poster(nama: string) {
+  return { src: `/img/donasi-${nama}.jpg`, width: 1080, height: 1350 };
+}
+
+/** Gambar contoh, dipakai program yang posternya belum ada. */
+function sementara(n: number) {
+  return { src: `/img/donasi-${n}.svg`, width: 1200, height: 800 };
+}
+
 const daftar: DonasiInput[] = [
   {
-    slug: "beasiswa-santri-yatim",
-    judul: "Beasiswa Santri Yatim dan Dhuafa",
+    slug: "orang-tua-asuh",
+    judul: "Orang Tua Asuh Santri Penghafal Al-Qur'an",
     ringkasan:
-      "Menanggung biaya pendidikan, asrama, dan kebutuhan harian 180 santri yatim serta dhuafa selama satu tahun ajaran.",
-    jenis: "zakat",
-    gambar: 1,
-    target: 1_800_000_000,
-    terkumpul: 1_142_500_000,
-    penerima_manfaat: "180 santri di seluruh unit",
-    batas_waktu: "2026-09-30",
+      "Menopang kebutuhan harian santri penghafal Al-Qur'an lewat donasi bulanan, mulai dari Rp 20.000.",
+    jenis: "sedekah",
+    gambar: poster("orang-tua-asuh"),
+    satuan_biaya: "Mulai Rp 20.000 / bulan",
+    penerima_manfaat: "Santri penghafal Al-Qur'an",
+    batas_waktu: null,
     mendesak: true,
     konten: [
-      "Setiap tahun yayasan menerima lebih banyak permohonan beasiswa daripada yang mampu kami tanggung. Program ini menutup biaya pendidikan penuh bagi santri yatim dan dhuafa yang telah lolos seleksi akademik namun terkendala biaya.",
-      "Satu paket beasiswa senilai Rp 10 juta per santri per tahun mencakup biaya pendidikan, asrama, makan tiga kali sehari, seragam, dan perlengkapan belajar.",
-      "Penerima ditetapkan melalui verifikasi berkas dan kunjungan rumah oleh tim amil. Perkembangan akademik penerima dilaporkan kepada donatur setiap semester.",
+      "Dengan Rp 20.000 sebulan, Anda bukan sekadar berdonasi — Anda ikut menyiapkan lahirnya para penghafal Qur'an dan calon ulama masa depan.",
+      "Tersedia lima paket donasi bulanan: Rp 20.000, Rp 50.000, Rp 100.000, Rp 500.000, dan Rp 1.000.000. Pilih yang paling ringan dan paling bisa Anda jaga keberlanjutannya.",
+      "Katakanlah: &quot;Sesungguhnya Tuhanku melapangkan rezeki bagi siapa yang dikehendaki-Nya di antara hamba-hamba-Nya dan menyempitkan bagi (siapa yang dikehendaki-Nya)&quot;. Dan barang apa saja yang kamu nafkahkan, maka Allah akan menggantinya dan Dialah Pemberi rezeki yang sebaik-baiknya. (QS. Saba' ayat 39)",
     ],
   },
   {
-    slug: "wakaf-pembangunan-asrama-putri",
-    judul: "Wakaf Pembangunan Asrama Putri Tahap Dua",
+    slug: "beras-santri",
+    judul: "Beras untuk Santri Penghafal Al-Qur'an",
     ringkasan:
-      "Menambah 60 tempat tidur, memperbaiki sanitasi, dan membangun ruang tahfizh baru di kompleks asrama putri.",
-    jenis: "wakaf",
-    gambar: 2,
-    target: 3_500_000_000,
-    terkumpul: 2_070_000_000,
-    penerima_manfaat: "240 santriwati",
-    batas_waktu: "2026-12-31",
-    mendesak: false,
-    konten: [
-      "Asrama putri saat ini menampung 240 santriwati dengan kapasitas terpasang 200 tempat tidur. Tahap dua pembangunan menambah 60 tempat tidur agar setiap santriwati memiliki ruang yang layak.",
-      "Pekerjaan mencakup perbaikan sanitasi, penambahan kamar mandi, dan pembangunan ruang tahfizh yang selama ini menumpang di ruang makan.",
-      "Wakaf pembangunan bersifat jariyah: manfaatnya mengalir selama bangunan digunakan. Laporan perkembangan fisik diterbitkan setiap bulan.",
-    ],
-  },
-  {
-    slug: "operasional-kelas-tahsin-masyarakat",
-    judul: "Operasional Kelas Tahsin untuk Masyarakat",
-    ringkasan:
-      "Membiayai honor pengampu, mushaf, dan modul kelas tahsin gratis bagi 120 peserta umum setiap angkatan.",
-    jenis: "infak",
-    gambar: 3,
-    target: 240_000_000,
-    terkumpul: 188_400_000,
-    penerima_manfaat: "120 peserta per angkatan",
-    batas_waktu: null,
-    mendesak: false,
-    konten: [
-      "Kelas tahsin PKM Wadi Mubarak terbuka gratis untuk umum, dari usia remaja hingga lansia. Biayanya ditanggung penuh oleh dana infak.",
-      "Satu angkatan berjalan selama enam bulan dengan 120 peserta yang dibagi ke dalam kelompok kecil sesuai kemampuan baca.",
-      "Infak yang terkumpul digunakan untuk honor pengampu, pengadaan mushaf dan modul, serta biaya operasional kelas daring bagi peserta luar kota.",
-    ],
-  },
-  {
-    slug: "dapur-santri",
-    judul: "Dapur Santri: Gizi Harian Penghafal Al-Qur'an",
-    ringkasan:
-      "Menjaga mutu tiga kali makan harian bagi 1.400 santri asrama dengan menu yang dipantau ahli gizi.",
+      "Satu kilogram beras seharga Rp 13.000 ikut menghidupi makan sehari-hari para santri penghafal Al-Qur'an.",
     jenis: "sedekah",
-    gambar: 4,
-    target: 900_000_000,
-    terkumpul: 402_750_000,
-    penerima_manfaat: "1.400 santri asrama",
-    batas_waktu: "2026-12-31",
-    mendesak: false,
-    konten: [
-      "Santri penghafal Al-Qur'an membutuhkan asupan yang cukup untuk menopang jadwal belajar yang padat sejak sebelum subuh hingga malam.",
-      "Program ini menjaga agar kenaikan harga bahan pangan tidak menurunkan mutu menu harian santri, terutama bagi santri penerima beasiswa.",
-      "Menu disusun dan dievaluasi bersama ahli gizi setiap bulan, dan rincian belanja dapur dapat diminta donatur kepada tim amil.",
-    ],
-  },
-  {
-    slug: "wakaf-mushaf-dan-kitab",
-    judul: "Wakaf Mushaf dan Kitab Perpustakaan",
-    ringkasan:
-      "Melengkapi mushaf santri baru dan menambah koleksi kitab berbahasa Arab di perpustakaan induk.",
-    jenis: "wakaf",
-    gambar: 5,
-    target: 150_000_000,
-    terkumpul: 150_000_000,
-    penerima_manfaat: "Seluruh santri dan mahasiswa",
+    gambar: poster("beras"),
+    satuan_biaya: "Rp 13.000 / kg — kebutuhan 3.300 kg per bulan",
+    penerima_manfaat: "Santri penghafal Al-Qur'an",
     batas_waktu: null,
     mendesak: false,
     konten: [
-      "Setiap santri baru menerima satu mushaf standar yang digunakan selama menempuh pendidikan, agar tanda dan catatan hafalan tetap konsisten.",
-      "Program ini juga menambah koleksi kitab rujukan berbahasa Arab di perpustakaan induk untuk kebutuhan santri jenjang atas dan mahasiswa STIU.",
-      "Target program ini telah terpenuhi. Kelebihan dana dialihkan ke gelombang pengadaan berikutnya dengan persetujuan donatur.",
+      "Cukup dengan Rp 13.000 — harga satu kilogram beras — Anda sudah menjadi bagian dari Keluarga Al-Qur'an. Karena dari 1 kg beras, lahir doa-doa dari para santri penghafal Al-Qur'an yang mengalir tanpa putus.",
+      "Kebutuhan dapur santri mencapai 3.300 kilogram beras setiap bulan. Setiap suapan mereka, setiap ayat yang dihafal, menjadi pahala jariyah yang terus mengalir untuk Anda.",
+      "Rp 13.000 = 1 kg beras. Rp 13.000 = doa para penghafal Al-Qur'an. Rp 13.000 = pahala yang terus mengalir.",
+    ],
+  },
+  {
+    slug: "buka-puasa-penghafal-quran",
+    judul: "Buka Puasa Penghafal Al-Qur'an",
+    ringkasan:
+      "Menyediakan hidangan berbuka bagi santri penghafal Al-Qur'an yang menjalankan puasa sunnah dan puasa Ramadan.",
+    jenis: "sedekah",
+    gambar: poster("buka-puasa"),
+    satuan_biaya: "Nominal bebas",
+    penerima_manfaat: "Santri penghafal Al-Qur'an yang berpuasa",
+    batas_waktu: null,
+    mendesak: false,
+    konten: [
+      "Mari menjadi bagian dari keberkahan buka puasa para penghafal Al-Qur'an.",
+      "Rasulullah bersabda: &quot;Barang siapa memberi makan orang yang berpuasa maka baginya pahala seperti orang yang berpuasa tersebut tanpa mengurangi pahala orang yang berpuasa sedikit pun.&quot; (HR. Tirmidzi)",
+      "Program ini berjalan sepanjang tahun, mengikuti puasa sunnah harian santri, dan menguat pada bulan Ramadan.",
+    ],
+  },
+  {
+    slug: "hewan-qurban",
+    judul: "Hewan Qurban",
+    ringkasan:
+      "Penyaluran hewan qurban melalui LAZIS SaQu Wadi Mubarak untuk santri dan masyarakat sekitar kampus.",
+    jenis: "sedekah",
+    gambar: sementara(4),
+    satuan_biaya: "Sesuai harga hewan yang berlaku",
+    penerima_manfaat: "Santri dan masyarakat sekitar kampus",
+    batas_waktu: null,
+    mendesak: false,
+    konten: [
+      "LAZIS SaQu Wadi Mubarak menerima titipan hewan qurban dan menyalurkannya untuk santri serta masyarakat di sekitar kampus.",
+      "Jenis hewan, harga yang berlaku, dan jadwal penyembelihan disampaikan tim amil menjelang Iduladha setiap tahun.",
+      "Hubungi tim amil lewat WhatsApp LAZIS untuk memesan dan mengonfirmasi titipan qurban Anda.",
+    ],
+  },
+  {
+    slug: "pembangunan",
+    judul: "Pembangunan Sarana Pendidikan",
+    ringkasan:
+      "Wakaf pembangunan dan pelengkapan sarana belajar serta asrama di lingkungan Islamic Center Wadi Mubarak.",
+    jenis: "wakaf",
+    gambar: sementara(2),
+    satuan_biaya: "Nominal bebas",
+    penerima_manfaat: "Santri seluruh unit",
+    batas_waktu: null,
+    mendesak: false,
+    konten: [
+      "Wakaf pembangunan bersifat jariyah: manfaatnya mengalir selama bangunannya digunakan untuk belajar dan menghafal Al-Qur'an.",
+      "Dana dialokasikan untuk pembangunan serta pelengkapan sarana belajar dan asrama di lingkungan Islamic Center Wadi Mubarak.",
+      "Rincian pekerjaan yang sedang berjalan dapat ditanyakan kepada tim amil lewat WhatsApp LAZIS.",
+    ],
+  },
+  {
+    slug: "konsultasi-zakat",
+    judul: "Konsultasi dan Penyaluran Zakat",
+    ringkasan:
+      "Pendampingan penghitungan zakat maal, penghasilan, dan fitrah, lalu penyalurannya lewat LAZIS SaQu Wadi Mubarak.",
+    jenis: "zakat",
+    gambar: sementara(5),
+    satuan_biaya: "Sesuai perhitungan zakat Anda",
+    penerima_manfaat: "Delapan asnaf penerima zakat",
+    batas_waktu: null,
+    mendesak: false,
+    konten: [
+      "Belum yakin berapa zakat yang wajib Anda tunaikan? Tim amil LAZIS SaQu Wadi Mubarak membantu menghitung zakat maal, zakat penghasilan, dan zakat fitrah.",
+      "Setelah nominalnya jelas, penyaluran dilakukan lewat rekening resmi LAZIS dan dicatat atas nama Anda.",
+      "Konsultasi dilayani lewat WhatsApp LAZIS pada jam kerja tim amil.",
     ],
   },
 ];
@@ -128,13 +162,14 @@ export const programDonasiMentah: unknown[] = daftar.map((d) => ({
   ringkasan: d.ringkasan,
   jenis: d.jenis,
   gambar: {
-    src: `/img/donasi-${d.gambar}.svg`,
+    src: d.gambar.src,
     alt: d.judul,
-    width: 1200,
-    height: 800,
+    width: d.gambar.width,
+    height: d.gambar.height,
   },
-  target: d.target,
-  terkumpul: d.terkumpul,
+  target: 0,
+  terkumpul: 0,
+  satuan_biaya: d.satuan_biaya,
   penerima_manfaat: d.penerima_manfaat,
   batas_waktu: d.batas_waktu,
   konten: d.konten.map((p) => `<p>${p}</p>`).join("\n"),

@@ -17,10 +17,10 @@ import { Icon } from "@/components/ui/Icon";
  */
 export function Hero({
   jumlahUnit,
-  jumlahSantri,
+  jumlahAlumni,
 }: {
   jumlahUnit: number;
-  jumlahSantri: string;
+  jumlahAlumni: string;
 }) {
   return (
     <section className="relative overflow-hidden bg-white pt-10 pb-16 md:pt-16 md:pb-20">
@@ -71,7 +71,7 @@ export function Hero({
           layar, ia terbaca sebagai aliran yang berlanjut di luar bingkai. */}
       <BentoHeroBerjalan
         jumlahUnit={jumlahUnit}
-        jumlahSantri={jumlahSantri}
+        jumlahAlumni={jumlahAlumni}
         className="mt-12 md:mt-16"
       />
     </section>

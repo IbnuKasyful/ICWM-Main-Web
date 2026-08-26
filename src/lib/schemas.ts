@@ -62,6 +62,25 @@ export const imageSchema = z.object({
 
 export type ImageData = z.infer<typeof imageSchema>;
 
+/**
+ * Foto galeri = gambar biasa + satu kelompok kegiatan. Kelompoknya hanya dipakai
+ * sebagai penyaring di halaman /galeri; komponen lain (dinding foto beranda)
+ * tetap menerimanya sebagai `ImageData` biasa karena bentuknya superset.
+ */
+export const galeriKategoriSchema = z.enum([
+  "wisuda",
+  "dauroh",
+  "halaqah",
+  "anak",
+  "kampus",
+]);
+
+export type GaleriKategori = z.infer<typeof galeriKategoriSchema>;
+
+export const galeriItemSchema = imageSchema.extend({ kategori: galeriKategoriSchema });
+
+export type GaleriItem = z.infer<typeof galeriItemSchema>;
+
 /* -------------------------------------------------------------------------- */
 /* Taksonomi `unit` + term meta (PRD §7.2)                                     */
 /* -------------------------------------------------------------------------- */
@@ -70,13 +89,21 @@ export type ImageData = z.infer<typeof imageSchema>;
  * Cabang sebuah unit. Satu unit (mis. TAUD SAQU) dapat memiliki banyak cabang
  * di kota berbeda dengan kurikulum yang sama; `lokasi_kampus` menandai kampus
  * induknya.
+ *
+ * `provinsi` dan `pulau` wajib karena keduanya yang dipakai mengelompokkan
+ * direktori cabang — jaringan TAUD SAQU sudah melewati 160 lokasi, terlalu
+ * banyak untuk disajikan sebagai satu daftar datar. `kota`, `alamat`, dan
+ * `kontak_wa` opsional: data resmi yayasan belum lengkap untuk semua cabang,
+ * dan lebih baik kolomnya kosong daripada diisi tebakan.
  */
 export const cabangSchema = z.object({
   slug: z.string().min(1),
   nama: z.string().min(1),
-  kota: z.string().min(1),
-  alamat: z.string().min(1),
-  kontak_wa: z.string(),
+  provinsi: z.string().min(1),
+  pulau: z.string().min(1),
+  kota: z.string().min(1).optional(),
+  alamat: z.string().min(1).optional(),
+  kontak_wa: z.string().optional(),
   status_ppdb: statusPpdbSchema,
 });
 
@@ -229,6 +256,12 @@ export const programDonasiSchema = z.object({
   /** Rupiah. `target` 0 berarti program berjalan tanpa target tertutup. */
   target: z.number().int().nonnegative(),
   terkumpul: z.number().int().nonnegative(),
+  /**
+   * Harga satuan yang diumumkan lembaga, mis. "Rp 13.000 / kg". Dipakai
+   * program berkelanjutan yang memang tidak punya target maupun rekapitulasi
+   * dana terkumpul — di sana bilah progres tidak punya arti apa pun.
+   */
+  satuan_biaya: z.string().min(1).optional(),
   penerima_manfaat: z.string().min(1),
   batas_waktu: z.string().nullable(),
   konten: z.string().min(1),

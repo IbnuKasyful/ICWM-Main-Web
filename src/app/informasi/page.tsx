@@ -41,7 +41,7 @@ export default async function HalamanInformasi({ searchParams }: { searchParams:
   };
 
   const units = getUnitsAktif();
-  const tahunTersedia = getTahunPost();
+  const tahunTersedia = await getTahunPost();
 
   // Nilai dari URL tidak dipercaya begitu saja: divalidasi dulu terhadap skema.
   const kategoriValid = categorySchema.safeParse(mentah.category);
@@ -55,7 +55,7 @@ export default async function HalamanInformasi({ searchParams }: { searchParams:
     tahun: tahunAngka && tahunTersedia.includes(tahunAngka) ? tahunAngka : undefined,
   };
 
-  const hasil = saringPosts(filter);
+  const hasil = await saringPosts(filter);
   const totalHalaman = Math.max(1, Math.ceil(hasil.length / PER_HALAMAN));
   const halamanMentah = Number(satu(sp["halaman"]) ?? "1");
   const halaman = Number.isFinite(halamanMentah)

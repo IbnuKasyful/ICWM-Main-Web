@@ -18,7 +18,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/program-quran", prioritas: 0.8, frekuensi: "monthly" },
     { path: "/donasi", prioritas: 0.9, frekuensi: "weekly" },
     { path: "/tentang", prioritas: 0.8, frekuensi: "monthly" },
-    { path: "/dampak", prioritas: 0.7, frekuensi: "monthly" },
     { path: "/informasi", prioritas: 0.8, frekuensi: "daily" },
     { path: "/agenda", prioritas: 0.7, frekuensi: "weekly" },
     { path: "/galeri", prioritas: 0.5, frekuensi: "monthly" },
@@ -45,7 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  const halamanTulisan: MetadataRoute.Sitemap = getPostsInduk().map((p) => ({
+  const halamanTulisan: MetadataRoute.Sitemap = (await getPostsInduk()).map((p) => ({
     url: `${site.url}/informasi/${p.slug}`,
     lastModified: new Date(p.tanggal),
     changeFrequency: "yearly",

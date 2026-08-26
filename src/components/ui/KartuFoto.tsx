@@ -33,7 +33,7 @@ export function KartuFoto({
   prioritas = false,
   className,
 }: {
-  gambar: string;
+  gambar?: string | null;
   ikon: NamaIkon;
   judul: string;
   keterangan: string;
@@ -48,18 +48,25 @@ export function KartuFoto({
 }) {
   const isi = (
     <>
-      <Image
-        src={gambar}
-        alt=""
-        aria-hidden="true"
-        fill
-        priority={prioritas}
-        sizes={sizes}
-        className={cn(
-          "object-cover transition duration-500 ease-out motion-reduce:transition-none",
-          "lg:grayscale lg:group-hover:grayscale-0 lg:group-focus-within:grayscale-0",
-        )}
-      />
+      {gambar ? (
+        <Image
+          src={gambar}
+          alt=""
+          aria-hidden="true"
+          fill
+          priority={prioritas}
+          sizes={sizes}
+          className={cn(
+            "object-cover transition duration-500 ease-out motion-reduce:transition-none",
+            "lg:grayscale lg:group-hover:grayscale-0 lg:group-focus-within:grayscale-0",
+          )}
+        />
+      ) : (
+        <div className="absolute inset-0 overflow-hidden bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-800 to-brand-950">
+          <span className="ornamen-islami absolute inset-0 text-brand-400 opacity-10" />
+          <span className="absolute -top-32 left-1/2 -translate-x-1/2 size-[22rem] rounded-full border border-brand-400/20" />
+        </div>
+      )}
 
       {/* Selubung padam: menahan warna foto tetap tenang saat menganggur, lalu
           menipis saat kartu terbuka. Di layar sempit ia hanya cukup gelap

@@ -32,6 +32,8 @@ const nextConfig: NextConfig = {
     // PRD §6 — next/image dengan remotePatterns ke domain WP.
     remotePatterns: [
       { protocol: "https", hostname: "cms.wadimubarak.com" },
+      // Gambar unggulan berita: WordPress yayasan menyimpannya di domain utama.
+      { protocol: "https", hostname: "wadimubarak.com", pathname: "/wp-content/uploads/**" },
       { protocol: "https", hostname: "images.unsplash.com" },
     ],
     formats: ["image/avif", "image/webp"],

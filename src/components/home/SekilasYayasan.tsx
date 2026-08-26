@@ -32,6 +32,10 @@ export function SekilasYayasan() {
                 zakat yang berizin resmi.
               </p>
               <p>
+                Kurikulum yang sama juga berjalan di luar kampus induk: 162 TAUD dan 35 MIT/SD
+                Sahabat Al-Qur&apos;an tersebar di 27 provinsi, dari Aceh sampai Maluku Utara.
+              </p>
+              <p>
                 Yang tidak berubah sejak awal adalah cara kami bekerja: kelompok belajar dibatasi
                 supaya setiap santri disimak namanya, dan pembinaan berjalan dengan standar yang
                 sama di setiap unit — dari tahfizh anak usia dini hingga perguruan tinggi.
@@ -51,8 +55,8 @@ export function SekilasYayasan() {
 
             <div className="mt-8 flex flex-wrap gap-3">
               <ButtonLink href="/tentang">Profil lengkap yayasan</ButtonLink>
-              <ButtonLink href="/dampak" varian="garis">
-                Lihat dampak program
+              <ButtonLink href="/program" varian="garis">
+                Lihat unit pendidikan
               </ButtonLink>
             </div>
           </div>

@@ -87,7 +87,6 @@ const berkas = [
   { nama: "hero-utama", w: 1600, h: 1200, palette: "hijauTua", label: "Wadi Mubarak" },
   { nama: "hero-donasi", w: 1600, h: 900, palette: "emas", label: "LAZIS Wadi Mubarak" },
   { nama: "hero-tentang", w: 1600, h: 900, palette: "teduh", label: "Yayasan" },
-  { nama: "hero-dampak", w: 1600, h: 900, palette: "fajar", label: "Dampak" },
   { nama: "hero-kerja-sama", w: 1600, h: 900, palette: "hijau", label: "Kerja Sama" },
   { nama: "sekilas", w: 1200, h: 1000, palette: "teduh", label: "" },
   { nama: "kampus-bogor", w: 1200, h: 900, palette: "hijau", label: "Kampus Bogor" },

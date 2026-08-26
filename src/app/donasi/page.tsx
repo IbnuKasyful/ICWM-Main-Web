@@ -89,13 +89,19 @@ const alurSetelahDonasi = [
   },
 ];
 
-/** Ditulis utuh, bukan dirakit dari `i`, supaya Tailwind ikut memindainya. */
-const kolomLangkah = [
-  "lg:col-start-1",
-  "lg:col-start-2",
-  "lg:col-start-3",
-  "lg:col-start-4",
-  "lg:col-start-5",
+/** Ditulis utuh, bukan dirakit dari `i`, supaya Tailwind ikut memindainya.
+ * Langkah ganjil menempel kolom kiri, langkah genap kolom kanan. */
+const kolomLangkah = ["lg:col-start-1", "lg:col-start-7"];
+
+/** Barisnya dipatok satu langkah per baris. Tanpa ini grid menjejalkan dua
+ * kartu setengah lebar ke baris yang sama, dan zigzagnya berubah jadi dua
+ * kolom sejajar. */
+const barisLangkah = [
+  "lg:row-start-1",
+  "lg:row-start-2",
+  "lg:row-start-3",
+  "lg:row-start-4",
+  "lg:row-start-5",
 ];
 
 export default async function HalamanDonasi() {
@@ -155,7 +161,7 @@ export default async function HalamanDonasi() {
             {jenisDana.map((j) => (
               <KartuFoto
                 key={j.nama}
-                gambar={j.gambar}
+                gambar={null}
                 ikon={j.ikon}
                 judul={j.nama}
                 keterangan={j.isi}
@@ -227,8 +233,8 @@ export default async function HalamanDonasi() {
               </p>
             </div>
             <ButtonLink
-              href={`https://wa.me/${site.kontak.whatsapp}?text=${encodeURIComponent(
-                "Assalamu'alaikum. Saya ingin mengonfirmasi donasi ke LAZIS Wadi Mubarak.",
+              href={`https://wa.me/${site.lazis.whatsapp}?text=${encodeURIComponent(
+                "Assalamu'alaikum. Saya ingin mengonfirmasi donasi ke LAZIS SaQu Wadi Mubarak.",
               )}`}
               eksternal
               varian="terang"
@@ -249,29 +255,35 @@ export default async function HalamanDonasi() {
             atas="Setelah berdonasi"
             judul="Apa yang terjadi"
             sorot="dengan uang Anda"
-            rata="kiri"
             keterangan="Lima langkah ini berlaku untuk semua jenis dana, dari nominal terkecil sampai terbesar."
           />
 
-          {/* Tangga: tiap langkah bergeser satu kolom ke kanan dan berganti
-              nada terang–gelap, jadi urutannya sudah terbaca dari bentuknya
-              sebelum nomornya dibaca. Kartunya selebar 8 dari 12 kolom dengan
-              lima titik mulai, sehingga langkah terakhir berhenti rata kanan.
-              Garis putus-putus di sela kartu menyambungkan langkah ke langkah:
-              tegak lurus saat kartu bertumpuk, menyiku saat bertangga. */}
+          {/* Zigzag: langkah berselang-seling kiri–kanan mengapit sumbu tengah
+              halaman, senapas dengan judul seksi yang rata tengah. Nada
+              terang–gelap ikut sisi — kiri terang, kanan gelap — jadi urutannya
+              sudah terbaca dari bentuknya sebelum nomornya dibaca. Kartunya
+              selebar 6 dari 12 kolom, dan bilah waktunya ikut dicerminkan agar
+              selalu menghadap tepi luar. Garis putus-putus di sela kartu
+              menyambungkan langkah ke langkah: tegak lurus saat kartu
+              bertumpuk, menyiku menyeberangi sumbu saat berselang-seling. */}
           <ol className="mt-12 grid gap-8 lg:grid-cols-12 lg:gap-10">
             {alurSetelahDonasi.map((langkah, i) => {
               const gelap = i % 2 === 1;
               return (
                 <li
                   key={langkah.judul}
-                  className={cn("relative flex items-stretch lg:col-span-8", kolomLangkah[i])}
+                  className={cn(
+                    "relative flex items-stretch lg:col-span-6",
+                    kolomLangkah[i % 2],
+                    barisLangkah[i],
+                    gelap ? "lg:flex-row-reverse" : "",
+                  )}
                 >
                   <span
                     aria-hidden="true"
                     className={cn(
                       "relative z-10 my-5 -mr-6 flex w-11 shrink-0 items-center justify-center rounded-full text-[0.7rem] font-semibold tracking-[0.1em] text-white uppercase",
-                      gelap ? "bg-brand-800" : "bg-brand-700",
+                      gelap ? "bg-brand-800 lg:mr-0 lg:-ml-6" : "bg-brand-700",
                     )}
                   >
                     <span className="rotate-180 [writing-mode:vertical-rl]">{langkah.waktu}</span>
@@ -281,7 +293,7 @@ export default async function HalamanDonasi() {
                     className={cn(
                       "flex-1 rounded-[22px] p-6 pl-10",
                       gelap
-                        ? "bg-brand-950 shadow-[0_22px_45px_-20px_rgba(0,12,40,0.7)]"
+                        ? "bg-brand-950 shadow-[0_22px_45px_-20px_rgba(0,12,40,0.7)] lg:pr-10 lg:pl-6"
                         : "border border-line bg-white shadow-soft",
                     )}
                   >
@@ -309,14 +321,24 @@ export default async function HalamanDonasi() {
                     </p>
                   </div>
 
+                  {/* Siku menyeberang sumbu: sisi tegaknya berhenti 0,5rem dari
+                      tepi kartu berikutnya, yang lebarnya satu sela grid. */}
                   {i < alurSetelahDonasi.length - 1 ? (
                     <span
                       aria-hidden="true"
-                      className="absolute top-full left-5 h-8 border-l-2 border-dashed border-line-strong lg:right-[16%] lg:left-auto lg:h-10 lg:w-[30%] lg:rounded-tr-2xl lg:border-t-2 lg:border-r-2 lg:border-l-0"
+                      className={cn(
+                        "absolute top-full left-5 h-8 border-l-2 border-dashed border-line-strong lg:h-10 lg:w-32 lg:border-t-2",
+                        gelap
+                          ? "lg:-left-8 lg:rounded-tl-2xl"
+                          : "lg:-right-8 lg:left-auto lg:rounded-tr-2xl lg:border-r-2 lg:border-l-0",
+                      )}
                     >
                       <Icon
                         nama="panahBawah"
-                        className="absolute -bottom-1.5 -left-2 size-4 text-line-strong lg:-right-2 lg:left-auto"
+                        className={cn(
+                          "absolute -bottom-1.5 -left-2 size-4 text-line-strong",
+                          gelap ? "" : "lg:-right-2 lg:left-auto",
+                        )}
                       />
                     </span>
                   ) : null}

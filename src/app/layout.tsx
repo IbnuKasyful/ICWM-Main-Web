@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Plus_Jakarta_Sans } from "next/font/google";
 
-import { PitaPratinjau } from "@/components/site/PitaPratinjau";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { JsonLd } from "@/components/ui/JsonLd";
@@ -66,8 +65,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex min-h-screen flex-col antialiased">
         <JsonLd data={jsonldOrganization()} />
         <JsonLd data={jsonldWebsite()} />
-
-        {modePratinjau ? <PitaPratinjau /> : null}
 
         {/* PRD §14 — tautan "lewati ke konten". */}
         <a

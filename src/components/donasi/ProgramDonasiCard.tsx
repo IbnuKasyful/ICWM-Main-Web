@@ -23,6 +23,11 @@ import { cn } from "@/lib/cn";
  * tautannya menerima fokus.
  */
 export function ProgramDonasiCard({ program }: { program: ProgramDonasi }) {
+  // Poster kampanye berbentuk potret dan judulnya ada di sepertiga atas;
+  // dipangkas dari tengah, yang tersisa justru bagian yang tidak menjelaskan
+  // apa pun. Foto lanskap tetap dipangkas dari tengah seperti biasa.
+  const potret = program.gambar.height > program.gambar.width;
+
   return (
     <li
       className={cn(
@@ -38,7 +43,10 @@ export function ProgramDonasiCard({ program }: { program: ProgramDonasi }) {
           width={program.gambar.width}
           height={program.gambar.height}
           sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
-          className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          className={cn(
+            "size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]",
+            potret ? "object-top" : "object-center",
+          )}
         />
 
         <span className="absolute top-3 left-3 flex flex-wrap gap-2">
@@ -71,7 +79,13 @@ export function ProgramDonasiCard({ program }: { program: ProgramDonasi }) {
           {program.ringkasan}
         </p>
 
-        <Progress terkumpul={program.terkumpul} target={program.target} className="mt-4" ringkas />
+        <Progress
+          terkumpul={program.terkumpul}
+          target={program.target}
+          satuanBiaya={program.satuan_biaya}
+          className="mt-4"
+          ringkas
+        />
 
         <dl className="mt-3.5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
           <div className="flex items-center gap-1.5">

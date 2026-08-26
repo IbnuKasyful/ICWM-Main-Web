@@ -13,8 +13,8 @@ function escapeXml(teks: string): string {
     .replace(/'/g, "&apos;");
 }
 
-export function GET() {
-  const posts = getPostsInduk().slice(0, 30);
+export async function GET() {
+  const posts = (await getPostsInduk()).slice(0, 30);
   const terbaru = posts[0];
 
   const butir = posts

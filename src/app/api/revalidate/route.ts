@@ -1,15 +1,20 @@
 import { revalidatePath, revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
+import { TAG_BERITA } from "@/lib/wp-berita";
 import { TAG_DONASI } from "@/lib/wp";
 
 /**
  * Penyegaran cache atas permintaan WordPress — pasangan dari plugin
  * `cms/wm-donasi/wm-donasi.php`.
  *
- * WordPress memanggil route ini setiap kali program donasi disimpan, sehingga
- * angka baru tampil dalam hitungan detik alih-alih menunggu ISR 15 menit habis.
- * Tanpa panggilan ini situs tetap benar — hanya lebih lambat menyusul.
+ * WordPress memanggil route ini setiap kali program donasi disimpan atau
+ * tulisan diterbitkan, sehingga isi baru tampil dalam hitungan detik alih-alih
+ * menunggu ISR habis. Tanpa panggilan ini situs tetap benar — hanya lebih
+ * lambat menyusul.
+ *
+ * Badan permintaan boleh menyertakan `jenis`: "donasi" (bawaan, menjaga
+ * kecocokan dengan plugin lama) atau "berita".
  *
  * Wewenangnya diperiksa lewat rahasia bersama `REVALIDATE_SECRET`, dikirim di
  * header `x-revalidate-secret`. Tanpa variabel itu route menolak semua
@@ -21,8 +26,22 @@ export const runtime = "nodejs";
 /** Tidak boleh di-cache: setiap panggilan harus benar-benar dieksekusi. */
 export const dynamic = "force-dynamic";
 
-/** Halaman yang menampilkan angka donasi dan harus ikut disegarkan. */
-const JALUR_TERDAMPAK = ["/", "/donasi", "/dampak", "/sitemap.xml"];
+/** Halaman yang terdampak per jenis isi. */
+const JALUR: Record<"donasi" | "berita", string[]> = {
+  donasi: ["/", "/donasi", "/sitemap.xml"],
+  berita: ["/", "/informasi", "/feed.xml", "/sitemap.xml"],
+};
+
+const TAG: Record<"donasi" | "berita", string> = {
+  donasi: TAG_DONASI,
+  berita: TAG_BERITA,
+};
+
+/** Awalan URL halaman rincian per jenis, dipakai bersama `slug`. */
+const AWALAN: Record<"donasi" | "berita", string> = {
+  donasi: "/donasi",
+  berita: "/informasi",
+};
 
 export async function POST(request: Request) {
   const rahasia = process.env["REVALIDATE_SECRET"]?.trim();
@@ -39,25 +58,31 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false }, { status: 401 });
   }
 
-  /* Slug opsional. Bila WordPress menyebutkannya, halaman program itu ikut
-     disegarkan — termasuk saat programnya baru dibuat dan belum pernah ada. */
+  /* Keduanya opsional. `jenis` menentukan tag dan halaman mana yang
+     disegarkan; bawaannya "donasi" supaya plugin lama tetap bekerja tanpa
+     diubah. Bila WordPress menyebutkan `slug`, halaman rinciannya ikut
+     disegarkan — termasuk saat isinya baru dibuat dan belum pernah ada. */
   let slug: string | undefined;
+  let jenis: "donasi" | "berita" = "donasi";
   try {
-    const isi = (await request.json()) as { slug?: unknown };
+    const isi = (await request.json()) as { slug?: unknown; jenis?: unknown };
     if (typeof isi.slug === "string" && isi.slug.length > 0 && isi.slug.length <= 200) {
       slug = isi.slug;
     }
+    if (isi.jenis === "berita" || isi.jenis === "donasi") jenis = isi.jenis;
   } catch {
-    // Body kosong atau bukan JSON — bukan galat, slug memang opsional.
+    // Body kosong atau bukan JSON — bukan galat, keduanya memang opsional.
   }
 
-  revalidateTag(TAG_DONASI);
-  for (const jalur of JALUR_TERDAMPAK) revalidatePath(jalur);
-  if (slug) revalidatePath(`/donasi/${slug}`);
+  const jalurTerdampak = JALUR[jenis];
+  revalidateTag(TAG[jenis]);
+  for (const jalur of jalurTerdampak) revalidatePath(jalur);
+  if (slug) revalidatePath(`${AWALAN[jenis]}/${slug}`);
 
   return NextResponse.json({
     ok: true,
-    disegarkan: slug ? [...JALUR_TERDAMPAK, `/donasi/${slug}`] : JALUR_TERDAMPAK,
+    jenis,
+    disegarkan: slug ? [...jalurTerdampak, `${AWALAN[jenis]}/${slug}`] : jalurTerdampak,
   });
 }
 

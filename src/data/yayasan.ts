@@ -1,11 +1,11 @@
 /** Data contoh profil yayasan: capaian, mitra. */
 
 export const capaianMentah: unknown[] = [
-  { label: "Santri aktif", nilai: 2140, satuan: "", keterangan: "Seluruh unit, tahun ajaran 2025/2026" },
-  { label: "Alumni", nilai: 6800, satuan: "", keterangan: "Sejak 2008" },
-  { label: "Hafizh 30 juz", nilai: 512, satuan: "", keterangan: "Lulusan program tahfizh" },
-  { label: "Hafidz bersanad", nilai: 148, satuan: "", keterangan: "Hafizh dengan sanad bersambung" },
-  { label: "Pengajar & pengasuh", nilai: 286, satuan: "", keterangan: "Guru, musyrif, dan tenaga kependidikan" },
+  { label: "Alumni", nilai: 12000, satuan: "+", keterangan: "Sejak yayasan berdiri pada 2008" },
+  { label: "Sekolah jaringan Sahabat Al-Qur'an", nilai: 197, satuan: "", keterangan: "162 TAUD dan 35 MIT/SD di 27 provinsi" },
+  { label: "Provinsi terjangkau", nilai: 27, satuan: "", keterangan: "Dari Aceh sampai Maluku Utara" },
+  { label: "Negara memakai kurikulum yang sama", nilai: 14, satuan: "", keterangan: "Kurikulum At-Tibyan susunan ulama Madinah" },
+  { label: "Alumni di Timur Tengah", nilai: 30, satuan: "+", keterangan: "Menempuh S1 sampai S3 di delapan universitas" },
   { label: "Unit pendidikan", nilai: 11, satuan: "", keterangan: "Dari TAUD hingga perguruan tinggi" },
 ];
 
@@ -36,12 +36,28 @@ export const mitraMentah: unknown[] = [
     sejak: 2012,
   },
   {
-    slug: "lembaga-wakaf-nusantara",
-    nama: "Lembaga Wakaf Nusantara",
-    jenis: "lembaga-sosial",
+    slug: "maqarie-al-quraniyah-madinah",
+    nama: "Maqarie Al-Qur'aniyah, Madinah",
+    jenis: "pendidikan",
     logo: null,
-    keterangan: "Pendampingan pengelolaan wakaf produktif dan literasi wakaf.",
-    sejak: 2020,
+    keterangan: "Badan internasional penghafal Al-Qur'an yang menaungi program tahfizh bersanad MTs dan MA Wadi Mubarak.",
+    sejak: 2019,
+  },
+  {
+    slug: "jamiah-khairukum-jeddah",
+    nama: "Jami'ah Khairukum, Jeddah",
+    jenis: "pendidikan",
+    logo: null,
+    keterangan: "Kerja sama strategis pengembangan mutu pendidikan Islam bagi santriwati Mahabbah Boarding School.",
+    sejak: 2024,
+  },
+  {
+    slug: "universitas-islam-madinah",
+    nama: "Universitas Islam Madinah",
+    jenis: "pendidikan",
+    logo: null,
+    keterangan: "Asal kurikulum At-Tibyan sekaligus tujuan studi lanjut puluhan alumni Wadi Mubarak pada jenjang S1 sampai S3.",
+    sejak: 2014,
   },
   {
     slug: "yayasan-peduli-yatim-indonesia",
@@ -50,14 +66,6 @@ export const mitraMentah: unknown[] = [
     logo: null,
     keterangan: "Program beasiswa bersama untuk santri yatim dan dhuafa.",
     sejak: 2019,
-  },
-  {
-    slug: "bank-syariah-mitra",
-    nama: "Bank Syariah Mitra",
-    jenis: "korporasi",
-    logo: null,
-    keterangan: "Layanan perbankan syariah dan program CSR pendidikan.",
-    sejak: 2018,
   },
 ];
 
@@ -154,7 +162,7 @@ export const faqMentah: unknown[] = [
     slug: "kapan-ppdb-dibuka",
     pertanyaan: "Kapan pendaftaran santri baru dibuka?",
     jawaban:
-      "Jadwal berbeda per unit. MTs dan MA umumnya membuka gelombang pertama pada Oktober, MIT pada November, TAUD pada Januari, sedangkan PKM membuka pendaftaran sekali setahun pada April. Program kaderisasi guru — PG TAUD SAQU, I'dad Mu'allimat, dan Imtiaz Putri — memiliki jadwal angkatannya sendiri. Periode terkini setiap unit tercantum pada halaman program.",
+      "Jadwal berbeda per unit. MTs dan MA putra membuka PPDB batch 3 untuk tahun pelajaran 2027/2028, sedangkan Mahabbah Boarding School membuka batch 6 pada 1 Agustus 2026 sampai 30 Juni 2027. MIT membuka gelombangnya pada November dan TAUD pada Januari, sedangkan PKM sekali setahun pada April. Program kaderisasi guru — PG TAUD SAQU, I'dad Mu'allimat, dan Imtiaz Putri — memiliki jadwal angkatannya sendiri. Periode terkini setiap unit tercantum pada halaman program.",
     kelompok: "pendaftaran",
     urutan: 1,
   },
@@ -162,7 +170,7 @@ export const faqMentah: unknown[] = [
     slug: "apakah-harus-hafal-dulu",
     pertanyaan: "Apakah anak harus sudah punya hafalan sebelum mendaftar?",
     jawaban:
-      "Untuk TAUD dan MIT tidak ada syarat hafalan awal. MTs mensyaratkan minimal 1 juz dan MA minimal 5 juz, karena target hafalan jenjang tersebut disusun bertingkat. PKM, sebagai program kaderisasi muhaffizh, mensyaratkan minimal 15 juz, sedangkan I'dad Mu'allimat mensyaratkan minimal juz 30 atau kesediaan menuntaskannya selama program.",
+      "Untuk TAUD dan MIT tidak ada syarat hafalan awal. TAUD menilai kesiapan lain: usia minimal 3 tahun 7 bulan, lulus toilet training, mampu mengikuti instruksi, dan jelas melafalkan huruf. MIT mensyaratkan lulus calistung dan mengenal huruf hijaiyah — mampu membaca iqro' 3 lebih diutamakan. MTs dan MA mengadakan tes kemampuan dan tes tahfizh saat seleksi. PKM, sebagai program kaderisasi muhaffizh, mensyaratkan minimal 15 juz, sedangkan I'dad Mu'allimat mensyaratkan minimal juz 30 atau kesediaan menuntaskannya selama program.",
     kelompok: "pendaftaran",
     urutan: 2,
   },
@@ -226,7 +234,7 @@ export const faqMentah: unknown[] = [
     slug: "ingin-jadi-guru-taud",
     pertanyaan: "Saya ingin menjadi guru tahfizh anak usia dini. Lewat jalur mana?",
     jawaban:
-      "Ada dua jalur dengan panjang yang berbeda. PG TAUD SAQU berdurasi tiga bulan di asrama dan cocok bagi yang ingin segera merintis TAUD di daerahnya. I'dad Mu'allimat berdurasi dua tahun penuh, membiayai pendidikan dan asrama peserta, serta memberi kepastian penempatan mengajar di jaringan sekolah yayasan setelah lulus.",
+      "Ada dua jalur dengan panjang yang berbeda. PG TAUD SAQU berdurasi tiga bulan di asrama dan cocok bagi yang ingin segera merintis TAUD di daerahnya; angkatan ke-24 sudah diwisuda pada Juli 2025. I'dad Mu'allimat berdurasi dua tahun penuh, membiayai pendidikan dan asrama peserta, serta memberi kepastian penempatan mengajar di jaringan sekolah yayasan setelah lulus.",
     kelompok: "pendaftaran",
     urutan: 10,
   },
@@ -268,6 +276,10 @@ export const faqMentah: unknown[] = [
  * Foto dokumentasi yayasan. Urutannya menentukan pembagian kolom pada dinding
  * foto beranda (`BentoBerjalan` mengambil indeks genap untuk kolom kiri dan
  * ganjil untuk kolom kanan), jadi potret dan lanskap sengaja diselang-seling.
+ *
+ * `kategori` menjadi penyaring di halaman /galeri. Kelompoknya sengaja sedikit
+ * dan berdasarkan jenis acara, bukan unit: pengunjung mencari "wisuda" atau
+ * "kegiatan anak", bukan nama lembaga penyelenggaranya.
  */
 export const galeriMentah: unknown[] = [
   {
@@ -275,71 +287,125 @@ export const galeriMentah: unknown[] = [
     alt: "Wisudawati Mahabbah Boarding School mengenakan selempang kelulusan",
     width: 775,
     height: 1200,
+    kategori: "wisuda",
   },
   {
     src: "/img/galeri-taud-mewarnai.jpg",
     alt: "Santri TAUD mewarnai bersama di meja kelas",
     width: 1600,
     height: 2133,
+    kategori: "anak",
   },
   {
     src: "/img/galeri-dauroh-fikih.jpg",
     alt: "Peserta dauroh fikih menyimak kajian di masjid kampus",
     width: 1200,
     height: 675,
+    kategori: "dauroh",
+  },
+  {
+    src: "/img/galeri-rihlah-peserta-pg-taud.jpg",
+    alt: "Peserta PG TAUD SAQU berfoto bersama saat rihlah di lapangan berlatar pegunungan",
+    width: 1200,
+    height: 1600,
+    kategori: "kampus",
+  },
+  {
+    src: "/img/galeri-wisuda-pg-taud-angkatan-24.jpg",
+    alt: "Foto bersama wisuda PG TAUD SAQU angkatan ke-24 di Megamendung, 10 Juli 2025",
+    width: 1600,
+    height: 1200,
+    kategori: "wisuda",
   },
   {
     src: "/img/galeri-haflah-akhirussanah.jpg",
     alt: "Santri TAUD dan MIT SaQu memegang piagam pada haflah akhirussanah",
     width: 1600,
     height: 1066,
+    kategori: "kampus",
   },
   {
     src: "/img/galeri-buka-puasa-bersama.jpg",
     alt: "Santri mengikuti buka puasa bersama di aula kampus",
     width: 1200,
     height: 675,
+    kategori: "kampus",
   },
   {
     src: "/img/galeri-wisuda-huffazh.jpg",
     alt: "Foto bersama pada Wisuda Akbar Huffazhul Qur'an ke-5",
     width: 1280,
     height: 720,
+    kategori: "wisuda",
   },
   {
     src: "/img/galeri-taud-panggung.jpg",
     alt: "Santri TAUD menunggu giliran tampil di panggung acara",
     width: 1200,
     height: 675,
+    kategori: "anak",
   },
   {
     src: "/img/galeri-cendera-mata-masyayikh.jpg",
     alt: "Penyerahan cendera mata kepada masyayikh tamu di kampus",
     width: 1200,
     height: 675,
+    kategori: "kampus",
+  },
+  {
+    src: "/img/galeri-halaqah-peserta-pg-taud.jpg",
+    alt: "Peserta PG TAUD SAQU melingkar dalam halaqah tahsin bersama pengampunya",
+    width: 1600,
+    height: 1200,
+    kategori: "halaqah",
+  },
+  {
+    src: "/img/galeri-wisudawati-pg-taud-piagam.jpg",
+    alt: "Wisudawati PG TAUD SAQU angkatan ke-24 memegang piagam kelulusan",
+    width: 1600,
+    height: 1200,
+    kategori: "wisuda",
   },
   {
     src: "/img/galeri-wisuda-haafizhaat.jpg",
     alt: "Wisuda ke-2 haafizhaatul Qur'an Mahabbah Boarding School",
     width: 1600,
     height: 1067,
+    kategori: "wisuda",
   },
   {
     src: "/img/galeri-dauroh-tadabur.jpg",
     alt: "Dauroh tadabur Al-Qur'an bersama syaikh tamu di kampus STIU",
     width: 1280,
     height: 720,
+    kategori: "dauroh",
   },
   {
     src: "/img/galeri-santriwati-halaqah.jpg",
     alt: "Foto bersama santriwati seusai halaqah di aula asrama",
     width: 1600,
     height: 901,
+    kategori: "halaqah",
+  },
+  {
+    src: "/img/galeri-praktik-mengajar-pg-taud.jpg",
+    alt: "Peserta PG TAUD SAQU praktik mengajar di kelas TAUD yang sedang berjalan",
+    width: 1600,
+    height: 1200,
+    kategori: "anak",
+  },
+  {
+    src: "/img/galeri-wisudawati-pg-taud-cendera-mata.jpg",
+    alt: "Wisudawati PG TAUD SAQU menerima cendera mata di panggung wisuda",
+    width: 1600,
+    height: 1200,
+    kategori: "wisuda",
   },
   {
     src: "/img/galeri-wisuda-taud-mit.jpg",
     alt: "Foto bersama wisuda TAUD dan MIT SaQu",
     width: 1200,
     height: 675,
+    kategori: "wisuda",
   },
 ];

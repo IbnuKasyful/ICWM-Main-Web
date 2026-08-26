@@ -28,18 +28,18 @@ export default async function Beranda() {
 
   // PRD §9.1 — TEPAT 6 kartu, tanpa elemen pagination apa pun di beranda.
   // Keenamnya seragam dan mengisi kisi dua kolom.
-  const tulisan = getPostsInduk().slice(0, 6);
+  const tulisan = (await getPostsInduk()).slice(0, 6);
   const agenda = getAgendaMendatang(3);
   const program = await getProgramDonasi();
   const programSorot = program.find((p) => p.mendesak) ?? program[0];
 
-  const santri = capaian.find((c) => c.label === "Santri aktif");
+  const alumni = capaian.find((c) => c.label === "Alumni");
 
   return (
     <>
       <Hero
         jumlahUnit={units.length}
-        jumlahSantri={santri ? `${angka(santri.nilai)}+` : `${units.length} unit`}
+        jumlahAlumni={alumni ? `${angka(alumni.nilai)}+` : `${units.length} unit`}
       />
 
       <Kutipan
@@ -57,9 +57,9 @@ export default async function Beranda() {
             atas="Angka capaian"
             judul="Yang sudah kami kerjakan"
             sorot="sejauh ini"
-            keterangan="Diperbarui setiap awal tahun ajaran. Rincian dan metodologi penghitungannya tersedia pada halaman dampak."
+            keterangan="Diperbarui setiap awal tahun ajaran, dihitung dari data induk seluruh unit."
           />
-          <StatBlock data={capaian} tautan="/dampak" className="mt-10" />
+          <StatBlock data={capaian} className="mt-10" />
         </div>
       </Section>
 

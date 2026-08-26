@@ -23,12 +23,12 @@ export const metadata = buatMetadata({
 const bentukKerjaSama: { judul: string; isi: string; ikon: NamaIkon }[] = [
   {
     judul: "Pendirian TAUD Sahabat Al-Qur'an",
-    isi: "Merintis unit tahfizh anak usia dini di daerah Anda memakai merek, kurikulum, dan pendampingan pembukaan cabang Sahabat Al-Qur'an.",
+    isi: "Merintis unit tahfizh anak usia dini di daerah Anda memakai merek, kurikulum, dan pendampingan pembukaan yang sama seperti 162 TAUD Sahabat Al-Qur'an yang sudah berjalan.",
     ikon: "sekolah",
   },
   {
     judul: "Pendirian MIT Sahabat Al-Qur'an",
-    isi: "Membuka madrasah ibtidaiyah terpadu Sahabat Al-Qur'an dengan kurikulum tahfizh dan standar madrasah Kementerian Agama.",
+    isi: "Membuka madrasah ibtidaiyah terpadu Sahabat Al-Qur'an dengan kurikulum At-Tibyan dan standar madrasah Kementerian Agama — 35 MIT/SD mitra sudah menjalankannya.",
     ikon: "sekolah",
   },
   {
@@ -59,7 +59,7 @@ export default function HalamanKerjaSama() {
         jejak={[{ label: "Kemitraan", href: "/kerja-sama" }]}
         atas="Kemitraan"
         judul="Kemitraan yang kami buka untuk TAUD & MIT"
-        keterangan="Untuk saat ini kemitraan Islamic Center Wadi Mubarak difokuskan pada dua jenjang: TAUD Sahabat Al-Qur'an (tahfizh anak usia dini) dan MIT Sahabat Al-Qur'an (madrasah ibtidaiyah tahfizh). Kemitraan di luar kedua jenjang ini untuk sementara belum kami buka."
+        keterangan="Untuk saat ini kemitraan Islamic Center Wadi Mubarak difokuskan pada dua jenjang: TAUD Sahabat Al-Qur'an (tahfizh anak usia dini) dan MIT Sahabat Al-Qur'an (madrasah ibtidaiyah tahfizh). Keduanya sudah berjalan di 197 sekolah pada 27 provinsi. Kemitraan di luar kedua jenjang ini untuk sementara belum kami buka."
       />
 
       <Section className="py-12 md:py-16">
