@@ -10,8 +10,19 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
-    // `next-env.d.ts` dibangkitkan Next.js dan tidak boleh disunting.
-    ignores: [".next/**", "node_modules/**", "public/**", "next-env.d.ts"],
+    /* `next-env.d.ts` dibangkitkan Next.js dan tidak boleh disunting.
+       `.open-next/` dan `.wrangler/` berisi bundel hasil build untuk Cloudflare.
+       Keduanya WAJIB diabaikan: `next build` menjalankan ESLint di dalam worker
+       thread ber-stack kecil, dan mengurai bundel sebesar itu menjatuhkan worker
+       (Windows: exit code 3221226505) sehingga build gagal tanpa pesan berguna. */
+    ignores: [
+      ".next/**",
+      ".open-next/**",
+      ".wrangler/**",
+      "node_modules/**",
+      "public/**",
+      "next-env.d.ts",
+    ],
   },
 ];
 
