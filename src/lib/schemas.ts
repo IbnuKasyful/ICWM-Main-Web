@@ -126,7 +126,11 @@ export const unitSchema = z.object({
   cabang: z.array(cabangSchema),
   status_ppdb: statusPpdbSchema,
   periode_ppdb: z.string(),
-  kisaran_biaya: z.string(),
+  /* Tidak ada `kisaran_biaya`. Situs ini tidak menayangkan biaya sama sekali,
+     dan selama medannya masih ada, angkanya ikut terkirim ke peramban lewat
+     muatan RSC — tidak tampak di halaman, tapi terbaca di sumbernya. Menghapus
+     medannya adalah satu-satunya cara yang benar-benar menutup jalan itu.
+     (Menyimpang dari PRD §9.1; yang berlaku rincian dari panitia PPDB.) */
   kontak_wa: z.string(),
   urutan_tampil: z.number().int(),
   aktif: z.boolean(),
@@ -191,7 +195,7 @@ export const programQuranSchema = z.object({
   penyelenggaraan: z.enum(["daring", "luring"]),
   durasi: z.string().min(1),
   peserta: z.string().min(1),
-  biaya: z.string().min(1),
+  /* Tanpa medan `biaya`, dengan alasan yang sama seperti pada `unitSchema`. */
   warna_aksen: z.string().regex(/^#[0-9a-fA-F]{6}$/),
   gambar: imageSchema,
   untuk_siapa: z.array(z.string().min(1)).min(1),
@@ -325,7 +329,7 @@ export const capaianSchema = z.object({
 });
 
 // Rekening tidak lagi dipecah per jenis dana: LAZIS hanya memakai dua rekening
-// resmi, dan keduanya menerima seluruh jenis donasi. Peruntukan ditulis pada
+// lembaga, dan keduanya menerima seluruh jenis donasi. Peruntukan ditulis pada
 // berita transfer, bukan dipilih lewat nomor rekening.
 export const rekeningSchema = z.object({
   bank: z.string().min(1),

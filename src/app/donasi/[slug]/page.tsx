@@ -142,18 +142,18 @@ export default async function HalamanProgramDonasi({
                   Donasi untuk program ini
                 </ButtonLink>
                 <ButtonLink href="/donasi#rekening" varian="garis">
-                  Lihat rekening resmi
+                  Lihat rekening lembaga
                 </ButtonLink>
               </div>
 
               <p className="mt-5 border-t border-line pt-5 text-xs leading-relaxed text-ink-subtle">
                 Fase ini belum melayani pembayaran daring. Donasi dilakukan lewat transfer ke
-                rekening resmi, lalu dikonfirmasi melalui WhatsApp.
+                rekening lembaga, lalu dikonfirmasi melalui WhatsApp.
               </p>
             </div>
 
             <div className="mt-6">
-              <h2 className="font-display text-base font-semibold text-ink">Rekening resmi</h2>
+              <h2 className="font-display text-base font-semibold text-ink">Rekening lembaga</h2>
               <p className="mt-1 text-xs leading-relaxed text-ink-subtle">
                 Tulis &ldquo;{labelJenisDonasi[program.jenis]} — {program.judul}&rdquo; pada berita
                 transfer agar dana tercatat untuk program ini.

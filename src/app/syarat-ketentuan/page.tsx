@@ -39,7 +39,7 @@ const bagian: BagianKebijakan[] = [
   {
     judul: "Donasi",
     isi: [
-      "Situs ini tidak memproses pembayaran daring. Seluruh donasi dilakukan melalui transfer ke rekening resmi yang tercantum pada halaman donasi.",
+      "Situs ini tidak memproses pembayaran daring. Seluruh donasi dilakukan melalui transfer ke rekening atas nama lembaga yang tercantum pada halaman donasi.",
       "Kami tidak pernah meminta transfer ke rekening atas nama perorangan. Bila Anda menerima permintaan semacam itu mengatasnamakan kami, mohon segera laporkan.",
       "Donasi yang telah disalurkan sesuai peruntukannya tidak dapat ditarik kembali. Bila terjadi kelebihan dana pada suatu program, dana dialihkan ke program sejenis dengan pemberitahuan kepada donatur.",
     ],

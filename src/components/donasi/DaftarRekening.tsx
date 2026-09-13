@@ -2,13 +2,13 @@ import { CopyButton } from "@/components/ui/CopyButton";
 import { EmptyState } from "@/components/ui/EmptyState";
 import type { Rekening } from "@/lib/schemas";
 
-/** PRD §9.4 — rekening resmi LAZIS, dengan tautan salin. */
+/** PRD §9.4 — rekening lembaga untuk LAZIS, dengan tautan salin. */
 export function DaftarRekening({ rekening }: { rekening: readonly Rekening[] }) {
   if (rekening.length === 0) {
     return (
       <EmptyState
         judul="Nomor rekening sedang diperbarui"
-        keterangan="Untuk sementara, silakan hubungi bagian LAZIS agar kami mengirimkan nomor rekening resmi langsung kepada Anda."
+        keterangan="Untuk sementara, silakan hubungi bagian LAZIS agar kami mengirimkan nomor rekening lembaga langsung kepada Anda."
         aksi={{ label: "Hubungi LAZIS", href: "/kontak" }}
       />
     );

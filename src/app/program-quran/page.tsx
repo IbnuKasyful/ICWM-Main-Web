@@ -133,11 +133,13 @@ export default function HalamanProgramQuran() {
               keterangan={p.ringkasan}
             />
 
-            <dl className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
+            {/* Biaya tidak ditampilkan di situs; yang berlaku adalah rincian
+                dari panitia program. Lihat catatan yang sama di halaman
+                profil unit. */}
+            <dl className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
               {[
                 { label: "Durasi", nilai: p.durasi, ikon: "jam" as const },
                 { label: "Peserta", nilai: p.peserta, ikon: "orang" as const },
-                { label: "Biaya", nilai: p.biaya, ikon: "uang" as const },
               ].map((item) => (
                 <div key={item.label} className="flex flex-col gap-1 bg-white p-5">
                   <dt className="flex items-center gap-2 text-xs font-semibold tracking-[0.1em] text-ink-subtle uppercase">

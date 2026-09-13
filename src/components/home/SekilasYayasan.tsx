@@ -6,7 +6,7 @@ import { Section } from "@/components/ui/Section";
 const penanda = [
   { ikon: "perisai", teks: "Berdiri sejak 3 Februari 2008 di Megamendung, Bogor" },
   { ikon: "sekolah", teks: "Sebelas unit dari tahfizh anak usia dini hingga perguruan tinggi" },
-  { ikon: "centang", teks: "LAZIS berizin Kementerian Agama RI" },
+  { ikon: "centang", teks: "LAZIS SaQu menghimpun zakat, infak, sedekah, dan wakaf" },
 ] as const;
 
 /** PRD §9.1 blok 4 — dua paragraf ringkas + tautan ke /tentang. */
@@ -29,7 +29,7 @@ export function SekilasYayasan() {
                 Islamic Center Wadi Mubarak berdiri pada 3 Februari 2008 di Megamendung, Bogor. Hari
                 ini yayasan menaungi sebelas unit pendidikan dari tahfizh anak usia dini hingga
                 perguruan tinggi, empat jalur kaderisasi guru Al-Qur&apos;an, dan sebuah lembaga amil
-                zakat yang berizin resmi.
+                zakat, infak, sedekah, serta wakaf.
               </p>
               <p>
                 Kurikulum yang sama juga berjalan di luar kampus induk: 162 TAUD dan 35 MIT/SD

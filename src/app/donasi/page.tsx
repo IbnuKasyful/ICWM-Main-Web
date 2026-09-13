@@ -18,9 +18,9 @@ export const revalidate = 900;
 export const metadata = buatMetadata({
   judul: "Donasi lewat LAZIS Wadi Mubarak",
   deskripsi:
-    "Salurkan zakat, infak, sedekah, dan wakaf lewat LAZIS Wadi Mubarak — lembaga amil berizin Kementerian Agama RI. Setiap program memiliki target, progres, dan penerima manfaat yang diverifikasi.",
+    "Salurkan zakat, infak, sedekah, dan wakaf lewat LAZIS SaQu Wadi Mubarak. Setiap program di halaman ini menyebut peruntukan, satuan biaya, dan penerima manfaatnya.",
   path: "/donasi",
-  gambar: "/img/hero-donasi.svg",
+  gambar: "/img/donasi-jumat-berkah.jpg",
 });
 
 /** `gambar` masih menumpang foto dokumentasi galeri sebagai penahan tempat —
@@ -61,7 +61,7 @@ const alurSetelahDonasi = [
     judul: "Transfer",
     waktu: "Menit ini",
     ikon: "uang" as const,
-    isi: "Anda mentransfer ke salah satu rekening resmi, dengan jenis dana ditulis pada berita transfer.",
+    isi: "Anda mentransfer ke salah satu rekening lembaga, dengan jenis dana ditulis pada berita transfer.",
   },
   {
     judul: "Konfirmasi",
@@ -121,17 +121,18 @@ export default async function HalamanDonasi() {
           <Breadcrumb jejak={[{ label: "Donasi", href: "/donasi" }]} terang />
 
           <h1 className="mt-5 max-w-3xl font-display text-display-md text-balance text-white md:text-display-lg">
-            Titipkan zakat Anda pada lembaga amil yang{" "}
-            <span className="text-accent-300">berizin resmi</span>
+            Titipkan zakat Anda pada tim amil yang{" "}
+            <span className="text-accent-300">Anda kenal jejaknya</span>
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-pretty text-white/70">
-            Kami lembaga amil resmi berizin Kementerian Agama RI. Setiap program di halaman ini
-            menampilkan target, jumlah terkumpul, dan penerima manfaatnya yang diverifikasi tim amil.
+            {site.lazis.nama} menghimpun dan menyalurkan zakat, infak, sedekah, dan wakaf untuk
+            santri penghafal Al-Qur&apos;an. Setiap program di halaman ini menyebut peruntukan,
+            satuan biaya, dan penerima manfaatnya.
           </p>
 
           <div className="mt-7 flex flex-wrap gap-3">
             <ButtonLink href="#rekening" varian="terang">
-              Lihat rekening resmi
+              Lihat rekening lembaga
             </ButtonLink>
             <ButtonLink
               href="#program"
@@ -191,8 +192,8 @@ export default async function HalamanDonasi() {
             <EmptyState
               className="mt-10"
               judul="Belum ada program yang dibuka"
-              keterangan="Saat ini tidak ada penghimpunan yang sedang berjalan. Infak umum tetap dapat disalurkan lewat rekening resmi di bawah."
-              aksi={{ label: "Lihat rekening resmi", href: "#rekening" }}
+              keterangan="Saat ini tidak ada penghimpunan yang sedang berjalan. Infak umum tetap dapat disalurkan lewat rekening lembaga di bawah."
+              aksi={{ label: "Lihat rekening lembaga", href: "#rekening" }}
             />
           ) : (
             <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -204,13 +205,13 @@ export default async function HalamanDonasi() {
         </div>
       </Section>
 
-      {/* Rekening resmi */}
+      {/* Rekening lembaga */}
       <Section id="rekening" className="py-14 md:py-20">
         <div className="container-page">
           <JudulSeksi
-            atas="Rekening resmi"
+            atas="Rekening lembaga"
             judul="Hanya dua rekening ini"
-            sorot="yang resmi"
+            sorot="yang sah"
             keterangan="Keduanya menerima zakat, infak, sedekah, dan wakaf — tulis peruntukannya pada berita transfer. Kami tidak pernah meminta transfer ke rekening pribadi. Bila Anda menerima permintaan atas nama perorangan, mohon laporkan kepada kami."
           />
           <div className="mt-12">

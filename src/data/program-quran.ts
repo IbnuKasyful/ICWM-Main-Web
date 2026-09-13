@@ -20,7 +20,6 @@ export const programQuranMentah: unknown[] = [
     penyelenggaraan: "daring",
     durasi: "Tiga bulan per angkatan",
     peserta: "Umum, segala usia; kelas putra dan putri terpisah",
-    biaya: "Rincian biaya disampaikan panitia saat pendaftaran",
     warna_aksen: "#0e7490",
     gambar: {
       src: "/img/galeri-dauroh-tadabur.jpg",
@@ -90,7 +89,7 @@ export const programQuranMentah: unknown[] = [
       "Pembayaran biaya program dan penempatan kelas",
       "Mulai belajar sesuai slot waktu yang dipilih",
     ],
-    kontak_wa: "6285883576234",
+    kontak_wa: "6285219808250",
     instagram: "https://instagram.com/grahaquran_wm",
   },
   {
@@ -102,7 +101,6 @@ export const programQuranMentah: unknown[] = [
     penyelenggaraan: "luring",
     durasi: "Beberapa hari, disesuaikan dengan kebutuhan rombongan",
     peserta: "Pelajar SD kelas 4–6, SMP, SMA, serta karyawan instansi pemerintah dan swasta",
-    biaya: "Paket disusun sesuai jumlah peserta dan lama kegiatan",
     warna_aksen: "#b45309",
     gambar: {
       src: "/img/galeri-dauroh-fikih.jpg",
@@ -166,7 +164,7 @@ export const programQuranMentah: unknown[] = [
       "Konfirmasi kepesertaan dan pembayaran",
       "Kedatangan rombongan di kampus Megamendung",
     ],
-    kontak_wa: "6285883576234",
+    kontak_wa: "6281111882022",
     instagram: null,
   },
 ];

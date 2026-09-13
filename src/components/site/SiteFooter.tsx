@@ -11,7 +11,7 @@ export type SiteFooterProps = {
   deskripsi: string;
   alamat: { jalan: string; kota: string; provinsi: string; kodePos: string };
   kontak: { telepon: string; email: string; jamLayanan: string };
-  lazis: { nama: string; nomorIzin: string };
+  lazis: { nama: string };
   sosial: readonly { label: string; href: string }[];
   grup: readonly { judul: string; tautan: readonly NavItem[] }[];
   kepatuhan: readonly NavItem[];

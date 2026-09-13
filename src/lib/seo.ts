@@ -125,7 +125,7 @@ export function jsonldNgo(): Jsonld {
     parentOrganization: { "@id": `${site.url}/#organization` },
     url: `${site.url}/donasi`,
     description:
-      "Lembaga amil zakat, infak, sedekah, dan wakaf Islamic Center Wadi Mubarak, berizin Kementerian Agama RI.",
+      "Lembaga amil zakat, infak, sedekah, dan wakaf Islamic Center Wadi Mubarak.",
     address: alamatPos,
     email: site.kontak.email,
     telephone: site.kontak.telepon,

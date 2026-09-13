@@ -9,6 +9,7 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { Icon } from "@/components/ui/Icon";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { DirektoriCabang } from "@/components/program/DirektoriCabang";
+import { GaleriUnit } from "@/components/program/GaleriUnit";
 import { PostBaris } from "@/components/ui/PostCard";
 import { JudulSeksi } from "@/components/ui/Section";
 import { getPostsUnit, getUnit, getUnitProfil, getUnitsAktif } from "@/lib/content";
@@ -113,12 +114,15 @@ export default async function HalamanProfilUnit({
             />
           </div>
 
-          <dl className="mt-8 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+          {/* Biaya sengaja tidak dicantumkan di situs. Komponennya berubah tiap
+              tahun ajaran dan berbeda antar cabang, jadi angka yang tayang di
+              sini akan lebih sering keliru daripada benar; yang berlaku selalu
+              rincian dari panitia PPDB unit terkait. */}
+          <dl className="mt-8 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
             {[
               { label: "Jenjang", nilai: labelJenjang[unit.jenjang], ikon: "sekolah" as const },
               { label: "Model belajar", nilai: labelModel[unit.model_belajar], ikon: "yayasan" as const },
               { label: "Periode PPDB", nilai: unit.periode_ppdb, ikon: "kalender" as const },
-              { label: "Kisaran biaya", nilai: unit.kisaran_biaya, ikon: "dokumen" as const },
             ].map((item) => (
               <div key={item.label} className="flex flex-col gap-1 bg-white p-5">
                 <dt className="flex items-center gap-2 text-xs font-semibold tracking-[0.1em] text-ink-subtle uppercase">
@@ -248,20 +252,7 @@ export default async function HalamanProfilUnit({
             <h2 className="font-display text-display-md text-ink">
               Suasana <span className="text-brand-600">sehari-hari</span>
             </h2>
-            <ul className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
-              {profil.galeri.map((g, i) => (
-                <li key={`${g.src}-${i}`} className="overflow-hidden rounded-xl bg-mist-100">
-                  <Image
-                    src={g.src}
-                    alt={g.alt}
-                    width={g.width}
-                    height={g.height}
-                    sizes="(min-width: 1024px) 190px, 45vw"
-                    className="aspect-square size-full object-cover transition-transform duration-500 hover:scale-105"
-                  />
-                </li>
-              ))}
-            </ul>
+            <GaleriUnit galeri={profil.galeri} />
           </div>
         </section>
       ) : null}
@@ -309,14 +300,6 @@ export default async function HalamanProfilUnit({
                   </span>
                   <span className="text-right text-sm font-semibold text-ink">
                     {unit.periode_ppdb}
-                  </span>
-                </div>
-                <div className="flex items-baseline justify-between gap-3 border-t border-line-strong pt-3">
-                  <span className="text-xs font-semibold tracking-[0.1em] text-ink-subtle uppercase">
-                    Biaya
-                  </span>
-                  <span className="text-right text-sm font-semibold text-ink">
-                    {unit.kisaran_biaya}
                   </span>
                 </div>
               </div>

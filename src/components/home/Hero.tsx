@@ -44,7 +44,7 @@ export function Hero({
 
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-pretty text-ink-muted">
             Sebelas unit pendidikan — dari tahfizh anak usia dini sampai perguruan tinggi —
-            beserta lembaga amil zakat resmi, dalam satu naungan. Temukan unit yang
+            beserta lembaga amil zakat, dalam satu naungan. Temukan unit yang
             benar-benar cocok untuk anak Anda sebelum menghubungi siapa pun.
           </p>
 

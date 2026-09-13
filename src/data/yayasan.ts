@@ -12,22 +12,6 @@ export const capaianMentah: unknown[] = [
 
 export const mitraMentah: unknown[] = [
   {
-    slug: "kementerian-agama-ri",
-    nama: "Kementerian Agama Republik Indonesia",
-    jenis: "pemerintah",
-    logo: null,
-    keterangan: "Pembinaan dan pengawasan lembaga amil zakat serta pendidikan keagamaan.",
-    sejak: 2021,
-  },
-  {
-    slug: "dinas-pendidikan-kabupaten-bogor",
-    nama: "Dinas Pendidikan Kabupaten Bogor",
-    jenis: "pemerintah",
-    logo: null,
-    keterangan: "Perizinan operasional dan pembinaan satuan pendidikan formal.",
-    sejak: 2016,
-  },
-  {
     slug: "jaringan-sekolah-islam-terpadu",
     nama: "Jaringan Sekolah Islam Terpadu",
     jenis: "pendidikan",
@@ -162,7 +146,7 @@ export const faqMentah: unknown[] = [
     slug: "kapan-ppdb-dibuka",
     pertanyaan: "Kapan pendaftaran santri baru dibuka?",
     jawaban:
-      "Jadwal berbeda per unit. MTs dan MA putra membuka PPDB batch 3 untuk tahun pelajaran 2027/2028, sedangkan Mahabbah Boarding School membuka batch 6 pada 1 Agustus 2026 sampai 30 Juni 2027. MIT membuka gelombangnya pada November dan TAUD pada Januari, sedangkan PKM sekali setahun pada April. Program kaderisasi guru — PG TAUD SAQU, I'dad Mu'allimat, dan Imtiaz Putri — memiliki jadwal angkatannya sendiri. Periode terkini setiap unit tercantum pada halaman program.",
+      "Jadwal berbeda per unit. MTs dan MA putra membuka PPDB batch 3 untuk tahun pelajaran 2027/2028, sedangkan Mahabbah Boarding School membuka batch 6 pada 1 Agustus 2026 sampai 30 Juni 2027. MIT membuka gelombangnya pada November, sedangkan TAUD SAQU membuka pendaftaran tahun ajaran 2026/2027 pada Oktober 2026 sampai Mei 2027, dan PKM sekali setahun pada April. Program kaderisasi guru — PG TAUD SAQU, I'dad Mu'allimat, dan Imtiaz Putri — memiliki jadwal angkatannya sendiri. Periode terkini setiap unit tercantum pada halaman program.",
     kelompok: "pendaftaran",
     urutan: 1,
   },
@@ -186,7 +170,7 @@ export const faqMentah: unknown[] = [
     slug: "berapa-biaya-pendidikan",
     pertanyaan: "Berapa biaya pendidikan di Wadi Mubarak?",
     jawaban:
-      "Kisaran biaya berbeda per unit dan tercantum pada setiap halaman profil unit. Rincian resmi disampaikan panitia PPDB unit terkait, karena komponen biaya dapat berubah setiap tahun ajaran.",
+      "Rincian biaya tidak kami cantumkan di situs ini. Komponennya berbeda antar unit dan antar cabang, dan dapat berubah setiap tahun ajaran — angka yang tayang di sini berisiko tidak lagi berlaku saat Anda membacanya. Yang resmi adalah rincian yang disampaikan panitia PPDB unit terkait; hubungi panitia lewat WhatsApp yang tercantum pada halaman profil unit.",
     kelompok: "biaya",
     urutan: 4,
   },
@@ -242,7 +226,7 @@ export const faqMentah: unknown[] = [
     slug: "bagaimana-cara-berdonasi",
     pertanyaan: "Bagaimana cara berdonasi?",
     jawaban:
-      "Donasi disalurkan melalui transfer ke rekening resmi lembaga — BSI a.n. LAZIS SaQu Wadi Mubarak atau Mandiri a.n. Islamic Center Wadi Mubarak. Tulis jenis dana (zakat, infak, sedekah, atau wakaf) pada berita transfer. Nomor rekening dan alur konfirmasi tersedia pada halaman donasi.",
+      "Donasi disalurkan melalui transfer ke rekening atas nama lembaga — BSI a.n. LAZIS SaQu Wadi Mubarak atau Mandiri a.n. Islamic Center Wadi Mubarak. Tulis jenis dana (zakat, infak, sedekah, atau wakaf) pada berita transfer. Nomor rekening dan alur konfirmasi tersedia pada halaman donasi.",
     kelompok: "donasi",
     urutan: 11,
   },
@@ -407,5 +391,47 @@ export const galeriMentah: unknown[] = [
     width: 1200,
     height: 675,
     kategori: "wisuda",
+  },
+  {
+    src: "/img/galeri-mtsma-kelas-papan-tulis.jpg",
+    alt: "Ustadz menerangkan materi di papan tulis di hadapan santri MTs dan MA Tahfizh Putra",
+    width: 2000,
+    height: 1125,
+    kategori: "kampus",
+  },
+  {
+    src: "/img/galeri-mtsma-halaqah-tahsin.jpg",
+    alt: "Halaqah tahsin MTs Tahfizh Putra: satu pengampu menyimak delapan santri duduk melingkar",
+    width: 1280,
+    height: 720,
+    kategori: "halaqah",
+  },
+  {
+    src: "/img/galeri-mtsma-kelas-malam-penjelasan.jpg",
+    alt: "Ustadz menjelaskan pelajaran kepada santri MTs dan MA Tahfizh Putra pada jam belajar malam",
+    width: 2000,
+    height: 1500,
+    kategori: "kampus",
+  },
+  {
+    src: "/img/galeri-mtsma-menulis-di-kelas.jpg",
+    alt: "Santri MTs dan MA Tahfizh Putra berseragam cokelat menulis di bukunya saat pelajaran berlangsung",
+    width: 2000,
+    height: 1125,
+    kategori: "kampus",
+  },
+  {
+    src: "/img/galeri-mtsma-soal-tertulis-ruang-kelas.jpg",
+    alt: "Santri MTs dan MA Tahfizh Putra serempak mengerjakan soal tertulis di bangku masing-masing",
+    width: 1280,
+    height: 720,
+    kategori: "kampus",
+  },
+  {
+    src: "/img/galeri-mtsma-kelas-malam.jpg",
+    alt: "Santri MTs dan MA Tahfizh Putra menyimak pelajaran di ruang kelas pada jam belajar malam",
+    width: 2000,
+    height: 1500,
+    kategori: "kampus",
   },
 ];

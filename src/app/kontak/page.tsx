@@ -40,6 +40,13 @@ const kanal: { ikon: NamaIkon; label: string; nilai: string; href: string; catat
     href: tautanWhatsApp(site.kontak.whatsapp, "Assalamu'alaikum, saya ingin bertanya."),
     catatan: "Untuk pertanyaan singkat",
   },
+  {
+    ikon: "whatsapp",
+    label: "Saluran WhatsApp",
+    nilai: "Islamic Center Wadi Mubarak",
+    href: site.kontak.saluranWhatsapp,
+    catatan: "Pengumuman dan kabar kegiatan, sekali arah",
+  },
 ];
 
 const kanalKhusus = [

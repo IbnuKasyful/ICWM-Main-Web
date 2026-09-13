@@ -28,7 +28,7 @@ const bentukKerjaSama: { judul: string; isi: string; ikon: NamaIkon }[] = [
   },
   {
     judul: "Pendirian MIT Sahabat Al-Qur'an",
-    isi: "Membuka madrasah ibtidaiyah terpadu Sahabat Al-Qur'an dengan kurikulum At-Tibyan dan standar madrasah Kementerian Agama — 35 MIT/SD mitra sudah menjalankannya.",
+    isi: "Membuka madrasah ibtidaiyah terpadu Sahabat Al-Qur'an dengan kurikulum At-Tibyan dan standar madrasah ibtidaiyah — 35 MIT/SD mitra sudah menjalankannya.",
     ikon: "sekolah",
   },
   {

@@ -17,6 +17,9 @@
  */
 export const modePratinjau = process.env["NEXT_PUBLIC_MODE_PRATINJAU"] === "1";
 
+/** Saluran siaran WhatsApp yayasan — sekali arah, hanya untuk pengumuman. */
+const saluranWhatsapp = "https://whatsapp.com/channel/0029VaACJZ6CcW4yfooIxy0G";
+
 export const site = {
   nama: "Islamic Center Wadi Mubarak",
   namaPendek: "Wadi Mubarak",
@@ -37,20 +40,20 @@ export const site = {
     telepon: "+62 858 8357 6234",
     whatsapp: "6285883576234",
     email: "psbwadimubarak@gmail.com",
+    saluranWhatsapp,
     emailMedia: "media@wadimubarak.com",
     emailKerjaSama: "kerjasama@wadimubarak.com",
     jamLayanan: "Setiap hari, 24 jam",
   },
   lazis: {
     nama: "LAZIS SaQu Wadi Mubarak",
-    nomorIzin: "SK Menteri Agama RI No. 118 Tahun 2021",
-    tahunIzin: 2021,
-    /** Nomor tim amil, tercetak di seluruh poster kampanye LAZIS. */
+    /** Nomor admin tim amil, tercetak di seluruh poster kampanye LAZIS. */
     whatsapp: "6287888821199",
     instagram: "https://instagram.com/lazis.saqu.wadimubarak",
     facebook: "https://facebook.com/LazisSaqu",
   },
   sosial: [
+    { label: "Saluran WhatsApp", href: saluranWhatsapp },
     { label: "Instagram", href: "https://instagram.com/ic_wadimubarak" },
     { label: "YouTube", href: "https://youtube.com/@ic_wadimubarak" },
     { label: "Facebook", href: "https://facebook.com/ic.wadimubarak" },
@@ -102,7 +105,7 @@ export const navUtama: NavGrup[] = [
     href: "/donasi",
     anak: [
       { label: "Program yang bisa didanai", href: "/donasi", deskripsi: "Zakat, infak, sedekah, dan wakaf" },
-      { label: "Rekening resmi LAZIS", href: "/donasi#rekening", deskripsi: "Nomor rekening BSI dan Mandiri atas nama lembaga" },
+      { label: "Rekening LAZIS", href: "/donasi#rekening", deskripsi: "Nomor rekening BSI dan Mandiri atas nama lembaga" },
     ],
   },
   {
@@ -149,7 +152,7 @@ export const navFooter: { judul: string; tautan: NavItem[] }[] = [
     judul: "Donasi & kemitraan",
     tautan: [
       { label: "Cara berdonasi", href: "/donasi" },
-      { label: "Rekening resmi LAZIS", href: "/donasi#rekening" },
+      { label: "Rekening LAZIS", href: "/donasi#rekening" },
       { label: "Kemitraan", href: "/kerja-sama" },
     ],
   },
@@ -198,7 +201,7 @@ export const routerNiat = [
   {
     label: "Berdonasi",
     ringkas: "Zakat, infak, sedekah, wakaf",
-    deskripsi: "Zakat, infak, sedekah, dan wakaf lewat LAZIS resmi berizin Kementerian Agama.",
+    deskripsi: "Zakat, infak, sedekah, dan wakaf lewat LAZIS SaQu Wadi Mubarak.",
     href: "/donasi",
     aksi: "Lihat program donasi",
     ikon: "donasi",

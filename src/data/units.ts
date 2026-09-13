@@ -5,9 +5,9 @@
  * awal. Seluruh isi berkas ini akan digantikan oleh WPGraphQL pada Tahap 0.
  * Bentuknya sengaja dibuat persis seperti hasil kueri GraphQL nanti.
  *
- * Penamaan unit mengikuti nomenklatur madrasah Kementerian Agama, karena
- * seluruh jenjang formal di yayasan ini terdaftar di sana: TAUD (Tahfizh Anak
- * Usia Dini), MIT, MTs, MA, lalu STIU pada jenjang tinggi. Jenjang putri tidak
+ * Penamaan unit mengikuti nomenklatur madrasah yang lazim dipakai di
+ * Indonesia: TAUD (Tahfizh Anak Usia Dini), MIT, MTs, MA, lalu STIU pada
+ * jenjang tinggi. Jenjang putri tidak
  * berdiri sendiri-sendiri: MTs dan MA putri berada di bawah satu sekolah
  * berasrama, Mahabbah Boarding School (MBS), sehingga keduanya dicatat sebagai
  * dua unit dengan nama MBS — satu unit hanya boleh punya satu jenjang agar
@@ -83,8 +83,7 @@ export const unitsMentah: unknown[] = [
     lokasi_kampus: "bogor",
     cabang: cabangTaudSaqu,
     status_ppdb: "buka",
-    periode_ppdb: "Januari – Maret 2026",
-    kisaran_biaya: "Rincian biaya disampaikan panitia saat pendaftaran",
+    periode_ppdb: "Oktober 2026 – Mei 2027 (tahun ajaran 2026/2027)",
     kontak_wa: "6285714923006",
     urutan_tampil: 1,
     aktif: true,
@@ -105,7 +104,6 @@ export const unitsMentah: unknown[] = [
     cabang: cabangMitSaqu,
     status_ppdb: "buka",
     periode_ppdb: "November 2025 – Februari 2026",
-    kisaran_biaya: "Rincian biaya disampaikan panitia saat pendaftaran",
     kontak_wa: "6285718234036",
     urutan_tampil: 2,
     aktif: true,
@@ -126,7 +124,6 @@ export const unitsMentah: unknown[] = [
     cabang: [],
     status_ppdb: "buka",
     periode_ppdb: "Batch 3, tahun pelajaran 2027/2028",
-    kisaran_biaya: "Rincian biaya disampaikan panitia saat pendaftaran",
     kontak_wa: "6281111882030",
     urutan_tampil: 3,
     aktif: true,
@@ -152,7 +149,6 @@ export const unitsMentah: unknown[] = [
     cabang: [],
     status_ppdb: "buka",
     periode_ppdb: "Batch 3, tahun pelajaran 2027/2028",
-    kisaran_biaya: "Rincian biaya disampaikan panitia saat pendaftaran",
     kontak_wa: "6281111882030",
     urutan_tampil: 4,
     aktif: true,
@@ -178,7 +174,6 @@ export const unitsMentah: unknown[] = [
     cabang: [],
     status_ppdb: "buka",
     periode_ppdb: "Batch 6 — 1 Agustus 2026 s.d. 30 Juni 2027 (TP 2027/2028)",
-    kisaran_biaya: "Rincian biaya disampaikan panitia saat pendaftaran",
     kontak_wa: "62895327002283",
     urutan_tampil: 5,
     aktif: true,
@@ -204,7 +199,6 @@ export const unitsMentah: unknown[] = [
     cabang: [],
     status_ppdb: "buka",
     periode_ppdb: "Batch 6 — 1 Agustus 2026 s.d. 30 Juni 2027 (TP 2027/2028)",
-    kisaran_biaya: "Rincian biaya disampaikan panitia saat pendaftaran",
     kontak_wa: "62895327002283",
     urutan_tampil: 6,
     aktif: true,
@@ -225,7 +219,6 @@ export const unitsMentah: unknown[] = [
     cabang: [],
     status_ppdb: "buka",
     periode_ppdb: "Setahun sekali — PMB tahun akademik 2026/2027",
-    kisaran_biaya: "Pendaftaran Rp 350.000; uang pangkal ditetapkan saat daftar ulang (tahun lalu Rp 2.500.000)",
     kontak_wa: "6285692757850",
     urutan_tampil: 7,
     aktif: true,
@@ -246,7 +239,6 @@ export const unitsMentah: unknown[] = [
     cabang: cabangPkm,
     status_ppdb: "buka",
     periode_ppdb: "Tahun ajaran 2026/2027 — KBM mulai sekitar Juli 2026",
-    kisaran_biaya: "Beasiswa: tanpa SPP bulanan, uang pangkal Rp 2.500.000",
     kontak_wa: "6285883576234",
     urutan_tampil: 8,
     aktif: true,
@@ -267,7 +259,6 @@ export const unitsMentah: unknown[] = [
     cabang: [],
     status_ppdb: "buka",
     periode_ppdb: "Tiga angkatan setiap tahun — angkatan ke-24 diwisuda 10 Juli 2025",
-    kisaran_biaya: "Beasiswa pendidikan (syarat dan ketentuan berlaku)",
     kontak_wa: "6285883576234",
     urutan_tampil: 9,
     aktif: true,
@@ -288,7 +279,6 @@ export const unitsMentah: unknown[] = [
     cabang: [],
     status_ppdb: "buka",
     periode_ppdb: "27 Juli – 25 Agustus 2026 (angkatan pertama)",
-    kisaran_biaya: "Bebas biaya pendidikan; rincian disampaikan panitia saat pendaftaran",
     kontak_wa: "6285286251819",
     urutan_tampil: 10,
     aktif: true,
@@ -309,7 +299,6 @@ export const unitsMentah: unknown[] = [
     cabang: [],
     status_ppdb: "buka",
     periode_ppdb: "Tahun ajaran 2025/2026",
-    kisaran_biaya: "Rincian biaya disampaikan panitia saat pendaftaran",
     kontak_wa: "6285883576234",
     urutan_tampil: 11,
     aktif: true,
@@ -355,8 +344,8 @@ const profilInput: ProfilInput[] = [
         isi: "Anak belajar membaca sekaligus menerapkan tahsin dan tajwid sejak awal — metode yang sama dipakai di Saudi, Mesir, Jepang, Australia, Malaysia, Brunei, dan Thailand.",
       },
       {
-        judul: "Terakreditasi A",
-        isi: "Satuan pendidikan induk di Megamendung terakreditasi A, dan kurikulum yang sama diterapkan di seluruh jaringan.",
+        judul: "Satu kurikulum di semua cabang",
+        isi: "Kurikulum, bahan ajar, dan cara pembinaan yang dipakai di kampus induk Megamendung diterapkan sama persis di seluruh jaringan.",
       },
       {
         judul: "Bonus matan Tuhfatul Athfal",
@@ -470,8 +459,8 @@ const profilInput: ProfilInput[] = [
         isi: "Satu musyrif mendampingi 12 santri, tinggal di gedung yang sama, bukan datang-pergi.",
       },
       {
-        judul: "Ijazah formal terakreditasi",
-        isi: "Santri mengikuti kurikulum madrasah Kementerian Agama dan dapat melanjutkan ke MA maupun SMA mana pun.",
+        judul: "Ijazah formal, bukan sekadar sertifikat pesantren",
+        isi: "Santri mengikuti kurikulum madrasah tsanawiyah penuh dan dapat melanjutkan ke MA maupun SMA mana pun.",
       },
       {
         judul: "Halaqah kepengasuhan",
@@ -482,7 +471,7 @@ const profilInput: ProfilInput[] = [
       { judul: "Tahfizh", isi: "Program takhassush tahfizh menuju 30 juz dengan sanad qiroat, dimulai setelah bacaan lulus standar." },
       { judul: "Ulum syar'i", isi: "Fiqh, hadits, aqidah, tafsir, dan sirah nabawiyah." },
       { judul: "Bahasa Arab intensif", isi: "Muhadatsah, kitab turats, dan pendampingan native speaker." },
-      { judul: "Akademik", isi: "Kurikulum madrasah Kementerian Agama penuh, ditambah dauroh bahasa Arab." },
+      { judul: "Akademik", isi: "Kurikulum madrasah tsanawiyah penuh, ditambah dauroh bahasa Arab." },
       { judul: "Life skills", isi: "Riset, keterampilan digital, copywriting, dan public speaking." },
     ],
     fasilitas: [
@@ -535,7 +524,7 @@ const profilInput: ProfilInput[] = [
       { judul: "Tahfizh", isi: "30 juz dengan sanad qiroat, tadrib sanad, dan ujian tasmi' bertahap." },
       { judul: "Ulum syar'i", isi: "Fiqh, ushul fiqh, hadits, aqidah, tafsir, dan sirah nabawiyah." },
       { judul: "Bahasa Arab", isi: "Muhadatsah, kitab turats, native speaker, serta public speaking berbahasa Arab." },
-      { judul: "Akademik", isi: "Kurikulum madrasah Kementerian Agama, peminatan IPA dan IPS." },
+      { judul: "Akademik", isi: "Kurikulum madrasah aliyah, peminatan IPA dan IPS." },
       { judul: "Middle East study preparation", isi: "Bimbingan dan persiapan studi ke Timur Tengah, terpadu sejak kelas sepuluh." },
     ],
     fasilitas: [
@@ -588,7 +577,7 @@ const profilInput: ProfilInput[] = [
       { judul: "Tahfizh", isi: "Tahfizh menuju 30 juz dengan tahsin dan tilawah bersanad." },
       { judul: "Diniyah", isi: "Fikih wanita, akidah, bahasa Arab, dan sirah nabawiyah." },
       { judul: "Bahasa", isi: "Bahasa Arab dan Inggris aktif untuk membentuk kemampuan komunikasi global." },
-      { judul: "Akademik", isi: "Kurikulum madrasah Kementerian Agama dengan ijazah terdaftar, dipadukan dengan sains." },
+      { judul: "Akademik", isi: "Kurikulum madrasah tsanawiyah penuh, dipadukan dengan sains." },
       { judul: "Qur'anic parenting", isi: "Pembentukan akhlak, disiplin, dan kemandirian berbasis Al-Qur'an dan Sunnah." },
     ],
     fasilitas: [
@@ -639,7 +628,7 @@ const profilInput: ProfilInput[] = [
     kurikulum: [
       { judul: "Tahfizh", isi: "30 juz dengan tahsin, tilawah bersanad, dan ujian tasmi' bertahap." },
       { judul: "Diniyah", isi: "Fikih, tafsir, hadis, dan bahasa Arab lanjutan." },
-      { judul: "Sains dan akademik", isi: "Kurikulum madrasah Kementerian Agama dengan peminatan IPA dan IPS." },
+      { judul: "Sains dan akademik", isi: "Kurikulum madrasah aliyah dengan peminatan IPA dan IPS." },
       { judul: "Persiapan studi lanjut", isi: "Bimbingan belajar masuk PTN dan kuliah umum bersama para masyaikh." },
     ],
     fasilitas: [
@@ -668,7 +657,7 @@ const profilInput: ProfilInput[] = [
     keunggulan: [
       {
         judul: "Gelar sarjana untuk penghafal Al-Qur'an",
-        isi: "Berdiri pada 2017 dengan SK Kementerian Agama nomor 3692 tahun 2017, lanjutan dari program tahfizh Ma'had Wadi Mubarak dan eLKID — supaya status formal hafizh ikut diakui.",
+        isi: "Berdiri pada 2017 sebagai lanjutan dari program tahfizh Ma'had Wadi Mubarak dan eLKID, supaya penghafal Al-Qur'an bisa menuntaskan hafalan sekaligus memegang gelar sarjana.",
       },
       {
         judul: "Hafalan tidak jadi syarat masuk",
@@ -703,7 +692,7 @@ const profilInput: ProfilInput[] = [
     ],
     alur_ppdb: [
       "Mendaftar daring lewat portal SPMB STIU Wadi Mubarak",
-      "Membayar biaya pendaftaran Rp 350.000, sudah termasuk makan selama ujian",
+      "Membayar biaya pendaftaran — nominalnya disampaikan panitia, sudah termasuk makan selama ujian",
       "Mengikuti ujian masuk sesuai jadwal yang diumumkan panitia",
       "Pengumuman kelulusan",
       "Daftar ulang, termasuk penetapan uang pangkal",
@@ -722,7 +711,7 @@ const profilInput: ProfilInput[] = [
     keunggulan: [
       {
         judul: "Tanpa SPP bulanan",
-        isi: "PKM adalah program beasiswa. Yang ditanggung pendaftar hanya uang pangkal Rp 2.500.000 untuk keperluan pribadi santri dan sarana pondok — tidak ada biaya bulanan.",
+        isi: "PKM adalah program beasiswa. Yang ditanggung pendaftar hanya uang pangkal sekali bayar untuk keperluan pribadi santri dan sarana pondok — tidak ada biaya bulanan. Nominalnya disampaikan panitia saat daftar ulang.",
       },
       {
         judul: "Tidak wajib punya ijazah formal",
@@ -839,7 +828,7 @@ const profilInput: ProfilInput[] = [
       },
       {
         judul: "Jalur gelar S1 PG PAUD",
-        isi: "Yayasan menyiapkan kerja sama dengan perguruan tinggi terakreditasi bagi peserta yang ingin melanjutkan ke jenjang sarjana.",
+        isi: "Yayasan menyiapkan kerja sama dengan perguruan tinggi mitra bagi peserta yang ingin melanjutkan ke jenjang sarjana.",
       },
       {
         judul: "Al-Qur'an sebagai porsi terbesar",
@@ -920,53 +909,555 @@ const profilInput: ProfilInput[] = [
  * Unit yang fotonya sudah tersedia memakai dokumentasi sungguhan; sisanya
  * masih memakai gambar contoh dari `galeriUnit`. Begitu satu unit dapat foto,
  * cukup tambahkan slug-nya di sini — tidak ada yang lain yang perlu diubah.
+ *
+ * MTs dan MA berbagi satu berkas dokumentasi: kedua jenjang tinggal di kampus
+ * yang sama dan difoto pada kegiatan yang sama. Yang dibedakan hanya foto hero
+ * dan urutan galerinya, supaya halaman kedua unit tidak tampak kembar.
  */
+function fotoDok(nama: string, alt: string, width: number, height: number): ImageData {
+  return { src: `/img/${nama}.jpg`, alt, width, height };
+}
+
+/** Dokumentasi MTs & MA Tahfizh Wadi Mubarak Putra, Megamendung. */
+const fotoTahfizhPutra = [
+  fotoDok(
+    "galeri-mtsma-apel-pagi",
+    "Santri MTs dan MA Tahfizh Putra berbaris pada apel pagi di halaman masjid kampus Megamendung",
+    2000,
+    1125,
+  ),
+  fotoDok(
+    "galeri-mtsma-kelas-papan-tulis",
+    "Ustadz menerangkan materi di papan tulis di hadapan santri MTs dan MA Tahfizh Putra pada pelajaran pagi",
+    2000,
+    1125,
+  ),
+  fotoDok(
+    "galeri-mtsma-halaqah-tahsin",
+    "Halaqah tahsin MTs Tahfizh Putra: satu pengampu menyimak delapan santri duduk melingkar",
+    1280,
+    720,
+  ),
+  fotoDok(
+    "galeri-mtsma-kelas-malam-penjelasan",
+    "Ustadz menjelaskan pelajaran kepada santri MTs dan MA Tahfizh Putra yang duduk di bangku kelas pada jam belajar malam",
+    2000,
+    1500,
+  ),
+  fotoDok(
+    "galeri-mtsma-menulis-di-kelas",
+    "Santri MTs dan MA Tahfizh Putra berseragam cokelat menulis di bukunya saat pelajaran berlangsung",
+    2000,
+    1125,
+  ),
+  fotoDok(
+    "galeri-mtsma-dauroh-bahasa-arab",
+    "Foto bersama peserta dauroh bahasa Arab intensif MTs dan MA Wadi Mubarak di masjid kampus",
+    2000,
+    1125,
+  ),
+  fotoDok(
+    "galeri-mtsma-soal-tertulis-ruang-kelas",
+    "Santri MTs dan MA Tahfizh Putra serempak mengerjakan soal tertulis di bangku masing-masing",
+    1280,
+    720,
+  ),
+  fotoDok(
+    "galeri-mtsma-kelas-malam",
+    "Santri MTs dan MA Tahfizh Putra menyimak pelajaran di ruang kelas pada jam belajar malam",
+    2000,
+    1500,
+  ),
+  fotoDok(
+    "galeri-mtsma-olahraga-futsal",
+    "Santri MTs dan MA Tahfizh Putra berfoto bersama seusai bermain futsal di lapangan kampus",
+    2000,
+    1125,
+  ),
+  fotoDok(
+    "galeri-mtsma-menyimak-pelajaran",
+    "Dua santri MTs dan MA Tahfizh Putra berseragam cokelat menyimak penjelasan ustadz dari bangku kelas",
+    2000,
+    1125,
+  ),
+  fotoDok(
+    "galeri-mtsma-lembar-soal",
+    "Santri MTs dan MA Tahfizh Putra mengerjakan lembar soal di ruang kelas",
+    2000,
+    1125,
+  ),
+  fotoDok(
+    "galeri-mtsma-penghargaan-tahfizh",
+    "Penyerahan penghargaan prestasi tahfizh Al-Qur'an terbaik kepada santri MTs Tahfizh Putra",
+    1280,
+    720,
+  ),
+  fotoDok(
+    "galeri-mtsma-kelas-pagi",
+    "Santri MTs dan MA Tahfizh Putra berseragam putih bersiap memulai pelajaran pagi di ruang kelas",
+    2000,
+    1125,
+  ),
+  fotoDok(
+    "galeri-mtsma-mencatat-pelajaran",
+    "Santri MTs dan MA Tahfizh Putra mencatat pelajaran di buku tulis pada jam belajar malam",
+    2000,
+    1500,
+  ),
+  fotoDok(
+    "galeri-mtsma-penghargaan-akademik",
+    "Penyerahan penghargaan santri terbaik kategori akademik jenjang MTs di masjid kampus",
+    1280,
+    720,
+  ),
+  fotoDok(
+    "galeri-mtsma-kelas-seragam-cokelat",
+    "Santri MTs dan MA Tahfizh Putra berseragam cokelat mengikuti pelajaran yang dipandu ustadz dari depan kelas",
+    2000,
+    1125,
+  ),
+  fotoDok(
+    "galeri-mtsma-soal-tertulis-berjas",
+    "Santri Tahfizh Putra berjas dan berpeci hitam mengerjakan soal tertulis di ruang kelas",
+    2000,
+    1125,
+  ),
+  fotoDok(
+    "galeri-mtsma-kerja-sama-maahid",
+    "Penandatanganan nota kesepahaman Islamic Center Wadi Mubarak dengan Ma'ahid, Riyadh",
+    1024,
+    576,
+  ),
+  fotoDok(
+    "galeri-mtsma-soal-tertulis-seragam-putih",
+    "Santri MTs dan MA Tahfizh Putra berkemeja putih mengerjakan soal tertulis di ruang kelas",
+    2000,
+    1125,
+  ),
+];
+
+/** Dokumentasi Mahabbah Boarding School (MTs & MA putri). */
+const fotoMahabbah = [
+  fotoDok(
+    "galeri-mbs-rihlah-book-fair",
+    "Santriwati Mahabbah Boarding School membentangkan spanduk rihlah ilmiah Road to Islamic Book Fair",
+    1280,
+    960,
+  ),
+  fotoDok(
+    "galeri-mbs-rihlah-foto-bersama",
+    "Foto bersama rombongan rihlah ilmiah Mahabbah Boarding School di halaman berumput kampus",
+    1280,
+    960,
+  ),
+  fotoDok(
+    "galeri-mbs-kelas-komputer",
+    "Santriwati Mahabbah Boarding School mengerjakan tugas di kelas komputer",
+    1280,
+    960,
+  ),
+  fotoDok(
+    "galeri-mbs-praktik-memasak",
+    "Santriwati Mahabbah Boarding School mengamati hasil praktik memasak bersama teman sekelompoknya",
+    1280,
+    960,
+  ),
+  fotoDok(
+    "galeri-mbs-hasil-praktik-memasak",
+    "Lima santriwati Mahabbah Boarding School menunjukkan hasil praktik memasak di dapur asrama",
+    1280,
+    960,
+  ),
+  fotoDok(
+    "galeri-mbs-piagam-tahfizh",
+    "Santriwati Mahabbah Boarding School memegang piagam penghargaan tahfizh dan medali",
+    1280,
+    960,
+  ),
+];
+
+/**
+ * Dokumentasi TAUD SAQU dan MIT SAQU, diambil dari artikel-artikel di
+ * wadimubarak.com — situs utama yayasan yang sama.
+ *
+ * Keduanya menyekolahkan anak, dan halaman galeri situs ini berjanji tidak
+ * menampilkan wajah santri secara menonjol. Maka yang dipilih di sini foto
+ * kegiatan, bukan potret: bidikan lebar, punggung dan sisi wajah, anak yang
+ * sedang menekuni sesuatu. Yang sengaja ditinggalkan: potret dekat anak yang
+ * disebut namanya, dan bidikan layar wisuda yang memuat nama lengkap, sekolah,
+ * serta asal daerah seorang anak — dua-duanya melewati batas itu meski sudah
+ * tayang di situs utama.
+ */
+const fotoTaud = [
+  fotoDok(
+    "galeri-taud-permainan-lingkaran",
+    "Anak-anak TAUD SAQU bermain lingkaran gelang di halaman bersama guru dan wali murid",
+    1024,
+    576,
+  ),
+  fotoDok(
+    "galeri-taud-belajar-alam",
+    "Kelas TAUD SAQU digelar beralas tikar di lapangan terbuka",
+    1024,
+    576,
+  ),
+  fotoDok(
+    "galeri-taud-wahana-panjat",
+    "Seorang anak TAUD SAQU menapaki wahana panjat di halaman bermain sekolah",
+    1024,
+    577,
+  ),
+  fotoDok(
+    "galeri-taud-rombongan-berkumpul",
+    "Rombongan anak dan wali murid TAUD SAQU berkumpul di lapangan saat kegiatan luar kelas",
+    1024,
+    576,
+  ),
+  fotoDok(
+    "galeri-taud-turun-bus",
+    "Anak-anak TAUD SAQU turun dari bus bersama wali murid pada kegiatan Little Hafizh Explorer",
+    1024,
+    576,
+  ),
+  fotoDok(
+    "galeri-taud-kelas-wali-murid",
+    "Pertemuan wali murid TAUD SAQU di ruang kelas berhias karya anak",
+    1024,
+    578,
+  ),
+];
+
+const fotoMit = [
+  fotoDok(
+    "galeri-mit-halaqah-saung",
+    "Halaqah tahfizh siswa MIT SAQU beralas lantai saung bersama dua pengampu",
+    1024,
+    576,
+  ),
+  fotoDok(
+    "galeri-mit-setor-hafalan-masjid",
+    "Seorang siswa MIT SAQU menyetorkan hafalan di hadapan pengampu di masjid sekolah",
+    1024,
+    576,
+  ),
+  fotoDok(
+    "galeri-mit-kelas",
+    "Siswa MIT SAQU membaca mushaf di meja masing-masing saat jam pelajaran",
+    1024,
+    576,
+  ),
+  fotoDok(
+    "galeri-mit-wisuda-menunggu",
+    "Wisudawan TAUD dan MIT SAQU duduk berbaris menunggu giliran dipanggil ke panggung",
+    1024,
+    576,
+  ),
+  /* Dua foto panggung lain dari acara yang sama sengaja tidak dipakai: pada
+     keduanya layar di belakang panggung sedang menampilkan data pribadi —
+     satu kartu nama wisudawan lengkap dengan sekolah dan asal daerahnya, satu
+     lagi sebuah kartu identitas bernomor. Dokumentasi wisuda tidak sepadan
+     dengan menerbitkan ulang keduanya. */
+  fotoDok(
+    "galeri-mit-wisuda-foto-bersama",
+    "Foto bersama seluruh wisudawan pada Wisuda TAUD dan MIT SAQU se-Indonesia",
+    1200,
+    675,
+  ),
+  fotoDok(
+    "galeri-mit-sambutan-podium",
+    "Sambutan di podium Wisuda TAUD dan MIT SAQU se-Indonesia dengan latar spanduk acara",
+    1024,
+    576,
+  ),
+];
+
+/** Dokumentasi Ma'had Tahfizh Intensif Imtiaz Putri, dipakai bersama I'dad Mu'allimat. */
+const fotoImtiaz = [
+  fotoDok(
+    "galeri-imtiaz-halaqah-beranda",
+    "Peserta Imtiaz Putri muroja'ah bersama di beranda asrama beralas karpet",
+    2000,
+    1125,
+  ),
+  fotoDok(
+    "galeri-imtiaz-murojaah-lesehan",
+    "Peserta Imtiaz Putri menyimak dan mencatat sambil duduk lesehan di ruang belajar",
+    1600,
+    1200,
+  ),
+  fotoDok(
+    "galeri-imtiaz-foto-bersama-asrama",
+    "Foto bersama satu angkatan Imtiaz Putri di halaman gedung asrama",
+    2000,
+    1500,
+  ),
+  fotoDok(
+    "galeri-imtiaz-foto-bersama-joglo",
+    "Peserta Imtiaz Putri berfoto bersama di depan bangunan kayu kampus Megamendung",
+    2000,
+    1500,
+  ),
+  fotoDok(
+    "galeri-imtiaz-rihlah-pegunungan",
+    "Peserta Imtiaz Putri berkumpul di teras berlatar pegunungan saat rihlah",
+    1125,
+    2000,
+  ),
+  fotoDok(
+    "galeri-imtiaz-wisuda-akbar",
+    "Wisudawati Imtiaz Putri pada Wisuda Akbar Huffazhul Qur'an Islamic Center Wadi Mubarak",
+    2000,
+    1184,
+  ),
+];
+
+/**
+ * Dokumentasi STIU Wadi Mubarak, diambil dari kanal artikel-berita kampusnya
+ * sendiri (stiuwm.ac.id) — satu yayasan, jadi fotonya memang milik yang sama.
+ *
+ * Yang dipilih kegiatan yang menandai sebuah perguruan tinggi, bukan sekadar
+ * suasana pondok: ujian semester, daurah bersama syaikh tamu, asesmen lapangan
+ * akreditasi, pelepasan KKN, dan organisasi mahasiswanya. Jenjang inilah yang
+ * membedakan STIU dari unit lain di halaman ini, jadi itu pula yang tampak.
+ */
+const fotoStiu = [
+  fotoDok(
+    "galeri-stiu-pelepasan-kkn",
+    "Foto bersama mahasiswa STIU Wadi Mubarak pada pelepasan KKN dan Da'i Ramadan di masjid kampus",
+    1280,
+    960,
+  ),
+  fotoDok(
+    "galeri-stiu-daurah-tadabbur",
+    "Syaikh tamu mengisi daurah tadabbur Al-Qur'an dan i'jaz al-'ilmi di hadapan mahasiswa STIU Wadi Mubarak",
+    1280,
+    960,
+  ),
+  fotoDok(
+    "galeri-stiu-ujian-quran",
+    "Ujian Al-Qur'an semester ganjil STIU Wadi Mubarak: mahasiswa duduk melingkar menghadap meja penguji",
+    1280,
+    960,
+  ),
+  fotoDok(
+    "galeri-stiu-ujian-tulis",
+    "Mahasiswa STIU Wadi Mubarak mengerjakan ujian tulis semester ganjil di ruang kelas kampus",
+    1280,
+    960,
+  ),
+  fotoDok(
+    "galeri-stiu-asesmen-aipt",
+    "Foto bersama tim asesor dan pengelola STIU Wadi Mubarak pada asesmen lapangan akreditasi institusi",
+    1280,
+    720,
+  ),
+  fotoDok(
+    "galeri-stiu-pelantikan-bem",
+    "Serah terima jabatan Badan Eksekutif Mahasiswa dan Lembaga Dakwah Kampus STIU Wadi Mubarak",
+    734,
+    392,
+  ),
+];
+
+/**
+ * Dokumentasi Program Kaderisasi Muhaffizh, dikirim dari pondok-pondok cabang
+ * penyelenggara. Karena PKM tidak punya satu kampus sendiri, fotonya sengaja
+ * dipilih dari beberapa pondok sekaligus: yang diperlihatkan bentuk kegiatannya
+ * — halaqah, tashih berdua, kajian, olah fisik — bukan satu bangunan tertentu.
+ */
+const fotoPkm = [
+  fotoDok(
+    "galeri-pkm-halaqah-setoran",
+    "Halaqah setoran hafalan Program Kaderisasi Muhaffizh: pengampu menyimak delapan santri yang duduk melingkar di atas karpet masjid pondok",
+    1280,
+    720,
+  ),
+  fotoDok(
+    "galeri-pkm-tashih-berpasangan",
+    "Dua santri Program Kaderisasi Muhaffizh duduk berhadapan saat tashih bacaan satu lawan satu",
+    960,
+    1280,
+  ),
+  fotoDok(
+    "galeri-pkm-halaqah-rihal",
+    "Santri Program Kaderisasi Muhaffizh membaca mushaf di atas rihal dalam halaqah melingkar",
+    1280,
+    720,
+  ),
+  fotoDok(
+    "galeri-pkm-halaqah-saung",
+    "Halaqah Program Kaderisasi Muhaffizh berlangsung di saung terbuka pondok cabang",
+    1280,
+    960,
+  ),
+  fotoDok(
+    "galeri-pkm-latihan-fisik-lapangan",
+    "Santri Program Kaderisasi Muhaffizh berbaris duduk mengikuti apel latihan fisik di lapangan rumput pondok",
+    1280,
+    960,
+  ),
+  fotoDok(
+    "galeri-pkm-latihan-memanah",
+    "Santri Program Kaderisasi Muhaffizh berlatih memanah berjajar di halaman pondok",
+    1280,
+    960,
+  ),
+];
+
 const fotoUnit: Record<string, { hero: ImageData; galeri: ImageData[] }> = {
+  "taud-saqu": {
+    hero: fotoDok(
+      "galeri-taud-halaman-psb",
+      "Anak-anak TAUD SAQU dan wali murid berkumpul di halaman sekolah pada kegiatan luar kelas",
+      1280,
+      720,
+    ),
+    galeri: fotoTaud,
+  },
+  "mit-saqu": {
+    hero: fotoDok(
+      "galeri-mit-wisuda-panggung",
+      "Wisudawan MIT SAQU berbaris mengenakan busana daerah di panggung Wisuda TAUD dan MIT SAQU se-Indonesia",
+      1024,
+      576,
+    ),
+    galeri: fotoMit,
+  },
+  "mts-tahfizh-putra": {
+    hero: fotoDok(
+      "galeri-mtsma-apel-pagi",
+      "Apel pagi santri MTs Tahfizh Wadi Mubarak Putra di halaman masjid kampus Megamendung",
+      2000,
+      1125,
+    ),
+    galeri: fotoTahfizhPutra,
+  },
+  "ma-tahfizh-putra": {
+    hero: fotoDok(
+      "galeri-mtsma-dauroh-bahasa-arab",
+      "Peserta dauroh bahasa Arab intensif MA Tahfizh Wadi Mubarak Putra di masjid kampus",
+      2000,
+      1125,
+    ),
+    galeri: [...fotoTahfizhPutra.slice(2), ...fotoTahfizhPutra.slice(0, 2)],
+  },
+  "mts-mbs-putri": {
+    hero: fotoDok(
+      "galeri-mbs-rihlah-foto-bersama",
+      "Santriwati Mahabbah Boarding School berfoto bersama seusai rihlah ilmiah",
+      1280,
+      960,
+    ),
+    galeri: fotoMahabbah,
+  },
+  "ma-mbs-putri": {
+    hero: fotoDok(
+      "galeri-mbs-rihlah-book-fair",
+      "Santriwati MA Mahabbah Boarding School membentangkan spanduk rihlah ilmiah Road to Islamic Book Fair",
+      1280,
+      960,
+    ),
+    galeri: [...fotoMahabbah.slice(2), ...fotoMahabbah.slice(0, 2)],
+  },
+  "stiu-wadi-mubarak": {
+    hero: fotoDok(
+      "galeri-stiu-daurah-renstra",
+      "Forum daurah STIU Wadi Mubarak di aula kampus Megamendung dengan latar pegunungan",
+      2000,
+      1125,
+    ),
+    galeri: fotoStiu,
+  },
+  "pkm-wadi-mubarak": {
+    hero: fotoDok(
+      "galeri-pkm-kajian-masjid",
+      "Kajian bersama santri Program Kaderisasi Muhaffizh di masjid pondok cabang",
+      2000,
+      1125,
+    ),
+    galeri: fotoPkm,
+  },
   "pg-taud-saqu": {
-    hero: {
-      src: "/img/galeri-wisuda-pg-taud-angkatan-24.jpg",
-      alt: "Wisuda PG TAUD SAQU angkatan ke-24 di Megamendung, 10 Juli 2025",
-      width: 1600,
-      height: 1200,
-    },
+    hero: fotoDok(
+      "galeri-pg-taud-wisuda-angkatan-24-panggung",
+      "Wisudawati PG TAUD SAQU angkatan ke-24 berbaris di panggung wisuda",
+      1280,
+      960,
+    ),
     galeri: [
-      {
-        src: "/img/galeri-halaqah-peserta-pg-taud.jpg",
-        alt: "Peserta PG TAUD SAQU melingkar dalam halaqah tahsin bersama pengampunya",
-        width: 1600,
-        height: 1200,
-      },
-      {
-        src: "/img/galeri-praktik-mengajar-pg-taud.jpg",
-        alt: "Peserta PG TAUD SAQU praktik mengajar di kelas TAUD yang sedang berjalan",
-        width: 1600,
-        height: 1200,
-      },
-      {
-        src: "/img/galeri-wisudawati-pg-taud-piagam.jpg",
-        alt: "Wisudawati PG TAUD SAQU angkatan ke-24 memegang piagam kelulusan",
-        width: 1600,
-        height: 1200,
-      },
-      {
-        src: "/img/galeri-wisudawati-pg-taud-cendera-mata.jpg",
-        alt: "Wisudawati PG TAUD SAQU menerima cendera mata di panggung wisuda",
-        width: 1600,
-        height: 1200,
-      },
-      {
-        src: "/img/galeri-rihlah-peserta-pg-taud.jpg",
-        alt: "Peserta PG TAUD SAQU berfoto bersama saat rihlah di lapangan berlatar pegunungan",
-        width: 1200,
-        height: 1600,
-      },
-      {
-        src: "/img/galeri-wisuda-pg-taud-angkatan-24.jpg",
-        alt: "Foto bersama seluruh wisudawati PG TAUD SAQU angkatan ke-24",
-        width: 1600,
-        height: 1200,
-      },
+      fotoDok(
+        "galeri-pg-taud-kelas-teori",
+        "Peserta PG TAUD SAQU mengikuti kelas teori ke-TAUD-an di aula kampus",
+        1280,
+        960,
+      ),
+      fotoDok(
+        "galeri-pg-taud-talqin-hafalan",
+        "Peserta PG TAUD SAQU duduk melingkar mengikuti talqin hafalan bersama pengampunya",
+        960,
+        1280,
+      ),
+      fotoDok(
+        "galeri-pg-taud-praktik-mengajar-taud",
+        "Peserta PG TAUD SAQU praktik mengajar di kelas TAUD yang sedang berjalan",
+        1280,
+        960,
+      ),
+      fotoDok(
+        "galeri-pg-taud-praktik-mengajar-kelas",
+        "Peserta PG TAUD SAQU memandu anak-anak TAUD di depan kelas saat praktik mengajar",
+        960,
+        1280,
+      ),
+      fotoDok(
+        "galeri-pg-taud-halaqah-lapangan",
+        "Halaqah PG TAUD SAQU berlangsung di lapangan rumput berlatar pegunungan Megamendung",
+        960,
+        1280,
+      ),
+      fotoDok(
+        "galeri-pg-taud-kelas-materi",
+        "Kelas materi PG TAUD SAQU dengan tayangan proyektor di ruang belajar kampus",
+        1280,
+        720,
+      ),
+      fotoDok(
+        "galeri-pg-taud-foto-bersama-lapangan",
+        "Foto bersama peserta PG TAUD SAQU di lapangan kampus berlatar pegunungan",
+        1280,
+        720,
+      ),
+      fotoDok(
+        "galeri-pg-taud-wisuda-xxv",
+        "Wisuda PG TAUD angkatan XXV dan MIT angkatan V Sahabat Al-Qur'an",
+        1280,
+        960,
+      ),
     ],
+  },
+  "imtiaz-putri": {
+    hero: fotoDok(
+      "galeri-imtiaz-foto-bersama-gunung",
+      "Peserta Ma'had Tahfizh Intensif Imtiaz Putri berfoto bersama berlatar pegunungan Megamendung",
+      2000,
+      1304,
+    ),
+    galeri: fotoImtiaz,
+  },
+  /* I'dad Mu'allimat memakai dokumentasi Imtiaz Putri: keduanya program putri
+     berasrama di kampus Megamendung yang sama, dan I'dad belum punya berkas
+     fotonya sendiri. Keterangan fotonya sengaja tetap menyebut Imtiaz — yang
+     terlihat memang peserta Imtiaz, dan mengganti namanya akan menjadikan
+     keterangan itu keliru. Urutannya diputar supaya kedua halaman tidak
+     tampak kembar. */
+  "idad-muallimat": {
+    hero: fotoDok(
+      "galeri-imtiaz-halaqah-beranda",
+      "Halaqah putri di beranda asrama kampus Megamendung, tempat I'dad Mu'allimat diselenggarakan",
+      2000,
+      1125,
+    ),
+    galeri: [...fotoImtiaz.slice(3), ...fotoImtiaz.slice(0, 3)],
   },
 };
 

@@ -96,15 +96,12 @@ export function UnitCard({
         </p>
 
         <dl className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+          {/* Tanpa baris biaya: angkanya tidak ditampilkan di mana pun di situs
+              ini, jadi kartu pun tidak boleh menjadi celahnya. */}
           <div className="flex items-center gap-1.5">
-            <Icon nama="uang" className="size-4 text-brand-600" />
-            <dt className="sr-only">Kisaran biaya</dt>
-            <dd className="font-semibold text-ink">{unit.kisaran_biaya}</dd>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <Icon nama="jam" className="size-4 text-ink-subtle" />
+            <Icon nama="jam" className="size-4 text-brand-600" />
             <dt className="sr-only">Periode PPDB</dt>
-            <dd className="text-ink-muted">{unit.periode_ppdb}</dd>
+            <dd className="font-semibold text-ink">{unit.periode_ppdb}</dd>
           </div>
           <div className="flex items-center gap-1.5">
             <Icon nama="pin" className="size-4 text-ink-subtle" />

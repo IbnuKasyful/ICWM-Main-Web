@@ -1,8 +1,10 @@
 /**
- * Program LAZIS SaQu Wadi Mubarak + rekening resminya (PRD §9.4).
+ * Program LAZIS SaQu Wadi Mubarak + rekeningnya (PRD §9.4).
  *
- * Isi berkas ini diambil dari materi kampanye resmi LAZIS SaQu di `info/donasi`
- * (poster Jum'at Berkah, Orang Tua Asuh, Beras, dan Buka Puasa).
+ * Isi berkas ini diambil dari materi kampanye LAZIS SaQu: poster payung Jum'at
+ * Berkah (memuat keenam program berkelanjutan), poster Orang Tua Asuh, Beras,
+ * Buka Puasa, dan Bantu Korban Gempa NTT, ditambah dokumentasi Hewan Qurban,
+ * Pembangunan Sarana Pendidikan, serta Buka Puasa Arafah.
  *
  * Catatan penting soal angka: LAZIS tidak menerbitkan target maupun jumlah dana
  * yang sudah terkumpul per program — yang diumumkan adalah harga satuannya
@@ -41,17 +43,35 @@ type DonasiInput = {
   konten: string[];
 };
 
-/** Poster kampanye resmi LAZIS SaQu — potret 4:5, teksnya di bagian atas. */
+/** Poster kampanye LAZIS SaQu — potret 4:5, teksnya di bagian atas. */
 function poster(nama: string) {
   return { src: `/img/donasi-${nama}.jpg`, width: 1080, height: 1350 };
 }
 
-/** Gambar contoh, dipakai program yang posternya belum ada. */
-function sementara(n: number) {
-  return { src: `/img/donasi-${n}.svg`, width: 1200, height: 800 };
+/** Foto dokumentasi program yang belum punya poster kampanye sendiri. */
+function foto(nama: string, width: number, height: number) {
+  return { src: `/img/donasi-${nama}.jpg`, width, height };
 }
 
 const daftar: DonasiInput[] = [
+  {
+    slug: "buka-puasa-arafah",
+    judul: "Buka Puasa Arafah Bersama Penghafal Al-Qur'an",
+    ringkasan:
+      "Penghimpunan khusus menjelang 9 Dzulhijjah: menyiapkan hidangan berbuka bagi santri penghafal Al-Qur'an yang menjalankan puasa Arafah.",
+    jenis: "sedekah",
+    gambar: foto("puasa-arafah", 1280, 720),
+    satuan_biaya: "Nominal bebas",
+    penerima_manfaat: "Santri penghafal Al-Qur'an yang berpuasa Arafah",
+    batas_waktu: null,
+    mendesak: true,
+    konten: [
+      "Puasa Arafah hanya datang sekali dalam setahun. Petang itu ratusan santri penghafal Al-Qur'an di kampus Megamendung berbuka bersama, dan hidangannya disiapkan dari sedekah para donatur.",
+      "Penghimpunan ini dibuka khusus menjelang 9 Dzulhijjah untuk menutup biaya hidangan berbuka mereka. Nominalnya bebas, dan seluruhnya disalurkan sebagai menu berbuka pada hari Arafah.",
+      "Rasulullah bersabda: &quot;Barang siapa memberi makan orang yang berpuasa maka baginya pahala seperti orang yang berpuasa tersebut tanpa mengurangi pahala orang yang berpuasa sedikit pun.&quot; (HR. Tirmidzi)",
+      "Pada 1447 H, buka puasa Arafah bersama para penghafal Al-Qur'an berlangsung di Islamic Center Wadi Mubarak, Bogor, tanggal 27 Mei 2026. Tanggal pelaksanaan tahun berikutnya diumumkan tim amil menjelang Dzulhijjah.",
+    ],
+  },
   {
     slug: "orang-tua-asuh",
     judul: "Orang Tua Asuh Santri Penghafal Al-Qur'an",
@@ -87,6 +107,23 @@ const daftar: DonasiInput[] = [
     ],
   },
   {
+    slug: "gempa-ntt",
+    judul: "Bantu Korban Gempa NTT",
+    ringkasan:
+      "Donasi bencana alam lewat LAZIS SaQu Wadi Mubarak untuk hunian darurat dan layanan kesehatan penyintas gempa di Nusa Tenggara Timur.",
+    jenis: "sedekah",
+    gambar: poster("gempa-ntt"),
+    satuan_biaya: "Nominal bebas",
+    penerima_manfaat: "Penyintas gempa di Nusa Tenggara Timur",
+    batas_waktu: null,
+    mendesak: true,
+    konten: [
+      "Nabi shallallahu 'alaihi wasallam bersabda: &quot;Barangsiapa yang meringankan (menghilangkan) kesulitan seorang muslim dari kesulitan-kesulitan duniawi, maka Allah akan meringankan (menghilangkan) baginya kesulitan di akhirat kelak…&quot; (HR. Tirmidzi No. 1853)",
+      "Dana yang terkumpul diarahkan pada dua kebutuhan yang paling mendesak setelah guncangan: tempat berteduh sementara bagi keluarga yang rumahnya rusak, dan layanan kesehatan bagi korban luka.",
+      "Penyaluran dikerjakan tim amil LAZIS SaQu Wadi Mubarak. Perkembangan penyalurannya dapat ditanyakan lewat WhatsApp LAZIS.",
+    ],
+  },
+  {
     slug: "buka-puasa-penghafal-quran",
     judul: "Buka Puasa Penghafal Al-Qur'an",
     ringkasan:
@@ -100,7 +137,7 @@ const daftar: DonasiInput[] = [
     konten: [
       "Mari menjadi bagian dari keberkahan buka puasa para penghafal Al-Qur'an.",
       "Rasulullah bersabda: &quot;Barang siapa memberi makan orang yang berpuasa maka baginya pahala seperti orang yang berpuasa tersebut tanpa mengurangi pahala orang yang berpuasa sedikit pun.&quot; (HR. Tirmidzi)",
-      "Program ini berjalan sepanjang tahun, mengikuti puasa sunnah harian santri, dan menguat pada bulan Ramadan.",
+      "Program ini berjalan sepanjang tahun, mengikuti puasa sunnah harian santri, dan menguat pada bulan Ramadan. Khusus puasa Arafah, penghimpunannya dibuka tersendiri menjelang Dzulhijjah.",
     ],
   },
   {
@@ -109,7 +146,7 @@ const daftar: DonasiInput[] = [
     ringkasan:
       "Penyaluran hewan qurban melalui LAZIS SaQu Wadi Mubarak untuk santri dan masyarakat sekitar kampus.",
     jenis: "sedekah",
-    gambar: sementara(4),
+    gambar: foto("hewan-qurban", 1200, 675),
     satuan_biaya: "Sesuai harga hewan yang berlaku",
     penerima_manfaat: "Santri dan masyarakat sekitar kampus",
     batas_waktu: null,
@@ -126,7 +163,7 @@ const daftar: DonasiInput[] = [
     ringkasan:
       "Wakaf pembangunan dan pelengkapan sarana belajar serta asrama di lingkungan Islamic Center Wadi Mubarak.",
     jenis: "wakaf",
-    gambar: sementara(2),
+    gambar: foto("pembangunan", 1280, 960),
     satuan_biaya: "Nominal bebas",
     penerima_manfaat: "Santri seluruh unit",
     batas_waktu: null,
@@ -143,14 +180,14 @@ const daftar: DonasiInput[] = [
     ringkasan:
       "Pendampingan penghitungan zakat maal, penghasilan, dan fitrah, lalu penyalurannya lewat LAZIS SaQu Wadi Mubarak.",
     jenis: "zakat",
-    gambar: sementara(5),
+    gambar: { src: "/img/donasi-5.svg", width: 1200, height: 800 },
     satuan_biaya: "Sesuai perhitungan zakat Anda",
     penerima_manfaat: "Delapan asnaf penerima zakat",
     batas_waktu: null,
     mendesak: false,
     konten: [
       "Belum yakin berapa zakat yang wajib Anda tunaikan? Tim amil LAZIS SaQu Wadi Mubarak membantu menghitung zakat maal, zakat penghasilan, dan zakat fitrah.",
-      "Setelah nominalnya jelas, penyaluran dilakukan lewat rekening resmi LAZIS dan dicatat atas nama Anda.",
+      "Setelah nominalnya jelas, penyaluran dilakukan lewat rekening lembaga dan dicatat atas nama Anda.",
       "Konsultasi dilayani lewat WhatsApp LAZIS pada jam kerja tim amil.",
     ],
   },

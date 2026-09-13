@@ -30,10 +30,6 @@ const perjalanan = [
     isi: "Islamic Center Wadi Mubarak berdiri pada 3 Februari 2008 di Megamendung, Bogor, didirikan oleh Roid Kadir, Awang Djohan, dan KH. Dr. Didik Hariyanto.",
   },
   {
-    tahun: "2021",
-    isi: "LAZIS Wadi Mubarak memperoleh izin resmi dari Kementerian Agama RI.",
-  },
-  {
     tahun: "2025",
     isi: "Ma'had Tahfizh Intensif Imtiaz Putri membuka tahun ajaran pertamanya bagi lulusan SMA sederajat.",
   },
@@ -57,7 +53,7 @@ export default function HalamanTentang() {
         jejak={[{ label: "Tentang", href: "/tentang" }]}
         atas="Profil yayasan"
         judul="Delapan belas tahun menemani santri dan keluarganya"
-        keterangan="Berdiri di Megamendung pada 3 Februari 2008, hari ini Islamic Center Wadi Mubarak menaungi sebelas unit pendidikan — dari tahfizh anak usia dini sampai perguruan tinggi — empat jalur kaderisasi guru Al-Qur'an, jaringan 197 sekolah Sahabat Al-Qur'an di 27 provinsi, dan sebuah lembaga amil zakat berizin resmi."
+        keterangan="Berdiri di Megamendung pada 3 Februari 2008, hari ini Islamic Center Wadi Mubarak menaungi sebelas unit pendidikan — dari tahfizh anak usia dini sampai perguruan tinggi — empat jalur kaderisasi guru Al-Qur'an, jaringan 197 sekolah Sahabat Al-Qur'an di 27 provinsi, dan sebuah lembaga amil zakat, infak, sedekah, serta wakaf."
       />
 
       <Section className="py-12 md:py-16">
@@ -181,7 +177,7 @@ export default function HalamanTentang() {
         <div className="container-page">
           <ul className="grid gap-4 md:grid-cols-3">
             {[
-              { judul: "Donasi", isi: "Zakat, infak, sedekah, dan wakaf lewat LAZIS berizin resmi.", href: "/donasi" },
+              { judul: "Donasi", isi: "Zakat, infak, sedekah, dan wakaf lewat LAZIS SaQu Wadi Mubarak.", href: "/donasi" },
               { judul: "Unit pendidikan", isi: "Sebelas unit dari tahfizh anak usia dini sampai perguruan tinggi.", href: "/program" },
               { judul: "Program Al-Qur'an untuk umum", isi: "Graha Qur'an daring dan short camp Wisata Qur'an.", href: "/program-quran" },
             ].map((t) => (

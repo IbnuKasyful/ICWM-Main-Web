@@ -28,14 +28,14 @@ export function AjakanDonasi({ sorot }: { sorot: ProgramDonasi | undefined }) {
           <div className="relative grid gap-10 p-8 md:p-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-center lg:p-16">
             <div>
               <h2 className="max-w-xl font-display text-display-md text-balance text-white md:text-display-lg">
-                Titipkan zakat Anda pada lembaga amil yang{" "}
-                <span className="text-accent-300">berizin resmi</span>
+                Titipkan zakat Anda pada tim amil yang{" "}
+                <span className="text-accent-300">Anda kenal jejaknya</span>
               </h2>
 
               <p className="mt-4 max-w-lg text-base leading-relaxed text-pretty text-white/70">
                 {site.lazis.nama} menyalurkan zakat, infak, sedekah, dan wakaf untuk beasiswa santri
                 yatim, pembangunan asrama, dan kelas Al-Qur&apos;an gratis untuk masyarakat. Setiap
-                program punya target, progres, dan penerima manfaat yang diverifikasi.
+                program menyebut peruntukan, satuan biaya, dan penerima manfaatnya.
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
