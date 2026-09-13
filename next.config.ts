@@ -39,7 +39,18 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [
+      { source: "/:path*", headers: securityHeaders },
+      /* Pratinjau di *.workers.dev tidak boleh dirayapi mesin pencari. robots.txt
+         sudah menolak lewat `modePratinjau`, tapi itu bergantung pada variabel
+         lingkungan saat build; header ini mengikat larangannya ke host, jadi
+         tetap berlaku walau variabel itu terlupa. Domain produksi tidak kena. */
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "(?<sub>.*)\\.workers\\.dev" }],
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+    ];
   },
 };
 
