@@ -12,7 +12,7 @@ import type { GaleriItem } from "@/lib/schemas";
  * di bawah kolase, di dalam bagian yang sudah luntur ke putih, sehingga tidak
  * perlu tirai gelap atau kotak putih di belakang teks.
  *
- * Foto di sini DEKORATIF (`alt=""`): semuanya muncul kembali di korsel bawah
+ * Foto di sini DEKORATIF (`alt=""`): semuanya muncul kembali di kisi bawah
  * lengkap dengan keterangannya, jadi mengumumkan dua kali hanya membuat
  * pembaca layar membacakan daftar yang sama berturut-turut.
  *

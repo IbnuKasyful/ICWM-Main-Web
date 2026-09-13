@@ -1,4 +1,4 @@
-import { KaruselGaleri } from "@/components/galeri/KaruselGaleri";
+import { GridGaleri } from "@/components/galeri/GridGaleri";
 import { KolaseGaleri } from "@/components/galeri/KolaseGaleri";
 import { PageHeader } from "@/components/site/PageHeader";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -47,7 +47,7 @@ export default function HalamanGaleri() {
   return (
     <>
       <KolaseGaleri galeri={galeri} />
-      <KaruselGaleri galeri={galeri} />
+      <GridGaleri galeri={galeri} />
     </>
   );
 }
