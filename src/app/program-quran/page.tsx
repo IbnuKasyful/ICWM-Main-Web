@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { PosterProgram } from "@/components/program/PosterProgram";
 import { PageHeader } from "@/components/site/PageHeader";
 import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
@@ -76,40 +77,41 @@ export default function HalamanProgramQuran() {
                 key={p.slug}
                 className="flex flex-col rounded-[28px] bg-white p-2 shadow-card"
               >
-                {/* Panel gambar bertumpuk teks — latar masih placeholder sampai
-                    fotonya siap. */}
-                <div className="relative flex aspect-[4/5] flex-col justify-end overflow-hidden rounded-[22px] bg-gradient-to-br from-mist-200 to-mist-400">
-                  {/* Tombol suka dekoratif di pojok, mengikuti referensi. */}
-                  <span
-                    aria-hidden="true"
-                    className="absolute top-3 right-3 inline-flex size-9 items-center justify-center rounded-full bg-white/25 text-white ring-1 ring-inset ring-white/40 backdrop-blur-sm"
-                  >
-                    <Icon nama="hati" className="size-4" tebal={2} />
-                  </span>
+                <PosterProgram gambar={p.gambar} nama={p.nama} />
 
-                  {/* Kerudung gelap di bawah supaya teks putih tetap terbaca
-                      begitu foto asli dipasang. */}
-                  <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-ink/75 via-ink/25 to-transparent" />
-
-                  <div className="relative p-4">
-                    <h2 className="font-display text-display-sm text-white">{p.nama}</h2>
-                    <p className="mt-0.5 text-sm text-white/70">
-                      {labelPenyelenggaraan[p.penyelenggaraan]}
-                    </p>
-                    <div className="mt-3 flex items-center gap-2 text-sm font-medium text-white/90">
-                      <Icon nama="jam" className="size-4 text-white/70" />
+                {/* Judul di bawah poster, bukan di atasnya: poster sudah penuh
+                    tulisan, dan teks yang ditumpuk hanya akan menutupinya. */}
+                <div className="px-3 pt-4 pb-1">
+                  <h2 className="font-display text-display-sm text-ink">{p.nama}</h2>
+                  <div className="mt-1.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-ink-muted">
+                    <span>{labelPenyelenggaraan[p.penyelenggaraan]}</span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <Icon nama="jam" className="size-4 text-ink-subtle" />
                       {p.durasi}
-                    </div>
+                    </span>
                   </div>
                 </div>
 
-                <a
-                  href={`#${p.slug}`}
-                  className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-full bg-ink px-5 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-ink/90"
-                >
-                  Baca rinciannya
-                  <Icon nama="panahBawah" className="size-3.5" tebal={2.2} />
-                </a>
+                <div className="mt-auto flex gap-2 pt-3">
+                  <a
+                    href={`#${p.slug}`}
+                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-ink px-5 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-ink/90"
+                  >
+                    Baca rinciannya
+                    <Icon nama="panahBawah" className="size-3.5" tebal={2.2} />
+                  </a>
+                  {p.instagram ? (
+                    <a
+                      href={p.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Instagram ${p.nama} (tab baru)`}
+                      className="inline-flex size-[3.25rem] shrink-0 items-center justify-center rounded-full border border-line-strong text-ink transition-colors hover:border-ink/45 hover:bg-mist-100"
+                    >
+                      <Icon nama="instagram" className="size-5" />
+                    </a>
+                  ) : null}
+                </div>
               </li>
             ))}
           </ul>
@@ -326,8 +328,8 @@ export default function HalamanProgramQuran() {
                     </ButtonLink>
                     {p.instagram ? (
                       <ButtonLink href={p.instagram} eksternal varian="garis">
-                        Instagram program
-                        <Icon nama="keluar" className="size-4" />
+                        <Icon nama="instagram" className="size-4" />
+                        Instagram {p.nama_pendek}
                       </ButtonLink>
                     ) : null}
                   </div>

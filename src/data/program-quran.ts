@@ -22,10 +22,10 @@ export const programQuranMentah: unknown[] = [
     peserta: "Umum, segala usia; kelas putra dan putri terpisah",
     warna_aksen: "#0e7490",
     gambar: {
-      src: "/img/galeri-dauroh-tadabur.jpg",
-      alt: "Peserta menyimak kajian tadabur Al-Qur'an di kampus Wadi Mubarak",
-      width: 1280,
-      height: 720,
+      src: "/img/program-graha-quran.jpg",
+      alt: "Poster varian kelas Graha Qur'an: Tahsin Dasar (At-Tibyan juz 1 dan 2), Tahsin Lanjutan (talaqqi juz 30), Matan Tuhfatul Athfal, Matan Jazariyyah, dan Tahfizh",
+      width: 1170,
+      height: 1463,
     },
     untuk_siapa: [
       "Anda yang ingin belajar tahsin tetapi tidak memungkinkan tinggal di asrama",
@@ -90,7 +90,7 @@ export const programQuranMentah: unknown[] = [
       "Mulai belajar sesuai slot waktu yang dipilih",
     ],
     kontak_wa: "6285219808250",
-    instagram: "https://instagram.com/grahaquran_wm",
+    instagram: "https://www.instagram.com/grahaquran.wm",
   },
   {
     slug: "wisata-quran",
@@ -103,10 +103,10 @@ export const programQuranMentah: unknown[] = [
     peserta: "Pelajar SD kelas 4–6, SMP, SMA, serta karyawan instansi pemerintah dan swasta",
     warna_aksen: "#b45309",
     gambar: {
-      src: "/img/galeri-dauroh-fikih.jpg",
-      alt: "Peserta dauroh menyimak kajian di masjid kampus Wadi Mubarak",
-      width: 1200,
-      height: 675,
+      src: "/img/program-wisata-quran.jpg",
+      alt: "Poster Wisata Qur'an: pesantren kilat lansia dan orang tua bernuansa Puncak Bogor, program tiga hari dua malam",
+      width: 1170,
+      height: 1561,
     },
     untuk_siapa: [
       "Sekolah yang mencari kegiatan liburan berisi, bukan sekadar rekreasi",
@@ -165,6 +165,6 @@ export const programQuranMentah: unknown[] = [
       "Kedatangan rombongan di kampus Megamendung",
     ],
     kontak_wa: "6281111882022",
-    instagram: null,
+    instagram: "https://www.instagram.com/_wisataquran/",
   },
 ];
