@@ -9,7 +9,7 @@ import {
   saringPosts,
   type FilterInformasi,
 } from "@/lib/content";
-import { categorySchema, lokasiSchema } from "@/lib/schemas";
+import { categorySchema } from "@/lib/schemas";
 import { buatMetadata } from "@/lib/seo";
 
 /** PRD §8 — ISR 5 menit. */
@@ -20,7 +20,7 @@ const PER_HALAMAN = 6;
 export const metadata = buatMetadata({
   judul: "Berita, pengumuman, dan artikel",
   deskripsi:
-    "Arsip berita, pengumuman, prestasi, dan catatan pengajar dari seluruh unit Islamic Center Wadi Mubarak. Dapat disaring per kategori, unit, lokasi, dan tahun.",
+    "Arsip berita, pengumuman, prestasi, dan catatan pengajar dari seluruh unit Islamic Center Wadi Mubarak. Dapat disaring per kategori, unit, dan tahun.",
   path: "/informasi",
 });
 
@@ -36,7 +36,6 @@ export default async function HalamanInformasi({ searchParams }: { searchParams:
   const mentah: NilaiFilter = {
     category: satu(sp["category"]),
     unit: satu(sp["unit"]),
-    lokasi: satu(sp["lokasi"]),
     tahun: satu(sp["tahun"]),
   };
 
@@ -45,13 +44,11 @@ export default async function HalamanInformasi({ searchParams }: { searchParams:
 
   // Nilai dari URL tidak dipercaya begitu saja: divalidasi dulu terhadap skema.
   const kategoriValid = categorySchema.safeParse(mentah.category);
-  const lokasiValid = lokasiSchema.safeParse(mentah.lokasi);
   const tahunAngka = mentah.tahun ? Number(mentah.tahun) : undefined;
 
   const filter: FilterInformasi = {
     category: kategoriValid.success ? kategoriValid.data : undefined,
     unit: units.some((u) => u.slug === mentah.unit) ? mentah.unit : undefined,
-    lokasi: lokasiValid.success ? lokasiValid.data : undefined,
     tahun: tahunAngka && tahunTersedia.includes(tahunAngka) ? tahunAngka : undefined,
   };
 
@@ -67,7 +64,6 @@ export default async function HalamanInformasi({ searchParams }: { searchParams:
   const nilaiBersih: NilaiFilter = {
     category: filter.category,
     unit: filter.unit,
-    lokasi: filter.lokasi,
     tahun: filter.tahun ? String(filter.tahun) : undefined,
   };
 

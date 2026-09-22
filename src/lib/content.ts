@@ -30,7 +30,6 @@ import {
   type Category,
   type Faq,
   type ImageData,
-  type Lokasi,
   type Post,
   type ProgramDonasi,
   type ProgramQuran,
@@ -173,7 +172,6 @@ export async function getSlugPostInduk(): Promise<string[]> {
 export type FilterInformasi = {
   category?: Category | undefined;
   unit?: string | undefined;
-  lokasi?: Lokasi | undefined;
   tahun?: number | undefined;
 };
 
@@ -181,7 +179,6 @@ export async function saringPosts(filter: FilterInformasi): Promise<readonly Pos
   return (await getPostsInduk()).filter((p) => {
     if (filter.category && p.category !== filter.category) return false;
     if (filter.unit && !p.unit.includes(filter.unit)) return false;
-    if (filter.lokasi && p.lokasi !== filter.lokasi) return false;
     if (filter.tahun && Number(p.tanggal.slice(0, 4)) !== filter.tahun) return false;
     return true;
   });

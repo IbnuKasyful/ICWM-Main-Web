@@ -1,14 +1,13 @@
 import Link from "next/link";
 
 import { Icon } from "@/components/ui/Icon";
-import { labelCategory, labelLokasi } from "@/lib/format";
-import type { Category, Lokasi, Unit } from "@/lib/schemas";
+import { labelCategory } from "@/lib/format";
+import type { Category, Unit } from "@/lib/schemas";
 import { cn } from "@/lib/cn";
 
 export type NilaiFilter = {
   category?: string | undefined;
   unit?: string | undefined;
-  lokasi?: string | undefined;
   tahun?: string | undefined;
 };
 
@@ -21,8 +20,6 @@ const kategoriOpsi: Category[] = [
   "kerja-sama",
   "laporan",
 ];
-
-const lokasiOpsi: Lokasi[] = ["bogor", "sleman"];
 
 /**
  * PRD §9.6 — penyaring tercermin di URL dan dapat dibagikan.
@@ -68,11 +65,6 @@ export function FilterBar({
       kunci: "unit",
       judul: "Unit",
       opsi: units.map((u) => ({ nilai: u.slug, label: u.nama_pendek })),
-    },
-    {
-      kunci: "lokasi",
-      judul: "Lokasi",
-      opsi: lokasiOpsi.map((l) => ({ nilai: l, label: labelLokasi[l] })),
     },
     {
       kunci: "tahun",
