@@ -4,7 +4,7 @@ import { z } from "zod";
 import { site } from "@/lib/site";
 
 /**
- * Penerima formulir kontak — PRD §6 & §15.
+ * Penerima formulir kontak, PRD §6 & §15.
  *
  * Honeypot + pembatasan laju berbasis IP, tanpa CAPTCHA. Pengiriman surel
  * memakai REST API Resend lewat `fetch` sehingga tidak menambah dependensi
@@ -31,7 +31,7 @@ const skemaPesan = z.object({
  * Pembatas laju sederhana di memori proses.
  *
  * Cukup untuk meredam pengiriman berulang dari satu IP. Bila situs berjalan di
- * banyak instans, ganti dengan penyimpanan bersama — catatan ini sengaja
+ * banyak instans, ganti dengan penyimpanan bersama, catatan ini sengaja
  * ditinggalkan agar keputusannya tidak hilang.
  */
 const jejakIp = new Map<string, { jumlah: number; sejak: number }>();
@@ -100,7 +100,8 @@ export async function POST(request: Request) {
   }
 
   const kunciResend = process.env["RESEND_API_KEY"];
-  const tujuan = process.env["KONTAK_EMAIL_TUJUAN"] ?? site.kontak.email;
+  // Seluruh pesan formulir masuk ke surel PSB pusat.
+  const tujuan = site.kontak.email;
   const pengirim = process.env["KONTAK_EMAIL_PENGIRIM"];
 
   // Tanpa kredensial (mis. saat pengembangan front-end), pesan dicatat di server
@@ -113,7 +114,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       ok: true,
       pesan:
-        "Pesan Anda tercatat. Layanan surel otomatis belum aktif pada tahap ini — untuk hal mendesak, silakan hubungi kami lewat WhatsApp.",
+        "Pesan Anda tercatat. Layanan surel otomatis belum aktif pada tahap ini, untuk hal mendesak, silakan hubungi kami lewat WhatsApp.",
     });
   }
 

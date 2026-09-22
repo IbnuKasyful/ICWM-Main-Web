@@ -8,16 +8,16 @@
 /**
  * Mode pratinjau.
  *
- * Selama seluruh isi situs masih berupa data contoh — termasuk nomor rekening —
+ * Selama seluruh isi situs masih berupa data contoh, termasuk nomor rekening,
  * penayangan publik ditutup dari perayap mesin pencari (`src/app/robots.ts`
  * dan metadata `robots` pada layout).
  *
- * Matikan dengan menghapus `NEXT_PUBLIC_MODE_PRATINJAU` dari environment —
+ * Matikan dengan menghapus `NEXT_PUBLIC_MODE_PRATINJAU` dari environment,
  * lakukan hanya setelah data Tier 1 pada audit diganti dengan data resmi.
  */
 export const modePratinjau = process.env["NEXT_PUBLIC_MODE_PRATINJAU"] === "1";
 
-/** Saluran siaran WhatsApp yayasan — sekali arah, hanya untuk pengumuman. */
+/** Saluran siaran WhatsApp yayasan, sekali arah, hanya untuk pengumuman. */
 const saluranWhatsapp = "https://whatsapp.com/channel/0029VaACJZ6CcW4yfooIxy0G";
 
 export const site = {
@@ -54,9 +54,9 @@ export const site = {
   },
   sosial: [
     { label: "Saluran WhatsApp", href: saluranWhatsapp },
-    { label: "Instagram", href: "https://instagram.com/ic_wadimubarak" },
-    { label: "YouTube", href: "https://youtube.com/@ic_wadimubarak" },
-    { label: "Facebook", href: "https://facebook.com/ic.wadimubarak" },
+    { label: "Instagram", href: "https://www.instagram.com/wadimubarak_official" },
+    { label: "YouTube", href: "https://www.youtube.com/@islamiccenterwadimubarak" },
+    { label: "Facebook", href: "https://www.facebook.com/share/1F4Bh4EZKB/" },
   ],
 } as const;
 
@@ -129,7 +129,7 @@ export const navUtama: NavGrup[] = [
   { label: "Kontak", href: "/kontak" },
 ];
 
-/** Navigasi footer, dikelompokkan (PRD §5.4 — dipakai ulang di Fase 2). */
+/** Navigasi footer, dikelompokkan (PRD §5.4, dipakai ulang di Fase 2). */
 export const navFooter: { judul: string; tautan: NavItem[] }[] = [
   {
     judul: "Pendidikan",
@@ -160,7 +160,6 @@ export const navFooter: { judul: string; tautan: NavItem[] }[] = [
     judul: "Bantuan",
     tautan: [
       { label: "Kontak", href: "/kontak" },
-      { label: "Cari", href: "/cari" },
       { label: "Berita & artikel", href: "/informasi" },
     ],
   },
@@ -173,7 +172,7 @@ export const navKepatuhan: NavItem[] = [
 ];
 
 /**
- * PRD §5.3 — lima pintu router niat di beranda.
+ * PRD §5.3, lima pintu router niat di beranda.
  *
  * `gambar` dan `ringkas` dipakai sisi depan kartu (foto + label kaca), sedangkan
  * `deskripsi` dan `aksi` muncul di sisi belakang saat kartu dibalik. Kelima
@@ -183,7 +182,7 @@ export const routerNiat = [
   {
     label: "Menyekolahkan anak",
     ringkas: "TAUD, MIT, MTs, MA, MBS, STIU",
-    deskripsi: "Bandingkan sebelas unit berdasarkan jenjang, gender, model belajar, dan lokasi — termasuk jaringan TAUD dan MIT di 27 provinsi.",
+    deskripsi: "Bandingkan sebelas unit berdasarkan jenjang, gender, model belajar, dan lokasi, termasuk jaringan TAUD dan MIT di 27 provinsi.",
     href: "/program",
     aksi: "Cari unit yang cocok",
     ikon: "sekolah",

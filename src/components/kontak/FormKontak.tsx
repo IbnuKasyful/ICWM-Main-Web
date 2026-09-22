@@ -2,13 +2,15 @@
 
 import { useState, type FormEvent } from "react";
 
-import { Button } from "@/components/ui/Button";
+import { Button, ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { cn } from "@/lib/cn";
+import { tautanWhatsApp } from "@/lib/format";
+import { site } from "@/lib/site";
 
 /**
- * PRD §14 — setiap ruas punya label yang terhubung dan pesan galat yang jelas.
- * PRD §15 — honeypot; pembatasan laju ditangani di route handler.
+ * PRD §14, setiap ruas punya label yang terhubung dan pesan galat yang jelas.
+ * PRD §15, honeypot; pembatasan laju ditangani di route handler.
  */
 
 const keperluanOpsi = [
@@ -22,12 +24,29 @@ const keperluanOpsi = [
 
 type Keadaan = "diam" | "mengirim" | "berhasil" | "galat";
 
+/**
+ * Ringkasan isian untuk tombol konfirmasi WhatsApp ke PSB pusat. Dirakit
+ * sebelum formulir dikosongkan, supaya pengunjung tidak perlu mengetik ulang.
+ */
+function pesanKonfirmasi(data: Record<string, FormDataEntryValue>): string {
+  const keperluan =
+    keperluanOpsi.find((o) => o.nilai === data["keperluan"])?.label ?? String(data["keperluan"] ?? "");
+  return [
+    "Assalamu'alaikum. Saya baru saja mengirim pesan lewat formulir kontak situs Wadi Mubarak.",
+    "",
+    `Nama: ${String(data["nama"] ?? "")}`,
+    `Keperluan: ${keperluan}`,
+    `Pesan: ${String(data["pesan"] ?? "")}`,
+  ].join("\n");
+}
+
 const kelasRuas =
   "w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink placeholder:text-ink-subtle transition-colors focus:border-brand-400";
 
 export function FormKontak({ keperluanAwal = "ppdb" }: { keperluanAwal?: string }) {
   const [keadaan, setKeadaan] = useState<Keadaan>("diam");
   const [pesanBalasan, setPesanBalasan] = useState("");
+  const [tautanKonfirmasi, setTautanKonfirmasi] = useState<string | null>(null);
 
   async function kirim(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -36,6 +55,7 @@ export function FormKontak({ keperluanAwal = "ppdb" }: { keperluanAwal?: string 
 
     setKeadaan("mengirim");
     setPesanBalasan("");
+    setTautanKonfirmasi(null);
 
     try {
       const tanggapan = await fetch("/api/kontak", {
@@ -52,6 +72,7 @@ export function FormKontak({ keperluanAwal = "ppdb" }: { keperluanAwal?: string 
       if (tanggapan.ok) {
         setKeadaan("berhasil");
         setPesanBalasan(pesan || "Pesan Anda terkirim.");
+        setTautanKonfirmasi(tautanWhatsApp(site.kontak.whatsapp, pesanKonfirmasi(data)));
         form.reset();
       } else {
         setKeadaan("galat");
@@ -67,7 +88,7 @@ export function FormKontak({ keperluanAwal = "ppdb" }: { keperluanAwal?: string 
 
   return (
     <form onSubmit={kirim} className="flex flex-col gap-5" noValidate={false}>
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="nama" className="mb-1.5 block text-sm font-semibold text-ink">
             Nama lengkap <span className="text-danger">*</span>
@@ -153,7 +174,7 @@ export function FormKontak({ keperluanAwal = "ppdb" }: { keperluanAwal?: string 
         <p className="mt-1.5 text-xs text-ink-subtle">Minimal 20 karakter.</p>
       </div>
 
-      {/* Honeypot — disembunyikan dari manusia dan dari pembaca layar. */}
+      {/* Honeypot, disembunyikan dari manusia dan dari pembaca layar. */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label htmlFor="website">Jangan diisi</label>
         <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
@@ -168,7 +189,7 @@ export function FormKontak({ keperluanAwal = "ppdb" }: { keperluanAwal?: string 
         </p>
       </div>
 
-      {/* Pesan hasil — selalu diumumkan ke teknologi bantu. */}
+      {/* Pesan hasil, selalu diumumkan ke teknologi bantu. */}
       <p
         role="status"
         aria-live="polite"
@@ -190,6 +211,18 @@ export function FormKontak({ keperluanAwal = "ppdb" }: { keperluanAwal?: string 
           </span>
         ) : null}
       </p>
+
+      {tautanKonfirmasi ? (
+        <div className="flex flex-col gap-3 rounded-xl border border-line bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-ink-muted">
+            Agar lebih cepat ditanggapi, konfirmasikan pesan Anda ke WhatsApp PSB pusat.
+          </p>
+          <ButtonLink href={tautanKonfirmasi} eksternal className="shrink-0">
+            <Icon nama="whatsapp" className="size-4" />
+            Konfirmasi via WhatsApp
+          </ButtonLink>
+        </div>
+      ) : null}
     </form>
   );
 }

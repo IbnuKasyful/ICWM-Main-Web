@@ -8,13 +8,13 @@ import { labelLokasi, tautanWhatsApp } from "@/lib/format";
 import { buatMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-/** PRD §8 — SSG. */
+/** PRD §8, SSG. */
 export const dynamic = "force-static";
 
 export const metadata = buatMetadata({
   judul: "Kontak",
   deskripsi:
-    "Alamat, telepon, surel, dan narahubung WhatsApp setiap unit Islamic Center Wadi Mubarak di Bogor dan Sleman.",
+    "Alamat, telepon, surel, dan narahubung WhatsApp setiap unit Islamic Center Wadi Mubarak.",
   path: "/kontak",
 });
 
@@ -63,11 +63,11 @@ export default function HalamanKontak() {
         jejak={[{ label: "Kontak", href: "/kontak" }]}
         atas="Hubungi kami"
         judul="Ada yang ingin ditanyakan?"
-        keterangan="Untuk pertanyaan tentang unit tertentu — terutama PPDB — menghubungi narahubung unit langsung biasanya jauh lebih cepat daripada lewat sekretariat."
+        keterangan="Untuk pertanyaan tentang unit tertentu, terutama PPDB, menghubungi narahubung unit langsung biasanya jauh lebih cepat daripada lewat sekretariat."
       />
 
       <Section className="py-12 md:py-16">
-        <div className="container-page grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-16">
+        <div className="container-page grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-16">
           <div>
             <h2 className="font-display text-display-sm text-ink">Kirim pesan</h2>
             <p className="mt-2 text-sm leading-relaxed text-ink-muted">
@@ -108,11 +108,11 @@ export default function HalamanKontak() {
 
               <ul className="mt-5 flex flex-col gap-2 border-t border-line pt-5">
                 {kanalKhusus.map((k) => (
-                  <li key={k.email} className="flex items-baseline justify-between gap-3 text-sm">
+                  <li key={k.email} className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5 text-sm">
                     <span className="text-ink-subtle">{k.label}</span>
                     <a
                       href={`mailto:${k.email}`}
-                      className="font-medium text-brand-700 underline-offset-4 hover:underline"
+                      className="min-w-0 font-medium [overflow-wrap:anywhere] text-brand-700 underline-offset-4 hover:underline"
                     >
                       {k.email}
                     </a>
@@ -133,14 +133,6 @@ export default function HalamanKontak() {
                     {site.alamat.kodePos}
                   </p>
                 </div>
-                <div className="border-t border-line pt-4">
-                  <p className="text-xs font-semibold tracking-[0.1em] text-ink-subtle uppercase">
-                    Kampus Sleman
-                  </p>
-                  <p className="mt-1 leading-relaxed text-ink">
-                    Jl. Kaliurang KM 12, Ngaglik, Kabupaten Sleman, DI Yogyakarta 55581
-                  </p>
-                </div>
               </address>
             </div>
           </aside>
@@ -155,10 +147,10 @@ export default function HalamanKontak() {
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-muted">
             Untuk pertanyaan PPDB, biaya, atau kehidupan santri, hubungi panitia unit terkait
-            langsung — merekalah yang memegang data paling mutakhir.
+            langsung, merekalah yang memegang data paling mutakhir.
           </p>
 
-          <ul className="mt-8 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-8 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
             {units.map((u) => (
               <li
                 key={u.slug}

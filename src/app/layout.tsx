@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Plus_Jakarta_Sans } from "next/font/google";
 
+import { KontakCepat } from "@/components/site/KontakCepat";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { JsonLd } from "@/components/ui/JsonLd";
@@ -10,14 +11,14 @@ import { modePratinjau, navFooter, navKepatuhan, site } from "@/lib/site";
 
 import "./globals.css";
 
-/* PRD §12 — font dimuat lewat next/font, tanpa permintaan ke pihak ketiga. */
+/* PRD §12, font dimuat lewat next/font, tanpa permintaan ke pihak ketiga. */
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-jakarta",
 });
 
-/* Huruf judul — sumbu lebar (`wdth`) dipakai untuk ragam mampat yang
+/* Huruf judul, sumbu lebar (`wdth`) dipakai untuk ragam mampat yang
    sejalan dengan lockup panjang yayasan; lihat panduan identitas §07. */
 const archivo = Archivo({
   subsets: ["latin"],
@@ -29,7 +30,7 @@ const archivo = Archivo({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.nama} — ${site.tagline}`,
+    default: `${site.nama}: ${site.tagline}`,
     template: `%s · ${site.namaPendek}`,
   },
   description: site.deskripsi,
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
     url: site.url,
   },
   /* Selama mode pratinjau aktif, situs tidak boleh masuk indeks mesin pencari
-     karena isinya masih data contoh — lihat `modePratinjau` di lib/site.ts. */
+     karena isinya masih data contoh, lihat `modePratinjau` di lib/site.ts. */
   robots: modePratinjau
     ? { index: false, follow: false, nocache: true }
     : { index: true, follow: true },
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  /* Biru inti lambang — sewarna kaki halaman (brand-700). */
+  /* Biru inti lambang, sewarna kaki halaman (brand-700). */
   themeColor: "#243c70",
   width: "device-width",
   initialScale: 1,
@@ -60,13 +61,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const units = getUnitsAktif();
 
   return (
-    /* PRD §14 — bahasa dokumen wajib id. */
+    /* PRD §14, bahasa dokumen wajib id. */
     <html lang={site.bahasa} className={`${jakarta.variable} ${archivo.variable}`}>
       <body className="flex min-h-screen flex-col antialiased">
         <JsonLd data={jsonldOrganization()} />
         <JsonLd data={jsonldWebsite()} />
 
-        {/* PRD §14 — tautan "lewati ke konten". */}
+        {/* PRD §14, tautan "lewati ke konten". */}
         <a
           href="#konten"
           className="sr-only rounded-full bg-brand-700 px-5 py-3 text-sm font-semibold text-white focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-[100]"
@@ -92,6 +93,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           kepatuhan={navKepatuhan}
           units={units}
           watermark="WADI MUBARAK"
+        />
+
+        {/* Kontak cepat mengambang, menemani seluruh halaman, bukan hanya
+            halaman kontak: pertanyaan paling sering muncul justru saat
+            pengunjung sedang membaca profil unit atau program donasi. */}
+        <KontakCepat
+          whatsappPsb={site.kontak.whatsapp}
+          whatsappLazis={site.lazis.whatsapp}
+          saluranWhatsapp={site.kontak.saluranWhatsapp}
         />
       </body>
     </html>
