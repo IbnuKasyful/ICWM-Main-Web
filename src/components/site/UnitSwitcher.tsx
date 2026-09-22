@@ -84,7 +84,10 @@ export function UnitSwitcher({
     <details ref={rujukan} className={cn("group relative min-w-0", className)}>
       <summary
         className={cn(
-          "flex min-h-10 min-w-0 cursor-pointer list-none items-center gap-1.5 rounded-full border border-line bg-white px-3 py-2 text-sm font-semibold text-ink transition-colors sm:gap-2 sm:px-3.5",
+          // Di ponsel pil diperkecil (12px, tebal normal, tinggi 32px) supaya
+          // nama unit lebih jarang terpotong di samping logo dan tombol menu.
+          "flex min-h-8 min-w-0 cursor-pointer list-none items-center gap-1 rounded-full border border-line bg-white px-2.5 py-1.5 text-xs font-normal text-ink transition-colors",
+          "sm:min-h-10 sm:gap-2 sm:px-3.5 sm:py-2 sm:text-sm sm:font-semibold",
           "hover:border-brand-300 hover:bg-brand-50 [&::-webkit-details-marker]:hidden",
         )}
         aria-label="Pindah ke situs unit lain"
@@ -109,7 +112,7 @@ export function UnitSwitcher({
         )}
         <Icon
           nama="panahBawah"
-          className="size-4 shrink-0 text-ink-subtle transition-transform group-open:rotate-180"
+          className="size-3.5 shrink-0 text-ink-subtle transition-transform group-open:rotate-180 sm:size-4"
         />
       </summary>
 
