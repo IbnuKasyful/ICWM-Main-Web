@@ -2,7 +2,7 @@ import { CopyButton } from "@/components/ui/CopyButton";
 import { EmptyState } from "@/components/ui/EmptyState";
 import type { Rekening } from "@/lib/schemas";
 
-/** PRD §9.4 — rekening lembaga untuk LAZIS, dengan tautan salin. */
+/** PRD §9.4, rekening lembaga untuk LAZIS, dengan tautan salin. */
 export function DaftarRekening({ rekening }: { rekening: readonly Rekening[] }) {
   if (rekening.length === 0) {
     return (
@@ -15,7 +15,7 @@ export function DaftarRekening({ rekening }: { rekening: readonly Rekening[] }) 
   }
 
   return (
-    <ul className="grid gap-4 sm:grid-cols-2">
+    <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2">
       {rekening.map((r) => (
         <li key={`${r.bank}-${r.nomor}`} className="rounded-2xl border border-line bg-white p-6">
           <h3 className="font-display text-base font-semibold text-ink">{r.bank}</h3>

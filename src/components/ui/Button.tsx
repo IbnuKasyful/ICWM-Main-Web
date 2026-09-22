@@ -18,15 +18,19 @@ const varianKelas: Record<Varian, string> = {
     "bg-white text-brand-900 hover:bg-mist-100 shadow-soft",
 };
 
+/* Tinggi ditulis sebagai `min-h` dan label boleh turun baris: di layar 320px,
+   label panjang seperti "Daftar lewat situs STIU Wadi Mubarak" tidak muat satu
+   baris, dan `nowrap` membuatnya menjebol lebar halaman. Selama muat, tampilan
+   tetap satu baris setinggi semula. */
 const ukuranKelas: Record<Ukuran, string> = {
-  sm: "h-9 px-4 text-sm gap-1.5",
-  md: "h-11 px-5 text-sm gap-2",
-  lg: "h-13 px-7 text-base gap-2.5",
+  sm: "min-h-9 px-4 py-1.5 text-sm gap-1.5",
+  md: "min-h-11 px-5 py-2 text-sm gap-2",
+  lg: "min-h-13 px-6 py-2.5 text-base gap-2.5 sm:px-7",
 };
 
 const dasar =
-  "inline-flex items-center justify-center rounded-full font-semibold transition-colors duration-150 " +
-  "disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap";
+  "inline-flex max-w-full items-center justify-center rounded-full text-center leading-snug font-semibold " +
+  "transition-colors duration-150 disabled:pointer-events-none disabled:opacity-50 text-balance";
 
 type Bersama = {
   varian?: Varian;

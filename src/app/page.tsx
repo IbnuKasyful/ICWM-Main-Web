@@ -18,7 +18,7 @@ import {
 } from "@/lib/content";
 import { angka } from "@/lib/format";
 
-/** PRD §8 — beranda memakai ISR 5 menit. */
+/** PRD §8, beranda memakai ISR 5 menit. */
 export const revalidate = 300;
 
 export default async function Beranda() {
@@ -26,7 +26,7 @@ export default async function Beranda() {
   const capaian = getCapaian();
   const namaUnit = getPetaNamaUnit();
 
-  // PRD §9.1 — TEPAT 6 kartu, tanpa elemen pagination apa pun di beranda.
+  // PRD §9.1, TEPAT 6 kartu, tanpa elemen pagination apa pun di beranda.
   // Keenamnya seragam dan mengisi kisi dua kolom.
   const tulisan = (await getPostsInduk()).slice(0, 6);
   const agenda = getAgendaMendatang(3);
@@ -50,7 +50,7 @@ export default async function Beranda() {
 
       <RouterNiat />
 
-      {/* PRD §9.1 blok 3 — angka capaian */}
+      {/* PRD §9.1 blok 3, angka capaian */}
       <Section className="py-14 md:py-20">
         <div className="container-page">
           <JudulSeksi
@@ -69,7 +69,7 @@ export default async function Beranda() {
 
       <AjakanDonasi sorot={programSorot} />
 
-      {/* PRD §9.1 blok 7 — tepat 6 kartu, lalu tautan "lihat semua" */}
+      {/* PRD §9.1 blok 7, tepat 6 kartu, lalu tautan "lihat semua" */}
       <Section nada="sejuk" className="py-16 md:py-20">
         <div className="container-page">
           <KepalaDaftar
@@ -81,7 +81,7 @@ export default async function Beranda() {
           />
 
           {/* Keenam kartu seragam dalam kisi dua kolom. */}
-          <ul className="mt-12 grid gap-5 lg:grid-cols-2">
+          <ul className="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-2">
             {tulisan.map((post, i) => (
               <PostCardKabar key={post.slug} post={post} prioritas={i < 2} />
             ))}
@@ -89,7 +89,7 @@ export default async function Beranda() {
         </div>
       </Section>
 
-      {/* PRD §9.1 blok 8 — blok TIDAK dirender sama sekali bila agenda kosong */}
+      {/* PRD §9.1 blok 8, blok TIDAK dirender sama sekali bila agenda kosong */}
       {agenda.length > 0 ? (
         <Section className="py-16 md:py-20">
           <div className="container-page">
@@ -100,7 +100,7 @@ export default async function Beranda() {
               tautan="/agenda"
               labelTautan="Semua agenda"
             />
-            <ul className="mt-10 grid gap-4 lg:grid-cols-3">
+            <ul className="mt-10 grid grid-cols-1 gap-4 lg:grid-cols-3">
               {agenda.map((a) => (
                 <AgendaCard
                   key={a.slug}

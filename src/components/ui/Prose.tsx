@@ -6,7 +6,7 @@ import { cn } from "@/lib/cn";
  * Pembungkus konten kaya dari editor WordPress.
  *
  * Gaya ditulis sebagai selector turunan agar HTML dari CMS tetap rapi tanpa
- * plugin typography tambahan (PRD §6 — tanpa dependensi baru).
+ * plugin typography tambahan (PRD §6, tanpa dependensi baru).
  */
 const gaya = [
   "max-w-none text-[1.0625rem] leading-[1.75] text-ink-muted",
@@ -19,7 +19,13 @@ const gaya = [
   "[&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5",
   "[&_li]:mt-2 [&_li]:marker:text-brand-400",
   "[&_blockquote]:border-l-2 [&_blockquote]:border-accent-300 [&_blockquote]:pl-5 [&_blockquote]:font-display [&_blockquote]:text-lg [&_blockquote]:text-ink [&_blockquote]:italic",
-  "[&_img]:rounded-xl",
+  // HTML dari CMS tidak bisa dijamin ramah layar sempit: tautan mentah yang
+  // panjang, gambar dengan atribut lebar tetap, tabel, dan sematan video
+  // semuanya sanggup menjebol lebar halaman di ponsel.
+  "break-words [&_a]:[overflow-wrap:anywhere]",
+  "[&_img]:rounded-xl [&_img]:h-auto [&_img]:max-w-full",
+  "[&_figure]:max-w-full [&_iframe]:max-w-full [&_video]:max-w-full [&_video]:h-auto [&_pre]:overflow-x-auto",
+  "[&_table]:block [&_table]:max-w-full [&_table]:overflow-x-auto",
   "[&_hr]:my-10 [&_hr]:border-line",
 ].join(" ");
 

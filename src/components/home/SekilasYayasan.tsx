@@ -9,12 +9,12 @@ const penanda = [
   { ikon: "centang", teks: "LAZIS SaQu menghimpun zakat, infak, sedekah, dan wakaf" },
 ] as const;
 
-/** PRD §9.1 blok 4 — dua paragraf ringkas + tautan ke /tentang. */
+/** PRD §9.1 blok 4, dua paragraf ringkas + tautan ke /tentang. */
 export function SekilasYayasan() {
   return (
     <Section>
       <div className="container-page">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <span className="inline-flex items-center rounded-full border border-accent-200 bg-accent-50 px-3 py-1 text-xs font-semibold tracking-[0.14em] text-accent-700 uppercase">
               Sekilas yayasan
@@ -38,7 +38,7 @@ export function SekilasYayasan() {
               <p>
                 Yang tidak berubah sejak awal adalah cara kami bekerja: kelompok belajar dibatasi
                 supaya setiap santri disimak namanya, dan pembinaan berjalan dengan standar yang
-                sama di setiap unit — dari tahfizh anak usia dini hingga perguruan tinggi.
+                sama di setiap unit, dari tahfizh anak usia dini hingga perguruan tinggi.
               </p>
             </div>
 
@@ -61,7 +61,7 @@ export function SekilasYayasan() {
             </div>
           </div>
 
-          {/* Dinding foto berjalan — ditaruh di kanan agar teks tetap yang
+          {/* Dinding foto berjalan, ditaruh di kanan agar teks tetap yang
               pertama dibaca, baik pada satu kolom maupun dua kolom. */}
           <div className="relative">
             <BentoBerjalan />

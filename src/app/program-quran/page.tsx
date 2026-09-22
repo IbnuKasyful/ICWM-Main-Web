@@ -10,13 +10,13 @@ import { getProgramQuran } from "@/lib/content";
 import { tautanWhatsApp } from "@/lib/format";
 import { buatMetadata } from "@/lib/seo";
 
-/** PRD §8 — SSG. */
+/** PRD §8, SSG. */
 export const dynamic = "force-static";
 
 export const metadata = buatMetadata({
   judul: "Program Al-Qur'an untuk umum",
   deskripsi:
-    "Graha Qur'an dan Wisata Qur'an — dua program Al-Qur'an Islamic Center Wadi Mubarak yang terbuka untuk masyarakat umum, tanpa harus menjadi santri.",
+    "Graha Qur'an dan Wisata Qur'an, dua program Al-Qur'an Islamic Center Wadi Mubarak yang terbuka untuk masyarakat umum, tanpa harus menjadi santri.",
   path: "/program-quran",
   gambar: "/img/galeri-dauroh-tadabur.jpg",
 });
@@ -29,7 +29,7 @@ const labelPenyelenggaraan = {
 /**
  * Latar ornamen untuk kartu berlatar terang di halaman ini, supaya bidang
  * putihnya tidak terasa kosong. Teksel `ornamen-islami` diredupkan dari pojok
- * kiri atas — padat di sudut kanan bawah yang memang lapang, hilang di sekitar
+ * kiri atas, padat di sudut kanan bawah yang memang lapang, hilang di sekitar
  * judul agar tidak mengganggu keterbacaan.
  *
  * Pemanggil wajib punya `relative isolate` (atau posisi lain) dan sudut
@@ -64,14 +64,14 @@ export default function HalamanProgramQuran() {
         ]}
         atas="Terbuka untuk umum"
         judul="Belajar Al-Qur'an di Wadi Mubarak tanpa harus mondok"
-        keterangan="Tidak semua orang bisa menempuh jenjang bertahun-tahun di asrama. Dua program berikut dibuka untuk siapa saja — satu berjalan daring dari mana pun Anda berada, satu lagi berupa camp singkat di kampus Megamendung."
+        keterangan="Tidak semua orang bisa menempuh jenjang bertahun-tahun di asrama. Dua program berikut dibuka untuk siapa saja, satu berjalan daring dari mana pun Anda berada, satu lagi berupa camp singkat di kampus Megamendung."
       />
 
       {/* Ringkasan dua program berdampingan, supaya pengunjung bisa memilih
           sebelum membaca rinciannya. */}
       <Section className="py-12 md:py-16">
         <div className="container-page">
-          <ul className="grid gap-5 sm:mx-auto sm:max-w-3xl md:max-w-none md:grid-cols-2">
+          <ul className="grid grid-cols-1 gap-5 sm:mx-auto sm:max-w-3xl md:max-w-none md:grid-cols-2">
             {program.map((p) => (
               <li
                 key={p.slug}
@@ -138,7 +138,7 @@ export default function HalamanProgramQuran() {
             {/* Biaya tidak ditampilkan di situs; yang berlaku adalah rincian
                 dari panitia program. Lihat catatan yang sama di halaman
                 profil unit. */}
-            <dl className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
+            <dl className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
               {[
                 { label: "Durasi", nilai: p.durasi, ikon: "jam" as const },
                 { label: "Peserta", nilai: p.peserta, ikon: "orang" as const },
@@ -156,7 +156,7 @@ export default function HalamanProgramQuran() {
             {/* Sorotan dalam kisi bento: sel pertama berisi judul seksi dan
                 ajakan, sisanya kartu. Satu kartu digelapkan agar mata punya
                 titik masuk, bukan enam kotak yang sama rata. */}
-            <div className="mt-12 grid gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-8">
+            <div className="mt-12 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-8">
               <div className="flex flex-col items-start justify-center px-1 py-2 sm:py-4">
                 <h3 className="font-display text-display-md text-balance text-ink">
                   Yang membedakan program ini
@@ -179,7 +179,7 @@ export default function HalamanProgramQuran() {
                 /* Kartu pertama sudah gelap sejak awal sebagai contoh tampilan
                    tersorot; sisanya menggelap saat disorot kursor. Begitu salah
                    satu kartu lain disorot, kartu pertama menyerah dan ikut
-                   memutih — `:has(~ article:hover)` menandai keadaan itu, jadi
+                   memutih, `:has(~ article:hover)` menandai keadaan itu, jadi
                    hanya ada satu kartu gelap pada satu waktu. Nada gelapnya
                    biru tua merek, bukan hitam netral. */
                 const gelap = n === 0;
@@ -193,7 +193,7 @@ export default function HalamanProgramQuran() {
                         : "border-line bg-white shadow-card hover:-translate-y-0.5 hover:border-brand-950 hover:bg-brand-950 hover:shadow-[0_20px_42px_-18px_rgba(0,12,40,0.6)]",
                     )}
                   >
-                    {/* Ornamen ikut surut begitu kartu menggelap — nada gelap
+                    {/* Ornamen ikut surut begitu kartu menggelap, nada gelap
                         sudah cukup mengisi bidangnya sendiri. */}
                     <OrnamenKartu
                       className={
@@ -240,7 +240,7 @@ export default function HalamanProgramQuran() {
               })}
             </div>
 
-            <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-14">
+            <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-14">
               <div>
                 <h3 className="font-display text-lg font-semibold text-ink">Untuk siapa</h3>
                 <ul className="mt-4 flex flex-col gap-3">

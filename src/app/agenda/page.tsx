@@ -5,7 +5,7 @@ import { Section } from "@/components/ui/Section";
 import { getAgendaLampau, getAgendaMendatang, getPetaNamaUnit } from "@/lib/content";
 import { buatMetadata } from "@/lib/seo";
 
-/** PRD §8 — ISR 15 menit. */
+/** PRD §8, ISR 15 menit. */
 export const revalidate = 900;
 
 export const metadata = buatMetadata({
@@ -35,11 +35,11 @@ export default function HalamanAgenda() {
             <EmptyState
               ikon="kalender"
               judul="Belum ada agenda terjadwal"
-              keterangan="Tidak ada kegiatan yang terjadwal untuk saat ini. Kegiatan baru biasanya diumumkan dua sampai empat pekan sebelum pelaksanaan — pantau halaman informasi atau kanal media sosial kami."
+              keterangan="Tidak ada kegiatan yang terjadwal untuk saat ini. Kegiatan baru biasanya diumumkan dua sampai empat pekan sebelum pelaksanaan, pantau halaman informasi atau kanal media sosial kami."
               aksi={{ label: "Lihat kabar terbaru", href: "/informasi" }}
             />
           ) : (
-            <ul className="grid gap-4 lg:grid-cols-2">
+            <ul className="grid grid-cols-1 gap-4 lg:grid-cols-2">
               {mendatang.map((a) => (
                 <AgendaCard
                   key={a.slug}
@@ -61,7 +61,7 @@ export default function HalamanAgenda() {
             <p className="mt-3 max-w-2xl text-sm text-ink-muted">
               Dokumentasi sebagian kegiatan ini tersedia di halaman galeri.
             </p>
-            <ul className="mt-8 grid gap-4 lg:grid-cols-2">
+            <ul className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
               {lampau.map((a) => (
                 <AgendaCard
                   key={a.slug}

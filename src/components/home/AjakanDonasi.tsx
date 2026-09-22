@@ -6,7 +6,7 @@ import { Progress } from "@/components/ui/Progress";
 import type { ProgramDonasi } from "@/lib/schemas";
 import { site } from "@/lib/site";
 
-/** PRD §9.1 blok 6 — satu blok ajakan donasi menuju /donasi. */
+/** PRD §9.1 blok 6, satu blok ajakan donasi menuju /donasi. */
 export function AjakanDonasi({ sorot }: { sorot: ProgramDonasi | undefined }) {
   return (
     <section className="bg-white py-16 md:py-24">
@@ -25,7 +25,7 @@ export function AjakanDonasi({ sorot }: { sorot: ProgramDonasi | undefined }) {
             className="absolute inset-0 bg-gradient-to-r from-brand-950 via-brand-950/90 to-brand-950/40"
           />
 
-          <div className="relative grid gap-10 p-8 md:p-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-center lg:p-16">
+          <div className="relative grid grid-cols-1 gap-10 p-6 sm:p-8 md:p-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-center lg:p-16">
             <div>
               <h2 className="max-w-xl font-display text-display-md text-balance text-white md:text-display-lg">
                 Titipkan zakat Anda pada tim amil yang{" "}

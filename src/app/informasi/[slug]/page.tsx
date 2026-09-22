@@ -13,7 +13,7 @@ import { getPetaNamaUnit, getPost, getPostsInduk, getSlugPostInduk, getUnit } fr
 import { labelCategory, labelLokasi, tanggal } from "@/lib/format";
 import { buatMetadata, jsonldArticle } from "@/lib/seo";
 
-/** PRD §8 — revalidasi on-demand lewat webhook; nilai ini menjadi jaring pengaman. */
+/** PRD §8, revalidasi on-demand lewat webhook; nilai ini menjadi jaring pengaman. */
 export const revalidate = 3600;
 
 export async function generateStaticParams() {
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return buatMetadata({
     judul: post.judul,
     deskripsi: post.ringkasan,
-    // PRD §13 — kanonik mengikuti unit_utama, yang menentukan kepemilikan tulisan.
+    // PRD §13, kanonik mengikuti unit_utama, yang menentukan kepemilikan tulisan.
     path: `/informasi/${post.slug}`,
     gambar: post.gambar.src,
     jenis: "article",
@@ -154,7 +154,7 @@ export default async function HalamanTulisan({ params }: { params: Promise<{ slu
             <h2 className="font-display text-display-md text-ink">
               Tulisan <span className="text-brand-600">terkait</span>
             </h2>
-            <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {terkait.map((p) => (
                 <PostCard key={p.slug} post={p} namaUnit={namaUnit.get(p.unit_utama)} />
               ))}

@@ -72,10 +72,10 @@ export function PanelFaq({ aktif }: { aktif: Kelompok }) {
         <span className="absolute -top-40 -left-32 size-96 rounded-full bg-accent-100/40 blur-3xl" />
       </span>
 
-      <div className="container-page relative grid gap-8 lg:grid-cols-[18.5rem_minmax(0,1fr)] lg:gap-12">
+      <div className="container-page relative grid grid-cols-1 gap-8 lg:grid-cols-[18.5rem_minmax(0,1fr)] lg:gap-12">
         {/* Kolom kiri: pemilih kelompok + ajakan menghubungi.
             Ia menempel saat halaman digulir; bila isinya lebih tinggi daripada
-            layar — kelompok banyak, atau layar pendek — kolomnya sendiri yang
+            layar, kelompok banyak, atau layar pendek, kolomnya sendiri yang
             digulir, supaya bagian bawahnya tetap dapat dijangkau. Marjin dan
             padding negatif menyisakan ruang agar bayangan kartu tidak
             terpotong oleh kliping gulir itu. */}
@@ -149,7 +149,7 @@ export function PanelFaq({ aktif }: { aktif: Kelompok }) {
             })}
           </nav>
 
-          {/* Ajakan menghubungi — satu-satunya bidang gelap di kolom ini, jadi
+          {/* Ajakan menghubungi, satu-satunya bidang gelap di kolom ini, jadi
               ia jadi titik berhenti mata setelah daftar kelompok habis. */}
           <div className="relative mt-1 shrink-0 overflow-hidden rounded-md bg-brand-900 p-6 text-white shadow-lift">
             <span

@@ -12,7 +12,7 @@ import {
 import { categorySchema } from "@/lib/schemas";
 import { buatMetadata } from "@/lib/seo";
 
-/** PRD §8 — ISR 5 menit. */
+/** PRD §8, ISR 5 menit. */
 export const revalidate = 300;
 
 const PER_HALAMAN = 6;
@@ -83,11 +83,11 @@ export default async function HalamanInformasi({ searchParams }: { searchParams:
         jejak={[{ label: "Informasi", href: "/informasi" }]}
         atas="Arsip"
         judul="Berita, pengumuman, dan artikel"
-        keterangan="Berita dan artikel tidak dipisah menjadi dua arsip. Keduanya ada di sini, dibedakan oleh kategori — gunakan penyaring untuk mempersempit."
+        keterangan="Berita dan artikel tidak dipisah menjadi dua arsip. Keduanya ada di sini, dibedakan oleh kategori, gunakan penyaring untuk mempersempit."
       />
 
       <section className="py-12 md:py-16">
-        <div className="container-page grid gap-10 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-12">
+        <div className="container-page grid grid-cols-1 gap-10 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-12">
           <div className="lg:sticky lg:top-24 lg:self-start">
             <FilterBar nilai={nilaiBersih} units={units} tahunTersedia={tahunTersedia} />
           </div>
@@ -115,7 +115,7 @@ export default async function HalamanInformasi({ searchParams }: { searchParams:
               <>
                 {/* Satu kolom: kolom isi di sini lebih sempit dari beranda karena
                     berbagi baris dengan penyaring, jadi kartu melebar butuh lebar penuh. */}
-                <ul className="mt-8 grid gap-5">
+                <ul className="mt-8 grid grid-cols-1 gap-5">
                   {tampil.map((post, i) => (
                     <PostCardKabar key={post.slug} post={post} prioritas={i < 2} />
                   ))}

@@ -9,7 +9,7 @@ import { labelJenisMitra } from "@/lib/format";
 import { buatMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-/** PRD §8 — SSG. */
+/** PRD §8, SSG. */
 export const dynamic = "force-static";
 
 export const metadata = buatMetadata({
@@ -28,7 +28,7 @@ const bentukKerjaSama: { judul: string; isi: string; ikon: NamaIkon }[] = [
   },
   {
     judul: "Pendirian MIT Sahabat Al-Qur'an",
-    isi: "Membuka madrasah ibtidaiyah terpadu Sahabat Al-Qur'an dengan kurikulum At-Tibyan dan standar madrasah ibtidaiyah — 35 MIT/SD mitra sudah menjalankannya.",
+    isi: "Membuka madrasah ibtidaiyah terpadu Sahabat Al-Qur'an dengan kurikulum At-Tibyan dan standar madrasah ibtidaiyah, 35 MIT/SD mitra sudah menjalankannya.",
     ikon: "sekolah",
   },
   {
@@ -68,9 +68,9 @@ export default function HalamanKerjaSama() {
             atas="Bentuk kemitraan"
             judul="Empat pintu"
             sorot="kemitraan TAUD & MIT"
-            keterangan="Untuk kunjungan lembaga atau kerja sama di luar TAUD dan MIT, silakan hubungi sekretariat lebih dulu — kami arahkan sesuai ketersediaan."
+            keterangan="Untuk kunjungan lembaga atau kerja sama di luar TAUD dan MIT, silakan hubungi sekretariat lebih dulu, kami arahkan sesuai ketersediaan."
           />
-          <ul className="mt-12 grid gap-5 sm:grid-cols-2">
+          <ul className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2">
             {bentukKerjaSama.map((b) => (
               <li key={b.judul} className="rounded-2xl border border-line bg-white p-6 md:p-8">
                 <span className="inline-flex size-11 items-center justify-center rounded-xl bg-brand-50 text-brand-700 ring-1 ring-brand-100 ring-inset">
@@ -97,7 +97,7 @@ export default function HalamanKerjaSama() {
               aksi={{ label: "Hubungi sekretariat", href: "/kontak" }}
             />
           ) : (
-            <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {mitra.map((m) => (
                 <li key={m.slug} className="rounded-2xl border border-line bg-white p-6">
                   <Badge nada="netral">{labelJenisMitra[m.jenis]}</Badge>
@@ -117,7 +117,7 @@ export default function HalamanKerjaSama() {
 
       {/* Alur + formulir */}
       <Section className="py-14 md:py-20">
-        <div className="container-page grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] lg:gap-16">
+        <div className="container-page grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] lg:gap-16">
           <div>
             <JudulSeksi
               atas="Alur pengajuan"

@@ -21,7 +21,7 @@ export type SiteFooterProps = {
 };
 
 /**
- * PRD §10 — seluruh isi datang dari props tanpa nilai yang dipatok mati,
+ * PRD §10, seluruh isi datang dari props tanpa nilai yang dipatok mati,
  * supaya komponen ini dipakai apa adanya oleh setiap subdomain pada Fase 2.
  */
 export function SiteFooter({
@@ -42,7 +42,7 @@ export function SiteFooter({
   return (
     <footer className="relative overflow-hidden bg-brand-950 text-white">
       <div className="container-page relative z-10 pt-16 pb-8 md:pt-24">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,2fr)]">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,2fr)]">
           <div className="max-w-sm">
             <Wordmark nama={namaPendek} keterangan="Islamic Center" terang />
             <p className="mt-5 text-sm leading-relaxed text-pretty text-white/60">{deskripsi}</p>
@@ -92,7 +92,7 @@ export function SiteFooter({
           </div>
         </div>
 
-        {/* Jalur balik lintas unit — PRD §5.4 */}
+        {/* Jalur balik lintas unit, PRD §5.4 */}
         {units.length > 0 ? (
           <nav aria-label="Unit pendidikan" className="mt-14 border-t border-white/10 pt-8">
             <h2 className="text-xs font-semibold tracking-[0.12em] text-accent-300 uppercase">

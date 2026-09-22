@@ -12,7 +12,7 @@ import type { Gender, ImageData, Jenjang, ModelBelajar, Unit } from "@/lib/schem
 import { cn } from "@/lib/cn";
 
 /**
- * PRD §9.2 — penyaring SISI KLIEN atas seluruh unit.
+ * PRD §9.2, penyaring SISI KLIEN atas seluruh unit.
  *
  * Seluruh data unit sudah diambil saat build dan diteruskan lewat props, jadi
  * penyaringan tidak pernah memicu permintaan jaringan tambahan. Kombinasi
@@ -102,7 +102,7 @@ export function PencariProgram({
   );
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-12">
+    <div className="grid grid-cols-1 gap-10 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-12">
       {/* Panel penyaring */}
       <div className="lg:sticky lg:top-24 lg:self-start">
         <div className="flex items-center justify-between gap-3">
@@ -111,7 +111,7 @@ export function PencariProgram({
             Penyaring
           </h2>
           {jumlahAktif > 0 ? (
-            <Button varian="hantu" ukuran="sm" onClick={bersihkan} className="h-8 px-3 text-xs">
+            <Button varian="hantu" ukuran="sm" onClick={bersihkan} className="min-h-8 px-3 text-xs">
               Bersihkan ({jumlahAktif})
             </Button>
           ) : null}
@@ -162,7 +162,7 @@ export function PencariProgram({
           </p>
           {jumlahAktif > 0 ? (
             <p className="text-xs text-ink-subtle">
-              Tautan halaman ini sudah menyimpan penyaring Anda — silakan dibagikan.
+              Tautan halaman ini sudah menyimpan penyaring Anda, silakan dibagikan.
             </p>
           ) : null}
         </div>
@@ -172,7 +172,7 @@ export function PencariProgram({
             className="mt-8"
             ikon="cari"
             judul="Belum ada unit dengan kombinasi ini"
-            keterangan="Kombinasi penyaring yang Anda pilih belum tersedia. Coba longgarkan salah satu penyaring — misalnya jenjang atau model belajar — atau hubungi kami untuk rekomendasi yang sesuai."
+            keterangan="Kombinasi penyaring yang Anda pilih belum tersedia. Coba longgarkan salah satu penyaring, misalnya jenjang atau model belajar, atau hubungi kami untuk rekomendasi yang sesuai."
             aksi={{ label: "Konsultasi lewat kontak", href: "/kontak" }}
           >
             <Button varian="garis" ukuran="sm" onClick={bersihkan}>
@@ -180,7 +180,7 @@ export function PencariProgram({
             </Button>
           </EmptyState>
         ) : (
-          <ul className="mt-8 grid gap-5 sm:grid-cols-2">
+          <ul className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
             {hasil.map((unit, i) => (
               <UnitCard
                 key={unit.slug}

@@ -14,7 +14,7 @@ import { labelJenisDonasi, rupiah, tanggal } from "@/lib/format";
 import { buatMetadata, jsonldDonateAction } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-/** PRD §8 — ISR 15 menit. */
+/** PRD §8, ISR 15 menit. */
 export const revalidate = 900;
 
 export async function generateStaticParams() {
@@ -72,7 +72,7 @@ export default async function HalamanProgramDonasi({
       </PageHeader>
 
       <section className="py-12 md:py-16">
-        <div className="container-page grid gap-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-14">
+        <div className="container-page grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-14">
           <div>
             <div className="overflow-hidden rounded-3xl bg-mist-100">
               <Image
@@ -82,7 +82,7 @@ export default async function HalamanProgramDonasi({
                 height={program.gambar.height}
                 priority
                 sizes="(min-width: 1024px) 720px, 100vw"
-                // Poster kampanye dibiarkan utuh pada rasio aslinya —
+                // Poster kampanye dibiarkan utuh pada rasio aslinya,
                 // tulisannya bagian dari gambar, jadi memangkasnya menghapus
                 // isi. Foto lanskap tetap diseragamkan ke 3:2.
                 className={
@@ -95,7 +95,7 @@ export default async function HalamanProgramDonasi({
 
             <ProseHtml html={program.konten} className="mt-8" />
 
-            <dl className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
+            <dl className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
               <div className="bg-white p-5">
                 <dt className="text-xs font-semibold tracking-[0.1em] text-ink-subtle uppercase">
                   Penerima manfaat
@@ -155,7 +155,7 @@ export default async function HalamanProgramDonasi({
             <div className="mt-6">
               <h2 className="font-display text-base font-semibold text-ink">Rekening lembaga</h2>
               <p className="mt-1 text-xs leading-relaxed text-ink-subtle">
-                Tulis &ldquo;{labelJenisDonasi[program.jenis]} — {program.judul}&rdquo; pada berita
+                Tulis &ldquo;{labelJenisDonasi[program.jenis]}, {program.judul}&rdquo; pada berita
                 transfer agar dana tercatat untuk program ini.
               </p>
               <div className="mt-3">
@@ -172,7 +172,7 @@ export default async function HalamanProgramDonasi({
             <h2 className="font-display text-display-md text-ink">
               Program <span className="text-brand-600">lainnya</span>
             </h2>
-            <ul className="mt-8 grid gap-4 md:grid-cols-3">
+            <ul className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
               {lain.map((p) => (
                 <li
                   key={p.slug}

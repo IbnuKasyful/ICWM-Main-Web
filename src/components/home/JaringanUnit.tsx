@@ -6,7 +6,7 @@ import type { Jenjang, Unit } from "@/lib/schemas";
 
 const urutan: Jenjang[] = ["paud", "sd", "smp", "sma", "tinggi", "non-formal"];
 
-/** PRD §9.1 blok 5 — grid ringkas seluruh unit dengan tautan ke /program. */
+/** PRD §9.1 blok 5, grid ringkas seluruh unit dengan tautan ke /program. */
 export function JaringanUnit({ units }: { units: readonly Unit[] }) {
   const kelompok = urutan
     .map((j) => ({ jenjang: j, isi: units.filter((u) => u.jenjang === j) }))
@@ -31,7 +31,7 @@ export function JaringanUnit({ units }: { units: readonly Unit[] }) {
             aksi={{ label: "Hubungi kami", href: "/kontak" }}
           />
         ) : (
-          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             {kelompok.map((k) => (
               <div key={k.jenjang}>
                 <h3 className="text-xs font-semibold tracking-[0.14em] text-ink-subtle uppercase">
