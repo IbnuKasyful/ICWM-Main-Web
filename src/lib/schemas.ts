@@ -109,6 +109,28 @@ export const cabangSchema = z.object({
 
 export type Cabang = z.infer<typeof cabangSchema>;
 
+/**
+ * Sebaran cabang sebuah unit, dihitung per wilayah.
+ *
+ * Dipakai untuk unit yang jaringannya terlalu luas, dan sebagian besar
+ * dijalankan lembaga mitra, untuk ditayangkan sebagai direktori bernama.
+ * Yang tampil hanya jumlah cabang dan murid per wilayah, di atas peta.
+ *
+ * `bentuk` menyebut nama provinsi pada peta dasar (`src/data/peta-provinsi.ts`).
+ * Satu wilayah bisa memakai lebih dari satu bentuk bila sumber datanya memang
+ * menggabungkan dua provinsi.
+ */
+export const persebaranSchema = z.object({
+  nama: z.string().min(1),
+  pulau: z.string().min(1),
+  bentuk: z.array(z.string().min(1)).min(1),
+  cabang: z.number().int().nonnegative(),
+  /** `null` berarti sumbernya tidak menyebut jumlah murid wilayah itu. */
+  murid: z.number().int().nonnegative().nullable(),
+});
+
+export type Persebaran = z.infer<typeof persebaranSchema>;
+
 export const unitSchema = z.object({
   slug: z.string().min(1),
   nama_lengkap: z.string().min(1),
@@ -124,6 +146,12 @@ export const unitSchema = z.object({
   lokasi_kampus: lokasiSchema,
   /** Larik kosong berarti unit hanya berjalan di kampus induk. */
   cabang: z.array(cabangSchema),
+  /**
+   * Sebaran seluruh jaringan unit, bila ada. Terpisah dari `cabang` karena
+   * keduanya tampil berbeda: `cabang` menjadi direktori bernama dan
+   * beralamat, `persebaran` hanya menjadi peta jumlah per wilayah.
+   */
+  persebaran: z.array(persebaranSchema),
   status_ppdb: statusPpdbSchema,
   periode_ppdb: z.string(),
   /* Tidak ada `kisaran_biaya`. Situs ini tidak menayangkan biaya sama sekali,

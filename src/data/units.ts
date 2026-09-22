@@ -20,7 +20,9 @@
  * pendidikan dan tinggal di `src/data/program-quran.ts`, bukan di sini.
  */
 
-import { cabangMitSaqu, cabangTaudSaqu } from "@/data/cabang-saqu";
+import { cabangMitSaqu } from "@/data/cabang-saqu";
+import { cabangTaudIcwm } from "@/data/cabang-taud-icwm";
+import { persebaranTaud } from "@/data/persebaran-taud";
 import type { Cabang, ImageData, UnitProfil } from "@/lib/schemas";
 
 /**
@@ -81,7 +83,8 @@ export const unitsMentah: unknown[] = [
     gender: "campur",
     model_belajar: "non-boarding",
     lokasi_kampus: "bogor",
-    cabang: cabangTaudSaqu,
+    cabang: cabangTaudIcwm,
+    persebaran: persebaranTaud,
     status_ppdb: "buka",
     periode_ppdb: "Oktober 2026 – Mei 2027 (tahun ajaran 2026/2027)",
     kontak_wa: "6285714923006",
@@ -102,6 +105,7 @@ export const unitsMentah: unknown[] = [
     model_belajar: "non-boarding",
     lokasi_kampus: "bogor",
     cabang: cabangMitSaqu,
+    persebaran: [],
     status_ppdb: "buka",
     periode_ppdb: "November 2025 – Februari 2026",
     kontak_wa: "6285718234036",
@@ -122,6 +126,7 @@ export const unitsMentah: unknown[] = [
     model_belajar: "boarding",
     lokasi_kampus: "bogor",
     cabang: [],
+    persebaran: [],
     status_ppdb: "buka",
     periode_ppdb: "Batch 3, tahun pelajaran 2027/2028",
     kontak_wa: "6281111882030",
@@ -147,6 +152,7 @@ export const unitsMentah: unknown[] = [
     model_belajar: "boarding",
     lokasi_kampus: "bogor",
     cabang: [],
+    persebaran: [],
     status_ppdb: "buka",
     periode_ppdb: "Batch 3, tahun pelajaran 2027/2028",
     kontak_wa: "6281111882030",
@@ -172,6 +178,7 @@ export const unitsMentah: unknown[] = [
     model_belajar: "boarding",
     lokasi_kampus: "bogor",
     cabang: [],
+    persebaran: [],
     status_ppdb: "buka",
     periode_ppdb: "Batch 6 — 1 Agustus 2026 s.d. 30 Juni 2027 (TP 2027/2028)",
     kontak_wa: "62895327002283",
@@ -197,6 +204,7 @@ export const unitsMentah: unknown[] = [
     model_belajar: "boarding",
     lokasi_kampus: "bogor",
     cabang: [],
+    persebaran: [],
     status_ppdb: "buka",
     periode_ppdb: "Batch 6 — 1 Agustus 2026 s.d. 30 Juni 2027 (TP 2027/2028)",
     kontak_wa: "62895327002283",
@@ -217,6 +225,7 @@ export const unitsMentah: unknown[] = [
     model_belajar: "boarding",
     lokasi_kampus: "bogor",
     cabang: [],
+    persebaran: [],
     status_ppdb: "buka",
     periode_ppdb: "Setahun sekali — PMB tahun akademik 2026/2027",
     kontak_wa: "6285692757850",
@@ -237,6 +246,7 @@ export const unitsMentah: unknown[] = [
     model_belajar: "boarding",
     lokasi_kampus: "bogor",
     cabang: cabangPkm,
+    persebaran: [],
     status_ppdb: "buka",
     periode_ppdb: "Tahun ajaran 2026/2027 — KBM mulai sekitar Juli 2026",
     kontak_wa: "6285883576234",
@@ -257,6 +267,7 @@ export const unitsMentah: unknown[] = [
     model_belajar: "boarding",
     lokasi_kampus: "bogor",
     cabang: [],
+    persebaran: [],
     status_ppdb: "buka",
     periode_ppdb: "Tiga angkatan setiap tahun — angkatan ke-24 diwisuda 10 Juli 2025",
     kontak_wa: "6285883576234",
@@ -277,6 +288,7 @@ export const unitsMentah: unknown[] = [
     model_belajar: "boarding",
     lokasi_kampus: "bogor",
     cabang: [],
+    persebaran: [],
     status_ppdb: "buka",
     periode_ppdb: "27 Juli – 25 Agustus 2026 (angkatan pertama)",
     kontak_wa: "6285286251819",
@@ -297,6 +309,7 @@ export const unitsMentah: unknown[] = [
     model_belajar: "boarding",
     lokasi_kampus: "bogor",
     cabang: [],
+    persebaran: [],
     status_ppdb: "buka",
     periode_ppdb: "Tahun ajaran 2025/2026",
     kontak_wa: "6285883576234",

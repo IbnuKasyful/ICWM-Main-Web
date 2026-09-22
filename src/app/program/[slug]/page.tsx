@@ -2,7 +2,6 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 import { PageHeader } from "@/components/site/PageHeader";
-import { UnitSwitcher } from "@/components/site/UnitSwitcher";
 import { Badge, TitikStatus } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -10,6 +9,7 @@ import { Icon } from "@/components/ui/Icon";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { DirektoriCabang } from "@/components/program/DirektoriCabang";
 import { GaleriUnit } from "@/components/program/GaleriUnit";
+import { PetaPersebaran } from "@/components/program/PetaPersebaran";
 import { PostBaris } from "@/components/ui/PostCard";
 import { JudulSeksi } from "@/components/ui/Section";
 import { getPostsUnit, getUnit, getUnitProfil, getUnitsAktif } from "@/lib/content";
@@ -24,8 +24,9 @@ import {
 } from "@/lib/format";
 import { buatMetadata, jsonldEducationalOrganization } from "@/lib/seo";
 import type { StatusPpdb } from "@/lib/schemas";
+import { cn } from "@/lib/cn";
 
-/** PRD §8 — ISR 1 jam. */
+/** PRD §8, ISR 1 jam. */
 export const revalidate = 3600;
 
 export function generateStaticParams() {
@@ -63,10 +64,20 @@ export default async function HalamanProfilUnit({
   if (!unit || !unit.aktif || !profil) notFound();
 
   const berita = await getPostsUnit(unit.slug, 3);
-  const semuaUnit = getUnitsAktif();
   const nada = nadaStatus(unit.status_ppdb);
   const ppdbTutup = unit.status_ppdb === "tutup";
   const jumlahProvinsi = new Set(unit.cabang.map((c) => c.provinsi)).size;
+  const adaPersebaran = unit.persebaran.length > 0;
+  const adaCabang = unit.cabang.length > 0;
+  const adaGaleri = profil.galeri.length > 0;
+
+  /* Cabang, Persebaran, Galeri, dan Info PPDB sama-sama berlatar putih dan
+     bisa tampil berurutan. Padding bawah section sebelumnya sudah memberi
+     jarak, jadi section putih yang menyambung section putih lain tidak
+     memakai padding atas; kalau tidak, celahnya berlipat dua. */
+  const kelasSeksi = "py-12 md:py-16";
+  const sambungPutih = (sebelumnyaPutih: boolean) =>
+    cn(kelasSeksi, sebelumnyaPutih && "pt-0 md:pt-0");
 
   const pesanWa = `Assalamu'alaikum. Saya membaca profil ${unit.nama_lengkap} di situs Wadi Mubarak dan ingin bertanya mengenai pendaftaran.`;
 
@@ -82,7 +93,6 @@ export default async function HalamanProfilUnit({
         atas={labelJenjang[unit.jenjang]}
         judul={unit.nama_lengkap}
         keterangan={unit.deskripsi_singkat}
-        aksi={<UnitSwitcher units={semuaUnit} unitAktif={unit.slug} labelSitusIni="Situs induk" />}
       >
         <div className="mt-6 flex flex-wrap items-center gap-2">
           <Badge nada={nada.badge} ikon={<TitikStatus nada={nada.titik} />}>
@@ -118,7 +128,7 @@ export default async function HalamanProfilUnit({
               tahun ajaran dan berbeda antar cabang, jadi angka yang tayang di
               sini akan lebih sering keliru daripada benar; yang berlaku selalu
               rincian dari panitia PPDB unit terkait. */}
-          <dl className="mt-8 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
+          <dl className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
             {[
               { label: "Jenjang", nilai: labelJenjang[unit.jenjang], ikon: "sekolah" as const },
               { label: "Model belajar", nilai: labelModel[unit.model_belajar], ikon: "yayasan" as const },
@@ -137,8 +147,8 @@ export default async function HalamanProfilUnit({
       </section>
 
       {/* Untuk siapa unit ini */}
-      <section className="bg-mist-50 py-14 md:py-20">
-        <div className="container-page grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-16">
+      <section className="bg-mist-50 py-12 md:py-16">
+        <div className="container-page grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-16">
           <JudulSeksi
             atas="Untuk siapa"
             judul="Unit ini paling cocok"
@@ -166,7 +176,7 @@ export default async function HalamanProfilUnit({
       </section>
 
       {/* Keunggulan */}
-      <section className="py-14 md:py-20">
+      <section className="py-12 md:py-16">
         <div className="container-page">
           <JudulSeksi
             atas="Keunggulan"
@@ -174,7 +184,7 @@ export default async function HalamanProfilUnit({
             sorot={unit.nama_pendek}
             keterangan="Bukan daftar janji, melainkan hal-hal yang bisa Anda tanyakan dan periksa saat berkunjung."
           />
-          <ul className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
             {profil.keunggulan.map((k, i) => (
               <li key={k.judul} className="rounded-2xl border border-line bg-white p-6 shadow-soft">
                 <span
@@ -194,8 +204,8 @@ export default async function HalamanProfilUnit({
       </section>
 
       {/* Kurikulum & fasilitas */}
-      <section className="bg-mist-50 py-14 md:py-20">
-        <div className="container-page grid gap-12 lg:grid-cols-2 lg:gap-16">
+      <section className="bg-mist-50 py-12 md:py-16">
+        <div className="container-page grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <h2 className="font-display text-display-md text-ink">
               Ringkasan <span className="text-brand-600">kurikulum</span>
@@ -214,7 +224,7 @@ export default async function HalamanProfilUnit({
             <h2 className="font-display text-display-md text-ink">
               Fasilitas <span className="text-brand-600">kampus</span>
             </h2>
-            <ul className="mt-8 grid gap-2.5 sm:grid-cols-2">
+            <ul className="mt-8 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               {profil.fasilitas.map((f) => (
                 <li
                   key={f}
@@ -230,24 +240,52 @@ export default async function HalamanProfilUnit({
       </section>
 
       {/* Cabang */}
-      {unit.cabang.length > 0 ? (
-        <section className="py-14 md:py-20">
+      {adaCabang ? (
+        <section className={kelasSeksi}>
           <div className="container-page">
+            {/* Unit yang punya peta persebaran berarti sebagian besar cabangnya
+                dijalankan lembaga mitra, daftar bernama di bawah ini hanya
+                memuat cabang kelolaan yayasan, dan judulnya harus mengatakan
+                itu apa adanya. */}
             <JudulSeksi
-              atas="Jaringan"
-              judul={`${unit.nama_pendek} hadir di`}
+              atas={adaPersebaran ? "Cabang kelolaan yayasan" : "Jaringan"}
+              judul={
+                adaPersebaran
+                  ? `${unit.nama_pendek} dikelola langsung di`
+                  : `${unit.nama_pendek} hadir di`
+              }
               sorot={`${unit.cabang.length} lokasi`}
               rata="kiri"
-              keterangan={`Tersebar di ${jumlahProvinsi} provinsi dengan kurikulum, target hafalan, dan penilaian yang sama. Hubungi panitia lokasi terdekat untuk jadwal kunjungan.`}
+              keterangan={
+                adaPersebaran
+                  ? `Cabang berikut dikelola langsung oleh yayasan, tersebar di ${jumlahProvinsi} provinsi. Hubungi admin cabang terdekat untuk jadwal kunjungan dan trial class. Cabang ${unit.nama_pendek} lain dijalankan lembaga mitra, sebarannya ada di peta bawah.`
+                  : `Tersebar di ${jumlahProvinsi} provinsi dengan kurikulum, target hafalan, dan penilaian yang sama. Hubungi panitia lokasi terdekat untuk jadwal kunjungan.`
+              }
             />
             <DirektoriCabang cabang={unit.cabang} namaUnit={unit.nama_pendek} />
           </div>
         </section>
       ) : null}
 
+      {/* Persebaran cabang mitra, hanya jumlah per provinsi, tanpa direktori */}
+      {adaPersebaran ? (
+        <section className={sambungPutih(adaCabang)}>
+          <div className="container-page">
+            <JudulSeksi
+              atas="Persebaran"
+              judul={`${unit.nama_pendek} di`}
+              sorot="seluruh Indonesia"
+              rata="kiri"
+              keterangan={`Di luar cabang kelolaan yayasan di atas, kurikulum ${unit.nama_pendek} dijalankan lembaga mitra di banyak daerah. Peta ini memuat keduanya.`}
+            />
+            <PetaPersebaran persebaran={unit.persebaran} namaUnit={unit.nama_pendek} />
+          </div>
+        </section>
+      ) : null}
+
       {/* Galeri */}
-      {profil.galeri.length > 0 ? (
-        <section className="py-14 md:py-20">
+      {adaGaleri ? (
+        <section className={sambungPutih(adaCabang || adaPersebaran)}>
           <div className="container-page">
             <h2 className="font-display text-display-md text-ink">
               Suasana <span className="text-brand-600">sehari-hari</span>
@@ -258,9 +296,9 @@ export default async function HalamanProfilUnit({
       ) : null}
 
       {/* Info PPDB + CTA keluar */}
-      <section className="py-14 md:py-20">
+      <section className={sambungPutih(adaCabang || adaPersebaran || adaGaleri)}>
         <div className="container-page">
-          <div className="grid gap-10 rounded-3xl border border-line bg-white p-7 shadow-card md:p-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-16">
+          <div className="grid grid-cols-1 gap-10 rounded-3xl border border-line bg-white p-5 shadow-card sm:p-7 md:p-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-16">
             <div>
               <span className="inline-flex items-center rounded-full border border-accent-200 bg-accent-50 px-3 py-1 text-xs font-semibold tracking-[0.14em] text-accent-700 uppercase">
                 Penerimaan santri baru
@@ -284,7 +322,7 @@ export default async function HalamanProfilUnit({
               </ol>
             </div>
 
-            <div className="flex flex-col gap-5 rounded-2xl bg-mist-50 p-6">
+            <div className="flex flex-col gap-5 rounded-2xl bg-mist-50 p-5 sm:p-6">
               <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-between gap-3">
                   <span className="text-xs font-semibold tracking-[0.1em] text-ink-subtle uppercase">
@@ -304,7 +342,7 @@ export default async function HalamanProfilUnit({
                 </div>
               </div>
 
-              {/* PRD §9.3 — CTA keluar hanya bila url_subdomain terisi; bila kosong,
+              {/* PRD §9.3, CTA keluar hanya bila url_subdomain terisi; bila kosong,
                   tampilkan tombol WhatsApp unit. Bila PPDB tutup, CTA menyesuaikan. */}
               <div className="mt-1 flex flex-col gap-3 border-t border-line-strong pt-5">
                 {ppdbTutup ? (
@@ -373,7 +411,7 @@ export default async function HalamanProfilUnit({
       </section>
 
       {/* Berita terkait unit ini */}
-      <section className="bg-mist-50 py-14 md:py-20">
+      <section className="bg-mist-50 py-12 md:py-16">
         <div className="container-page">
           <h2 className="font-display text-display-md text-ink">
             Kabar dari <span className="text-brand-600">{unit.nama_pendek}</span>

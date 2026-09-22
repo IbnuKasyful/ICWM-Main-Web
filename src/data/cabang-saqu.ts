@@ -7,6 +7,12 @@
  *
  * Jangan disunting tangan: perbarui berkas xlsx-nya lalu bangkitkan ulang.
  *
+ * `cabangTaudSaqu` tidak lagi ditayangkan: cabang TAUD yang dikelola mitra
+ * kini hanya tampil sebagai persebaran per provinsi (`persebaran-taud.ts`),
+ * dan yang tampil bernama-beralamat hanya cabang kelolaan yayasan sendiri
+ * (`cabang-taud-icwm.ts`). Datanya disimpan karena tetap dipakai sebagai
+ * rujukan internal dan sumber hitungan persebaran berikutnya.
+ *
  * Catatan sumber:
  *   - Lembar MIT memuat kolom kabupaten dan kecamatan yang tergeser pada
  *     sebagian baris, sehingga hanya pulau, provinsi, dan nama yang dipakai;
