@@ -47,24 +47,37 @@ export function SiteHeader({ units }: { units: readonly Unit[] }) {
   const aktifDi = (href: string) =>
     href === "/" ? path === "/" : path === href || path.startsWith(`${href}/`);
 
+  /* Label penukar unit mengikuti halaman yang sedang dibuka: di /program/<slug>
+     pilnya menampilkan nama unit itu, di halaman lain kembali ke "Situs induk".
+     Slug yang tidak cocok dengan unit mana pun aman, UnitSwitcher sendiri yang
+     jatuh kembali ke `labelSitusIni` bila pencariannya tidak menemukan apa pun. */
+  const unitAktif = path.startsWith("/program/") ? path.split("/")[2] : undefined;
+
   return (
-    <header className="sticky top-0 z-50 border-b border-line bg-white/85 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-line">
+      {/* Kaca buram dipasang pada lapisan latar tersendiri, bukan pada <header>.
+          `backdrop-filter` menjadikan elemennya containing block bagi turunan
+          `position: fixed`, sehingga panel menu ponsel di bawah ikut terkurung
+          setinggi header dan kolaps menjadi nol. */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-white/85 backdrop-blur-md" />
       <div className="container-page">
         <div className="flex h-16 items-center justify-between gap-4 md:h-18">
-          <Link href="/" className="shrink-0 rounded-lg" aria-label={`${site.nama} — beranda`}>
+          <Link href="/" className="shrink-0 rounded-lg" aria-label={`${site.nama}, beranda`}>
             <Lockup prioritas className="h-8 md:h-10" />
           </Link>
 
           {/* Navigasi desktop */}
           <nav aria-label="Navigasi utama" className="hidden lg:block">
-            <ul className="flex items-center gap-1">
+            {/* Rentang 1024–1279px sempit untuk enam butir + pil unit, jadi
+                jarak antarbutir dirapatkan di sana. */}
+            <ul className="flex items-center xl:gap-1">
               {navUtama.map((item) => (
                 <li key={item.href} className="group relative">
                   <Link
                     href={item.href}
                     aria-current={aktifDi(item.href) ? "page" : undefined}
                     className={cn(
-                      "inline-flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-semibold transition-colors",
+                      "inline-flex items-center gap-1 rounded-full px-3 py-2 text-sm font-semibold transition-colors xl:px-3.5",
                       aktifDi(item.href)
                         ? "bg-brand-50 text-brand-800"
                         : "text-ink-muted hover:bg-mist-50 hover:text-ink",
@@ -113,20 +126,28 @@ export function SiteHeader({ units }: { units: readonly Unit[] }) {
             </ul>
           </nav>
 
-          <div className="flex items-center gap-2">
-            <Link
-              href="/cari"
-              aria-label="Cari di situs ini"
-              className="inline-flex size-10 items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-mist-50 hover:text-ink"
+          {/* `min-w-0` membiarkan pil unit menyusut (namanya terpotong
+              elipsis) alih-alih mendorong header keluar layar. */}
+          <div className="flex min-w-0 items-center gap-2">
+            {/* Tampil di semua lebar layar, supaya pindah unit di ponsel tidak
+                perlu membuka menu dulu. Di bawah `sm` labelnya diringkas agar
+                muat berdampingan dengan logo dan tombol menu, kecuali saat
+                sebuah unit sedang dibuka: namanya tetap ditampilkan. */}
+            <UnitSwitcher
+              units={units}
+              unitAktif={unitAktif}
+              labelSitusIni="Situs induk"
+              labelRingkas="Unit"
+            />
+
+            {/* Disembunyikan di 1024–1279px: "Donasi" sudah ada di navigasi
+                utama, dan tanpanya header di rentang itu meluber. */}
+            <ButtonLink
+              href="/donasi"
+              varian="kedua"
+              ukuran="sm"
+              className="shrink-0 max-sm:hidden lg:max-xl:hidden"
             >
-              <Icon nama="cari" />
-            </Link>
-
-            <div className="hidden xl:block">
-              <UnitSwitcher units={units} labelSitusIni="Situs induk" />
-            </div>
-
-            <ButtonLink href="/donasi" varian="kedua" ukuran="sm" className="hidden sm:inline-flex">
               Donasi
             </ButtonLink>
 
@@ -136,7 +157,7 @@ export function SiteHeader({ units }: { units: readonly Unit[] }) {
               aria-expanded={terbuka}
               aria-controls="menu-ponsel"
               aria-label={terbuka ? "Tutup menu" : "Buka menu"}
-              className="inline-flex size-10 items-center justify-center rounded-full border border-line text-ink transition-colors hover:bg-mist-50 lg:hidden"
+              className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-line text-ink transition-colors hover:bg-mist-50 lg:hidden"
             >
               <Icon nama={terbuka ? "tutup" : "menu"} />
             </button>
@@ -148,26 +169,33 @@ export function SiteHeader({ units }: { units: readonly Unit[] }) {
       <div
         id="menu-ponsel"
         hidden={!terbuka}
-        className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto border-t border-line bg-white lg:hidden"
+        className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto overscroll-contain border-t border-line bg-white md:top-18 lg:hidden"
       >
-        <nav aria-label="Navigasi ponsel" className="container-page py-6">
+        <nav
+          aria-label="Navigasi ponsel"
+          className="container-page py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))]"
+        >
           <ul className="flex flex-col gap-1">
             {navUtama.map((item) => (
               <li key={item.href} className="border-b border-line py-2 last:border-b-0">
                 <Link
                   href={item.href}
-                  className="flex items-center justify-between py-2 font-display text-lg font-semibold text-ink"
+                  aria-current={aktifDi(item.href) ? "page" : undefined}
+                  className={cn(
+                    "flex min-h-11 items-center justify-between gap-3 py-2 font-display text-lg font-semibold",
+                    aktifDi(item.href) ? "text-brand-700" : "text-ink",
+                  )}
                 >
                   {item.label}
                   <Icon nama="panahKanan" className="size-4 text-ink-subtle" />
                 </Link>
                 {item.anak ? (
-                  <ul className="mt-1 mb-2 flex flex-col gap-1 pl-1">
+                  <ul className="mt-1 mb-2 flex flex-col gap-0.5 pl-1">
                     {item.anak.map((anak) => (
                       <li key={anak.href + anak.label}>
                         <Link
                           href={anak.href}
-                          className="block rounded-lg px-2 py-1.5 text-sm text-ink-muted hover:bg-mist-50"
+                          className="flex min-h-11 items-center rounded-lg px-2 py-2 text-sm text-ink-muted hover:bg-mist-50"
                         >
                           {anak.label}
                         </Link>
@@ -186,10 +214,6 @@ export function SiteHeader({ units }: { units: readonly Unit[] }) {
             <ButtonLink href="/program" varian="garis" ukuran="lg">
               Cari unit yang cocok
             </ButtonLink>
-          </div>
-
-          <div className="mt-6">
-            <UnitSwitcher units={units} labelSitusIni="Situs induk" />
           </div>
         </nav>
       </div>
