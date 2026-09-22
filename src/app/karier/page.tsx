@@ -9,19 +9,19 @@ import { buatMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 import type { Lokasi } from "@/lib/schemas";
 
-/** PRD §8 — ISR 1 jam. */
+/** PRD §8, ISR 1 jam. */
 export const revalidate = 3600;
 
 export const metadata = buatMetadata({
   judul: "Karier",
   deskripsi:
-    "Lowongan pengajar, musyrif, dan tenaga kependidikan di Islamic Center Wadi Mubarak, kampus Bogor dan Sleman.",
+    "Lowongan pengajar, musyrif, dan tenaga kependidikan di Islamic Center Wadi Mubarak. Saat ini belum ada formasi yang dibuka; lamaran terbuka tetap kami terima.",
   path: "/karier",
 });
 
 /**
  * Lowongan masih ditulis di berkas ini karena CPT khusus lowongan tidak ada
- * dalam daftar Fase 1 (PRD §7.3) — menambahkannya butuh revisi dokumen lebih
+ * dalam daftar Fase 1 (PRD §7.3), menambahkannya butuh revisi dokumen lebih
  * dulu. Ketika CPT tersedia, ganti sumbernya tanpa mengubah tampilan.
  */
 const lowongan: {
@@ -30,52 +30,7 @@ const lowongan: {
   lokasi: Lokasi;
   jenis: string;
   syarat: string[];
-}[] = [
-  {
-    judul: "Pengampu Tahfizh Putra",
-    unit: "MTs & MA Tahfizh Putra",
-    lokasi: "bogor",
-    jenis: "Penuh waktu · menetap di asrama",
-    syarat: [
-      "Hafalan minimal 30 juz dengan bacaan mutqin",
-      "Bersedia tinggal di lingkungan asrama",
-      "Pengalaman mengampu halaqah minimal 1 tahun",
-    ],
-  },
-  {
-    judul: "Guru Kelas MIT",
-    unit: "MIT Sahabat Al-Qur'an",
-    lokasi: "bogor",
-    jenis: "Penuh waktu",
-    syarat: [
-      "S1 Pendidikan atau bidang terkait",
-      "Hafalan minimal 3 juz",
-      "Terbiasa dengan pembelajaran berbasis proyek",
-    ],
-  },
-  {
-    judul: "Musyrifah Asrama Putri",
-    unit: "MBS Putri (MTs & MA)",
-    lokasi: "bogor",
-    jenis: "Penuh waktu · menetap di asrama",
-    syarat: [
-      "Perempuan, usia maksimal 35 tahun",
-      "Hafalan minimal 10 juz",
-      "Mampu mendampingi remaja dengan sabar dan terstruktur",
-    ],
-  },
-  {
-    judul: "Guru Pendamping TAUD",
-    unit: "TAUD SAQU — Cabang Sleman",
-    lokasi: "sleman",
-    jenis: "Penuh waktu",
-    syarat: [
-      "Latar belakang PAUD atau psikologi anak",
-      "Berdomisili di sekitar Sleman",
-      "Menyukai pendampingan anak usia dini",
-    ],
-  },
-];
+}[] = [];
 
 export default function HalamanKarier() {
   return (
@@ -104,11 +59,11 @@ export default function HalamanKarier() {
               className="mt-8"
               ikon="orang"
               judul="Tidak ada lowongan yang sedang dibuka"
-              keterangan="Saat ini seluruh formasi telah terisi. Anda tetap dapat mengirim lamaran terbuka — berkas Anda kami simpan dan hubungi kembali saat formasi yang sesuai dibuka."
+              keterangan="Saat ini seluruh formasi telah terisi. Anda tetap dapat mengirim lamaran terbuka, berkas Anda kami simpan dan hubungi kembali saat formasi yang sesuai dibuka."
               aksi={{ label: "Kirim lamaran terbuka", href: "/kontak" }}
             />
           ) : (
-            <ul className="mt-8 grid gap-4 lg:grid-cols-2">
+            <ul className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
               {lowongan.map((l) => (
                 <li key={l.judul} className="flex flex-col rounded-2xl border border-line bg-white p-6">
                   <div className="flex flex-wrap items-center gap-2">
@@ -130,7 +85,7 @@ export default function HalamanKarier() {
                   </ul>
 
                   <ButtonLink
-                    href={`mailto:${site.kontak.email}?subject=${encodeURIComponent(`Lamaran — ${l.judul}`)}`}
+                    href={`mailto:${site.kontak.email}?subject=${encodeURIComponent(`Lamaran: ${l.judul}`)}`}
                     varian="garis"
                     ukuran="sm"
                     className="mt-6 self-start"
