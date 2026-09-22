@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { PageHeader } from "@/components/site/PageHeader";
+import { CarouselTestimoni } from "@/components/tentang/CarouselTestimoni";
 import { Icon } from "@/components/ui/Icon";
 import { JudulSeksi, Section } from "@/components/ui/Section";
 import { StatBlock } from "@/components/ui/StatBlock";
@@ -142,32 +142,7 @@ export default function HalamanTentang() {
               judul="Suara wali santri,"
               sorot="alumni, dan jamaah"
             />
-            <ul className="mt-12 grid gap-5 md:grid-cols-3">
-              {testimoni.map((t) => (
-                <li key={t.slug} className="flex flex-col rounded-2xl border border-line bg-white p-6">
-                  <Icon nama="quran" className="size-6 text-accent-700" />
-                  <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-pretty text-ink italic">
-                    &ldquo;{t.kutipan}&rdquo;
-                  </blockquote>
-                  <div className="mt-5 flex items-center gap-3 border-t border-line pt-4">
-                    {t.foto ? (
-                      <Image
-                        src={t.foto.src}
-                        alt=""
-                        width={t.foto.width}
-                        height={t.foto.height}
-                        sizes="40px"
-                        className="size-10 rounded-full object-cover"
-                      />
-                    ) : null}
-                    <div>
-                      <p className="text-sm font-semibold text-ink">{t.nama}</p>
-                      <p className="text-xs text-ink-subtle">{t.peran}</p>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <CarouselTestimoni testimoni={testimoni} />
           </div>
         </Section>
       ) : null}
