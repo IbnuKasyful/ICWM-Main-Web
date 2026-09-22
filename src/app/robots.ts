@@ -16,8 +16,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        // Hasil pencarian internal tidak perlu dirayapi.
-        disallow: ["/cari", "/api/"],
+        disallow: ["/api/"],
       },
     ],
     sitemap: `${site.url}/sitemap.xml`,

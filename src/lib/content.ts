@@ -62,7 +62,7 @@ export function getUnits(): readonly Unit[] {
   return units;
 }
 
-/** PRD §9.2 — pencari program hanya menampilkan unit `aktif = true`. */
+/** PRD §9.2, pencari program hanya menampilkan unit `aktif = true`. */
 export function getUnitsAktif(): readonly Unit[] {
   return units
     .filter((u) => u.aktif)
@@ -148,7 +148,7 @@ async function muatPosts(): Promise<readonly Post[]> {
 }
 
 /**
- * PRD §9.1 & §9.6 — situs induk HANYA menampilkan tulisan yang dikurasi naik.
+ * PRD §9.1 & §9.6, situs induk HANYA menampilkan tulisan yang dikurasi naik.
  * Semua jalur baca publik wajib melewati fungsi ini.
  */
 export async function getPostsInduk(): Promise<readonly Post[]> {
@@ -164,7 +164,7 @@ export async function getPost(slug: string): Promise<Post | undefined> {
   return semua.find((p) => p.slug === slug && p.tampilkan_di_induk);
 }
 
-/** Slug untuk `generateStaticParams` — hanya yang tayang di induk. */
+/** Slug untuk `generateStaticParams`, hanya yang tayang di induk. */
 export async function getSlugPostInduk(): Promise<string[]> {
   return (await getPostsInduk()).map((p) => p.slug);
 }
@@ -184,13 +184,13 @@ export async function saringPosts(filter: FilterInformasi): Promise<readonly Pos
   });
 }
 
-/** Tahun yang benar-benar punya tulisan — untuk mengisi penyaring. */
+/** Tahun yang benar-benar punya tulisan, untuk mengisi penyaring. */
 export async function getTahunPost(): Promise<number[]> {
   const tahun = new Set((await getPostsInduk()).map((p) => Number(p.tanggal.slice(0, 4))));
   return [...tahun].sort((a, b) => b - a);
 }
 
-/** PRD §9.3 — 3 berita terkait pada halaman profil unit. */
+/** PRD §9.3, 3 berita terkait pada halaman profil unit. */
 export async function getPostsUnit(unitSlug: string, batas: number): Promise<readonly Post[]> {
   return (await getPostsInduk())
     .filter((p) => p.unit.includes(unitSlug))
@@ -229,7 +229,7 @@ export function getGaleri() {
 }
 
 /**
- * PRD §9.1 — blok agenda di beranda disembunyikan bila kosong, jadi fungsi ini
+ * PRD §9.1, blok agenda di beranda disembunyikan bila kosong, jadi fungsi ini
  * memang boleh mengembalikan array kosong.
  */
 export function getAgendaMendatang(batas?: number): readonly Agenda[] {
@@ -267,7 +267,7 @@ export function getAgendaLampau(): readonly Agenda[] {
 /* -------------------------------------------------------------------------- */
 
 /**
- * Angka rekapitulasi yang ikut build — dipakai selama `WPGRAPHQL_ENDPOINT`
+ * Angka rekapitulasi yang ikut build, dipakai selama `WPGRAPHQL_ENDPOINT`
  * belum diisi (mis. pratinjau di Cloudflare) dan sebagai jaring bila WordPress
  * sedang tidak dapat dihubungi.
  */
@@ -314,97 +314,4 @@ export async function getProgramDonasiSlug(slug: string): Promise<ProgramDonasi 
 
 export function getRekening() {
   return rekening;
-}
-
-/* -------------------------------------------------------------------------- */
-/* Pencarian (PRD §8 — /cari)                                                  */
-/* -------------------------------------------------------------------------- */
-
-export type HasilCari = {
-  judul: string;
-  ringkasan: string;
-  href: string;
-  jenis:
-    | "Tulisan"
-    | "Unit"
-    | "Program Al-Qur'an"
-    | "Program donasi"
-    | "Agenda"
-    | "Pertanyaan umum";
-};
-
-export async function cari(kueri: string): Promise<HasilCari[]> {
-  const q = kueri.trim().toLowerCase();
-  if (q.length < 2) return [];
-
-  const cocok = (...bagian: string[]) => bagian.some((b) => b.toLowerCase().includes(q));
-  const hasil: HasilCari[] = [];
-
-  for (const u of getUnitsAktif()) {
-    if (cocok(u.nama_lengkap, u.nama_pendek, u.deskripsi_singkat)) {
-      hasil.push({
-        judul: u.nama_lengkap,
-        ringkasan: u.deskripsi_singkat,
-        href: `/program/${u.slug}`,
-        jenis: "Unit",
-      });
-    }
-  }
-
-  for (const p of getProgramQuran()) {
-    if (cocok(p.nama, p.nama_pendek, p.ringkasan)) {
-      hasil.push({
-        judul: p.nama,
-        ringkasan: p.ringkasan,
-        href: `/program-quran#${p.slug}`,
-        jenis: "Program Al-Qur'an",
-      });
-    }
-  }
-
-  for (const p of await getPostsInduk()) {
-    if (cocok(p.judul, p.ringkasan, p.topik.join(" "))) {
-      hasil.push({
-        judul: p.judul,
-        ringkasan: p.ringkasan,
-        href: `/informasi/${p.slug}`,
-        jenis: "Tulisan",
-      });
-    }
-  }
-
-  for (const d of await getProgramDonasi()) {
-    if (cocok(d.judul, d.ringkasan)) {
-      hasil.push({
-        judul: d.judul,
-        ringkasan: d.ringkasan,
-        href: `/donasi/${d.slug}`,
-        jenis: "Program donasi",
-      });
-    }
-  }
-
-  for (const a of getAgendaMendatang()) {
-    if (cocok(a.judul, a.ringkasan, a.tempat)) {
-      hasil.push({
-        judul: a.judul,
-        ringkasan: a.ringkasan,
-        href: "/agenda",
-        jenis: "Agenda",
-      });
-    }
-  }
-
-  for (const f of getFaq()) {
-    if (cocok(f.pertanyaan, f.jawaban)) {
-      hasil.push({
-        judul: f.pertanyaan,
-        ringkasan: f.jawaban.slice(0, 160),
-        href: "/faq",
-        jenis: "Pertanyaan umum",
-      });
-    }
-  }
-
-  return hasil;
 }

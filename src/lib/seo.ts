@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { site } from "@/lib/site";
 import type { Agenda, Post, ProgramDonasi, Unit } from "@/lib/schemas";
 
-/** PRD §13 — metadata per halaman lewat Metadata API, tanpa kecuali. */
+/** PRD §13, metadata per halaman lewat Metadata API, tanpa kecuali. */
 export function buatMetadata({
   judul,
   deskripsi,
@@ -91,14 +91,6 @@ export function jsonldWebsite(): Jsonld {
     url: site.url,
     name: site.nama,
     inLanguage: "id-ID",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${site.url}/cari?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   };
 }
 
