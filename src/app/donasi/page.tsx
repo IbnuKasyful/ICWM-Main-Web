@@ -12,7 +12,7 @@ import { getProgramDonasi, getRekening } from "@/lib/content";
 import { buatMetadata, jsonldNgo } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-/** PRD §8 — ISR 15 menit. */
+/** PRD §8, ISR 15 menit. */
 export const revalidate = 900;
 
 export const metadata = buatMetadata({
@@ -23,39 +23,41 @@ export const metadata = buatMetadata({
   gambar: "/img/donasi-jumat-berkah.jpg",
 });
 
-/** `gambar` masih menumpang foto dokumentasi galeri sebagai penahan tempat —
- * menyusul diganti foto yang benar-benar mewakili tiap jenis dana. Sengaja
- * memakai foto, bukan ilustrasi ornamen: kartunya sekartu dengan bilah beranda,
- * dan ilustrasi emas membuat warnanya melenceng jauh dari nada foto di sana. */
+/** `gambar` diambil dari dokumentasi program donasi di `src/data/donasi.ts`,
+ * hanya yang berupa foto, bukan poster, karena kartunya memangkas gambar
+ * (`object-cover`) dan tulisan poster akan terpotong. Donasi baru punya tiga
+ * foto dokumentasi, jadi Zakat memakai foto kartu "Berdonasi" di bilah "Mulai
+ * dari sini" beranda. Sengaja memakai foto, bukan ilustrasi ornamen: kartunya
+ * sekartu dengan bilah beranda. */
 const jenisDana = [
   {
     nama: "Zakat",
     isi: "Kewajiban 2,5% atas harta yang telah mencapai nisab dan haul. Kami salurkan hanya kepada delapan asnaf yang berhak.",
     ikon: "perisai" as const,
-    gambar: "/img/galeri-buka-puasa-bersama.jpg",
+    gambar: "/img/niat-berdonasi.jpg",
   },
   {
     nama: "Infak",
     isi: "Pemberian bebas nominal dan bebas waktu, dipakai untuk menutup biaya operasional program pendidikan dan sosial.",
     ikon: "donasi" as const,
-    gambar: "/img/galeri-santriwati-halaqah.jpg",
+    gambar: "/img/donasi-puasa-arafah.jpg",
   },
   {
     nama: "Sedekah",
     isi: "Pemberian sukarela, termasuk sedekah dapur santri dan santunan mendesak bagi keluarga santri.",
     ikon: "orang" as const,
-    gambar: "/img/galeri-taud-mewarnai.jpg",
+    gambar: "/img/donasi-hewan-qurban.jpg",
   },
   {
     nama: "Wakaf",
-    isi: "Menahan pokok harta dan mengalirkan manfaatnya — dipakai untuk pembangunan asrama, kelas, dan aset produktif.",
+    isi: "Menahan pokok harta dan mengalirkan manfaatnya, dipakai untuk pembangunan asrama, kelas, dan aset produktif.",
     ikon: "yayasan" as const,
-    gambar: "/img/galeri-cendera-mata-masyayikh.jpg",
+    gambar: "/img/donasi-pembangunan.jpg",
   },
 ];
 
 /** `waktu` tampil pada bilah tegak di sisi kiri kartu, jadi tulisannya harus
- * pendek — bilah itu setinggi kartu dikurangi 2,5rem, bukan lebih. */
+ * pendek, bilah itu setinggi kartu dikurangi 2,5rem, bukan lebih. */
 const alurSetelahDonasi = [
   {
     judul: "Transfer",
@@ -154,7 +156,7 @@ export default async function HalamanDonasi() {
             keterangan="Pastikan Anda memilih jenis yang tepat: zakat memiliki ketentuan penerima yang mengikat, sedangkan infak, sedekah, dan wakaf lebih lapang peruntukannya."
           />
           {/* Bilah yang sama persis dengan "Mulai dari sini" di beranda, hanya
-              tanpa tautan — keempat jenis dana ini tidak punya halaman tujuan
+              tanpa tautan, keempat jenis dana ini tidak punya halaman tujuan
               masing-masing. Susunan barisnya ikut disamakan: blok teksnya
               dipatok selebar 22rem, jadi ia butuh bilah yang melebar, bukan
               petak grid yang sempit. */}
@@ -162,7 +164,7 @@ export default async function HalamanDonasi() {
             {jenisDana.map((j) => (
               <KartuFoto
                 key={j.nama}
-                gambar={null}
+                gambar={j.gambar}
                 ikon={j.ikon}
                 judul={j.nama}
                 keterangan={j.isi}
@@ -196,7 +198,7 @@ export default async function HalamanDonasi() {
               aksi={{ label: "Lihat rekening lembaga", href: "#rekening" }}
             />
           ) : (
-            <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {program.map((p) => (
                 <ProgramDonasiCard key={p.slug} program={p} />
               ))}
@@ -212,7 +214,7 @@ export default async function HalamanDonasi() {
             atas="Rekening lembaga"
             judul="Hanya dua rekening ini"
             sorot="yang sah"
-            keterangan="Keduanya menerima zakat, infak, sedekah, dan wakaf — tulis peruntukannya pada berita transfer. Kami tidak pernah meminta transfer ke rekening pribadi. Bila Anda menerima permintaan atas nama perorangan, mohon laporkan kepada kami."
+            keterangan="Keduanya menerima zakat, infak, sedekah, dan wakaf, tulis peruntukannya pada berita transfer. Kami tidak pernah meminta transfer ke rekening pribadi. Bila Anda menerima permintaan atas nama perorangan, mohon laporkan kepada kami."
           />
           <div className="mt-12">
             <DaftarRekening rekening={rekening} />
@@ -221,7 +223,7 @@ export default async function HalamanDonasi() {
           {/* Nada gelapnya dipinjam dari kartu "Yang membedakan program ini" di
               /program-quran saat disorot: biru tua merek, bukan hitam netral,
               dengan bayangan rendah yang mengangkatnya sedikit dari halaman.
-              Di sini nada itu menetap — kartunya memang satu-satunya langkah
+              Di sini nada itu menetap, kartunya memang satu-satunya langkah
               yang tersisa setelah transfer, jadi ia pantas menonjol sendiri. */}
           <div className="mt-8 flex flex-col gap-4 rounded-[22px] bg-brand-950 p-6 shadow-[0_22px_45px_-20px_rgba(0,12,40,0.7)] sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-start gap-3">
@@ -261,13 +263,13 @@ export default async function HalamanDonasi() {
 
           {/* Zigzag: langkah berselang-seling kiri–kanan mengapit sumbu tengah
               halaman, senapas dengan judul seksi yang rata tengah. Nada
-              terang–gelap ikut sisi — kiri terang, kanan gelap — jadi urutannya
+              terang–gelap ikut sisi, kiri terang, kanan gelap, jadi urutannya
               sudah terbaca dari bentuknya sebelum nomornya dibaca. Kartunya
               selebar 6 dari 12 kolom, dan bilah waktunya ikut dicerminkan agar
               selalu menghadap tepi luar. Garis putus-putus di sela kartu
               menyambungkan langkah ke langkah: tegak lurus saat kartu
               bertumpuk, menyiku menyeberangi sumbu saat berselang-seling. */}
-          <ol className="mt-12 grid gap-8 lg:grid-cols-12 lg:gap-10">
+          <ol className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10">
             {alurSetelahDonasi.map((langkah, i) => {
               const gelap = i % 2 === 1;
               return (
