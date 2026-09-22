@@ -1,7 +1,7 @@
 /**
  * Data contoh taksonomi `unit` + CPT `unit_profil`.
  *
- * PRD §17 mengizinkan — bahkan meminta — pembangunan dengan data contoh sejak
+ * PRD §17 mengizinkan, bahkan meminta, pembangunan dengan data contoh sejak
  * awal. Seluruh isi berkas ini akan digantikan oleh WPGraphQL pada Tahap 0.
  * Bentuknya sengaja dibuat persis seperti hasil kueri GraphQL nanti.
  *
@@ -10,13 +10,13 @@
  * jenjang tinggi. Jenjang putri tidak
  * berdiri sendiri-sendiri: MTs dan MA putri berada di bawah satu sekolah
  * berasrama, Mahabbah Boarding School (MBS), sehingga keduanya dicatat sebagai
- * dua unit dengan nama MBS — satu unit hanya boleh punya satu jenjang agar
+ * dua unit dengan nama MBS, satu unit hanya boleh punya satu jenjang agar
  * penyaringan di /program tetap bekerja.
  *
  * Empat unit berjenjang `non-formal`, semuanya kaderisasi pengampu Al-Qur'an:
  * PKM (muhaffizh, campur), PG TAUD SAQU (guru TAUD, 3 bulan), I'dad Mu'allimat
  * (guru TAUD, 2 tahun), dan Imtiaz Putri (tahfizh intensif pra-mengajar).
- * Program Al-Qur'an untuk umum — Graha Qur'an dan Wisata Qur'an — bukan unit
+ * Program Al-Qur'an untuk umum, Graha Qur'an dan Wisata Qur'an, bukan unit
  * pendidikan dan tinggal di `src/data/program-quran.ts`, bukan di sini.
  */
 
@@ -26,9 +26,12 @@ import { persebaranTaud } from "@/data/persebaran-taud";
 import type { Cabang, ImageData, UnitProfil } from "@/lib/schemas";
 
 /**
- * Empat pondok cabang penyelenggara PKM (brosur PKM 2026/2027 bagian F).
- * Nomor WhatsApp per pondok belum diumumkan; pendaftaran berjalan lewat jalur
- * PMB STIU di kampus pusat, jadi `kontak_wa` sengaja dikosongkan.
+ * Enam pondok cabang penyelenggara PKM. Bogor, Jepara, Bengkulu, dan
+ * Banjarbaru dari brosur PKM 2026/2027 bagian F; Mojokerto dan Tegal serta
+ * narahubung tiap pondok dari pkm.wadimubarak.com (beranda dan artikel
+ * "Selayang Pandang Program Kaderisasi Muhaffizh"). Banjarbaru tidak punya
+ * narahubung sendiri di sana, jadi `kontak_wa`-nya dikosongkan dan
+ * pendaftarnya diarahkan ke PSB pusat.
  */
 const cabangPkm: Cabang[] = [
   {
@@ -38,6 +41,7 @@ const cabangPkm: Cabang[] = [
     pulau: "Jawa",
     kota: "Kota Bogor",
     alamat: "Jl. Danau Bogor Raya, RT.01/RW.13, Katulampa, Kec. Bogor Timur, Kota Bogor, Jawa Barat 16144",
+    kontak_wa: "6287770910628",
     status_ppdb: "buka",
   },
   {
@@ -47,6 +51,7 @@ const cabangPkm: Cabang[] = [
     pulau: "Jawa",
     kota: "Kabupaten Jepara",
     alamat: "Jl. Watuagung Pulewijaya, Desa Plajan RT 26 RW 4, Kec. Pakis Aji, Jepara, Jawa Tengah 59452",
+    kontak_wa: "6285329617697",
     status_ppdb: "buka",
   },
   {
@@ -56,6 +61,27 @@ const cabangPkm: Cabang[] = [
     pulau: "Sumatera",
     kota: "Kabupaten Bengkulu Selatan",
     alamat: "Jl. Affan Bachsin No.13, Ps. Mulia, Kec. Kota Manna, Kab. Bengkulu Selatan, Bengkulu 38518",
+    kontak_wa: "6282374807575",
+    status_ppdb: "buka",
+  },
+  {
+    slug: "pkm-ahmad-assadi-mojokerto",
+    nama: "Pondok Tahfizh Ahmad As-Sa'di",
+    provinsi: "Jawa Timur",
+    pulau: "Jawa",
+    kota: "Kabupaten Mojokerto",
+    alamat: "Desa Kedungudi, Kec. Trawas, Kab. Mojokerto, Jawa Timur",
+    kontak_wa: "62895604420903",
+    status_ppdb: "buka",
+  },
+  {
+    slug: "pkm-darul-muttaqien-tegal",
+    nama: "Pondok Tahfizh Darul Muttaqien",
+    provinsi: "Jawa Tengah",
+    pulau: "Jawa",
+    kota: "Kabupaten Tegal",
+    alamat: "Jl. Merak 1 RT.02 RW.03, Desa Balapulang Kulon, Kec. Balapulang, Kab. Tegal, Jawa Tengah",
+    kontak_wa: "628112586686",
     status_ppdb: "buka",
   },
   {
@@ -69,13 +95,126 @@ const cabangPkm: Cabang[] = [
   },
 ];
 
+/**
+ * Ma'had cabang Program Tahfizh tingkat SMP Putra, dari daftar "Jurusan" di
+ * smp.wadimubarak.com (berandanya sendiri sedang 404, daftar itu masih tampil
+ * di kaki halaman). Alamat dan narahubung dari halaman 1 dokumen "Selayang
+ * Pandang Program Tahfizh SMP Putra" terbitan yayasan.
+ *
+ * Halaman itu memuat empat alamat tanpa mencantumkan nama pondoknya sebagai
+ * teks, namanya berupa gambar. Urutannya dipetakan lewat kecocokan yang bisa
+ * diperiksa: nomor 0888-2780-278 juga tercetak di situs Ma'had Sabilul Qur'an,
+ * dan Gunungkidul hanya dimiliki Al-Arqam. Sisanya, alamat Megamendung dengan
+ * narahubung Ustadz Muhammad Iqbal, jatuh ke Rumah Tahfizh Imtiaz.
+ */
+const cabangSmpTahfizh: Cabang[] = [
+  {
+    slug: "smp-sulthon-al-islamy-sentul",
+    nama: "Ma'had Sulthon Al-Islamy",
+    provinsi: "Jawa Barat",
+    pulau: "Jawa",
+    kota: "Kabupaten Bogor",
+    alamat: "Jalan Bukit Zanbaqah RT 04 RW 08, Desa Bojongkoneng, Kec. Babakan Madang, Kabupaten Bogor, Jawa Barat",
+    kontak_wa: "6288809252683",
+    status_ppdb: "buka",
+  },
+  {
+    slug: "smp-sabilul-quran-bogor",
+    nama: "Ma'had Sabilul Qur'an",
+    provinsi: "Jawa Barat",
+    pulau: "Jawa",
+    kota: "Kabupaten Bogor",
+    alamat: "Kp. Sukaremi Kabandungan, Cipayung Datar, Megamendung, Kab. Bogor, Jawa Barat",
+    kontak_wa: "628882780278",
+    status_ppdb: "buka",
+  },
+  {
+    slug: "smp-al-arqam-gunungkidul",
+    nama: "Ma'had Tahfizh Al-Arqam",
+    provinsi: "DI Yogyakarta",
+    pulau: "Jawa",
+    kota: "Kabupaten Gunungkidul",
+    alamat: "Jalan Yogyakarta–Wonosari, Padukuhan Nogosari II, Desa Bandung, Kec. Playen, Kabupaten Gunung Kidul, DI Yogyakarta",
+    kontak_wa: "6285326932713",
+    status_ppdb: "buka",
+  },
+  {
+    slug: "smp-rumah-tahfizh-imtiaz-bogor",
+    nama: "Rumah Tahfizh Imtiaz",
+    provinsi: "Jawa Barat",
+    pulau: "Jawa",
+    kota: "Kabupaten Bogor",
+    alamat: "Jl. KH. Ma'mun Goleah, Sukagalih, Kec. Megamendung, Kabupaten Bogor, Jawa Barat 16770",
+    kontak_wa: "6289524151750",
+    status_ppdb: "buka",
+  },
+];
+
+/**
+ * Ma'had cabang Program Tahfizh tingkat SMA Putra, dari bagian "Jenjang
+ * Pendidikan" di sma.wadimubarak.com. Sama seperti SMP: alamat dan narahubung
+ * hanya diisi bila ma'hadnya menerbitkan sendiri.
+ */
+const cabangSmaTahfizh: Cabang[] = [
+  {
+    slug: "sma-imtiaz-sukabumi",
+    nama: "Ma'had Tahfizh Imtiaz Sukabumi",
+    provinsi: "Jawa Barat",
+    pulau: "Jawa",
+    kota: "Kabupaten Sukabumi",
+    alamat: "Jl. Manggis No. 999, Kampung Baru, Tenjoayu, Kec. Cicurug, Kab. Sukabumi, Jawa Barat",
+    kontak_wa: "6285819475363",
+    status_ppdb: "buka",
+  },
+  {
+    slug: "sma-ar-rabwah-cirebon",
+    nama: "Ma'had Tahfizh Ar-Rabwah",
+    provinsi: "Jawa Barat",
+    pulau: "Jawa",
+    kota: "Cirebon",
+    status_ppdb: "buka",
+  },
+  {
+    slug: "sma-al-arqam-gunungkidul",
+    nama: "Ma'had Tahfizh Al-Arqam",
+    provinsi: "DI Yogyakarta",
+    pulau: "Jawa",
+    kota: "Kabupaten Gunungkidul",
+    status_ppdb: "buka",
+  },
+  {
+    slug: "sma-al-quds-al-islamy-sumenep",
+    nama: "Ma'had Tahfizh Al-Quds Al-Islamy",
+    provinsi: "Jawa Timur",
+    pulau: "Jawa",
+    kota: "Kabupaten Sumenep",
+    status_ppdb: "buka",
+  },
+  {
+    slug: "sma-thoyyibah-bandung",
+    nama: "Ma'had Tahfizh Thoyyibah",
+    provinsi: "Jawa Barat",
+    pulau: "Jawa",
+    kota: "Lembang, Bandung Barat",
+    status_ppdb: "buka",
+  },
+  {
+    slug: "sma-baitul-mubarak-jakarta",
+    nama: "Ma'had Tahfizh Baitul Mubarak",
+    provinsi: "DKI Jakarta",
+    pulau: "Jawa",
+    kota: "Jakarta",
+    status_ppdb: "buka",
+  },
+];
+
 export const unitsMentah: unknown[] = [
   {
     slug: "taud-saqu",
     nama_lengkap: "TAUD Sahabat Al-Qur'an",
     nama_pendek: "TAUD SAQU",
     deskripsi_singkat:
-      "Tahfizh anak usia dini sejak 3 tahun 7 bulan dengan metode At-Tibyan, kini berjalan di 162 lokasi pada 27 provinsi dengan kurikulum yang sama.",
+      "Tahfizh anak usia dini sejak 3 tahun 7 bulan dengan metode At-Tibyan: delapan cabang dikelola langsung yayasan, selebihnya jaringan mitra di 25 provinsi.",
     url_subdomain: "https://taud.wadimubarak.com",
     logo: { src: "/img/logo-taud-saqu.png", alt: "Logo TAUD Sahabat Al-Qur’an", width: 238, height: 234 },
     warna_aksen: "#00a2e9",
@@ -87,7 +226,7 @@ export const unitsMentah: unknown[] = [
     persebaran: persebaranTaud,
     status_ppdb: "buka",
     periode_ppdb: "Oktober 2026 – Mei 2027 (tahun ajaran 2026/2027)",
-    kontak_wa: "6285714923006",
+    kontak_wa: "6285883576234",
     urutan_tampil: 1,
     aktif: true,
   },
@@ -108,7 +247,7 @@ export const unitsMentah: unknown[] = [
     persebaran: [],
     status_ppdb: "buka",
     periode_ppdb: "November 2025 – Februari 2026",
-    kontak_wa: "6285718234036",
+    kontak_wa: "6285165074542",
     urutan_tampil: 2,
     aktif: true,
   },
@@ -125,11 +264,11 @@ export const unitsMentah: unknown[] = [
     gender: "putra",
     model_belajar: "boarding",
     lokasi_kampus: "bogor",
-    cabang: [],
+    cabang: cabangSmpTahfizh,
     persebaran: [],
     status_ppdb: "buka",
-    periode_ppdb: "Batch 3, tahun pelajaran 2027/2028",
-    kontak_wa: "6281111882030",
+    periode_ppdb: "Batch 3: tahun pelajaran 2027/2028",
+    kontak_wa: "6285883576234",
     urutan_tampil: 3,
     aktif: true,
   },
@@ -151,11 +290,11 @@ export const unitsMentah: unknown[] = [
     gender: "putra",
     model_belajar: "boarding",
     lokasi_kampus: "bogor",
-    cabang: [],
+    cabang: cabangSmaTahfizh,
     persebaran: [],
     status_ppdb: "buka",
-    periode_ppdb: "Batch 3, tahun pelajaran 2027/2028",
-    kontak_wa: "6281111882030",
+    periode_ppdb: "Batch 3: tahun pelajaran 2027/2028",
+    kontak_wa: "6285883576234",
     urutan_tampil: 4,
     aktif: true,
   },
@@ -180,8 +319,8 @@ export const unitsMentah: unknown[] = [
     cabang: [],
     persebaran: [],
     status_ppdb: "buka",
-    periode_ppdb: "Batch 6 — 1 Agustus 2026 s.d. 30 Juni 2027 (TP 2027/2028)",
-    kontak_wa: "62895327002283",
+    periode_ppdb: "Batch 6: 1 Agustus 2026 s.d. 30 Juni 2027 (TP 2027/2028)",
+    kontak_wa: "6285883576234",
     urutan_tampil: 5,
     aktif: true,
   },
@@ -206,8 +345,8 @@ export const unitsMentah: unknown[] = [
     cabang: [],
     persebaran: [],
     status_ppdb: "buka",
-    periode_ppdb: "Batch 6 — 1 Agustus 2026 s.d. 30 Juni 2027 (TP 2027/2028)",
-    kontak_wa: "62895327002283",
+    periode_ppdb: "Batch 6: 1 Agustus 2026 s.d. 30 Juni 2027 (TP 2027/2028)",
+    kontak_wa: "6285883576234",
     urutan_tampil: 6,
     aktif: true,
   },
@@ -227,8 +366,8 @@ export const unitsMentah: unknown[] = [
     cabang: [],
     persebaran: [],
     status_ppdb: "buka",
-    periode_ppdb: "Setahun sekali — PMB tahun akademik 2026/2027",
-    kontak_wa: "6285692757850",
+    periode_ppdb: "Setahun sekali: PMB tahun akademik 2026/2027",
+    kontak_wa: "6285883576234",
     urutan_tampil: 7,
     aktif: true,
   },
@@ -237,7 +376,7 @@ export const unitsMentah: unknown[] = [
     nama_lengkap: "Program Kaderisasi Muhaffizh Wadi Mubarak",
     nama_pendek: "PKM Wadi Mubarak",
     deskripsi_singkat:
-      "Jalur cepat mencetak muhaffizh: dua tahun tahfizh dan tajwid, lalu satu tahun ikatan dinas. Berjalan di empat pondok cabang, tanpa SPP bulanan.",
+      "Jalur cepat mencetak muhaffizh: dua tahun tahfizh dan tajwid, lalu satu tahun ikatan dinas. Berjalan di enam pondok cabang, tanpa SPP bulanan.",
     url_subdomain: "",
     logo: { src: "/img/logo-wadi-mubarak.png", alt: "Logo Wadi Mubarak", width: 797, height: 938 },
     warna_aksen: "#38bdf8",
@@ -248,7 +387,7 @@ export const unitsMentah: unknown[] = [
     cabang: cabangPkm,
     persebaran: [],
     status_ppdb: "buka",
-    periode_ppdb: "Tahun ajaran 2026/2027 — KBM mulai sekitar Juli 2026",
+    periode_ppdb: "Tahun ajaran 2026/2027: KBM mulai sekitar Juli 2026",
     kontak_wa: "6285883576234",
     urutan_tampil: 8,
     aktif: true,
@@ -269,8 +408,8 @@ export const unitsMentah: unknown[] = [
     cabang: [],
     persebaran: [],
     status_ppdb: "buka",
-    periode_ppdb: "Tiga angkatan setiap tahun — angkatan ke-24 diwisuda 10 Juli 2025",
-    kontak_wa: "6285883576234",
+    periode_ppdb: "Tiga angkatan setiap tahun: angkatan ke-24 diwisuda 10 Juli 2025",
+    kontak_wa: "62881024143048",
     urutan_tampil: 9,
     aktif: true,
   },
@@ -312,7 +451,7 @@ export const unitsMentah: unknown[] = [
     persebaran: [],
     status_ppdb: "buka",
     periode_ppdb: "Tahun ajaran 2025/2026",
-    kontak_wa: "6285883576234",
+    kontak_wa: "6281111882029",
     urutan_tampil: 11,
     aktif: true,
   },
@@ -354,7 +493,7 @@ const profilInput: ProfilInput[] = [
     keunggulan: [
       {
         judul: "Metode At-Tibyan dari Mesir",
-        isi: "Anak belajar membaca sekaligus menerapkan tahsin dan tajwid sejak awal — metode yang sama dipakai di Saudi, Mesir, Jepang, Australia, Malaysia, Brunei, dan Thailand.",
+        isi: "Anak belajar membaca sekaligus menerapkan tahsin dan tajwid sejak awal, metode yang sama dipakai di Saudi, Mesir, Jepang, Australia, Malaysia, Brunei, dan Thailand.",
       },
       {
         judul: "Satu kurikulum di semua cabang",
@@ -370,12 +509,12 @@ const profilInput: ProfilInput[] = [
       },
       {
         judul: "162 lokasi, satu kurikulum",
-        isi: "Materi, target hafalan, dan penilaian sama di setiap lokasi — keluarga yang pindah kota tidak perlu memulai dari awal.",
+        isi: "Materi, target hafalan, dan penilaian sama di setiap lokasi, keluarga yang pindah kota tidak perlu memulai dari awal.",
       },
     ],
     kurikulum: [
       { judul: "Baca Al-Qur'an", isi: "Metode At-Tibyan: membaca sekaligus menerapkan tahsin dan tajwid, plus matan Tuhfatul Athfal." },
-      { judul: "Tahfizh Al-Qur'an", isi: "Menu utama program — menekankan jumlah hafalan sekaligus kekuatan muraja'ah." },
+      { judul: "Tahfizh Al-Qur'an", isi: "Menu utama program, menekankan jumlah hafalan sekaligus kekuatan muraja'ah." },
       { judul: "Aqidah dan akhlak", isi: "Penanaman tauhid dan karakter Islami lewat hadits, dzikir, dan doa harian." },
       { judul: "Praktik ibadah", isi: "Penguasaan ibadah sehari-hari sesuai tuntunan Al-Qur'an dan Sunnah." },
       { judul: "Adab Qur'ani", isi: "Pengenalan dan pembiasaan adab hidup sehari-hari sesuai tuntunan Al-Qur'an." },
@@ -404,12 +543,12 @@ const profilInput: ProfilInput[] = [
     untuk_siapa: [
       "Anak usia 7–12 tahun yang sudah lulus calistung dan mengenal huruf hijaiyah",
       "Orang tua yang menginginkan hafalan kuat tanpa mengorbankan akademik",
-      "Lulusan TAUD SAQU maupun TK/RA lain — pendaftar non-TAUD mengikuti Pra MIT lebih dulu",
+      "Lulusan TAUD SAQU maupun TK/RA lain, pendaftar non-TAUD mengikuti Pra MIT lebih dulu",
     ],
     keunggulan: [
       {
         judul: "Target bertingkat 5 sampai 30 juz",
-        isi: "Santri naik bertahap — 5, 10, 15, hingga 30 juz — mengikuti kemampuannya, bukan satu target seragam untuk semua.",
+        isi: "Santri naik bertahap, 5, 10, 15, hingga 30 juz, mengikuti kemampuannya, bukan satu target seragam untuk semua.",
       },
       {
         judul: "Kurikulum At-Tibyan",
@@ -417,7 +556,7 @@ const profilInput: ProfilInput[] = [
       },
       {
         judul: "Empat pilar pendidikan",
-        isi: "Tarbiyah, tahsin, tahfizh, dan akademik berjalan bersamaan — tahfizh tidak menggeser pelajaran sekolah.",
+        isi: "Tarbiyah, tahsin, tahfizh, dan akademik berjalan bersamaan, tahfizh tidak menggeser pelajaran sekolah.",
       },
       {
         judul: "Kurikulum madrasah penuh",
@@ -425,7 +564,7 @@ const profilInput: ProfilInput[] = [
       },
       {
         judul: "Apresiasi bagi penuntas 30 juz",
-        isi: "Santri yang menuntaskan 30 juz mendapat apresiasi yayasan — di antaranya umrah dan kunjungan ke Jepang.",
+        isi: "Santri yang menuntaskan 30 juz mendapat apresiasi yayasan, di antaranya umrah dan kunjungan ke Jepang.",
       },
     ],
     kurikulum: [
@@ -447,7 +586,7 @@ const profilInput: ProfilInput[] = [
     alur_ppdb: [
       "Mengisi formulir daring dan luring serta membayar biaya pendaftaran",
       "Melengkapi berkas: akta kelahiran, KTP orang tua, kartu keluarga, pas foto 3x4 masing-masing 4 lembar, dan ijazah RA/TK/KB",
-      "Tes calistung dan pengenalan huruf hijaiyah — mampu membaca iqro' 3 lebih diutamakan",
+      "Tes calistung dan pengenalan huruf hijaiyah, mampu membaca iqro' 3 lebih diutamakan",
       "Wawancara anak dan komitmen kerja sama wali santri",
       "Pengumuman hasil dan daftar ulang",
       "Mengikuti Pra MIT bagi pendaftar yang bukan lulusan TAUD",
@@ -465,7 +604,7 @@ const profilInput: ProfilInput[] = [
     keunggulan: [
       {
         judul: "Fondasi dulu, hafalan kemudian",
-        isi: "Tiga bulan pertama dipakai membenahi adab, fiqh thaharah dan shalat, serta bacaan sesuai standar sanad At-Tibyan — baru setelah itu masuk program takhassush tahfizh.",
+        isi: "Tiga bulan pertama dipakai membenahi adab, fiqh thaharah dan shalat, serta bacaan sesuai standar sanad At-Tibyan, baru setelah itu masuk program takhassush tahfizh.",
       },
       {
         judul: "Musyrif tinggal di asrama",
@@ -602,7 +741,7 @@ const profilInput: ProfilInput[] = [
     ],
     alur_ppdb: [
       "Pendaftaran daring",
-      "Tes kemampuan dan tes tahfizh — dijadwalkan setiap akhir pekan sesuai konfirmasi wali santri",
+      "Tes kemampuan dan tes tahfizh, dijadwalkan setiap akhir pekan sesuai konfirmasi wali santri",
       "Wawancara orang tua",
       "Pengumuman hasil tes, lalu daftar ulang pada Juli 2027",
     ],
@@ -653,7 +792,7 @@ const profilInput: ProfilInput[] = [
     ],
     alur_ppdb: [
       "Pendaftaran daring",
-      "Tes kemampuan dan tes tahfizh — dijadwalkan setiap akhir pekan sesuai konfirmasi wali santri",
+      "Tes kemampuan dan tes tahfizh, dijadwalkan setiap akhir pekan sesuai konfirmasi wali santri",
       "Wawancara orang tua",
       "Pengumuman hasil tes, lalu daftar ulang pada Juli 2027",
     ],
@@ -664,7 +803,7 @@ const profilInput: ProfilInput[] = [
     namaTampil: "STIU Wadi Mubarak",
     untuk_siapa: [
       "Lulusan MA/SMA/pesantren, putra maupun putri, yang ingin mendalami ilmu Al-Qur'an dan tafsir",
-      "Pendaftar dengan bekal dasar bahasa Arab — hafalan awal tidak disyaratkan",
+      "Pendaftar dengan bekal dasar bahasa Arab, hafalan awal tidak disyaratkan",
       "Calon pengajar dan dai yang siap menjalani dua tahun pengabdian setelah lulus",
     ],
     keunggulan: [
@@ -705,7 +844,7 @@ const profilInput: ProfilInput[] = [
     ],
     alur_ppdb: [
       "Mendaftar daring lewat portal SPMB STIU Wadi Mubarak",
-      "Membayar biaya pendaftaran — nominalnya disampaikan panitia, sudah termasuk makan selama ujian",
+      "Membayar biaya pendaftaran, nominalnya disampaikan panitia, sudah termasuk makan selama ujian",
       "Mengikuti ujian masuk sesuai jadwal yang diumumkan panitia",
       "Pengumuman kelulusan",
       "Daftar ulang, termasuk penetapan uang pangkal",
@@ -724,7 +863,7 @@ const profilInput: ProfilInput[] = [
     keunggulan: [
       {
         judul: "Tanpa SPP bulanan",
-        isi: "PKM adalah program beasiswa. Yang ditanggung pendaftar hanya uang pangkal sekali bayar untuk keperluan pribadi santri dan sarana pondok — tidak ada biaya bulanan. Nominalnya disampaikan panitia saat daftar ulang.",
+        isi: "PKM adalah program beasiswa. Yang ditanggung pendaftar hanya uang pangkal sekali bayar untuk keperluan pribadi santri dan sarana pondok, tidak ada biaya bulanan. Nominalnya disampaikan panitia saat daftar ulang.",
       },
       {
         judul: "Tidak wajib punya ijazah formal",
@@ -744,14 +883,14 @@ const profilInput: ProfilInput[] = [
       },
     ],
     kurikulum: [
-      { judul: "Bulan 1–1,5 — Tahsin dan Tajwid I", isi: "Tahsin plus setoran juz 30, serta matan dan syarah Tuhfatul Athfal yang wajib dihafal." },
-      { judul: "Pekan VII–VIII — Ujian", isi: "Ujian tahsin dan tajwid; kelulusannya menjadi syarat melanjutkan hafalan Al-Qur'an." },
-      { judul: "Bulan III – Semester III — Tahfizh", isi: "Hafalan 30 juz, ditutup ujian yang menentukan peluang mengambil Tajwid II." },
-      { judul: "Semester IV — Tajwid II dan sanad", isi: "Matan dan syarah Jazariyah serta sanad tajwid, bersyarat sesuai capaian belajar santri." },
-      { judul: "Semester IV — Manajemen halaqah", isi: "Materi wajib bagi setiap santri, dilanjutkan praktik pengelolaan halaqah (PPL)." },
+      { judul: "Bulan 1–1,5, Tahsin dan Tajwid I", isi: "Tahsin plus setoran juz 30, serta matan dan syarah Tuhfatul Athfal yang wajib dihafal." },
+      { judul: "Pekan VII–VIII, Ujian", isi: "Ujian tahsin dan tajwid; kelulusannya menjadi syarat melanjutkan hafalan Al-Qur'an." },
+      { judul: "Bulan III – Semester III, Tahfizh", isi: "Hafalan 30 juz, ditutup ujian yang menentukan peluang mengambil Tajwid II." },
+      { judul: "Semester IV, Tajwid II dan sanad", isi: "Matan dan syarah Jazariyah serta sanad tajwid, bersyarat sesuai capaian belajar santri." },
+      { judul: "Semester IV, Manajemen halaqah", isi: "Materi wajib bagi setiap santri, dilanjutkan praktik pengelolaan halaqah (PPL)." },
     ],
     fasilitas: [
-      "Asrama di salah satu dari empat pondok cabang penyelenggara",
+      "Asrama di salah satu dari enam pondok cabang penyelenggara",
       "Ruang halaqah dan ruang tashih",
       "Perpustakaan kitab dan mushaf rujukan",
       "Masjid pondok",
@@ -837,7 +976,7 @@ const profilInput: ProfilInput[] = [
       },
       {
         judul: "Target hafalan yang realistis",
-        isi: "Lima juz dengan standar mutqin — dituntaskan betul, bukan dikejar jumlahnya.",
+        isi: "Lima juz dengan standar mutqin, dituntaskan betul, bukan dikejar jumlahnya.",
       },
       {
         judul: "Jalur gelar S1 PG PAUD",
@@ -849,11 +988,11 @@ const profilInput: ProfilInput[] = [
       },
     ],
     kurikulum: [
-      { judul: "Marhalah I — bulan 1–3", isi: "Tahsin, tajwid nazhari, dan dasar bahasa Arab." },
-      { judul: "Marhalah II — bulan 4–6", isi: "Fokus penuh pada hafalan Al-Qur'an." },
-      { judul: "Semester 2 — bulan 7–12", isi: "Bahasa Arab lanjutan serta pengantar ilmu ke-TAUD-an dan ilmu syar'i." },
-      { judul: "Semester 3 — bulan 13–18", isi: "Metode At-Tibyan, pengajaran Al-Qur'an anak usia dini, dan microteaching." },
-      { judul: "Semester 4 — bulan 19–24", isi: "Praktik pengalaman lapangan terbimbing, pengelolaan kelas, dan etika profesi." },
+      { judul: "Marhalah I, bulan 1–3", isi: "Tahsin, tajwid nazhari, dan dasar bahasa Arab." },
+      { judul: "Marhalah II, bulan 4–6", isi: "Fokus penuh pada hafalan Al-Qur'an." },
+      { judul: "Semester 2, bulan 7–12", isi: "Bahasa Arab lanjutan serta pengantar ilmu ke-TAUD-an dan ilmu syar'i." },
+      { judul: "Semester 3, bulan 13–18", isi: "Metode At-Tibyan, pengajaran Al-Qur'an anak usia dini, dan microteaching." },
+      { judul: "Semester 4, bulan 19–24", isi: "Praktik pengalaman lapangan terbimbing, pengelolaan kelas, dan etika profesi." },
     ],
     fasilitas: [
       "Asrama putri di kompleks kampus Megamendung",
@@ -921,7 +1060,7 @@ const profilInput: ProfilInput[] = [
 /**
  * Unit yang fotonya sudah tersedia memakai dokumentasi sungguhan; sisanya
  * masih memakai gambar contoh dari `galeriUnit`. Begitu satu unit dapat foto,
- * cukup tambahkan slug-nya di sini — tidak ada yang lain yang perlu diubah.
+ * cukup tambahkan slug-nya di sini, tidak ada yang lain yang perlu diubah.
  *
  * MTs dan MA berbagi satu berkas dokumentasi: kedua jenjang tinggal di kampus
  * yang sama dan difoto pada kegiatan yang sama. Yang dibedakan hanya foto hero
@@ -1090,53 +1229,85 @@ const fotoMahabbah = [
 ];
 
 /**
- * Dokumentasi TAUD SAQU dan MIT SAQU, diambil dari artikel-artikel di
- * wadimubarak.com — situs utama yayasan yang sama.
+ * Dokumentasi TAUD SAQU dikirim langsung oleh pengelola TAUD (September 2026);
+ * dokumentasi MIT SAQU diambil dari artikel-artikel di wadimubarak.com.
  *
- * Keduanya menyekolahkan anak, dan halaman galeri situs ini berjanji tidak
- * menampilkan wajah santri secara menonjol. Maka yang dipilih di sini foto
- * kegiatan, bukan potret: bidikan lebar, punggung dan sisi wajah, anak yang
- * sedang menekuni sesuatu. Yang sengaja ditinggalkan: potret dekat anak yang
- * disebut namanya, dan bidikan layar wisuda yang memuat nama lengkap, sekolah,
- * serta asal daerah seorang anak — dua-duanya melewati batas itu meski sudah
- * tayang di situs utama.
+ * Kisinya enam kolom di layar lebar, jadi TAUD memakai dua belas foto, dua
+ * baris penuh. Urutannya mendahulukan keseharian di kelas dan rihlah; acara
+ * Penganugerahan Tahfizh 20 Juni 2025 ditaruh di akhir.
  */
 const fotoTaud = [
   fotoDok(
-    "galeri-taud-permainan-lingkaran",
-    "Anak-anak TAUD SAQU bermain lingkaran gelang di halaman bersama guru dan wali murid",
-    1024,
-    576,
+    "galeri-taud-kelas-layar",
+    "Ustadzah TAUD SAQU menerangkan materi lewat layar di depan anak-anak yang duduk rapi di lantai kelas",
+    1280,
+    960,
   ),
   fotoDok(
-    "galeri-taud-belajar-alam",
-    "Kelas TAUD SAQU digelar beralas tikar di lapangan terbuka",
-    1024,
-    576,
+    "galeri-taud-rihlah-kebun-binatang",
+    "Anak-anak TAUD SAQU berfoto bersama guru di depan kandang gajah saat rihlah ke kebun binatang",
+    1600,
+    1200,
   ),
   fotoDok(
-    "galeri-taud-wahana-panjat",
-    "Seorang anak TAUD SAQU menapaki wahana panjat di halaman bermain sekolah",
-    1024,
-    577,
+    "galeri-taud-bekal-di-taman",
+    "Anak-anak TAUD SAQU duduk di atas tikar bergambar peta di taman sambil menunjukkan bekal mereka",
+    1200,
+    1600,
   ),
   fotoDok(
-    "galeri-taud-rombongan-berkumpul",
-    "Rombongan anak dan wali murid TAUD SAQU berkumpul di lapangan saat kegiatan luar kelas",
-    1024,
-    576,
+    "galeri-taud-rihlah-edukatif",
+    "Rombongan TAUD SAQU bertopi kuning membentangkan spanduk Rihlah Edukatif bersama para guru",
+    1600,
+    1200,
   ),
   fotoDok(
-    "galeri-taud-turun-bus",
-    "Anak-anak TAUD SAQU turun dari bus bersama wali murid pada kegiatan Little Hafizh Explorer",
-    1024,
-    576,
+    "galeri-taud-kelas-kursi",
+    "Anak-anak TAUD SAQU berseragam biru duduk di kursi kecil menekuni kegiatan di ruang kelas",
+    1200,
+    1600,
   ),
   fotoDok(
-    "galeri-taud-kelas-wali-murid",
-    "Pertemuan wali murid TAUD SAQU di ruang kelas berhias karya anak",
-    1024,
-    578,
+    "galeri-taud-bermain-lapangan",
+    "Anak-anak TAUD SAQU bermain lompat simpai di lapangan rumput di bawah langit cerah",
+    920,
+    1600,
+  ),
+  fotoDok(
+    "galeri-taud-foto-kelas",
+    "Satu kelas TAUD SAQU berfoto bersama di ruang kelas berhias karya anak",
+    1600,
+    1200,
+  ),
+  fotoDok(
+    "galeri-taud-permainan-gelas",
+    "Anak-anak TAUD SAQU bermain menyusun gelas di atas meja biru",
+    913,
+    1600,
+  ),
+  fotoDok(
+    "galeri-taud-tamu-kelas",
+    "Anak-anak TAUD SAQU duduk menyimak ustadz tamu yang berkunjung ke kelas",
+    721,
+    1600,
+  ),
+  fotoDok(
+    "galeri-taud-penampilan-panggung",
+    "Penampilan drama anak TAUD SAQU berkostum bunga di panggung Penganugerahan Tahfizh TAUD SAQU - MIT SAQU",
+    1600,
+    1200,
+  ),
+  fotoDok(
+    "galeri-taud-penganugerahan-piala",
+    "Ustadz menyerahkan piala kepada anak TAUD SAQU pada Penganugerahan Tahfizh 20 Juni 2025",
+    1600,
+    1066,
+  ),
+  fotoDok(
+    "galeri-taud-penganugerahan-foto-bersama",
+    "Anak-anak TAUD SAQU berfoto bersama para ustadz di panggung Penganugerahan Tahfizh TAUD SAQU - MIT SAQU",
+    1600,
+    1066,
   ),
 ];
 
@@ -1166,7 +1337,7 @@ const fotoMit = [
     576,
   ),
   /* Dua foto panggung lain dari acara yang sama sengaja tidak dipakai: pada
-     keduanya layar di belakang panggung sedang menampilkan data pribadi —
+     keduanya layar di belakang panggung sedang menampilkan data pribadi,
      satu kartu nama wisudawan lengkap dengan sekolah dan asal daerahnya, satu
      lagi sebuah kartu identitas bernomor. Dokumentasi wisuda tidak sepadan
      dengan menerbitkan ulang keduanya. */
@@ -1226,7 +1397,7 @@ const fotoImtiaz = [
 
 /**
  * Dokumentasi STIU Wadi Mubarak, diambil dari kanal artikel-berita kampusnya
- * sendiri (stiuwm.ac.id) — satu yayasan, jadi fotonya memang milik yang sama.
+ * sendiri (stiuwm.ac.id), satu yayasan, jadi fotonya memang milik yang sama.
  *
  * Yang dipilih kegiatan yang menandai sebuah perguruan tinggi, bukan sekadar
  * suasana pondok: ujian semester, daurah bersama syaikh tamu, asesmen lapangan
@@ -1275,8 +1446,8 @@ const fotoStiu = [
 /**
  * Dokumentasi Program Kaderisasi Muhaffizh, dikirim dari pondok-pondok cabang
  * penyelenggara. Karena PKM tidak punya satu kampus sendiri, fotonya sengaja
- * dipilih dari beberapa pondok sekaligus: yang diperlihatkan bentuk kegiatannya
- * — halaqah, tashih berdua, kajian, olah fisik — bukan satu bangunan tertentu.
+ * dipilih dari beberapa pondok sekaligus: yang diperlihatkan bentuk kegiatannya,
+ * halaqah, tashih berdua, kajian, olah fisik, bukan satu bangunan tertentu.
  */
 const fotoPkm = [
   fotoDok(
@@ -1459,7 +1630,7 @@ const fotoUnit: Record<string, { hero: ImageData; galeri: ImageData[] }> = {
   },
   /* I'dad Mu'allimat memakai dokumentasi Imtiaz Putri: keduanya program putri
      berasrama di kampus Megamendung yang sama, dan I'dad belum punya berkas
-     fotonya sendiri. Keterangan fotonya sengaja tetap menyebut Imtiaz — yang
+     fotonya sendiri. Keterangan fotonya sengaja tetap menyebut Imtiaz, yang
      terlihat memang peserta Imtiaz, dan mengganti namanya akan menjadikan
      keterangan itu keliru. Urutannya diputar supaya kedua halaman tidak
      tampak kembar. */

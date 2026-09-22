@@ -1,8 +1,8 @@
 /**
  * Data contoh `post` (PRD §7.4).
  *
- * Perhatikan `tampilkan_di_induk`: beberapa tulisan sengaja bernilai `false`
- * — termasuk tulisan cabang Sleman — untuk membuktikan bahwa penyaringan
+ * Perhatikan `tampilkan_di_induk`: beberapa tulisan sengaja bernilai `false`,
+ * termasuk tulisan cabang Sleman, untuk membuktikan bahwa penyaringan
  * kurasi benar-benar bekerja di situs induk (PRD §9.1 & §9.6).
  */
 
@@ -213,7 +213,7 @@ const daftar: PostInput[] = [
     topik: ["tahfizh"],
     gambar: 11,
     penulis: "Bagian Tahfizh",
-    // Pengumuman internal unit — tidak relevan bagi pengunjung situs induk.
+    // Pengumuman internal unit, tidak relevan bagi pengunjung situs induk.
     tampilkan_di_induk: false,
   },
   {
