@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { site } from "@/lib/site";
-import type { Post, ProgramDonasi, Unit } from "@/lib/schemas";
+import type { Agenda, Post, ProgramDonasi, Unit } from "@/lib/schemas";
 
 /** PRD §13 — metadata per halaman lewat Metadata API, tanpa kecuali. */
 export function buatMetadata({
@@ -145,6 +145,46 @@ export function jsonldArticle(post: Post): Jsonld {
     author: { "@type": "Organization", name: post.penulis },
     publisher: { "@id": `${site.url}/#organization` },
     mainEntityOfPage: `${site.url}/informasi/${post.slug}`,
+  };
+}
+
+const wilayahLokasi: Record<Agenda["lokasi"], { kota: string; provinsi: string }> = {
+  bogor: { kota: "Bogor", provinsi: "Jawa Barat" },
+  sleman: { kota: "Sleman", provinsi: "DI Yogyakarta" },
+};
+
+export function jsonldEvent(agenda: Agenda): Jsonld {
+  const wilayah = wilayahLokasi[agenda.lokasi];
+  // Kegiatan beberapa hari tanpa jam pasti ditulis sebagai tanggal saja,
+  // supaya mesin pencari tidak menampilkan jam 00:00.
+  const multiHari = agenda.selesai !== null && agenda.mulai.slice(0, 10) !== agenda.selesai.slice(0, 10);
+  const waktu = (iso: string) => (multiHari ? iso.slice(0, 10) : iso);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: agenda.judul,
+    description: agenda.ringkasan,
+    startDate: waktu(agenda.mulai),
+    ...(agenda.selesai ? { endDate: waktu(agenda.selesai) } : {}),
+    eventStatus: "https://schema.org/EventScheduled",
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    location: {
+      "@type": "Place",
+      name: agenda.tempat,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: wilayah.kota,
+        addressRegion: wilayah.provinsi,
+        addressCountry: "ID",
+      },
+    },
+    ...(agenda.poster ? { image: `${site.url}${agenda.poster.src}` } : {}),
+    organizer: agenda.penyelenggara
+      ? { "@type": "Organization", name: agenda.penyelenggara, url: site.url }
+      : { "@id": `${site.url}/#organization` },
+    url: `${site.url}/agenda/${agenda.slug}`,
+    inLanguage: "id-ID",
   };
 }
 

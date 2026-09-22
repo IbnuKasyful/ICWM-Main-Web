@@ -5,7 +5,7 @@ import {
   kelompokFaqBawaan,
   tautanKelompokFaq,
 } from "@/components/faq/PanelFaq";
-import { getPostsInduk, getProgramDonasi, getUnitsAktif } from "@/lib/content";
+import { getPostsInduk, getProgramDonasi, getSemuaAgenda, getUnitsAktif } from "@/lib/content";
 import { site } from "@/lib/site";
 
 /** PRD §13 — sitemap dibangkitkan otomatis dari sumber konten. */
@@ -58,6 +58,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  const halamanAgenda: MetadataRoute.Sitemap = getSemuaAgenda().map((a) => ({
+    url: `${site.url}/agenda/${a.slug}`,
+    lastModified: sekarang,
+    changeFrequency: "weekly",
+    priority: 0.6,
+  }));
+
   // Kelompok bawaan sudah terwakili oleh `/faq` di daftar statis di atas.
   const halamanFaq: MetadataRoute.Sitemap = daftarKelompokFaq()
     .filter((k) => k.kelompok !== kelompokFaqBawaan)
@@ -68,5 +75,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     }));
 
-  return [...halamanStatis, ...halamanUnit, ...halamanTulisan, ...halamanDonasi, ...halamanFaq];
+  return [...halamanStatis, ...halamanUnit, ...halamanTulisan, ...halamanDonasi, ...halamanAgenda, ...halamanFaq];
 }

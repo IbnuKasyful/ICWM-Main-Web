@@ -300,6 +300,17 @@ export const agendaSchema = z.object({
   unit: z.array(z.string().min(1)).min(1),
   ringkasan: z.string().min(1).max(200),
   terbuka_umum: z.boolean(),
+  /** Nama penyelenggara bila kegiatan bukan milik unit pendidikan, mis. Wisata Qur'an. */
+  penyelenggara: z.string().min(1).optional(),
+  poster: imageSchema.optional(),
+  /** Narahubung pendaftaran; `wa` berformat 62xxxxxxxxxx. */
+  kontak: z.object({ nama: z.string().min(1), wa: z.string().min(1) }).optional(),
+  /** Paragraf deskripsi di halaman detail `/agenda/[slug]`. */
+  deskripsi: z.array(z.string().min(1)).optional(),
+  /** Daftar berjudul di halaman detail, mis. materi, fasilitas, ketentuan. */
+  rincian: z
+    .array(z.object({ judul: z.string().min(1), butir: z.array(z.string().min(1)).min(1) }))
+    .optional(),
 });
 
 export const mitraSchema = z.object({

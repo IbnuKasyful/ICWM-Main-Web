@@ -1,6 +1,8 @@
+import Image from "next/image";
+import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { Icon } from "@/components/ui/Icon";
-import { hari, labelLokasi, rentangWaktu } from "@/lib/format";
+import { hari, labelLokasi, rentangWaktu, tautanWhatsApp } from "@/lib/format";
 import type { Agenda } from "@/lib/schemas";
 import { cn } from "@/lib/cn";
 
@@ -17,11 +19,12 @@ export function AgendaCard({
   className?: string;
 }) {
   const mulai = new Date(agenda.mulai);
+  const labelUnit = agenda.penyelenggara ?? namaUnit;
 
   return (
     <li
       className={cn(
-        "flex gap-5 rounded-2xl border border-line bg-white p-5 transition-colors hover:border-brand-200",
+        "relative flex gap-5 rounded-2xl border border-line bg-white p-5 transition-colors hover:border-brand-200",
         className,
       )}
     >
@@ -44,11 +47,15 @@ export function AgendaCard({
           ) : (
             <Badge nada="netral">Internal / undangan</Badge>
           )}
-          {namaUnit ? <Badge nada="netral">{namaUnit}</Badge> : null}
+          {labelUnit ? <Badge nada="netral">{labelUnit}</Badge> : null}
         </div>
 
         <h3 className="mt-2 font-display text-base leading-snug font-semibold text-balance text-ink">
-          {agenda.judul}
+          {/* Seluruh kartu bisa diklik lewat pseudo-elemen; tautan lain di
+              dalamnya diangkat dengan `relative z-10`. */}
+          <Link href={`/agenda/${agenda.slug}`} className="after:absolute after:inset-0">
+            {agenda.judul}
+          </Link>
         </h3>
         <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-ink-muted">
           {agenda.ringkasan}
@@ -72,7 +79,41 @@ export function AgendaCard({
             </dd>
           </div>
         </dl>
+
+        {agenda.kontak ? (
+          <a
+            href={tautanWhatsApp(
+              agenda.kontak.wa,
+              `Assalamu'alaikum, saya ingin bertanya tentang ${agenda.judul}.`,
+            )}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative z-10 mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-brand-700 hover:text-brand-900"
+          >
+            <Icon nama="whatsapp" className="size-3.5" />
+            Info &amp; pendaftaran: {agenda.kontak.nama}
+          </a>
+        ) : null}
       </div>
+
+      {agenda.poster ? (
+        <a
+          href={agenda.poster.src}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Lihat poster ${agenda.judul}`}
+          className="relative z-10 hidden w-24 shrink-0 self-start overflow-hidden rounded-lg border border-line sm:block"
+        >
+          <Image
+            src={agenda.poster.src}
+            alt={agenda.poster.alt}
+            width={agenda.poster.width}
+            height={agenda.poster.height}
+            sizes="96px"
+            className="h-auto w-full"
+          />
+        </a>
+      ) : null}
     </li>
   );
 }

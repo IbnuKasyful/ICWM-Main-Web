@@ -244,6 +244,19 @@ export function getAgendaMendatang(batas?: number): readonly Agenda[] {
   return typeof batas === "number" ? mendatang.slice(0, batas) : mendatang;
 }
 
+export function getAgenda(slug: string): Agenda | undefined {
+  return agenda.find((a) => a.slug === slug);
+}
+
+export function getSemuaAgenda(): readonly Agenda[] {
+  return agenda;
+}
+
+/** Selesai = waktu selesai (atau mulai, bila tanpa selesai) sudah lewat. */
+export function agendaSudahLewat(a: Agenda): boolean {
+  return new Date(a.selesai ?? a.mulai).getTime() < Date.now();
+}
+
 export function getAgendaLampau(): readonly Agenda[] {
   const sekarang = Date.now();
   return agenda
