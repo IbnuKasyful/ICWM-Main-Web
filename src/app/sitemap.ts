@@ -8,7 +8,7 @@ import {
 import { getPostsInduk, getProgramDonasi, getSemuaAgenda, getUnitsAktif } from "@/lib/content";
 import { site } from "@/lib/site";
 
-/** PRD §13 — sitemap dibangkitkan otomatis dari sumber konten. */
+/** PRD §13, sitemap dibangkitkan otomatis dari sumber konten. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sekarang = new Date();
 

@@ -75,7 +75,7 @@ export function Icon({
   );
 }
 
-/** Ikon dalam kotak lembut — pola kartu pada referensi desain. */
+/** Ikon dalam kotak lembut, pola kartu pada referensi desain. */
 export function IconChip({
   nama,
   className,

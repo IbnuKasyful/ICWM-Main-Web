@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   Sistem desain ICWM — PRD §10
+   Sistem desain ICWM, PRD §10
    Semua token didefinisikan di sini. Komponen TIDAK BOLEH menulis warna
    mentah (hex/rgb); selalu lewat token di bawah ini.
 
@@ -67,7 +67,7 @@
      Judul memakai Archivo: lockup panjang yayasan sudah disusun dengan
      grotesk mampat bertulang tebal, dan sisi hurufnya yang rata sejalan
      dengan bilah lambang yang bersudut tajam. Teks memakai Plus Jakarta
-     Sans — huruf Indonesia untuk lembaga Indonesia. */
+     Sans, huruf Indonesia untuk lembaga Indonesia. */
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
 
@@ -151,7 +151,7 @@
   /* --- Gerak: bilah progres donasi (§9.4) ---
      Bilah terisi dari nol saat pertama kali dirender, supaya capaian terbaca
      sebagai sesuatu yang bertumbuh, bukan grafik mati. Yang dianimasikan
-     adalah `width`, bukan `transform: scaleX` — scaleX ikut memelintir sudut
+     adalah `width`, bukan `transform: scaleX`, scaleX ikut memelintir sudut
      bilah yang membulat. Elemennya setipis 10px dan animasinya sekali jalan,
      jadi biaya layout-nya tidak berarti. Tanpa kata kunci `to`, nilai akhirnya
      otomatis lebar yang disetel inline per program. */
@@ -165,7 +165,7 @@
 
   /* Kilau yang melintasi bilah. Sengaja hanya dipasang saat kartu induknya
      disentuh kursor (`group-hover`), jadi tidak ada gerak yang berjalan terus
-     tanpa diminta — sejalan dengan dinding foto di atas: ini respons, bukan
+     tanpa diminta, sejalan dengan dinding foto di atas: ini respons, bukan
      tontonan. */
   --animate-progres-kilau: progres-kilau 1.5s ease-in-out infinite;
 
@@ -213,7 +213,7 @@
      Belasan foto yang muncul serentak terbaca sebagai satu blok gambar dan mata
      tidak tahu harus mulai dari mana. Kepingnya karena itu masuk bersusul dengan
      jeda kecil per keping (disetel lewat `animation-delay` inline), sehingga
-     kolasenya terbaca sedang disusun — bukan ditempel sekaligus. Skala awalnya
+     kolasenya terbaca sedang disusun, bukan ditempel sekaligus. Skala awalnya
      sengaja dekat 1: yang dicari kesan mengendap, bukan meletup. */
   --animate-kolase-masuk: kolase-masuk 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 
@@ -226,7 +226,7 @@
 
   /* Setelah masuk, tiap kolom mengambang naik-turun sangat pelan dengan
      amplitudo di bawah satu rem. Dua laju supaya kolom bersebelahan tidak
-     pernah sefase — kalau sefase, seluruh kolase terbaca bergoyang sebagai satu
+     pernah sefase, kalau sefase, seluruh kolase terbaca bergoyang sebagai satu
      papan. Sengaja dipasang pada pembungkus kolom, bukan pada kepingnya, agar
      tidak bertabrakan dengan animasi masuk di atas. */
   --animate-kolase-apung-lambat: kolase-apung 13s ease-in-out infinite;
@@ -282,7 +282,7 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* PRD §14 — indikator fokus wajib terlihat di seluruh elemen interaktif. */
+  /* PRD §14, indikator fokus wajib terlihat di seluruh elemen interaktif. */
   :focus-visible {
     outline: 2px solid var(--color-brand-600);
     outline-offset: 2px;
@@ -297,7 +297,7 @@
 
 /* Archivo adalah huruf variabel dengan sumbu lebar 62–125%. Utilitas
    `font-display` bawaan Tailwind hanya menyetel font-family, jadi ragam
-   mampat disetel di sini — properti berbeda, tidak bertabrakan dengan
+   mampat disetel di sini, properti berbeda, tidak bertabrakan dengan
    utilitas aslinya. */
 .font-display {
   font-stretch: 78%;
@@ -314,7 +314,7 @@
   }
 }
 
-/* Ornamen geometri islami — tesela bintang delapan (khatam) yang bersambung
+/* Ornamen geometri islami, tesela bintang delapan (khatam) yang bersambung
    ke segala arah: persegi lurus ditumpuk persegi terputar 45°, dengan belah
    ketupat di keempat sudut petak sehingga sambungan antar-petak tidak terlihat.
 
@@ -322,7 +322,7 @@
    warnanya tetap datang dari token lewat utilitas `text-*` (aturan §10: tidak
    ada warna mentah di komponen), dan tidak ada permintaan jaringan tambahan
    (PRD §12). Pemakaian: satu span dekoratif berposisi absolut, diberi warna
-   dan opasitas rendah — ini latar, bukan gambar. */
+   dan opasitas rendah, ini latar, bukan gambar. */
 @utility ornamen-islami {
   background-color: currentColor;
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' fill='none' stroke='%23000' stroke-width='1'%3E%3Cpath d='M7 7h30v30H7z'/%3E%3Cpath d='M22 0L44 22L22 44L0 22Z'/%3E%3Cpath d='M22 14L30 22L22 30L14 22Z'/%3E%3Cpath d='M0 -7L7 0L0 7L-7 0Z'/%3E%3Cpath d='M44 -7L51 0L44 7L37 0Z'/%3E%3Cpath d='M0 37L7 44L0 51L-7 44Z'/%3E%3Cpath d='M44 37L51 44L44 51L37 44Z'/%3E%3C/svg%3E");
@@ -333,7 +333,7 @@
 /* Kolase kepala halaman galeri melebur ke latar di tiga sisi sekaligus: kiri dan
    kanan supaya kolomnya tidak terpotong garis lurus di tepi layar, dan bawah
    supaya judul yang duduk di atasnya tetap terbaca tanpa perlu tirai putih
-   terpisah. Dua mask digabung dengan `intersect` — bagian yang terlihat adalah
+   terpisah. Dua mask digabung dengan `intersect`, bagian yang terlihat adalah
    irisan keduanya. Prefiks `-webkit-` diperlukan Safari, yang menamai nilai yang
    sama dengan `source-in`. */
 @utility kolase-luntur {

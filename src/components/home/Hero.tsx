@@ -4,7 +4,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 
 /**
- * PRD §9.1 blok 1 — satu pesan, satu CTA utama. BUKAN carousel: carousel di
+ * PRD §9.1 blok 1, satu pesan, satu CTA utama. BUKAN carousel: carousel di
  * situs lama menurunkan performa dan nyaris tak pernah diklik melewati slide
  * pertama.
  *
@@ -12,7 +12,7 @@ import { Icon } from "@/components/ui/Icon";
  * tengah, dan seluruh bidang gambar dipindah ke bawahnya sebagai dinding bento
  * melintang yang berjalan pelan. Alasannya: kalimat pembuka adalah satu-satunya
  * hal yang harus terbaca lebih dulu, jadi tidak ada gambar yang bersaing di
- * sebelahnya — dan begitu kalimat itu selesai dibaca, mata langsung jatuh ke
+ * sebelahnya, dan begitu kalimat itu selesai dibaca, mata langsung jatuh ke
  * foto kegiatan yang nyata, bukan ke ilustrasi.
  */
 export function Hero({
@@ -43,7 +43,7 @@ export function Hero({
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-pretty text-ink-muted">
-            Sebelas unit pendidikan — dari tahfizh anak usia dini sampai perguruan tinggi —
+            Sebelas unit pendidikan, dari tahfizh anak usia dini sampai perguruan tinggi,
             beserta lembaga amil zakat, dalam satu naungan. Temukan unit yang
             benar-benar cocok untuk anak Anda sebelum menghubungi siapa pun.
           </p>

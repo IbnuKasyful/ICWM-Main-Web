@@ -9,13 +9,13 @@ Sistem update donasi lewat CMS membutuhkan Next.js berjalan sebagai proses Node.
 Periksa dulu:
 
 1. Masuk cPanel, cari ikon **Setup Node.js App** (di grup "Software").
-2. Bila ada, buka dan lihat versi Node yang tersedia — **butuh Node 20 atau lebih baru**.
+2. Bila ada, buka dan lihat versi Node yang tersedia, **butuh Node 20 atau lebih baru**.
 
 Kalau ikonnya tidak ada, atau versinya di bawah 20, hubungi penyedia hosting dan
 minta LiteSpeed/Passenger dengan Node 20+ diaktifkan. Paket hosting PHP-saja
-tidak bisa menjalankan konfigurasi ini — lihat catatan di bawah.
+tidak bisa menjalankan konfigurasi ini, lihat catatan di bawah.
 
-## Jalur A — Node.js App (yang dipakai)
+## Jalur A, Node.js App (yang dipakai)
 
 ```bash
 # di mesin lokal atau di SSH cPanel
@@ -47,7 +47,7 @@ ikut terunggah): `NEXT_PUBLIC_SITE_URL`, `WPGRAPHQL_ENDPOINT`,
 `REVALIDATE_SECRET`, `RESEND_API_KEY`, `KONTAK_EMAIL_*`. Kosongkan
 `NEXT_PUBLIC_MODE_PRATINJAU` hanya setelah seluruh data Tier 1 resmi.
 
-Klik **Restart**. Cache ISR ditulis ke disk di dalam `.next/cache` — tidak perlu
+Klik **Restart**. Cache ISR ditulis ke disk di dalam `.next/cache`, tidak perlu
 R2 atau layanan tambahan seperti pada Cloudflare.
 
 Hal yang perlu diperhatikan:
@@ -60,10 +60,10 @@ Hal yang perlu diperhatikan:
 - Pastikan Passenger tidak menaruh aplikasi di subpath; situs ini menganggap
   dirinya berada di akar domain.
 
-## Jalur B — hanya PHP, tanpa Node (bukan jalur yang dipilih)
+## Jalur B, hanya PHP, tanpa Node (bukan jalur yang dipilih)
 
 Bila hosting benar-benar tidak bisa menjalankan Node, satu-satunya cara adalah
-`output: "export"` — HTML statis murni. Konsekuensinya harus disadari:
+`output: "export"`, HTML statis murni. Konsekuensinya harus disadari:
 
 - **Sistem update CMS ini tidak berlaku.** Tanpa server, tidak ada ISR dan tidak
   ada `/api/revalidate`; angka donasi hanya berubah saat build ulang diunggah.
@@ -73,7 +73,7 @@ Bila hosting benar-benar tidak bisa menjalankan Node, satu-satunya cara adalah
 - `/cari` yang `force-dynamic` harus diubah menjadi pencarian di sisi peramban.
 - Optimasi `next/image` harus dimatikan (`images.unoptimized`).
 
-Kalau ini yang tersedia, beri tahu — pekerjaannya berbeda dan lebih baik
+Kalau ini yang tersedia, beri tahu, pekerjaannya berbeda dan lebih baik
 dikerjakan sebagai perubahan tersendiri.
 
 ## Pratinjau Cloudflare

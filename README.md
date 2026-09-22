@@ -22,19 +22,19 @@ ulang: `node scripts/generate-placeholders.mjs`.
 
 PRD §16 menempatkan **Tahap 0 (penyiapan WordPress) sebagai pemblokir** untuk
 seluruh tahap berikutnya. Tahap itu belum dikerjakan, jadi front-end ini berjalan
-di atas **data contoh** — persis seperti yang diminta PRD §17 sebagai mitigasi
+di atas **data contoh**, persis seperti yang diminta PRD §17 sebagai mitigasi
 risiko keterlambatan konten.
 
 | Tahap | Isi | Status |
 |---|---|---|
-| 0 | WordPress: taksonomi, CPT, ACF, WPGraphQL | **Belum** — di luar lingkup front-end |
+| 0 | WordPress: taksonomi, CPT, ACF, WPGraphQL | **Belum**, di luar lingkup front-end |
 | 1 | Fondasi Next.js, sistem desain, layout, tipe & Zod | Selesai |
 | 2 | `/`, `/program`, `/program/[slug]` | Selesai |
 | 3 | `/tentang`, `/tentang/legalitas`, `/tentang/pengurus`, `/transparansi`, `/dampak` | Selesai |
 | 4 | `/donasi`, `/donasi/[slug]` | Selesai |
 | 5 | `/informasi`, `/agenda`, `/galeri`, `/faq`, `/cari` | Selesai |
 | 6 | Halaman pendukung, kepatuhan, formulir kontak | Selesai |
-| 7 | Migrasi konten, redirect, peluncuran | **Belum** — butuh Tahap 0 |
+| 7 | Migrasi konten, redirect, peluncuran | **Belum**, butuh Tahap 0 |
 
 Seluruh 22 route pada PRD §8 sudah ada. Tidak ada route di luar daftar itu.
 
@@ -60,7 +60,7 @@ Kueri GraphQL nantinya diletakkan bersebelahan dengan route yang memakainya
 ## Sistem desain
 
 Token ada di `src/app/globals.css` di dalam blok `@theme` (Tailwind v4).
-**Tidak ada komponen yang boleh menulis warna mentah** — semuanya lewat token.
+**Tidak ada komponen yang boleh menulis warna mentah**, semuanya lewat token.
 
 Komponen inti sesuai PRD §10 ada di `src/components/`:
 
@@ -72,10 +72,10 @@ Komponen inti sesuai PRD §10 ada di `src/components/`:
 | `UnitCard` | `ui/UnitCard.tsx` (+ varian ringkas) |
 | `PostCard` | `ui/PostCard.tsx` (+ `PostBaris`) |
 | `FilterBar` | `informasi/FilterBar.tsx`, `program/PencariProgram.tsx` |
-| `Breadcrumb` | `ui/Breadcrumb.tsx` — sekaligus memancarkan JSON-LD |
-| `UnitSwitcher` | `site/UnitSwitcher.tsx` — **props-driven**, siap dipakai ulang Fase 2 |
+| `Breadcrumb` | `ui/Breadcrumb.tsx`, sekaligus memancarkan JSON-LD |
+| `UnitSwitcher` | `site/UnitSwitcher.tsx`, **props-driven**, siap dipakai ulang Fase 2 |
 | `SiteHeader` | `site/SiteHeader.tsx` |
-| `SiteFooter` | `site/SiteFooter.tsx` — **props-driven**, tanpa nilai dipatok mati |
+| `SiteFooter` | `site/SiteFooter.tsx`, **props-driven**, tanpa nilai dipatok mati |
 | `StatBlock` | `ui/StatBlock.tsx` |
 | `EmptyState` | `ui/EmptyState.tsx` |
 | `Prose` | `ui/Prose.tsx` (+ `ProseHtml` untuk HTML dari CMS) |
@@ -86,7 +86,7 @@ yang di-set inline pada pembungkus, bukan lewat kelas yang dibuat dinamis.
 ## Keputusan yang perlu diketahui
 
 - **Tanpa dependensi di luar PRD §6.** Ikon, akordeon, penggabung className, dan
-  pengiriman surel Resend semuanya ditulis sendiri. `resend` tidak dipasang —
+  pengiriman surel Resend semuanya ditulis sendiri. `resend` tidak dipasang,
   route handler memanggil REST API-nya lewat `fetch`.
 - **Akordeon FAQ memakai `<details>`**, bukan JavaScript: dapat dirayapi,
   bekerja tanpa JS, dan nol biaya bundel.

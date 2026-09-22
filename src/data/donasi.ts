@@ -7,7 +7,7 @@
  * Pembangunan Sarana Pendidikan, serta Buka Puasa Arafah.
  *
  * Catatan penting soal angka: LAZIS tidak menerbitkan target maupun jumlah dana
- * yang sudah terkumpul per program — yang diumumkan adalah harga satuannya
+ * yang sudah terkumpul per program, yang diumumkan adalah harga satuannya
  * (mis. Rp 13.000 per kilogram beras). Karena itu seluruh program di sini
  * memakai `target: 0` dan `terkumpul: 0` sehingga tampil sebagai program
  * berkelanjutan, dengan `satuan_biaya` menggantikan bilah progres. Jangan
@@ -43,7 +43,7 @@ type DonasiInput = {
   konten: string[];
 };
 
-/** Poster kampanye LAZIS SaQu — potret 4:5, teksnya di bagian atas. */
+/** Poster kampanye LAZIS SaQu, potret 4:5, teksnya di bagian atas. */
 function poster(nama: string) {
   return { src: `/img/donasi-${nama}.jpg`, width: 1080, height: 1350 };
 }
@@ -84,7 +84,7 @@ const daftar: DonasiInput[] = [
     batas_waktu: null,
     mendesak: true,
     konten: [
-      "Dengan Rp 20.000 sebulan, Anda bukan sekadar berdonasi — Anda ikut menyiapkan lahirnya para penghafal Qur'an dan calon ulama masa depan.",
+      "Dengan Rp 20.000 sebulan, Anda bukan sekadar berdonasi, Anda ikut menyiapkan lahirnya para penghafal Qur'an dan calon ulama masa depan.",
       "Tersedia lima paket donasi bulanan: Rp 20.000, Rp 50.000, Rp 100.000, Rp 500.000, dan Rp 1.000.000. Pilih yang paling ringan dan paling bisa Anda jaga keberlanjutannya.",
       "Katakanlah: &quot;Sesungguhnya Tuhanku melapangkan rezeki bagi siapa yang dikehendaki-Nya di antara hamba-hamba-Nya dan menyempitkan bagi (siapa yang dikehendaki-Nya)&quot;. Dan barang apa saja yang kamu nafkahkan, maka Allah akan menggantinya dan Dialah Pemberi rezeki yang sebaik-baiknya. (QS. Saba' ayat 39)",
     ],
@@ -96,12 +96,12 @@ const daftar: DonasiInput[] = [
       "Satu kilogram beras seharga Rp 13.000 ikut menghidupi makan sehari-hari para santri penghafal Al-Qur'an.",
     jenis: "sedekah",
     gambar: poster("beras"),
-    satuan_biaya: "Rp 13.000 / kg — kebutuhan 3.300 kg per bulan",
+    satuan_biaya: "Rp 13.000 / kg: kebutuhan 3.300 kg per bulan",
     penerima_manfaat: "Santri penghafal Al-Qur'an",
     batas_waktu: null,
     mendesak: false,
     konten: [
-      "Cukup dengan Rp 13.000 — harga satu kilogram beras — Anda sudah menjadi bagian dari Keluarga Al-Qur'an. Karena dari 1 kg beras, lahir doa-doa dari para santri penghafal Al-Qur'an yang mengalir tanpa putus.",
+      "Cukup dengan Rp 13.000, harga satu kilogram beras, Anda sudah menjadi bagian dari Keluarga Al-Qur'an. Karena dari 1 kg beras, lahir doa-doa dari para santri penghafal Al-Qur'an yang mengalir tanpa putus.",
       "Kebutuhan dapur santri mencapai 3.300 kilogram beras setiap bulan. Setiap suapan mereka, setiap ayat yang dihafal, menjadi pahala jariyah yang terus mengalir untuk Anda.",
       "Rp 13.000 = 1 kg beras. Rp 13.000 = doa para penghafal Al-Qur'an. Rp 13.000 = pahala yang terus mengalir.",
     ],

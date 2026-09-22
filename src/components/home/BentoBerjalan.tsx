@@ -5,13 +5,13 @@ import { getGaleri } from "@/lib/content";
 import type { ImageData } from "@/lib/schemas";
 
 /**
- * Dinding foto bento yang berjalan naik pelan — pendamping visual untuk blok
+ * Dinding foto bento yang berjalan naik pelan, pendamping visual untuk blok
  * "Sekilas yayasan".
  *
  * Dua kolom dengan laju berbeda supaya susunannya tidak pernah terbaca sebagai
  * tabel: satu kolom selalu tertinggal dari yang lain. Setiap kolom merender
  * daftarnya dua kali, lalu bergeser tepat sepanjang satu salinan, sehingga
- * putarannya menyambung tanpa sela dan tanpa JavaScript sama sekali —
+ * putarannya menyambung tanpa sela dan tanpa JavaScript sama sekali,
  * komponen ini tetap komponen server.
  *
  * Gerak berhenti saat kursor menyentuh dinding (memberi kesempatan menatap satu
@@ -40,7 +40,7 @@ export function BentoBerjalan({ className }: { className?: string }) {
         // Tinggi pada lg disetel agar sepadan dengan kolom teks di sebelahnya.
         "group/bento relative h-[26rem] overflow-hidden sm:h-[32rem] lg:h-[38rem]",
         // Foto muncul dan lenyap berangsur di tepi atas-bawah, bukan terpotong
-        // garis lurus — itu yang membuatnya terbaca sebagai aliran.
+        // garis lurus, itu yang membuatnya terbaca sebagai aliran.
         "[mask-image:linear-gradient(to_bottom,transparent,#000_12%,#000_86%,transparent)]",
         className,
       )}

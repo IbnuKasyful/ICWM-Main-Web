@@ -8,7 +8,7 @@ const amiri = Amiri({
 });
 
 /**
- * Pita kutipan di bawah hero — mengikuti bahasa desain referensi (kalimat
+ * Pita kutipan di bawah hero, mengikuti bahasa desain referensi (kalimat
  * besar bergaya editorial di antara dua garis tipis).
  */
 export function Kutipan({ teks, sumber, arab }: { teks: string; sumber: string; arab?: boolean }) {

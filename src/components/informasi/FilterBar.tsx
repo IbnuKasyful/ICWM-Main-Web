@@ -22,7 +22,7 @@ const kategoriOpsi: Category[] = [
 ];
 
 /**
- * PRD §9.6 — penyaring tercermin di URL dan dapat dibagikan.
+ * PRD §9.6, penyaring tercermin di URL dan dapat dibagikan.
  *
  * Sengaja dibangun dari tautan `<a>` sungguhan, bukan tombol JavaScript:
  * penyaring pun ikut dapat dirayapi dan bekerja tanpa JS aktif.

@@ -4,7 +4,7 @@ import { Icon } from "@/components/ui/Icon";
 import { cn } from "@/lib/cn";
 
 /**
- * PRD §9.6 — pagination memakai TAUTAN SUNGGUHAN yang dapat dirayapi,
+ * PRD §9.6, pagination memakai TAUTAN SUNGGUHAN yang dapat dirayapi,
  * bukan tombol berbasis JavaScript.
  */
 export function Pagination({

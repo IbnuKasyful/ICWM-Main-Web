@@ -13,7 +13,7 @@ import type { ImageData } from "@/lib/schemas";
  * besarnya sendiri.
  *
  * Sebelumnya kisi ini hanya berupa gambar mati: foto dipotong persegi, dan
- * satu-satunya keterangan — teks `alt` — tidak pernah sampai ke pembaca yang
+ * satu-satunya keterangan, teks `alt`, tidak pernah sampai ke pembaca yang
  * melihat. Padahal justru di sini pengunjung mencoba menerka seperti apa
  * kesehariannya, dan potongan persegi memangkas hampir separuh isi tiap foto.
  * Mengetuknya kini membuka foto utuh beserta keterangannya.

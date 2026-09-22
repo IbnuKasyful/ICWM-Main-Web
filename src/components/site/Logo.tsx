@@ -11,7 +11,7 @@ const RASIO = 512 / 723;
  *
  * Memakai varian *simbol* (tanpa kaligrafi Arab) sesuai panduan identitas:
  * pada ukuran header, kaligrafi pada lambang utama sudah tidak terbaca.
- * Varian `terang` adalah reproduksi negatif putih — wajib di latar gelap,
+ * Varian `terang` adalah reproduksi negatif putih, wajib di latar gelap,
  * sebab bilah biru tua lambang berwarna praktis lenyap di sana.
  */
 export function Lambang({
@@ -45,7 +45,7 @@ export function Lambang({
 const RASIO_LOCKUP = 1760 / 513;
 
 /**
- * Lockup panjang resmi — dipakai di kepala halaman.
+ * Lockup panjang resmi, dipakai di kepala halaman.
  *
  * Berkas ini sudah memuat nama lembaga, jadi tidak boleh dipasangkan dengan
  * teks nama lagi. Tulisannya hitam, karena itu lockup HANYA untuk latar terang;

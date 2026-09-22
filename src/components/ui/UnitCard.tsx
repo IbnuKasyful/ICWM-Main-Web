@@ -14,13 +14,13 @@ function nadaStatus(status: Unit["status_ppdb"]) {
 }
 
 /**
- * PRD §9.2 — kartu wajib menampilkan nama, deskripsi singkat, jenjang, gender,
+ * PRD §9.2, kartu wajib menampilkan nama, deskripsi singkat, jenjang, gender,
  * lokasi, dan status PPDB, serta MENAUT KE `/program/[slug]`, bukan langsung ke
  * subdomain unit: pengunjung belum memutuskan pada tahap ini.
  *
  * Susunannya: panel gambar di atas (status PPDB melayang di atasnya, garis warna
- * aksen unit di kaki panel), lalu nama, deskripsi, baris fakta keputusan —
- * biaya, periode, lokasi — penanda taksonomi, dan satu ajakan selebar kartu.
+ * aksen unit di kaki panel), lalu nama, deskripsi, baris fakta keputusan,
+ * biaya, periode, lokasi, penanda taksonomi, dan satu ajakan selebar kartu.
  * Biaya sengaja ditaruh paling depan pada baris fakta: itu pertanyaan pertama
  * hampir semua wali santri.
  */

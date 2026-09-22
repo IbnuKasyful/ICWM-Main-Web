@@ -6,7 +6,7 @@ import { Section } from "@/components/ui/Section";
 import { getGaleri } from "@/lib/content";
 import { buatMetadata } from "@/lib/seo";
 
-/** PRD §8 — ISR 1 jam. */
+/** PRD §8, ISR 1 jam. */
 export const revalidate = 3600;
 
 export const metadata = buatMetadata({
@@ -20,7 +20,7 @@ export default function HalamanGaleri() {
   const galeri = getGaleri();
 
   /* Kepala halaman ini dibangun dari fotonya sendiri, jadi saat galeri kosong
-     tidak ada yang bisa disusun — halaman kembali memakai kepala halaman baku. */
+     tidak ada yang bisa disusun, halaman kembali memakai kepala halaman baku. */
   if (galeri.length === 0) {
     return (
       <>

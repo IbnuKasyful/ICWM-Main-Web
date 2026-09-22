@@ -5,13 +5,13 @@ import { PencariProgram } from "@/components/program/PencariProgram";
 import { getPetaHeroUnit, getUnitsAktif } from "@/lib/content";
 import { buatMetadata } from "@/lib/seo";
 
-/** PRD §8 — ISR 1 jam. */
+/** PRD §8, ISR 1 jam. */
 export const revalidate = 3600;
 
 export const metadata = buatMetadata({
   judul: "Cari unit pendidikan yang cocok",
   deskripsi:
-    "Bandingkan sebelas unit pendidikan Islamic Center Wadi Mubarak berdasarkan jenjang, gender, model belajar, dan lokasi kampus — lengkap dengan status dan periode PPDB.",
+    "Bandingkan sebelas unit pendidikan Islamic Center Wadi Mubarak berdasarkan jenjang, gender, model belajar, dan lokasi kampus, lengkap dengan status dan periode PPDB.",
   path: "/program",
 });
 
@@ -26,7 +26,7 @@ export default function HalamanProgram() {
         jejak={[{ label: "Pendidikan", href: "/program" }]}
         atas="Sebelas unit pendidikan"
         judul="Cari unit yang cocok untuk anak Anda"
-        keterangan="Saring berdasarkan jenjang, peserta didik, dan model belajar. Setiap kartu membawa Anda ke profil unit — bukan langsung ke pendaftaran, karena keputusan sebaiknya diambil setelah Anda punya cukup gambaran."
+        keterangan="Saring berdasarkan jenjang, peserta didik, dan model belajar. Setiap kartu membawa Anda ke profil unit, bukan langsung ke pendaftaran, karena keputusan sebaiknya diambil setelah Anda punya cukup gambaran."
       />
 
       <section className="py-12 md:py-16">

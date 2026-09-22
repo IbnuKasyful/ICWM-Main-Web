@@ -5,11 +5,11 @@ import { routerNiat } from "@/lib/site";
 import { cn } from "@/lib/cn";
 
 /**
- * PRD §9.1 blok 2 & §5.3 — lima pintu berdasarkan NIAT pengunjung.
+ * PRD §9.1 blok 2 & §5.3, lima pintu berdasarkan NIAT pengunjung.
  *
  * Rupa tiap bilah ditangani `KartuFoto`; yang diatur di sini hanyalah
  * perilaku barisnya. Kelimanya berjajar dalam satu baris sebagai bilah yang
- * sama lebar dan kelabu — keadaan menganggur yang sengaja dibuat "padam".
+ * sama lebar dan kelabu, keadaan menganggur yang sengaja dibuat "padam".
  * Begitu satu bilah disentuh kursor, bilah itu melebar dan fotonya menyala
  * berwarna sementara yang lain menyempit. Jadi hanya ada satu pintu yang
  * hidup pada satu waktu, dan pilihan itu terbaca dari jauh tanpa perlu
@@ -18,7 +18,7 @@ import { cn } from "@/lib/cn";
  * Kriteria penerimaan: kelima pintu dapat diakses keyboard dan memiliki label
  * yang jelas. Setiap bilah adalah satu tautan tunggal, bukan div yang diberi
  * penangan klik, dan ia ikut terbuka saat tautannya menerima fokus
- * (`focus-within`) — pengguna papan tik melihat isi yang sama dengan pengguna
+ * (`focus-within`), pengguna papan tik melihat isi yang sama dengan pengguna
  * tetikus. Seluruh isi selalu ada di DOM, hanya penampakannya yang berubah,
  * sehingga pembaca layar tidak pernah bergantung pada hover.
  *
@@ -36,7 +36,7 @@ export function RouterNiat() {
           judul="Apa yang sedang"
           sorot="Anda cari"
           penutup="hari ini?"
-          keterangan="Pilih satu pintu di bawah ini. Kami mengarahkan Anda langsung ke halaman yang tepat — tanpa perlu memahami struktur organisasi yayasan lebih dulu."
+          keterangan="Pilih satu pintu di bawah ini. Kami mengarahkan Anda langsung ke halaman yang tepat, tanpa perlu memahami struktur organisasi yayasan lebih dulu."
         />
 
         <ul className="mt-12 flex flex-col gap-3 lg:h-[27rem] lg:flex-row lg:gap-4">

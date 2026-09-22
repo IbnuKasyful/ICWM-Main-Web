@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 /**
- * Skema Zod — PRD §7 (model data) & §18 (setiap respons GraphQL divalidasi
+ * Skema Zod, PRD §7 (model data) & §18 (setiap respons GraphQL divalidasi
  * sebelum dipakai komponen).
  *
  * Bentuk skema di sini adalah KONTRAK dengan WPGraphQL. Ketika Tahap 0 selesai
@@ -54,7 +54,7 @@ export type Lokasi = z.infer<typeof lokasiSchema>;
 
 export const imageSchema = z.object({
   src: z.string().min(1),
-  /** PRD §14 — gambar dekoratif memakai string kosong secara sengaja. */
+  /** PRD §14, gambar dekoratif memakai string kosong secara sengaja. */
   alt: z.string(),
   width: z.number().int().positive(),
   height: z.number().int().positive(),
@@ -91,7 +91,7 @@ export type GaleriItem = z.infer<typeof galeriItemSchema>;
  * induknya.
  *
  * `provinsi` dan `pulau` wajib karena keduanya yang dipakai mengelompokkan
- * direktori cabang — jaringan TAUD SAQU sudah melewati 160 lokasi, terlalu
+ * direktori cabang, jaringan TAUD SAQU sudah melewati 160 lokasi, terlalu
  * banyak untuk disajikan sebagai satu daftar datar. `kota`, `alamat`, dan
  * `kontak_wa` opsional: data resmi yayasan belum lengkap untuk semua cabang,
  * dan lebih baik kolomnya kosong daripada diisi tebakan.
@@ -156,7 +156,7 @@ export const unitSchema = z.object({
   periode_ppdb: z.string(),
   /* Tidak ada `kisaran_biaya`. Situs ini tidak menayangkan biaya sama sekali,
      dan selama medannya masih ada, angkanya ikut terkirim ke peramban lewat
-     muatan RSC — tidak tampak di halaman, tapi terbaca di sumbernya. Menghapus
+     muatan RSC, tidak tampak di halaman, tapi terbaca di sumbernya. Menghapus
      medannya adalah satu-satunya cara yang benar-benar menutup jalan itu.
      (Menyimpang dari PRD §9.1; yang berlaku rincian dari panitia PPDB.) */
   kontak_wa: z.string(),
@@ -194,7 +194,7 @@ export type UnitProfil = z.infer<typeof unitProfilSchema>;
 /**
  * Graha Qur'an dan Wisata Qur'an. Sengaja terpisah dari `unitSchema`: keduanya
  * tidak punya jenjang, gender peserta, maupun status PPDB, sehingga memaksakan
- * bentuk unit hanya akan mengisi separuh field dengan nilai kosong — dan membuat
+ * bentuk unit hanya akan mengisi separuh field dengan nilai kosong, dan membuat
  * keduanya ikut muncul di penyaring /program.
  */
 /**
@@ -255,12 +255,12 @@ export type ProgramQuran = z.infer<typeof programQuranSchema>;
 export const postSchema = z.object({
   slug: z.string().min(1),
   judul: z.string().min(1),
-  /** Teks kartu, maks 200 karakter — wajib. */
+  /** Teks kartu, maks 200 karakter, wajib. */
   ringkasan: z.string().min(1).max(200),
   /** ISO 8601. */
   tanggal: z.string().min(1),
   category: categorySchema,
-  /** Menentukan URL kanonik — wajib. */
+  /** Menentukan URL kanonik, wajib. */
   unit_utama: z.string().min(1),
   unit: z.array(z.string().min(1)).min(1),
   lokasi: lokasiSchema,
@@ -291,7 +291,7 @@ export const programDonasiSchema = z.object({
   /**
    * Harga satuan yang diumumkan lembaga, mis. "Rp 13.000 / kg". Dipakai
    * program berkelanjutan yang memang tidak punya target maupun rekapitulasi
-   * dana terkumpul — di sana bilah progres tidak punya arti apa pun.
+   * dana terkumpul, di sana bilah progres tidak punya arti apa pun.
    */
   satuan_biaya: z.string().min(1).optional(),
   penerima_manfaat: z.string().min(1),

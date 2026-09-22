@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/ui/JsonLd";
 import { labelKelompokFaq } from "@/lib/format";
 import { buatMetadata, jsonldFaq } from "@/lib/seo";
 
-/** PRD §8 — SSG. Hanya kelompok yang terdaftar di bawah yang punya halaman. */
+/** PRD §8, SSG. Hanya kelompok yang terdaftar di bawah yang punya halaman. */
 export const dynamic = "force-static";
 export const dynamicParams = false;
 

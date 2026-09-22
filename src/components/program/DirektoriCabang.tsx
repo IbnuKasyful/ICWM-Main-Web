@@ -12,14 +12,14 @@ import { cn } from "@/lib/cn";
  *
  * Dulu cabang cukup ditampilkan sebagai grid kartu, karena datanya sepuluh
  * baris. Setelah data resmi yayasan masuk, TAUD SAQU saja berjalan di 162
- * lokasi pada 27 provinsi — grid datar sepanjang itu tidak bisa dibaca dan
+ * lokasi pada 27 provinsi, grid datar sepanjang itu tidak bisa dibaca dan
  * tidak bisa dicari. Maka: pencarian teks, saringan pulau, lalu daftar yang
  * dikelompokkan per provinsi.
  *
  * Pengelompokan memakai `<details>`, bukan state buka-tutup sendiri, supaya
  * Ctrl+F bawaan peramban tetap dapat menemukan cabang di grup yang tertutup
  * pada peramban yang mendukungnya, dan supaya keyboard bekerja tanpa tambahan
- * apa pun. Provinsi terbuka otomatis begitu pengguna mengetik — tidak ada
+ * apa pun. Provinsi terbuka otomatis begitu pengguna mengetik, tidak ada
  * gunanya menyembunyikan hasil pencarian di balik grup tertutup.
  */
 
@@ -127,7 +127,7 @@ export function DirektoriCabang({ cabang, namaUnit }: { cabang: readonly Cabang[
             // `<details>` menyimpan sendiri keadaan buka-tutupnya begitu
             // pengguna mengkliknya, dan React tidak tahu itu terjadi. Dengan
             // menyertakan status penyaringan pada `key`, grup dipasang ulang
-            // setiap kali pengguna mulai atau berhenti menyaring — sehingga
+            // setiap kali pengguna mulai atau berhenti menyaring, sehingga
             // `open` di bawah selalu dituruti. Saat mengetik nilainya tetap
             // `true`, jadi pengetikan tidak memasang ulang apa pun.
             key={`${provinsi}-${sedangMenyaring}`}

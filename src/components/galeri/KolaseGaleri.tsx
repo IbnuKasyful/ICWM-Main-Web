@@ -7,7 +7,7 @@ import type { GaleriItem } from "@/lib/schemas";
 /**
  * Kepala halaman /galeri: kolase foto yang melengkung di atas judul.
  *
- * Bedanya dengan `PageHeader` yang dipakai halaman dalam lain — di sini gambar
+ * Bedanya dengan `PageHeader` yang dipakai halaman dalam lain, di sini gambar
  * yang bicara lebih dulu, karena isi halaman ini memang gambar. Judulnya duduk
  * di bawah kolase, di dalam bagian yang sudah luntur ke putih, sehingga tidak
  * perlu tirai gelap atau kotak putih di belakang teks.
@@ -17,7 +17,7 @@ import type { GaleriItem } from "@/lib/schemas";
  * pembaca layar membacakan daftar yang sama berturut-turut.
  *
  * Semua ukuran memakai `clamp()` alih-alih titik henti Tailwind. Kolase ini
- * harus mengecil mulus mengikuti lebar layar — kalau tingginya meloncat per
+ * harus mengecil mulus mengikuti lebar layar, kalau tingginya meloncat per
  * titik henti, lengkung susunannya patah di tengah-tengah rentang.
  */
 
@@ -49,14 +49,14 @@ type Kolom = {
       sepasang, supaya lengkungnya tetap simetris di tiap lebar. Lima kolom
       terdalam bertahan sampai layar ponsel: di sana keduanya memang melebihi
       lebar layar, tapi bagian yang keluar justru jatuh di tepi yang sudah
-      dilunturkan mask — persis kesan kolase yang tak berujung. */
+      dilunturkan mask, persis kesan kolase yang tak berujung. */
   tampil: string;
 };
 
 /**
  * Sembilan kolom, tujuh belas keping. Tinggi dan pangkalnya sengaja tidak
  * beraturan: susunan yang rapi terbaca sebagai tabel foto, bukan kolase. Yang
- * dijaga hanya siluetnya — kolom tengah paling jangkung dan berpangkal paling
+ * dijaga hanya siluetnya, kolom tengah paling jangkung dan berpangkal paling
  * atas, kolom tepi lebih pendek dan turun, sehingga seluruhnya membentuk
  * lengkung yang membuka ke bawah tepat di tempat judul berdiri.
  */
@@ -127,7 +127,7 @@ export function KolaseGaleri({ galeri }: { galeri: readonly GaleriItem[] }) {
                     width={foto.width}
                     height={foto.height}
                     /* Seluruh kolase berada di atas lipatan, jadi tak satu pun
-                       kepingnya boleh ditunda — keping yang menunggu tergulir
+                       kepingnya boleh ditunda, keping yang menunggu tergulir
                        menyisakan kotak kosong di kepala halaman. Yang berbeda
                        hanya kolom tengah: itu saja yang ikut diprasandang,
                        supaya belasan foto tidak berebut antrean unduh. */

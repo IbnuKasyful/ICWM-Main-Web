@@ -30,7 +30,7 @@ export function AccordionItem({
   pertanyaan: string;
   children: ReactNode;
   terbukaAwal?: boolean;
-  /** Urutan kartu dalam daftar — menentukan jeda animasi masuknya. */
+  /** Urutan kartu dalam daftar, menentukan jeda animasi masuknya. */
   indeks?: number;
 }) {
   const gaya: CSSProperties = {
@@ -51,7 +51,7 @@ export function AccordionItem({
       {/* Ornamen khatam yang muncul perlahan saat jawaban terbuka: penanda
           kartu aktif yang tidak menambah garis atau bidang warna baru. Wadah
           luarnya membawa gradasi peluruh supaya tesela tidak terpotong tegas
-          di tepi kiri — dua topeng, jadi tidak saling menimpa. */}
+          di tepi kiri, dua topeng, jadi tidak saling menimpa. */}
       <span
         aria-hidden="true"
         className="pointer-events-none absolute inset-y-0 right-0 w-52 overflow-hidden opacity-0 transition-opacity duration-500 group-open:opacity-100 [mask-image:linear-gradient(to_left,black,transparent)]"

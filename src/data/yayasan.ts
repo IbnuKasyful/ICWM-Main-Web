@@ -146,7 +146,7 @@ export const faqMentah: unknown[] = [
     slug: "kapan-ppdb-dibuka",
     pertanyaan: "Kapan pendaftaran santri baru dibuka?",
     jawaban:
-      "Jadwal berbeda per unit. MTs dan MA putra membuka PPDB batch 3 untuk tahun pelajaran 2027/2028, sedangkan Mahabbah Boarding School membuka batch 6 pada 1 Agustus 2026 sampai 30 Juni 2027. MIT membuka gelombangnya pada November, sedangkan TAUD SAQU membuka pendaftaran tahun ajaran 2026/2027 pada Oktober 2026 sampai Mei 2027, dan PKM sekali setahun pada April. Program kaderisasi guru — PG TAUD SAQU, I'dad Mu'allimat, dan Imtiaz Putri — memiliki jadwal angkatannya sendiri. Periode terkini setiap unit tercantum pada halaman program.",
+      "Jadwal berbeda per unit. MTs dan MA putra membuka PPDB batch 3 untuk tahun pelajaran 2027/2028, sedangkan Mahabbah Boarding School membuka batch 6 pada 1 Agustus 2026 sampai 30 Juni 2027. MIT membuka gelombangnya pada November, sedangkan TAUD SAQU membuka pendaftaran tahun ajaran 2026/2027 pada Oktober 2026 sampai Mei 2027, dan PKM sekali setahun pada April. Program kaderisasi guru, PG TAUD SAQU, I'dad Mu'allimat, dan Imtiaz Putri, memiliki jadwal angkatannya sendiri. Periode terkini setiap unit tercantum pada halaman program.",
     kelompok: "pendaftaran",
     urutan: 1,
   },
@@ -154,7 +154,7 @@ export const faqMentah: unknown[] = [
     slug: "apakah-harus-hafal-dulu",
     pertanyaan: "Apakah anak harus sudah punya hafalan sebelum mendaftar?",
     jawaban:
-      "Untuk TAUD dan MIT tidak ada syarat hafalan awal. TAUD menilai kesiapan lain: usia minimal 3 tahun 7 bulan, lulus toilet training, mampu mengikuti instruksi, dan jelas melafalkan huruf. MIT mensyaratkan lulus calistung dan mengenal huruf hijaiyah — mampu membaca iqro' 3 lebih diutamakan. MTs dan MA mengadakan tes kemampuan dan tes tahfizh saat seleksi. PKM, sebagai program kaderisasi muhaffizh, mensyaratkan minimal 15 juz, sedangkan I'dad Mu'allimat mensyaratkan minimal juz 30 atau kesediaan menuntaskannya selama program.",
+      "Untuk TAUD dan MIT tidak ada syarat hafalan awal. TAUD menilai kesiapan lain: usia minimal 3 tahun 7 bulan, lulus toilet training, mampu mengikuti instruksi, dan jelas melafalkan huruf. MIT mensyaratkan lulus calistung dan mengenal huruf hijaiyah, mampu membaca iqro' 3 lebih diutamakan. MTs dan MA mengadakan tes kemampuan dan tes tahfizh saat seleksi. PKM, sebagai program kaderisasi muhaffizh, mensyaratkan minimal 15 juz, sedangkan I'dad Mu'allimat mensyaratkan minimal juz 30 atau kesediaan menuntaskannya selama program.",
     kelompok: "pendaftaran",
     urutan: 2,
   },
@@ -170,7 +170,7 @@ export const faqMentah: unknown[] = [
     slug: "berapa-biaya-pendidikan",
     pertanyaan: "Berapa biaya pendidikan di Wadi Mubarak?",
     jawaban:
-      "Rincian biaya tidak kami cantumkan di situs ini. Komponennya berbeda antar unit dan antar cabang, dan dapat berubah setiap tahun ajaran — angka yang tayang di sini berisiko tidak lagi berlaku saat Anda membacanya. Yang resmi adalah rincian yang disampaikan panitia PPDB unit terkait; hubungi panitia lewat WhatsApp yang tercantum pada halaman profil unit.",
+      "Rincian biaya tidak kami cantumkan di situs ini. Komponennya berbeda antar unit dan antar cabang, dan dapat berubah setiap tahun ajaran, angka yang tayang di sini berisiko tidak lagi berlaku saat Anda membacanya. Yang resmi adalah rincian yang disampaikan panitia PPDB unit terkait; hubungi panitia lewat WhatsApp yang tercantum pada halaman profil unit.",
     kelompok: "biaya",
     urutan: 4,
   },
@@ -226,7 +226,7 @@ export const faqMentah: unknown[] = [
     slug: "bagaimana-cara-berdonasi",
     pertanyaan: "Bagaimana cara berdonasi?",
     jawaban:
-      "Donasi disalurkan melalui transfer ke rekening atas nama lembaga — BSI a.n. LAZIS SaQu Wadi Mubarak atau Mandiri a.n. Islamic Center Wadi Mubarak. Tulis jenis dana (zakat, infak, sedekah, atau wakaf) pada berita transfer. Nomor rekening dan alur konfirmasi tersedia pada halaman donasi.",
+      "Donasi disalurkan melalui transfer ke rekening atas nama lembaga, BSI a.n. LAZIS SaQu Wadi Mubarak atau Mandiri a.n. Islamic Center Wadi Mubarak. Tulis jenis dana (zakat, infak, sedekah, atau wakaf) pada berita transfer. Nomor rekening dan alur konfirmasi tersedia pada halaman donasi.",
     kelompok: "donasi",
     urutan: 11,
   },

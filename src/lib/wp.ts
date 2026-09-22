@@ -1,5 +1,5 @@
 /**
- * Klien WPGraphQL — satu-satunya tempat aplikasi ini berbicara dengan WordPress.
+ * Klien WPGraphQL, satu-satunya tempat aplikasi ini berbicara dengan WordPress.
  *
  * Dipakai oleh `src/lib/content.ts` (batas API, PRD §18). Tidak ada komponen
  * yang boleh mengimpor berkas ini langsung.
@@ -8,7 +8,7 @@
  * jaringan, kesalahan GraphQL, atau WordPress mati mengembalikan `null`, dan
  * pemanggil melanjutkan dengan data statis di `src/data/`. Halaman donasi lebih
  * baik menampilkan angka rekapitulasi terakhir yang ikut build daripada berubah
- * menjadi halaman galat — nomor rekening dan penjelasan programnya tetap benar.
+ * menjadi halaman galat, nomor rekening dan penjelasan programnya tetap benar.
  */
 
 /** Ambang waktu satu kueri. WordPress di cPanel yang sama biasanya <200 ms. */
@@ -17,7 +17,7 @@ const BATAS_MS = 8000;
 /** Label cache Next.js, dipakai `/api/revalidate` untuk menyegarkan seketika. */
 export const TAG_DONASI = "donasi";
 
-/** ISR 15 menit — sepadan dengan `export const revalidate` di halaman donasi. */
+/** ISR 15 menit, sepadan dengan `export const revalidate` di halaman donasi. */
 const UMUR_CACHE = 900;
 
 export function endpointWp(): string | undefined {
@@ -149,7 +149,7 @@ function tanpaTag(html: string): string {
 
 /**
  * Ambil seluruh program donasi dari WordPress dalam bentuk mentah yang sama
- * dengan `programDonasiMentah` — validasi Zod tetap dijalankan di `content.ts`,
+ * dengan `programDonasiMentah`, validasi Zod tetap dijalankan di `content.ts`,
  * memakai skema yang sama, sehingga data CMS tidak lebih dipercaya daripada
  * data statis.
  *
@@ -179,7 +179,7 @@ export async function ambilProgramDonasiWp(): Promise<unknown[] | null> {
       target: n.target ?? 0,
       terkumpul: n.terkumpul ?? 0,
       penerima_manfaat: n.penerimaManfaat ?? "—",
-      // Kolom tanggal WordPress kosong terkirim sebagai "" — skema menuntut null.
+      // Kolom tanggal WordPress kosong terkirim sebagai "", skema menuntut null.
       batas_waktu: n.batasWaktu ? n.batasWaktu : null,
       konten: n.content ?? "",
       mendesak: n.mendesak ?? false,

@@ -13,10 +13,10 @@ import type { ImageData } from "@/lib/schemas";
  *
  * Dibangun di atas `<dialog>` bawaan peramban, bukan `<div>` berposisi tetap:
  * lapisan atas, jebakan fokus, pengembalian fokus ke pemicunya, dan tombol Esc
- * sudah menjadi perilaku bawaan elemennya — tiga hal terakhir itulah yang
+ * sudah menjadi perilaku bawaan elemennya, tiga hal terakhir itulah yang
  * biasanya terlupa saat lightbox ditulis dari nol.
  *
- * Keadaannya dipegang pemanggil (`aktif`), karena pemicunya — kartu di kisi —
+ * Keadaannya dipegang pemanggil (`aktif`), karena pemicunya, kartu di kisi,
  * tinggal di sana.
  */
 export function LightboxFoto({
@@ -45,7 +45,7 @@ export function LightboxFoto({
   }, [aktif]);
 
   /* Lapisan atas menghalangi klik, tapi tidak menghentikan gulir halaman di
-     belakangnya — tanpa ini foto besar ikut melayang saat pembaca menggulir. */
+     belakangnya, tanpa ini foto besar ikut melayang saat pembaca menggulir. */
   useEffect(() => {
     if (aktif === null) return;
     const semula = document.body.style.overflow;
@@ -108,7 +108,7 @@ export function LightboxFoto({
           <figcaption className="pointer-events-auto flex w-full flex-col items-center gap-3 text-center">
             {/* Tinggi dasar dua baris: keterangan foto panjangnya berbeda-beda,
                 dan tanpa ini tombol maju-mundur ikut naik-turun setiap kali
-                foto berganti — persis di bawah jari yang sedang menekannya. */}
+                foto berganti, persis di bawah jari yang sedang menekannya. */}
             <p className="flex min-h-10 max-w-2xl items-center text-sm leading-relaxed text-pretty text-white/80">
               {foto.alt}
             </p>

@@ -26,7 +26,7 @@ export function Section({
 }
 
 /**
- * Judul seksi dua nada — pola desain inti situs ini: kalimat gelap dengan satu
+ * Judul seksi dua nada, pola desain inti situs ini: kalimat gelap dengan satu
  * frasa berwarna merek, disertai kalimat penjelas.
  */
 export function JudulSeksi({

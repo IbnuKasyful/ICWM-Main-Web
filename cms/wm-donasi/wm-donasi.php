@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Wadi Mubarak — Program Donasi
+ * Plugin Name:       Wadi Mubarak, Program Donasi
  * Description:       CPT program_donasi + kolom angka penghimpunan, diekspos ke WPGraphQL, dan pemberitahuan otomatis ke situs Next.js setiap kali angkanya disimpan.
  * Version:           1.0.0
  * Requires at least: 6.4
@@ -12,7 +12,7 @@
  * src/app/api/revalidate/route.ts (penyegar cache).
  *
  * Ketergantungan: plugin WPGraphQL. Tanpa itu CPT tetap bisa diisi admin, hanya
- * tidak terbaca situs — jadi kegagalannya jujur, bukan senyap.
+ * tidak terbaca situs, jadi kegagalannya jujur, bukan senyap.
  */
 
 if (!defined('ABSPATH')) {
@@ -23,7 +23,7 @@ const WM_DONASI_CPT   = 'program_donasi';
 const WM_DONASI_NONCE = 'wm_donasi_nonce';
 
 /**
- * Definisi kolom. Satu sumber untuk metabox, register_post_meta, dan WPGraphQL —
+ * Definisi kolom. Satu sumber untuk metabox, register_post_meta, dan WPGraphQL,
  * menambah field cukup di sini.
  *
  * 'meta'    kunci meta di basis data (berprefiks, agar tidak bentrok plugin lain)
@@ -47,7 +47,7 @@ function wm_donasi_kolom(): array
             'label'   => 'Target (Rp)',
             'jenis'   => 'angka',
             'tipe'    => 'integer',
-            'bantuan' => 'Tulis angka polos tanpa titik dan tanpa "Rp", contoh: 1800000000. Isi 0 bila program berkelanjutan tanpa target — bar progres otomatis disembunyikan.',
+            'bantuan' => 'Tulis angka polos tanpa titik dan tanpa "Rp", contoh: 1800000000. Isi 0 bila program berkelanjutan tanpa target, bar progres otomatis disembunyikan.',
         ],
         [
             'meta'    => '_wm_terkumpul',
@@ -260,7 +260,7 @@ function wm_donasi_render_metabox(WP_Post $post): void
     $terkumpul = (int) get_post_meta($post->ID, '_wm_terkumpul', true);
     if ($target > 0) {
         $persen = min(100, (int) round($terkumpul / $target * 100));
-        echo '<p class="wm-bantuan"><strong>Capaian saat ini: ' . esc_html((string) $persen) . '%</strong> — '
+        echo '<p class="wm-bantuan"><strong>Capaian saat ini: ' . esc_html((string) $persen) . '%</strong>, '
             . esc_html(number_format_i18n($terkumpul)) . ' dari ' . esc_html(number_format_i18n($target)) . '</p>';
     }
 }
@@ -378,7 +378,7 @@ function wm_donasi_daftar_graphql(): void
  * Sengaja tidak disimpan di halaman pengaturan: rahasianya tidak perlu bisa
  * dibaca siapa pun yang bisa masuk wp-admin.
  *
- * Kegagalan panggilan ini dicatat ke log lalu diabaikan — admin tidak boleh
+ * Kegagalan panggilan ini dicatat ke log lalu diabaikan, admin tidak boleh
  * kehilangan simpanannya hanya karena situs sedang tidak menjawab. ISR 15 menit
  * tetap menyusul dengan sendirinya.
  */

@@ -85,7 +85,7 @@ export function PostCard({
   );
 }
 
-/** Inisial penulis — dipakai sebagai avatar, sebab `post` tidak memuat foto penulis. */
+/** Inisial penulis, dipakai sebagai avatar, sebab `post` tidak memuat foto penulis. */
 function inisial(nama: string): string {
   return nama
     .split(/\s+/)
@@ -186,7 +186,7 @@ export function PostCardKabar({
   );
 }
 
-/** Baris ringkas tanpa gambar — untuk daftar terkait di halaman dalam. */
+/** Baris ringkas tanpa gambar, untuk daftar terkait di halaman dalam. */
 export function PostBaris({ post }: { post: Post }) {
   return (
     <li className="group relative border-b border-line py-4 last:border-b-0">

@@ -181,7 +181,7 @@ export function tautanWhatsApp(nomor: string, pesan: string): string {
 }
 
 /**
- * PRD §9.3 — tautan keluar ke subdomain unit wajib membawa UTM bersumber
+ * PRD §9.3, tautan keluar ke subdomain unit wajib membawa UTM bersumber
  * `induk`, supaya perpindahan lintas domain terbaca di GA4.
  */
 export function tautanKeluar(url: string, unitSlug: string): string {

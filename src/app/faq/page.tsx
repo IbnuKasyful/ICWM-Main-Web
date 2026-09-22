@@ -4,7 +4,7 @@ import { JsonLd } from "@/components/ui/JsonLd";
 import { getFaq } from "@/lib/content";
 import { buatMetadata, jsonldFaq } from "@/lib/seo";
 
-/** PRD §8 — SSG. */
+/** PRD §8, SSG. */
 export const dynamic = "force-static";
 
 export const metadata = buatMetadata({
@@ -19,7 +19,7 @@ export default function HalamanFaq() {
 
   return (
     <>
-      {/* PRD §13 — JSON-LD FAQPage. Halaman pangkal mewakili seluruh daftar;
+      {/* PRD §13, JSON-LD FAQPage. Halaman pangkal mewakili seluruh daftar;
           halaman kelompok hanya mendaftarkan pertanyaannya sendiri. */}
       {faq.length > 0 ? <JsonLd data={jsonldFaq(faq)} /> : null}
 

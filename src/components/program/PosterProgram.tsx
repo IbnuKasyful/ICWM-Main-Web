@@ -11,7 +11,7 @@ import type { ImageData } from "@/lib/schemas";
  * Poster program di kartu ringkasan /program-quran.
  *
  * Poster penuh tulisan, dan pada lebar kartu tulisannya terlalu kecil untuk
- * dibaca — jadi mengetuknya membuka poster utuh di lightbox. Karena alasan yang
+ * dibaca, jadi mengetuknya membuka poster utuh di lightbox. Karena alasan yang
  * sama, tidak ada teks atau tirai gelap yang ditumpuk di atasnya: keduanya akan
  * menutupi isi poster itu sendiri.
  */

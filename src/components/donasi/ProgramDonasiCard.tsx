@@ -9,7 +9,7 @@ import type { ProgramDonasi } from "@/lib/schemas";
 import { cn } from "@/lib/cn";
 
 /**
- * PRD §9.4 — setiap program menampilkan target, terkumpul, dan progres.
+ * PRD §9.4, setiap program menampilkan target, terkumpul, dan progres.
  *
  * Susunannya menyamai `UnitCard` di /program: panel gambar tersemat di dalam
  * bingkai kartu (lencana melayang di atasnya, garis aksen di kaki panel), lalu
@@ -17,7 +17,7 @@ import { cn } from "@/lib/cn";
  * kartu di kaki. Dua halaman ini dibaca berurutan oleh calon donatur, jadi
  * kartunya sebaiknya terasa satu keluarga.
  *
- * Seluruh gerak adalah transisi CSS pada `group` — tidak ada JavaScript yang
+ * Seluruh gerak adalah transisi CSS pada `group`, tidak ada JavaScript yang
  * dikirim untuk kartu ini (PRD §12). Setiap keadaan `hover` dipasangkan dengan
  * `focus-within` supaya pengguna papan tuntas melihat perubahan yang sama saat
  * tautannya menerima fokus.
@@ -53,7 +53,7 @@ export function ProgramDonasiCard({ program }: { program: ProgramDonasi }) {
           <Badge nada="aksen" className="border-white/70 bg-white/90 shadow-soft backdrop-blur-sm">
             {labelJenisDonasi[program.jenis]}
           </Badge>
-          {/* Putih di atas accent-500 hanya 2,9:1 — pakai accent-800. */}
+          {/* Putih di atas accent-500 hanya 2,9:1, pakai accent-800. */}
           {program.mendesak ? (
             <Badge nada="peringatan" className="border-accent-800 bg-accent-800 text-white shadow-soft">
               Mendesak

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """Membangkitkan src/data/cabang-saqu.ts dari dua berkas resmi yayasan.
 
-Sumber — taruh di folder `info/` di akar proyek:
+Sumber, taruh di folder `info/` di akar proyek:
     info/DATA TAUD SELINDO NEW.xlsx
     info/DATA MIT SELINDO NEW.xlsx
 
-Sengaja memakai pustaka bawaan Python saja — xlsx hanyalah zip berisi XML —
+Sengaja memakai pustaka bawaan Python saja, xlsx hanyalah zip berisi XML,
 supaya tidak menambah dependensi hanya untuk berkas yang jarang berubah.
 
 Jalankan: python scripts/bangkitkan-cabang-saqu.py

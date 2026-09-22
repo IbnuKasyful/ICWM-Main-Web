@@ -5,7 +5,7 @@ import { Icon, type NamaIkon } from "@/components/ui/Icon";
 import { cn } from "@/lib/cn";
 
 /**
- * Kartu foto gelap — satu bahasa rupa yang dipakai bersama oleh bilah "Mulai
+ * Kartu foto gelap, satu bahasa rupa yang dipakai bersama oleh bilah "Mulai
  * dari sini" di beranda (PRD §9.1 blok 2) dan kartu jenis dana di halaman
  * donasi.
  *
@@ -14,7 +14,7 @@ import { cn } from "@/lib/cn";
  * sempit, lalu judul dan penjelasannya naik dari dasar kartu begitu disentuh
  * kursor atau menerima fokus.
  *
- * `href` hanya menentukan pembungkusnya — ada berarti seluruh kartu menjadi
+ * `href` hanya menentukan pembungkusnya, ada berarti seluruh kartu menjadi
  * satu tautan, tidak ada berarti kartu hanya bidang biasa. Selebihnya persis
  * sama, termasuk urutan lapisan dan setiap kelasnya, supaya kedua tempat itu
  * tidak pernah berangsur berbeda.
@@ -88,7 +88,7 @@ export function KartuFoto({
         <Icon nama={ikon} className="size-5 text-accent-200" tebal={1.8} />
       </span>
 
-      {/* Label tegak — satu-satunya isi yang tampil saat kartu menyempit.
+      {/* Label tegak, satu-satunya isi yang tampil saat kartu menyempit.
           Teksnya tidak dipendekkan, hanya diputar, jadi kartu tetap terbaca
           utuh meski sesempit apa pun. */}
       <span
@@ -103,7 +103,7 @@ export function KartuFoto({
       </span>
 
       {/* Lebarnya dipatok pada lg supaya teks sudah tersusun pada lebar
-          akhirnya sejak kartu masih sempit — kalau dibiarkan mengikuti lebar
+          akhirnya sejak kartu masih sempit, kalau dibiarkan mengikuti lebar
           kartu, tiap huruf akan berlompatan sepanjang animasi. */}
       <div
         className={cn(

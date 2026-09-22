@@ -3,14 +3,14 @@ import { persen, rupiahRingkas } from "@/lib/format";
 import { cn } from "@/lib/cn";
 
 /**
- * PRD §9.4 — setiap program donasi menampilkan target, terkumpul, dan progres.
+ * PRD §9.4, setiap program donasi menampilkan target, terkumpul, dan progres.
  *
  * Susunannya: nominal terkumpul sebagai angka besar, lencana capaian di
  * seberangnya, bilah bertonggak 25/50/75%, lalu targetnya. Angka persen
  * dipisahkan ke lencana karena itu yang dicari mata lebih dulu; nominal
  * targetnya tetap tampil di bawah agar syarat PRD terpenuhi.
  *
- * Geraknya murni CSS — komponen ini tidak mengirim JavaScript sama sekali:
+ * Geraknya murni CSS, komponen ini tidak mengirim JavaScript sama sekali:
  * bilah terisi dari nol saat dirender, dan kilau melintas saat kartu induknya
  * (`group`) disentuh kursor. Blok `prefers-reduced-motion` di globals.css
  * mematikan keduanya bagi pengguna yang tidak menghendaki gerak.
@@ -66,7 +66,7 @@ export function Progress({
                 : "bg-accent-50 text-accent-800 ring-accent-100",
             )}
           >
-            {/* `size-3!` — `Icon` sudah memasang `size-5` bawaan dan `cn()`
+            {/* `size-3!`, `Icon` sudah memasang `size-5` bawaan dan `cn()`
                 hanya menggabung tanpa meredam kelas kembar, jadi ukuran yang
                 lebih kecil harus dipaksa agar tidak kalah urutan CSS. */}
             {tuntas ? <Icon nama="centang" className="size-3!" tebal={2.6} /> : null}

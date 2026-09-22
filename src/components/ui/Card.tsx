@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 /**
- * Kartu dasar. Varian `interaktif` menambahkan efek angkat — dipakai bila
+ * Kartu dasar. Varian `interaktif` menambahkan efek angkat, dipakai bila
  * seluruh kartu dibungkus tautan.
  */
 export function Card({

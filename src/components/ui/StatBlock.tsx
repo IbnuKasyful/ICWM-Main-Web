@@ -5,12 +5,12 @@ import { cn } from "@/lib/cn";
 import type { Capaian } from "@/lib/schemas";
 
 /**
- * PRD §9.1 blok 3 — 4–6 angka capaian.
+ * PRD §9.1 blok 3, 4–6 angka capaian.
  *
  * Tiap angka berdiri sebagai kartu terpisah dan rata tengah. Saat disentuh
  * kursor, kartu terangkat dan seluruh bidangnya terisi warna primer: angka,
  * label, dan keterangannya berbalik menjadi terang sekaligus. Satu kartu aktif
- * pada satu waktu — itu yang membuat deret angka ini bisa dibaca satu per satu,
+ * pada satu waktu, itu yang membuat deret angka ini bisa dibaca satu per satu,
  * bukan sebagai dinding angka.
  *
  * Bila `tautan` diberikan, sebuah pil ajakan muncul di kaki kartu. Pil itu

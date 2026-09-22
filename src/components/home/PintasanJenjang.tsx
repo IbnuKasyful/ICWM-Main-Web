@@ -20,7 +20,7 @@ const pintasan: { jenjang: Jenjang; href: string }[] = [
  * Pintasan jenjang pada hero.
  *
  * Tepat satu keping selalu tampil tebal: keping pertama saat halaman dibuka,
- * lalu berpindah ke keping yang terakhir disentuh kursor — dan menetap di sana
+ * lalu berpindah ke keping yang terakhir disentuh kursor, dan menetap di sana
  * meski kursor sudah pergi, sebagai jejak ke mana perhatian tadi diarahkan.
  *
  * Karena itu blok ini butuh state klien: CSS `:hover` tidak menyimpan ingatan

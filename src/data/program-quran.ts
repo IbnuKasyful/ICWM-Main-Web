@@ -2,7 +2,7 @@
  * Program Al-Qur'an untuk umum: Graha Qur'an dan Wisata Qur'an.
  *
  * Keduanya dulu berada di bawah YASAQU. Setelah lembaga itu tidak lagi
- * dipakai, programnya berjalan langsung di bawah yayasan — namun tetap bukan
+ * dipakai, programnya berjalan langsung di bawah yayasan, namun tetap bukan
  * unit pendidikan: tidak ada jenjang, tidak ada PPDB, dan pesertanya masyarakat
  * umum, bukan santri. Karena itu datanya dipisah dari `src/data/units.ts` agar
  * tidak ikut tersaring di /program.
@@ -30,7 +30,7 @@ export const programQuranMentah: unknown[] = [
     untuk_siapa: [
       "Anda yang ingin belajar tahsin tetapi tidak memungkinkan tinggal di asrama",
       "Pekerja dan ibu rumah tangga dengan waktu belajar yang tidak tetap",
-      "Yang merasa terlambat memulai — kelas ini tidak mensyaratkan hafalan awal",
+      "Yang merasa terlambat memulai, kelas ini tidak mensyaratkan hafalan awal",
       "Yang sudah bisa membaca namun ingin bacaannya diperiksa ulang",
     ],
     sorotan: [
@@ -97,7 +97,7 @@ export const programQuranMentah: unknown[] = [
     nama: "Wisata Qur'an",
     nama_pendek: "Wisata Qur'an",
     ringkasan:
-      "Short camp Al-Qur'an di kampus Megamendung untuk rombongan sekolah, instansi, dan komunitas — belajar tahsin dan tahfizh tanpa meninggalkan suasana liburan.",
+      "Short camp Al-Qur'an di kampus Megamendung untuk rombongan sekolah, instansi, dan komunitas, belajar tahsin dan tahfizh tanpa meninggalkan suasana liburan.",
     penyelenggaraan: "luring",
     durasi: "Beberapa hari, disesuaikan dengan kebutuhan rombongan",
     peserta: "Pelajar SD kelas 4–6, SMP, SMA, serta karyawan instansi pemerintah dan swasta",

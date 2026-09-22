@@ -94,7 +94,7 @@ const berkas = [
 ];
 
 /**
- * Unit — hero profil.
+ * Unit, hero profil.
  *
  * Warnanya diturunkan dari `warna_aksen` masing-masing unit di
  * `src/data/units.ts` (gelap – sedang – terang), bukan dari palet umum di atas:
@@ -124,7 +124,7 @@ units.forEach(([slug, warna], i) => {
   });
 });
 
-/** Tulisan — 12 gambar kartu. */
+/** Tulisan, 12 gambar kartu. */
 for (let i = 1; i <= 12; i += 1) {
   berkas.push({
     nama: `post-${i}`,

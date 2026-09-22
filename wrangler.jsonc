@@ -11,7 +11,7 @@
 		"binding": "ASSETS"
 	},
 
-	// Pengoptimal gambar bawaan Cloudflare — menggantikan peran `sharp` yang
+	// Pengoptimal gambar bawaan Cloudflare, menggantikan peran `sharp` yang
 	// dipakai next/image di server Node. Tidak perlu dibuat lebih dulu.
 	"images": {
 		"binding": "IMAGES"
@@ -21,7 +21,7 @@
 		"enabled": true
 	}
 
-	// CATATAN — cache ISR belum diaktifkan.
+	// CATATAN, cache ISR belum diaktifkan.
 	//
 	// Seluruh konten situs masih berasal dari berkas statis di `src/data/`, jadi
 	// `export const revalidate` di 14 halaman belum punya sumber data yang bisa

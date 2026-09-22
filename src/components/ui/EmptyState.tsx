@@ -5,7 +5,7 @@ import { Icon, type NamaIkon } from "@/components/ui/Icon";
 import { cn } from "@/lib/cn";
 
 /**
- * PRD §9.2, §9.5, §18 — keadaan kosong wajib berisi pesan yang membantu,
+ * PRD §9.2, §9.5, §18, keadaan kosong wajib berisi pesan yang membantu,
  * bukan halaman kosong. Komponen ini dipakai setiap daftar tanpa kecuali.
  */
 export function EmptyState({

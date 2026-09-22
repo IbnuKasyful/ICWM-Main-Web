@@ -5,12 +5,12 @@ import { TAG_BERITA } from "@/lib/wp-berita";
 import { TAG_DONASI } from "@/lib/wp";
 
 /**
- * Penyegaran cache atas permintaan WordPress — pasangan dari plugin
+ * Penyegaran cache atas permintaan WordPress, pasangan dari plugin
  * `cms/wm-donasi/wm-donasi.php`.
  *
  * WordPress memanggil route ini setiap kali program donasi disimpan atau
  * tulisan diterbitkan, sehingga isi baru tampil dalam hitungan detik alih-alih
- * menunggu ISR habis. Tanpa panggilan ini situs tetap benar — hanya lebih
+ * menunggu ISR habis. Tanpa panggilan ini situs tetap benar, hanya lebih
  * lambat menyusul.
  *
  * Badan permintaan boleh menyertakan `jenis`: "donasi" (bawaan, menjaga
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
   const rahasia = process.env["REVALIDATE_SECRET"]?.trim();
 
   if (!rahasia) {
-    console.error("[revalidate] REVALIDATE_SECRET belum diisi — permintaan ditolak");
+    console.error("[revalidate] REVALIDATE_SECRET belum diisi, permintaan ditolak");
     return NextResponse.json({ ok: false, pesan: "Penyegaran cache belum diaktifkan" }, { status: 503 });
   }
 
@@ -61,7 +61,7 @@ export async function POST(request: Request) {
   /* Keduanya opsional. `jenis` menentukan tag dan halaman mana yang
      disegarkan; bawaannya "donasi" supaya plugin lama tetap bekerja tanpa
      diubah. Bila WordPress menyebutkan `slug`, halaman rinciannya ikut
-     disegarkan — termasuk saat isinya baru dibuat dan belum pernah ada. */
+     disegarkan, termasuk saat isinya baru dibuat dan belum pernah ada. */
   let slug: string | undefined;
   let jenis: "donasi" | "berita" = "donasi";
   try {
@@ -71,7 +71,7 @@ export async function POST(request: Request) {
     }
     if (isi.jenis === "berita" || isi.jenis === "donasi") jenis = isi.jenis;
   } catch {
-    // Body kosong atau bukan JSON — bukan galat, keduanya memang opsional.
+    // Body kosong atau bukan JSON, bukan galat, keduanya memang opsional.
   }
 
   const jalurTerdampak = JALUR[jenis];

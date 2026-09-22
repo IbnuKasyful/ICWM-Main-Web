@@ -2,7 +2,7 @@ import { HalamanKebijakan, type BagianKebijakan } from "@/components/site/Halama
 import { buatMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-/** PRD §8 — SSG. */
+/** PRD §8, SSG. */
 export const dynamic = "force-static";
 
 export const metadata = buatMetadata({

@@ -2,7 +2,7 @@ import { HalamanKebijakan, type BagianKebijakan } from "@/components/site/Halama
 import { buatMetadata } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-/** PRD §8 — SSG. */
+/** PRD §8, SSG. */
 export const dynamic = "force-static";
 
 export const metadata = buatMetadata({
@@ -17,7 +17,7 @@ const bagian: BagianKebijakan[] = [
     judul: "Komitmen kami",
     isi: [
       "Setiap santri berhak merasa aman selama berada di lingkungan yayasan. Komitmen ini berlaku sama di seluruh unit, baik yang berasrama maupun tidak.",
-      "Kami tidak menoleransi kekerasan fisik, kekerasan verbal, perundungan antar-santri, maupun bentuk pelecehan apa pun — termasuk yang dilakukan atas nama pendisiplinan.",
+      "Kami tidak menoleransi kekerasan fisik, kekerasan verbal, perundungan antar-santri, maupun bentuk pelecehan apa pun, termasuk yang dilakukan atas nama pendisiplinan.",
     ],
   },
   {
@@ -67,7 +67,7 @@ export default function HalamanPerlindunganAnak() {
     <HalamanKebijakan
       judul="Kebijakan perlindungan anak"
       slug="perlindungan-anak"
-      keterangan="Kebijakan ini kami publikasikan agar wali santri tahu persis apa yang boleh dituntut dari kami — dan ke mana harus melapor bila terjadi sesuatu."
+      keterangan="Kebijakan ini kami publikasikan agar wali santri tahu persis apa yang boleh dituntut dari kami, dan ke mana harus melapor bila terjadi sesuatu."
       diperbarui="2026-07-01"
       bagian={bagian}
     />

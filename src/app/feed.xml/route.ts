@@ -1,7 +1,7 @@
 import { getPostsInduk } from "@/lib/content";
 import { site } from "@/lib/site";
 
-/** PRD §8 — /feed.xml dibangkitkan dari tulisan yang tayang di induk. */
+/** PRD §8, /feed.xml dibangkitkan dari tulisan yang tayang di induk. */
 export const revalidate = 900;
 
 function escapeXml(teks: string): string {

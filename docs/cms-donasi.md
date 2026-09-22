@@ -5,7 +5,7 @@ repo ini. Dokumen ini memuat cara memasangnya (sekali) dan cara memakainya
 (rutin).
 
 Arsitekturnya: **WordPress dan Next.js berada di satu cPanel.** WordPress hanya
-menjadi tempat mengisi data (headless) — pengunjung tidak pernah membukanya.
+menjadi tempat mengisi data (headless), pengunjung tidak pernah membukanya.
 
 ```
 Admin  →  wp-admin  →  simpan
@@ -15,19 +15,19 @@ Admin  →  wp-admin  →  simpan
 
 ---
 
-## Bagian 1 — Pemasangan (sekali saja)
+## Bagian 1, Pemasangan (sekali saja)
 
 ### 1. WordPress di subdomain
 
 Di cPanel: **Domains → Create A Domain**, buat `cms.wadimubarak.com`, lalu pasang
-WordPress ke situ via **Softaculous → WordPress**. Jangan pasang di domain utama —
+WordPress ke situ via **Softaculous → WordPress**. Jangan pasang di domain utama,
 domain utama dipakai Next.js.
 
 ### 2. Plugin
 
 Pasang **WPGraphQL** dari direktori plugin WordPress (wajib), lalu unggah folder
 `cms/wm-donasi/` dari repo ini ke `wp-content/plugins/` dan aktifkan
-"Wadi Mubarak — Program Donasi".
+"Wadi Mubarak, Program Donasi".
 
 Setelah aktif, menu **Program Donasi** muncul di sidebar wp-admin.
 
@@ -67,7 +67,7 @@ sana; ganti bila subdomainnya berbeda.
 
 Buat pengguna dengan peran **Editor**, bukan Administrator. Editor cukup untuk
 mengelola program donasi tetapi tidak bisa memasang plugin, mengubah tema, atau
-membaca `wp-config.php` — dan rahasia penyegaran cache tidak tersimpan di
+membaca `wp-config.php`, dan rahasia penyegaran cache tidak tersimpan di
 basis data, jadi tidak ikut terbaca siapa pun yang masuk wp-admin.
 
 ### 5. Uji
@@ -86,7 +86,7 @@ curl -X POST https://wadimubarak.com/api/revalidate \
 
 ---
 
-## Bagian 2 — Pemakaian rutin oleh admin
+## Bagian 2, Pemakaian rutin oleh admin
 
 Buka **Program Donasi → pilih program → ubah angka → Update**. Selesai.
 
@@ -99,18 +99,18 @@ otomatis dalam maksimal 15 menit (ISR).
 
 | Kolom | Cara mengisi |
 |---|---|
-| Judul | Nama program. Slug URL-nya ikut judul; **jangan ubah slug program yang sudah tayang** — tautan lama akan mati. |
+| Judul | Nama program. Slug URL-nya ikut judul; **jangan ubah slug program yang sudah tayang**, tautan lama akan mati. |
 | Kutipan (excerpt) | Ringkasan 1–2 kalimat. Dipangkas otomatis di 200 karakter. |
 | Isi | Penjelasan program. Paragraf biasa; heading dan daftar didukung. |
 | Gambar unggulan | Rasio 3:2, minimal 1200 px. Bila kosong, situs memakai ilustrasi cadangan. |
 | Jenis dana | Menentukan nomor rekening mana yang tampil di halaman program. |
-| Target (Rp) | Angka polos. **Isi 0** bila program berkelanjutan — bar progres otomatis hilang dan situs menulis "program berkelanjutan". |
+| Target (Rp) | Angka polos. **Isi 0** bila program berkelanjutan, bar progres otomatis hilang dan situs menulis "program berkelanjutan". |
 | Terkumpul (Rp) | Angka polos hasil rekapitulasi. Ini kolom yang biasanya diperbarui. |
 | Penerima manfaat | Ringkas dan terukur, mis. "180 santri di seluruh unit". |
 | Batas waktu | Kosongkan bila tanpa batas. |
 | Tandai mendesak | Menaikkan program ke urutan teratas + jadi sorotan donasi di beranda. |
 
-Menempel `Rp 1.305.000.000` dari pembukuan tidak masalah — titik dan "Rp"
+Menempel `Rp 1.305.000.000` dari pembukuan tidak masalah, titik dan "Rp"
 dibuang otomatis saat disimpan. Kolom **Capaian** di daftar program menampilkan
 persentasenya supaya salah ketik satu nol langsung kelihatan.
 
@@ -118,7 +118,7 @@ Begitu `Terkumpul` mencapai `Target`, situs otomatis mengubah nada progresnya
 menjadi "Target terpenuhi". Tidak ada kolom status yang perlu diubah.
 
 Menghapus program (ke Trash) juga menyegarkan situs. Halaman lamanya akan
-menjawab 404 — pertimbangkan mengosongkan target dan menandainya selesai alih-alih
+menjawab 404, pertimbangkan mengosongkan target dan menandainya selesai alih-alih
 menghapus, bila tautannya sudah pernah disebar.
 
 ---
@@ -152,7 +152,7 @@ Node.js App. Semua pesan dari sistem ini berprefiks `[wp]`, `[donasi]`,
 | `src/lib/wp.ts` | Klien WPGraphQL. Tidak pernah melempar; `null` berarti gagal. |
 | `src/lib/content.ts` | Batas API: memilih WP atau data statis, menjalankan Zod. |
 | `src/app/api/revalidate/route.ts` | Menerima panggilan WordPress, menyegarkan cache. |
-| `src/lib/schemas.ts` | `programDonasiSchema` — kontrak yang mengikat kedua sisi. |
+| `src/lib/schemas.ts` | `programDonasiSchema`, kontrak yang mengikat kedua sisi. |
 
 Menambah kolom baru: tambahkan di `wm_donasi_kolom()` (PHP), di kueri dan
 pemeta `src/lib/wp.ts`, lalu di `programDonasiSchema`. Ketiganya harus sepakat,

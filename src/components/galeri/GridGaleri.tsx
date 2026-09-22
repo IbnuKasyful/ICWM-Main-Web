@@ -17,7 +17,7 @@ import type { GaleriItem, GaleriKategori } from "@/lib/schemas";
  * Menggantikan korsel *coverflow* sebelumnya. Korsel hanya memperlihatkan satu
  * foto dalam satu waktu, sehingga pengunjung harus menekan panah belasan kali
  * untuk tahu isi galeri; kisi memperlihatkan semuanya sekaligus. Kartu sengaja
- * dibuat sama besar — potongan `object-cover` memang memangkas foto tegak,
+ * dibuat sama besar, potongan `object-cover` memang memangkas foto tegak,
  * tapi mengetuk kartu membuka foto utuh beserta keterangan lengkapnya.
  */
 
@@ -47,7 +47,7 @@ export function GridGaleri({ galeri }: { galeri: readonly GaleriItem[] }) {
   return (
     <section className="py-12 md:py-16">
       <div className="container-page">
-        {/* Baris penyaring — satu baris utuh, tidak pernah membungkus. Di layar
+        {/* Baris penyaring, satu baris utuh, tidak pernah membungkus. Di layar
             sempit barisnya digeser mendatar; membungkus jadi dua-tiga baris
             mengubah baris penyaring menjadi blok tersendiri dan mendorong foto
             turun dari pandangan pertama. */}
@@ -109,7 +109,7 @@ export function GridGaleri({ galeri }: { galeri: readonly GaleriItem[] }) {
                 />
 
                 {/* Dua tirai tipis, atas dan bawah, hanya setinggi yang dibutuhkan
-                    label dan keterangan — bagian tengah foto dibiarkan terang. */}
+                    label dan keterangan, bagian tengah foto dibiarkan terang. */}
                 <span
                   aria-hidden="true"
                   className="absolute inset-0 bg-[linear-gradient(to_bottom,rgb(11_21_36/0.45),transparent_28%,transparent_52%,rgb(11_21_36/0.82))]"

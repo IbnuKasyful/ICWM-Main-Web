@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 /**
- * Header keamanan — PRD §15.
+ * Header keamanan, PRD §15.
  * CSP dibiarkan longgar untuk gambar/skrip GA4; perketat saat domain WP final.
  */
 const securityHeaders = [
@@ -23,13 +23,13 @@ const nextConfig: NextConfig = {
   /* Sasaran penempatan produksi adalah cPanel (Node.js App / Passenger), yang
      menjalankan berkas hasil `output: "standalone"`. Cloudflare Workers dipakai
      hanya untuk pratinjau ke pihak yayasan dan dibangun lewat OpenNext, yang
-     mengurus pembungkusannya sendiri — karena itu mode ini dinyalakan lewat
+     mengurus pembungkusannya sendiri, karena itu mode ini dinyalakan lewat
      variabel, bukan dipasang permanen. Lihat docs/deploy-cpanel.md. */
   ...(process.env["BUILD_TARGET"] === "cpanel" ? { output: "standalone" as const } : {}),
   // Ada lockfile lain di direktori induk; kunci akar penelusuran ke proyek ini.
   outputFileTracingRoot: process.cwd(),
   images: {
-    // PRD §6 — next/image dengan remotePatterns ke domain WP.
+    // PRD §6, next/image dengan remotePatterns ke domain WP.
     remotePatterns: [
       { protocol: "https", hostname: "cms.wadimubarak.com" },
       // Gambar unggulan berita: WordPress yayasan menyimpannya di domain utama.

@@ -1,11 +1,11 @@
-# PRD — Rebuild Website Induk Islamic Center Wadi Mubarak
+# PRD, Rebuild Website Induk Islamic Center Wadi Mubarak
 
 **Dokumen:** Product Requirements Document
 **Ruang lingkup:** Website induk `wadimubarak.com` (Fase 1)
 **Versi:** 1.0
 **Status:** Draf untuk dieksekusi
 
-> Dokumen ini ditulis untuk dipakai sebagai spesifikasi kerja bersama Claude Code. Keputusan teknis di dalamnya bersifat **mengikat** — bila sebuah keputusan perlu diubah, ubah dokumen ini lebih dulu, jangan diubah diam-diam di kode. Bagian 18 berisi aturan kerja spesifik untuk agen coding.
+> Dokumen ini ditulis untuk dipakai sebagai spesifikasi kerja bersama Claude Code. Keputusan teknis di dalamnya bersifat **mengikat**, bila sebuah keputusan perlu diubah, ubah dokumen ini lebih dulu, jangan diubah diam-diam di kode. Bagian 18 berisi aturan kerja spesifik untuk agen coding.
 
 ---
 
@@ -15,7 +15,7 @@ Islamic Center Wadi Mubarak menaungi belasan unit pendidikan dan lembaga sosial.
 
 1. **Navigasi disusun berdasarkan bagan organisasi, bukan kebutuhan pengunjung.** Menu berisi singkatan internal (YASAQU, MIMBAR, PKM-WM) yang tidak berarti apa-apa bagi orang tua calon santri.
 2. **Beranda tidak fokus.** Puluhan artikel ditampilkan langsung di beranda lengkap dengan pagination sampai halaman 51.
-3. **Identitas yayasan tidak terasa.** Tidak ada legalitas, struktur pengurus, laporan keuangan, atau halaman donasi yang layak — padahal lembaga ini menaungi LAZIS.
+3. **Identitas yayasan tidak terasa.** Tidak ada legalitas, struktur pengurus, laporan keuangan, atau halaman donasi yang layak, padahal lembaga ini menaungi LAZIS.
 4. **Konten tersebar tanpa tata kelola.** Kategori mencampur jenis konten, unit, dan label internal. Konten cabang Sleman bercampur dengan konten pusat Bogor tanpa penanda.
 
 ## 2. Tujuan
@@ -32,12 +32,12 @@ Islamic Center Wadi Mubarak menaungi belasan unit pendidikan dan lembaga sosial.
 
 Ditulis eksplisit untuk mencegah pelebaran ruang lingkup. **Jangan dikerjakan** kecuali dokumen ini direvisi:
 
-- Membangun website unit (`sma.`, `smp.`, `mbs.`, dst.) — Fase 2
+- Membangun website unit (`sma.`, `smp.`, `mbs.`, dst.), Fase 2
 - Multibahasa (EN/AR). Model data tidak boleh menghalanginya, tetapi implementasinya di luar Fase 1
-- Formulir pendaftaran santri online — tetap diarahkan ke WhatsApp per unit
+- Formulir pendaftaran santri online, tetap diarahkan ke WhatsApp per unit
 - Pembayaran donasi daring. Fase 1 hanya menampilkan rekening & instruksi transfer
 - Area login wali santri, portal nilai, atau e-learning
-- Migrasi domain STIU (`stiuwm.ac.id`) — tetap eksternal
+- Migrasi domain STIU (`stiuwm.ac.id`), tetap eksternal
 - Aplikasi mobile
 
 ## 4. Pengguna & kebutuhannya
@@ -59,7 +59,7 @@ Satu WordPress headless menjadi gudang konten. Beberapa front-end Next.js mengam
 
 ```
 WordPress (headless, admin-only)
-   └── WPGraphQL  ──┬── wadimubarak.com     (induk — Fase 1)
+   └── WPGraphQL  ──┬── wadimubarak.com     (induk, Fase 1)
                     ├── sma.wadimubarak.com  (Fase 2)
                     ├── smp.wadimubarak.com  (Fase 2)
                     └── ...
@@ -69,7 +69,7 @@ WordPress (headless, admin-only)
 
 **Situs induk adalah tempat pengunjung MEMUTUSKAN. Situs unit adalah tempat pengunjung MENDAFTAR.**
 
-Konsekuensi yang harus dipegang selama implementasi: induk wajib memuat informasi yang cukup untuk mengambil keputusan (jenjang, gender, lokasi, kisaran biaya, jadwal PPDB). Jangan melempar pengunjung ke subdomain sebelum mereka yakin — mereka tidak akan kembali.
+Konsekuensi yang harus dipegang selama implementasi: induk wajib memuat informasi yang cukup untuk mengambil keputusan (jenjang, gender, lokasi, kisaran biaya, jadwal PPDB). Jangan melempar pengunjung ke subdomain sebelum mereka yakin, mereka tidak akan kembali.
 
 ### 5.3 Perjalanan pengguna utama
 
@@ -77,8 +77,8 @@ Konsekuensi yang harus dipegang selama implementasi: induk wajib memuat informas
 Beranda
   └── Router niat (5 pintu)
         └── "Menyekolahkan anak"
-              └── /program  — penyaring: jenjang × gender × model × lokasi
-                    └── /program/[unit]  — profil ringkas + keputusan
+              └── /program, penyaring: jenjang × gender × model × lokasi
+                    └── /program/[unit], profil ringkas + keputusan
                           └── CTA keluar ke subdomain unit
 ```
 
@@ -95,7 +95,7 @@ Sebagian besar trafik organik nantinya mendarat langsung di subdomain unit, buka
 | Lapis | Pilihan | Catatan |
 |---|---|---|
 | CMS | WordPress 6.x, headless | Front-end WP dimatikan; hanya `/wp-admin` dan endpoint GraphQL yang terbuka |
-| API | WPGraphQL + WPGraphQL for ACF | GraphQL, bukan REST — menghindari over-fetching dan memberi tipe yang jelas |
+| API | WPGraphQL + WPGraphQL for ACF | GraphQL, bukan REST, menghindari over-fetching dan memberi tipe yang jelas |
 | Custom field | ACF Pro | |
 | Front-end | Next.js 15 (App Router), TypeScript strict | **Bukan SPA.** Rendering di server wajib karena SEO menentukan |
 | Rendering | SSG + ISR, revalidasi on-demand via webhook | |
@@ -107,7 +107,7 @@ Sebagian besar trafik organik nantinya mendarat langsung di subdomain unit, buka
 | Hosting front-end | Vercel | |
 | Hosting WP | Terpisah, dibatasi akses IP untuk `/wp-admin` | |
 
-**Aturan dependensi:** jangan menambah paket di luar daftar ini tanpa persetujuan. Terutama hindari component library besar — sistem desain dibangun sendiri di atas Tailwind.
+**Aturan dependensi:** jangan menambah paket di luar daftar ini tanpa persetujuan. Terutama hindari component library besar, sistem desain dibangun sendiri di atas Tailwind.
 
 ---
 
@@ -136,9 +136,9 @@ Field ini yang menyalakan penyaring di `/program`. Wajib tersedia lewat GraphQL:
 
 ### 7.4 Field kunci pada `post`
 
-- `unit_utama` — menentukan URL kanonik. Wajib.
-- `ringkasan` — teks kartu, maks 200 karakter. Wajib.
-- `tampilkan_di_induk` — boolean. **Menentukan apakah tulisan naik ke situs induk.**
+- `unit_utama`, menentukan URL kanonik. Wajib.
+- `ringkasan`, teks kartu, maks 200 karakter. Wajib.
+- `tampilkan_di_induk`, boolean. **Menentukan apakah tulisan naik ke situs induk.**
 
 Field terakhir inilah yang menangani kasus Sleman: berita TAUD Sleman tersimpan dengan `unit=taud-saqu` dan `lokasi=sleman`, tayang penuh di situs TK nanti, dan hanya muncul di induk bila dikurasi secara sadar.
 
@@ -172,7 +172,7 @@ Seluruh route Fase 1. Tidak ada route lain yang boleh dibuat tanpa merevisi doku
 | `/kebijakan-privasi` | `page` | SSG |
 | `/syarat-ketentuan` | `page` | SSG |
 | `/perlindungan-anak` | `page` | SSG |
-| `/sitemap.xml`, `/robots.txt`, `/feed.xml` | Dibangkitkan | — |
+| `/sitemap.xml`, `/robots.txt`, `/feed.xml` | Dibangkitkan |, |
 
 **Catatan:** berita dan artikel tidak dipisah menjadi dua route. Keduanya adalah `post` yang dibedakan oleh `category`, dan `/informasi` menyediakan penyaring. Ini menghemat kode dan menjaga taksonomi tetap menjadi satu-satunya sumber kebenaran.
 
@@ -184,14 +184,14 @@ Seluruh route Fase 1. Tidak ada route lain yang boleh dibuat tanpa merevisi doku
 
 **Susunan blok, berurutan dari atas:**
 
-1. **Hero** — satu pesan, satu gambar, satu CTA utama. Bukan carousel. Carousel di situs lama menurunkan performa dan hampir tidak pernah diklik melewati slide pertama.
-2. **Router niat** — lima kartu: menyekolahkan anak · belajar Al-Qur'an · berdonasi · kerja sama · tentang yayasan.
-3. **Angka capaian** — 4–6 angka (santri aktif, alumni, hafizh, pengajar, cabang).
-4. **Sekilas yayasan** — 2 paragraf + tautan ke `/tentang`.
-5. **Jaringan unit** — grid ringkas seluruh unit dengan tautan ke `/program`.
-6. **Ajakan donasi** — satu blok menuju `/donasi`.
-7. **Informasi terbaru** — **tepat 6 kartu**, lalu tautan "Lihat semua". Tidak ada pagination di beranda.
-8. **Agenda mendatang** — maks 3 item; blok disembunyikan bila kosong.
+1. **Hero**, satu pesan, satu gambar, satu CTA utama. Bukan carousel. Carousel di situs lama menurunkan performa dan hampir tidak pernah diklik melewati slide pertama.
+2. **Router niat**, lima kartu: menyekolahkan anak · belajar Al-Qur'an · berdonasi · kerja sama · tentang yayasan.
+3. **Angka capaian**, 4–6 angka (santri aktif, alumni, hafizh, pengajar, cabang).
+4. **Sekilas yayasan**, 2 paragraf + tautan ke `/tentang`.
+5. **Jaringan unit**, grid ringkas seluruh unit dengan tautan ke `/program`.
+6. **Ajakan donasi**, satu blok menuju `/donasi`.
+7. **Informasi terbaru**, **tepat 6 kartu**, lalu tautan "Lihat semua". Tidak ada pagination di beranda.
+8. **Agenda mendatang**, maks 3 item; blok disembunyikan bila kosong.
 
 **Kriteria penerimaan:**
 - [ ] Beranda memuat maksimal 6 tulisan; tidak ada elemen pagination
@@ -275,8 +275,8 @@ Situs lama memiliki arsip yang panjang (lebih dari 50 halaman pagination). Ini p
 **Langkah:**
 1. Ekspor seluruh `post` beserta kategori lamanya
 2. Petakan kategori lama → `unit` + `category` baru sesuai tabel migrasi di dokumen taksonomi
-3. Isi `unit_utama`, `ringkasan`, dan `lokasi` — sebagian bisa diturunkan otomatis, sisanya manual
-4. Setel `tampilkan_di_induk` — **default `false`**, lalu kurasi naik. Lebih aman daripada sebaliknya
+3. Isi `unit_utama`, `ringkasan`, dan `lokasi`, sebagian bisa diturunkan otomatis, sisanya manual
+4. Setel `tampilkan_di_induk`, **default `false`**, lalu kurasi naik. Lebih aman daripada sebaliknya
 5. Bangun peta redirect 301 dari URL lama ke URL baru
 6. Isi `alt` gambar yang kosong
 
@@ -303,7 +303,7 @@ Situs lama memiliki arsip yang panjang (lebih dari 50 halaman pagination). Ini p
 
 ## 13. SEO
 
-- Metadata per halaman lewat Metadata API Next.js — tanpa kecuali
+- Metadata per halaman lewat Metadata API Next.js, tanpa kecuali
 - `rel="canonical"` mengikuti field `unit_utama`
 - JSON-LD: `Organization` (global), `EducationalOrganization` (profil unit), `NGO` (donasi), `Article` (tulisan), `BreadcrumbList`, `FAQPage`
 - Sitemap dibangkitkan otomatis dari WPGraphQL
@@ -379,7 +379,7 @@ Bagian ini ditujukan langsung ke agen coding.
 - Kerjakan satu tahap dari Bagian 16 dalam satu waktu. Jangan melompat ke depan
 - Jangan membuat route yang tidak ada di Bagian 8
 - Jangan membuat field, taksonomi, atau CPT yang tidak ada di Bagian 7
-- Bila spesifikasi tampak kurang, **tanyakan** — jangan mengarang field atau perilaku
+- Bila spesifikasi tampak kurang, **tanyakan**, jangan mengarang field atau perilaku
 
 **Kode**
 - TypeScript mode strict. Tanpa `any`
@@ -403,6 +403,6 @@ Bagian ini ditujukan langsung ke agen coding.
 
 ## 19. Dokumen terkait
 
-- *Skema Taksonomi & Kebutuhan Konten Website Induk ICWM* — rincian term, field, dan daftar permintaan konten ke yayasan
+- *Skema Taksonomi & Kebutuhan Konten Website Induk ICWM*, rincian term, field, dan daftar permintaan konten ke yayasan
 - Peta redirect (dibuat pada Tahap 7)
 - Panduan editor CMS (dibuat pada Tahap 6)

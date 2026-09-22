@@ -4,7 +4,7 @@
  * Terpisah dari `wp.ts` karena berbicara dengan antarmuka yang berbeda:
  * `wp.ts` memakai WPGraphQL untuk CPT `program_donasi`, sedangkan berita
  * diambil lewat REST API bawaan WordPress (`/wp-json/wp/v2`). Alasannya
- * praktis — instalasi WordPress yayasan di wadimubarak.com tidak memasang
+ * praktis, instalasi WordPress yayasan di wadimubarak.com tidak memasang
  * WPGraphQL, tetapi REST API-nya publik dan sudah menyediakan seluruh yang
  * dibutuhkan halaman /informasi.
  *
@@ -14,8 +14,8 @@
  * sedang tidak bisa dihubungi.
  *
  * Catatan penting soal ukuran: pemakaian `_embed` ditolak dengan sengaja.
- * Balasan ber-`_embed` untuk 100 tulisan mencapai 5,5 MB — 2,8 MB di antaranya
- * hanya objek taksonomi dan media yang disematkan berulang-ulang — dan itu
+ * Balasan ber-`_embed` untuk 100 tulisan mencapai 5,5 MB, 2,8 MB di antaranya
+ * hanya objek taksonomi dan media yang disematkan berulang-ulang, dan itu
  * melewati batas cache data Next.js, sehingga setiap halaman yang dirender
  * mengambil ulang seluruh arsip. Dengan `_fields` yang ketat plus tiga tabel
  * pencarian kecil (kategori, penulis, media), satu halaman turun ke ~1 MB dan
@@ -27,7 +27,7 @@ import type { Category, Lokasi } from "@/lib/schemas";
 /** Ambang satu permintaan. Arsip 100 tulisan bisa ~1 MB, jadi tidak ketat. */
 const BATAS_MS = 20000;
 
-/** Label cache Next.js — dipakai `/api/revalidate` untuk menyegarkan seketika. */
+/** Label cache Next.js, dipakai `/api/revalidate` untuk menyegarkan seketika. */
 export const TAG_BERITA = "berita";
 
 /** ISR 1 jam, sepadan dengan `revalidate` di halaman /informasi. */
@@ -67,10 +67,10 @@ export function beritaWpAktif(): boolean {
  *
  * Kunci adalah slug kategori WordPress. Kategori yang TIDAK ada di sini
  * dianggap bukan isi redaksional situs induk dan tulisannya tidak dinaikkan
- * (lihat `tampilkan_di_induk` di bawah) — itu cara kurasi PRD §9.1 bekerja
+ * (lihat `tampilkan_di_induk` di bawah), itu cara kurasi PRD §9.1 bekerja
  * selama WordPress belum punya penanda khusus. Yang sengaja ditinggalkan:
  * `pemasaran`, `publishing`, `bimbel-saqu`, `madrasah-online`, `sahabat-resto`,
- * dan `live-streaming` — semuanya lini usaha atau kanal lain, bukan kabar
+ * dan `live-streaming`, semuanya lini usaha atau kanal lain, bukan kabar
  * yayasan. Menambah kategori ke situs induk cukup dengan satu baris di sini.
  */
 const KATEGORI_INDUK: Record<string, Category> = {
@@ -186,7 +186,7 @@ const SINGKATAN = /\b(taud|mit|mts|ma|stiu|mbs|pkm|ppdb|saqu|lazis|pg|iqt|wm)\b/
 
 /**
  * Judul WordPress yayasan banyak yang ditulis KAPITAL SELURUHNYA dan diakhiri
- * emoji. Keduanya merusak ritme kartu di /informasi, jadi dirapikan di sini —
+ * emoji. Keduanya merusak ritme kartu di /informasi, jadi dirapikan di sini,
  * bukan di komponen, supaya JSON-LD dan feed RSS ikut memakai judul yang sama.
  */
 function rapikanJudul(judul: string): string {
@@ -314,7 +314,7 @@ function petakan(p: PostWp, t: Tabel): unknown | null {
   const kutipan = tanpaTag(p.excerpt?.rendered ?? "") || tanpaTag(konten);
 
   // Seluruh unit yayasan berkampus di Bogor kecuali Sleman, dan WordPress tidak
-  // menandai lokasi sama sekali — jadi Bogor adalah satu-satunya nilai jujur.
+  // menandai lokasi sama sekali, jadi Bogor adalah satu-satunya nilai jujur.
   const lokasi: Lokasi = "bogor";
 
   return {

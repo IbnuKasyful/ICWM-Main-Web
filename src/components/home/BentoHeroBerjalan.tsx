@@ -10,12 +10,12 @@ import type { ImageData } from "@/lib/schemas";
  *
  * Bedanya dengan `BentoBerjalan` di blok "Sekilas yayasan": yang ini melintang
  * penuh selebar layar dan menjadi bidang gambar utama beranda, jadi susunannya
- * diselingi kartu angka dan kartu keterangan — persis pola bento, bukan deretan
+ * diselingi kartu angka dan kartu keterangan, persis pola bento, bukan deretan
  * foto seragam. Kolom sengaja berbeda-beda lebar dan isinya; kalau semua kolom
  * sama, geraknya terbaca sebagai carousel dan mata langsung berhenti membaca.
  *
  * Seluruh putaran dirender dua kali lalu digeser tepat sepanjang satu salinan,
- * sehingga sambungannya tak terlihat dan tak perlu JavaScript sama sekali —
+ * sehingga sambungannya tak terlihat dan tak perlu JavaScript sama sekali,
  * komponen ini tetap komponen server. Gerak berhenti saat
  * pengunjung meminta pengurangan gerak (aturan global di
  * globals.css).
@@ -139,7 +139,7 @@ export function BentoHeroBerjalan({
       className={cn(
         "group/dinding relative overflow-hidden",
         // Foto muncul dan lenyap berangsur di tepi kiri-kanan, bukan terpotong
-        // garis lurus — itu yang membuatnya terbaca sebagai aliran.
+        // garis lurus, itu yang membuatnya terbaca sebagai aliran.
         "[mask-image:linear-gradient(to_right,transparent,#000_6%,#000_94%,transparent)]",
         className,
       )}

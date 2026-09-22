@@ -14,7 +14,7 @@ next-env.d.ts
 .wrangler
 cloudflare-env.d.ts
 
-# Materi mentah yayasan (brosur PDF, dokumentasi foto) — puluhan MB dan sudah
+# Materi mentah yayasan (brosur PDF, dokumentasi foto), puluhan MB dan sudah
 # disarikan ke src/data serta public/img. Dua xlsx sumber direktori cabang
 # tetap diikutkan karena scripts/bangkitkan-cabang-saqu.py membacanya.
 /info/*
