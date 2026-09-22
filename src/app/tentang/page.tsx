@@ -2,44 +2,228 @@ import Link from "next/link";
 
 import { PageHeader } from "@/components/site/PageHeader";
 import { CarouselTestimoni } from "@/components/tentang/CarouselTestimoni";
+import {
+  LinimasaPerjalanan,
+  type EntriPerjalanan,
+} from "@/components/tentang/LinimasaPerjalanan";
 import { Icon } from "@/components/ui/Icon";
 import { JudulSeksi, Section } from "@/components/ui/Section";
 import { StatBlock } from "@/components/ui/StatBlock";
 import { getCapaian, getTestimoni } from "@/lib/content";
+import type { ImageData } from "@/lib/schemas";
 import { buatMetadata } from "@/lib/seo";
 
-/** PRD §8 — SSG. */
+/** PRD §8, SSG. */
 export const dynamic = "force-static";
 
 export const metadata = buatMetadata({
   judul: "Tentang Islamic Center Wadi Mubarak",
   deskripsi:
-    "Sejarah, visi, misi, dan arah gerak Islamic Center Wadi Mubarak — yayasan yang berdiri sejak 2008 di Megamendung dan kini menaungi sebelas unit pendidikan, jaringan sekolah Sahabat Al-Qur'an di 27 provinsi, serta lembaga amil zakat.",
+    "Sejarah, visi, misi, dan arah gerak Islamic Center Wadi Mubarak, yayasan yang berdiri sejak 2008 di Megamendung dan kini menaungi sebelas unit pendidikan, jaringan sekolah Sahabat Al-Qur'an di 27 provinsi, serta lembaga amil zakat.",
   path: "/tentang",
   gambar: "/img/hero-tentang.svg",
 });
 
 /**
- * Hanya tonggak yang tercatat di kanal resmi yayasan. Tahun berdirinya unit
- * menengah, MBS, dan STIU belum dimuat di sini karena tanggalnya belum ada
- * rujukan resmi — mohon dilengkapi sekretariat sebelum mode pratinjau dimatikan.
+ * Foto ilustratif linimasa. Yayasan belum punya arsip foto bertahun, jadi yang
+ * dipakai di sini dokumentasi kegiatan yang tersedia di galeri. `alt` selalu
+ * menerangkan isi fotonya apa adanya, tidak pernah mengaku sebagai rekaman
+ * peristiwa pada tahun di kartunya. Ganti berkasnya begitu arsip resmi ada.
  */
-const perjalanan = [
+function ilustrasi(nama: string, alt: string, width: number, height: number): ImageData {
+  return { src: `/img/${nama}.jpg`, alt, width, height };
+}
+
+/**
+ * Linimasa "Perjalanan Wadi Mubarak Megamendung 2008-2026", disusun sekretariat
+ * yayasan (September 2026). Satu tahun bisa memuat beberapa peristiwa; tanggal,
+ * bila ada, ditulis di awal kalimat peristiwanya.
+ *
+ * `judul` adalah ringkasan satu baris yang diturunkan langsung dari butir
+ * peristiwa di bawahnya, bukan keterangan baru. Dipakai sebagai kepala kartu.
+ */
+const perjalanan: EntriPerjalanan[] = [
   {
     tahun: "2008",
-    isi: "Islamic Center Wadi Mubarak berdiri pada 3 Februari 2008 di Megamendung, Bogor, didirikan oleh Roid Kadir, Awang Djohan, dan KH. Dr. Didik Hariyanto.",
+    judul: "Islamic Center Wadi Mubarak berdiri",
+    peristiwa: [
+      "3 Februari: Islamic Center Wadi Mubarak (ICWM) didirikan di Megamendung, Bogor, oleh H. Roid Kadir, H. Awang Djohan, dan KH. Dr. Didik Hariyanto, Lc., M.P.I.",
+      "Program Lembaga Kaderisasi Imam dan Dai (eLKID) mulai diselenggarakan sebagai program tahfizh dan kaderisasi, menjadi salah satu langkah awal pengembangan pendidikan di Wadi Mubarak.",
+    ],
+    foto: ilustrasi(
+      "galeri-pkm-kajian-masjid",
+      "Kajian bersama santri Program Kaderisasi Muhaffizh di masjid pondok cabang",
+      2000,
+      1125,
+    ),
+  },
+  {
+    tahun: "2013",
+    judul: "Gagasan TAUD SaQu lahir",
+    peristiwa: [
+      "Istilah TAUD SaQu (Tahfizh Anak Usia Dini Sahabat Qur'an) mulai dipopulerkan sebagai konsep pendidikan tahfizh bagi anak usia dini.",
+    ],
+    foto: ilustrasi(
+      "galeri-taud-foto-kelas",
+      "Satu kelas TAUD SAQU berfoto bersama di ruang kelas berhias karya anak",
+      1600,
+      1200,
+    ),
+  },
+  {
+    tahun: "2014",
+    judul: "TAUD SaQu resmi berdiri",
+    peristiwa: [
+      "TAUD SaQu resmi dirilis dan didirikan di bawah Yayasan Sahabat Qur'an. Program ini kemudian dikembangkan melalui sistem cabang dan pembinaan guru.",
+      "Yayasan Lembah Qur'an mulai dirintis dan kemudian berkembang menjadi YASAQU, sebagai yayasan yang menaungi TAUD SaQu.",
+    ],
+    foto: ilustrasi(
+      "galeri-pg-taud-kelas-teori",
+      "Peserta PG TAUD SAQU mengikuti kelas teori ke-TAUD-an di aula kampus",
+      1280,
+      960,
+    ),
+  },
+  {
+    tahun: "2015",
+    judul: "Kerja sama dengan Universitas Ummul Qura', Makkah",
+    peristiwa: [
+      "Menjalin kerja sama dengan Universitas Ummul Qura', Makkah, dalam rangka pengembangan kualitas hafalan santri.",
+    ],
+    foto: ilustrasi(
+      "galeri-cendera-mata-masyayikh",
+      "Penyerahan cendera mata kepada masyayikh tamu di kampus",
+      1200,
+      675,
+    ),
+  },
+  {
+    tahun: "2016",
+    judul: "Gedung Pendidikan Guru TAUD diresmikan",
+    peristiwa: [
+      "2 Maret: Gedung Terpadu Program Internasional Pendidikan Guru TAUD di Wadi Mubarak Megamendung diresmikan. Fasilitas tersebut mencakup ruang kelas, perpustakaan, aula, dan asrama.",
+      "Dauroh Wahyain mulai diselenggarakan dan kemudian dilaksanakan secara rutin setiap tahun hingga kini.",
+      "Proses pengurusan izin pendirian pendidikan tinggi STIU Wadi Mubarak dimulai sebagai bagian dari pengembangan program tahfizh nonformal menuju pendidikan formal jenjang S-1.",
+    ],
+    foto: ilustrasi(
+      "galeri-pg-taud-kelas-materi",
+      "Kelas materi PG TAUD SAQU dengan tayangan proyektor di ruang belajar kampus",
+      1280,
+      720,
+    ),
+  },
+  {
+    tahun: "2017",
+    judul: "Izin pendirian STIU Wadi Mubarak terbit",
+    peristiwa: [
+      "11 Juli: Kementerian Agama menerbitkan izin pendirian Sekolah Tinggi Ilmu Ushuluddin (STIU) Wadi Mubarak Bogor, Program Studi Ilmu Al-Qur'an dan Tafsir, melalui SK Nomor 3692 Tahun 2017.",
+      "Ma'had Sulthan al-Islamy didirikan di Sentul, Bogor.",
+      "Menjalin kerja sama dengan Yayasan Maqarie Qur'aniyah, Madinah Al-Munawwarah, dalam rangka peningkatan kualitas dan sanad hafalan.",
+    ],
+    foto: ilustrasi(
+      "galeri-stiu-asesmen-aipt",
+      "Foto bersama tim asesor dan pengelola STIU Wadi Mubarak pada asesmen lapangan akreditasi institusi",
+      1280,
+      720,
+    ),
+  },
+  {
+    tahun: "2018",
+    judul: "95 cabang di dalam dan luar negeri",
+    peristiwa: [
+      "TAUD SaQu telah berkembang menjadi 95 cabang di Indonesia dan luar negeri, menunjukkan semakin luasnya pengembangan model pendidikan TAUD SaQu Wadi Mubarak.",
+      "Ma'had Al-Quds Al-Islamy didirikan di Sumenep, Madura.",
+    ],
+    foto: ilustrasi(
+      "galeri-pg-taud-foto-bersama-lapangan",
+      "Foto bersama peserta PG TAUD SAQU di lapangan kampus berlatar pegunungan",
+      1280,
+      720,
+    ),
+  },
+  {
+    tahun: "2021",
+    judul: "Ma'had Tahfizh Imtiaz Putri berdiri",
+    peristiwa: ["Ma'had Tahfizh Imtiaz Putri didirikan di Megamendung, Bogor."],
+    foto: ilustrasi(
+      "galeri-imtiaz-halaqah-beranda",
+      "Peserta Imtiaz Putri muroja'ah bersama di beranda asrama beralas karpet",
+      2000,
+      1125,
+    ),
+  },
+  {
+    tahun: "2022",
+    judul: "Wisuda Akbar pertama, 363 peserta",
+    peristiwa: [
+      "7 Agustus: Wisuda Akbar pertama di Grand Smesco Hills, Puncak, Bogor. Sebanyak 363 peserta diwisuda, yang terdiri atas lulusan STIU, SMP/SMA/PKM, TAUD SaQu, dan MIT SaQu.",
+      "Mahabbah Boarding School didirikan di Megamendung, Bogor.",
+    ],
+    foto: ilustrasi(
+      "galeri-imtiaz-wisuda-akbar",
+      "Wisudawati Imtiaz Putri pada Wisuda Akbar Huffazhul Qur'an Islamic Center Wadi Mubarak",
+      2000,
+      1184,
+    ),
+  },
+  {
+    tahun: "2023",
+    judul: "Cabang internasional pertama di Hokkaido",
+    peristiwa: [
+      "TAUD SaQu & MIT SaQu mencapai 154 cabang di Indonesia.",
+      "TAUD SaQu kemudian membuka cabang internasional pertama yang dikelola langsung oleh YASAQU di Hokkaido, Jepang, sehingga jumlah keseluruhan cabang mencapai 155.",
+      "Ma'had Thoyyibah didirikan di Lembang, Bandung.",
+    ],
+    foto: ilustrasi(
+      "galeri-mit-kelas",
+      "Siswa MIT SAQU membaca mushaf di meja masing-masing saat jam pelajaran",
+      1024,
+      576,
+    ),
+  },
+  {
+    tahun: "2024",
+    judul: "Kerja sama Makkah dan Jeddah, kampus baru dibangun",
+    peristiwa: [
+      "25 Februari: Kerja sama STIU-WM dengan Ma'had Mufassir Makkah Mukarromah.",
+      "2 November: Peletakan batu pertama Islamic Center Wadi Mubarak Banjarbaru, Kalimantan Selatan.",
+      "25 November: Kerja sama dengan Yayasan Khairukum Jeddah dalam rangka pengembangan pendidikan Al-Qur'an.",
+      "Memulai pembangunan gedung MTs/MA Wadi Mubarak dan Mahabbah Boarding School.",
+    ],
+    foto: ilustrasi(
+      "galeri-mtsma-kerja-sama-maahid",
+      "Penandatanganan nota kesepahaman Islamic Center Wadi Mubarak dengan Ma'ahid, Riyadh",
+      1024,
+      576,
+    ),
   },
   {
     tahun: "2025",
-    isi: "Ma'had Tahfizh Intensif Imtiaz Putri membuka tahun ajaran pertamanya bagi lulusan SMA sederajat.",
+    judul: "MTs/MA Wadi Mubarak berdiri",
+    peristiwa: [
+      "19 Februari: Menerima kunjungan Ketua Umum PP Muhammadiyah dalam kegiatan yang menyoroti program hafalan Al-Qur'an anak-anak Wadi Mubarak.",
+      "MTs/MA Wadi Mubarak didirikan di Megamendung, Bogor.",
+    ],
+    foto: ilustrasi(
+      "galeri-mit-sambutan-podium",
+      "Sambutan di podium Wisuda TAUD dan MIT SAQU se-Indonesia dengan latar spanduk acara",
+      1024,
+      576,
+    ),
   },
   {
-    tahun: "Juni 2026",
-    isi: "Wisuda Akbar Huffazhul Qur'an ke-5 meluluskan 181 wisudawan dari seluruh unit yayasan.",
-  },
-  {
-    tahun: "Agustus 2026",
-    isi: "I'dad Mu'allimat membuka pendaftaran angkatan pertama: kaderisasi guru TAUD selama dua tahun dengan pembiayaan yayasan.",
+    tahun: "2026",
+    judul: "196 cabang dan ekosistem pendidikan yang lengkap",
+    peristiwa: [
+      "TAUD SaQu & MIT SaQu kini mencapai 196 cabang di Indonesia.",
+      "Islamic Center Wadi Mubarak memasuki tahun ke-18 sejak dirintis pada 2008, dengan ekosistem pendidikan yang mencakup STIU, program tahfizh SMP/SMA, PKM, TAUD SaQu, MIT SaQu, PG TAUD, Mahabbah Boarding School, serta jaringan pendidikan Al-Qur'an di Indonesia dan luar negeri.",
+    ],
+    foto: ilustrasi(
+      "galeri-wisuda-taud-mit",
+      "Foto bersama wisuda TAUD dan MIT SaQu",
+      1200,
+      675,
+    ),
   },
 ];
 
@@ -53,7 +237,7 @@ export default function HalamanTentang() {
         jejak={[{ label: "Tentang", href: "/tentang" }]}
         atas="Profil yayasan"
         judul="Delapan belas tahun menemani santri dan keluarganya"
-        keterangan="Berdiri di Megamendung pada 3 Februari 2008, hari ini Islamic Center Wadi Mubarak menaungi sebelas unit pendidikan — dari tahfizh anak usia dini sampai perguruan tinggi — empat jalur kaderisasi guru Al-Qur'an, jaringan 197 sekolah Sahabat Al-Qur'an di 27 provinsi, dan sebuah lembaga amil zakat, infak, sedekah, serta wakaf."
+        keterangan="Berdiri di Megamendung pada 3 Februari 2008, hari ini Islamic Center Wadi Mubarak menaungi sebelas unit pendidikan, dari tahfizh anak usia dini sampai perguruan tinggi, empat jalur kaderisasi guru Al-Qur'an, jaringan 197 sekolah Sahabat Al-Qur'an di 27 provinsi, dan sebuah lembaga amil zakat, infak, sedekah, serta wakaf."
       />
 
       <Section className="py-12 md:py-16">
@@ -73,7 +257,7 @@ export default function HalamanTentang() {
 
       {/* Visi & misi */}
       <Section nada="sejuk" className="py-14 md:py-20">
-        <div className="container-page grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-16">
+        <div className="container-page grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-16">
           <JudulSeksi
             atas="Arah gerak"
             judul="Ke mana yayasan ini"
@@ -115,21 +299,8 @@ export default function HalamanTentang() {
       {/* Perjalanan */}
       <Section className="py-14 md:py-20">
         <div className="container-page">
-          <JudulSeksi atas="Perjalanan" judul="Dari Megamendung," sorot="sejak 2008" />
-          <ol className="relative mt-12 ml-3 border-l border-line-strong pl-8">
-            {perjalanan.map((p) => (
-              <li key={p.tahun} className="relative pb-8 last:pb-0">
-                <span
-                  aria-hidden="true"
-                  className="absolute top-1.5 -left-[2.3rem] size-3 rounded-full border-2 border-white bg-brand-600"
-                />
-                <p className="font-display text-lg font-bold text-brand-700">{p.tahun}</p>
-                <p className="mt-1 max-w-2xl text-sm leading-relaxed text-pretty text-ink-muted">
-                  {p.isi}
-                </p>
-              </li>
-            ))}
-          </ol>
+          <JudulSeksi atas="Perjalanan" judul="Wadi Mubarak Megamendung" sorot="2008–2026" />
+          <LinimasaPerjalanan entri={perjalanan} />
         </div>
       </Section>
 
@@ -150,7 +321,7 @@ export default function HalamanTentang() {
       {/* Tautan lanjut */}
       <Section className="py-14 md:py-20">
         <div className="container-page">
-          <ul className="grid gap-4 md:grid-cols-3">
+          <ul className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {[
               { judul: "Donasi", isi: "Zakat, infak, sedekah, dan wakaf lewat LAZIS SaQu Wadi Mubarak.", href: "/donasi" },
               { judul: "Unit pendidikan", isi: "Sebelas unit dari tahfizh anak usia dini sampai perguruan tinggi.", href: "/program" },
