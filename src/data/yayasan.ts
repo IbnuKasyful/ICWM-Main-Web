@@ -57,7 +57,7 @@ export const testimoniMentah: unknown[] = [
   {
     slug: "testimoni-wali-santri-mts",
     nama: "Bapak Hendra Wijaya",
-    peran: "Wali santri MTs Tahfizh Putra",
+    peran: "Wali santri MTs Wadi Mubarak",
     unit: "mts-tahfizh-putra",
     kutipan:
       "Yang membuat kami tenang bukan janji jumlah juz, tapi karena musyrif tahu betul karakter anak kami dan mengabari kalau ada yang perlu dibicarakan.",
@@ -66,7 +66,7 @@ export const testimoniMentah: unknown[] = [
   {
     slug: "testimoni-alumni-ma",
     nama: "Fatimah Az-Zahra",
-    peran: "Alumni MA Mahabbah Boarding School, angkatan 2022",
+    peran: "Alumni SMA Mahabbah Boarding School, angkatan 2022",
     unit: "ma-mbs-putri",
     kutipan:
       "Kebiasaan muraja'ah sebelum subuh yang dibentuk di asrama masih saya jalankan sampai sekarang di bangku kuliah.",
@@ -146,7 +146,7 @@ export const faqMentah: unknown[] = [
     slug: "kapan-ppdb-dibuka",
     pertanyaan: "Kapan pendaftaran santri baru dibuka?",
     jawaban:
-      "Jadwal berbeda per unit. MTs dan MA putra membuka PPDB batch 3 untuk tahun pelajaran 2027/2028, sedangkan Mahabbah Boarding School membuka batch 6 pada 1 Agustus 2026 sampai 30 Juni 2027. MIT membuka gelombangnya pada November, sedangkan TAUD SAQU membuka pendaftaran tahun ajaran 2026/2027 pada Oktober 2026 sampai Mei 2027, dan PKM sekali setahun pada April. Program kaderisasi guru, PG TAUD SAQU, I'dad Mu'allimat, dan Imtiaz Putri, memiliki jadwal angkatannya sendiri. Periode terkini setiap unit tercantum pada halaman program.",
+      "Jadwal berbeda per unit. MTs dan MA Wadi Mubarak membuka PPDB batch 3 untuk tahun pelajaran 2027/2028, sedangkan Mahabbah Boarding School membuka batch 6 pada 1 Agustus 2026 sampai 30 Juni 2027. MIT membuka gelombangnya pada November, sedangkan TAUD SAQU membuka pendaftaran tahun ajaran 2026/2027 pada Oktober 2026 sampai Mei 2027, dan PKM sekali setahun pada April. Program kaderisasi guru, PG TAUD SAQU, I'dad Mu'allimat, dan Imtiaz Putri, memiliki jadwal angkatannya sendiri. Periode terkini setiap unit tercantum pada halaman program.",
     kelompok: "pendaftaran",
     urutan: 1,
   },
@@ -154,7 +154,7 @@ export const faqMentah: unknown[] = [
     slug: "apakah-harus-hafal-dulu",
     pertanyaan: "Apakah anak harus sudah punya hafalan sebelum mendaftar?",
     jawaban:
-      "Untuk TAUD dan MIT tidak ada syarat hafalan awal. TAUD menilai kesiapan lain: usia minimal 3 tahun 7 bulan, lulus toilet training, mampu mengikuti instruksi, dan jelas melafalkan huruf. MIT mensyaratkan lulus calistung dan mengenal huruf hijaiyah, mampu membaca iqro' 3 lebih diutamakan. MTs dan MA mengadakan tes kemampuan dan tes tahfizh saat seleksi. PKM, sebagai program kaderisasi muhaffizh, mensyaratkan minimal 15 juz, sedangkan I'dad Mu'allimat mensyaratkan minimal juz 30 atau kesediaan menuntaskannya selama program.",
+      "Untuk TAUD dan MIT tidak ada syarat hafalan awal. TAUD menilai kesiapan lain: usia minimal 4 tahun, lulus toilet training, mampu mengikuti instruksi, dan jelas melafalkan huruf. MIT mensyaratkan lulus calistung dan mengenal huruf hijaiyah, mampu membaca iqro' 3 lebih diutamakan. MTs dan MA Wadi Mubarak serta SMP dan SMA Mahabbah mengadakan tes kemampuan dan tes tahfizh saat seleksi. PKM, sebagai program kaderisasi muhaffizh, mensyaratkan minimal 15 juz, sedangkan I'dad Mu'allimat mensyaratkan minimal juz 30 atau kesediaan menuntaskannya selama program.",
     kelompok: "pendaftaran",
     urutan: 2,
   },
@@ -394,42 +394,42 @@ export const galeriMentah: unknown[] = [
   },
   {
     src: "/img/galeri-mtsma-kelas-papan-tulis.jpg",
-    alt: "Ustadz menerangkan materi di papan tulis di hadapan santri MTs dan MA Tahfizh Putra",
+    alt: "Ustadz menerangkan materi di papan tulis di hadapan santri MTs dan MA Wadi Mubarak",
     width: 2000,
     height: 1125,
     kategori: "kampus",
   },
   {
     src: "/img/galeri-mtsma-halaqah-tahsin.jpg",
-    alt: "Halaqah tahsin MTs Tahfizh Putra: satu pengampu menyimak delapan santri duduk melingkar",
+    alt: "Halaqah tahsin MTs Wadi Mubarak: satu pengampu menyimak delapan santri duduk melingkar",
     width: 1280,
     height: 720,
     kategori: "halaqah",
   },
   {
     src: "/img/galeri-mtsma-kelas-malam-penjelasan.jpg",
-    alt: "Ustadz menjelaskan pelajaran kepada santri MTs dan MA Tahfizh Putra pada jam belajar malam",
+    alt: "Ustadz menjelaskan pelajaran kepada santri MTs dan MA Wadi Mubarak pada jam belajar malam",
     width: 2000,
     height: 1500,
     kategori: "kampus",
   },
   {
     src: "/img/galeri-mtsma-menulis-di-kelas.jpg",
-    alt: "Santri MTs dan MA Tahfizh Putra berseragam cokelat menulis di bukunya saat pelajaran berlangsung",
+    alt: "Santri MTs dan MA Wadi Mubarak berseragam pramuka menulis di bukunya saat pelajaran berlangsung",
     width: 2000,
     height: 1125,
     kategori: "kampus",
   },
   {
     src: "/img/galeri-mtsma-soal-tertulis-ruang-kelas.jpg",
-    alt: "Santri MTs dan MA Tahfizh Putra serempak mengerjakan soal tertulis di bangku masing-masing",
+    alt: "Santri MTs dan MA Wadi Mubarak serempak mengerjakan soal tertulis di bangku masing-masing",
     width: 1280,
     height: 720,
     kategori: "kampus",
   },
   {
     src: "/img/galeri-mtsma-kelas-malam.jpg",
-    alt: "Santri MTs dan MA Tahfizh Putra menyimak pelajaran di ruang kelas pada jam belajar malam",
+    alt: "Santri MTs dan MA Wadi Mubarak menyimak pelajaran di ruang kelas pada jam belajar malam",
     width: 2000,
     height: 1500,
     kategori: "kampus",

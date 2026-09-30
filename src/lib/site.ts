@@ -181,7 +181,7 @@ export const navKepatuhan: NavItem[] = [
 export const routerNiat = [
   {
     label: "Menyekolahkan anak",
-    ringkas: "TAUD, MIT, MTs, MA, MBS, STIU",
+    ringkas: "TAUD, MIT, MTs, MA, SMP, SMA, STIU",
     deskripsi: "Bandingkan sebelas unit berdasarkan jenjang, gender, model belajar, dan lokasi, termasuk jaringan TAUD dan MIT di 27 provinsi.",
     href: "/program",
     aksi: "Cari unit yang cocok",

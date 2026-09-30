@@ -114,7 +114,8 @@ export type Cabang = z.infer<typeof cabangSchema>;
  *
  * Dipakai untuk unit yang jaringannya terlalu luas, dan sebagian besar
  * dijalankan lembaga mitra, untuk ditayangkan sebagai direktori bernama.
- * Yang tampil hanya jumlah cabang dan murid per wilayah, di atas peta.
+ * Yang tampil hanya jumlah cabang per wilayah, di atas peta. Angka murid tetap
+ * disimpan, tetapi tidak lagi ditayangkan atas permintaan yayasan.
  *
  * `bentuk` menyebut nama provinsi pada peta dasar (`src/data/peta-provinsi.ts`).
  * Satu wilayah bisa memakai lebih dari satu bentuk bila sumber datanya memang
@@ -138,6 +139,11 @@ export const unitSchema = z.object({
   deskripsi_singkat: z.string().min(1).max(200),
   /** Kosong berarti subdomain belum tayang (Fase 2). */
   url_subdomain: z.string().url().or(z.literal("")),
+  /**
+   * Formulir pendaftaran milik unit sendiri, mis. tautan bit.ly dari panitia.
+   * Bila terisi, tombol utama profil unit langsung menuju formulir ini.
+   */
+  url_daftar: z.string().url().optional(),
   logo: imageSchema.nullable(),
   warna_aksen: z.string().regex(/^#[0-9a-fA-F]{6}$/),
   jenjang: jenjangSchema,

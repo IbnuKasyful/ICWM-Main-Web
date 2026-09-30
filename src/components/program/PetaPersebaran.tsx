@@ -38,8 +38,6 @@ const URUTAN_PULAU = [
   "Maluku",
 ] as const;
 
-const angka = new Intl.NumberFormat("id-ID");
-
 /** Empat tingkat warna; lebih dari itu tidak terbaca sebagai urutan. */
 function tingkat(cabang: number, terbanyak: number): 0 | 1 | 2 | 3 | 4 {
   if (cabang <= 0) return 0;
@@ -166,18 +164,7 @@ export function PetaPersebaran({
                     {wilayahAktif.cabang}
                   </dd>
                 </div>
-                <div className="flex items-baseline justify-between gap-3 border-t border-line pt-3">
-                  <dt className="text-ink-muted">Murid</dt>
-                  <dd className="font-display text-xl font-bold text-ink tabular-nums">
-                    {wilayahAktif.murid === null ? "—" : angka.format(wilayahAktif.murid)}
-                  </dd>
-                </div>
               </dl>
-              {wilayahAktif.murid === null ? (
-                <p className="mt-3 text-xs leading-relaxed text-ink-subtle">
-                  Jumlah murid wilayah ini belum diumumkan yayasan.
-                </p>
-              ) : null}
             </>
           ) : (
             <>
@@ -189,7 +176,7 @@ export function PetaPersebaran({
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-ink-muted">
                 Arahkan kursor ke sebuah wilayah, atau pilih namanya di bawah peta, untuk
-                melihat jumlah cabang dan muridnya.
+                melihat jumlah cabangnya.
               </p>
             </>
           )}
@@ -217,9 +204,7 @@ export function PetaPersebaran({
                     onFocus={() => setAktif(w.nama)}
                     onBlur={() => setAktif((n) => (n === w.nama ? null : n))}
                     onClick={() => setAktif(w.nama)}
-                    aria-label={`${w.nama}: ${w.cabang} cabang${
-                      w.murid === null ? "" : `, ${angka.format(w.murid)} murid`
-                    }`}
+                    aria-label={`${w.nama}: ${w.cabang} cabang`}
                     className={cn(
                       "flex w-full items-center gap-3 rounded-lg px-2 py-1.5 text-left text-sm",
                       "transition-colors duration-150 hover:bg-mist-50 motion-reduce:transition-none",
@@ -228,9 +213,6 @@ export function PetaPersebaran({
                     )}
                   >
                     <span className="min-w-0 flex-1 truncate text-ink-muted">{w.nama}</span>
-                    <span className="shrink-0 text-xs text-ink-subtle tabular-nums">
-                      {w.murid === null ? "—" : `${angka.format(w.murid)} murid`}
-                    </span>
                     <span className="w-6 shrink-0 text-right font-semibold text-ink tabular-nums">
                       {w.cabang}
                     </span>
@@ -245,8 +227,7 @@ export function PetaPersebaran({
       <p className="mt-5 flex items-start gap-2 text-sm leading-relaxed text-ink-subtle">
         <Icon nama="info" className="mt-0.5 size-4 shrink-0" />
         <span>
-          Jumlah cabang dari data jaringan {namaUnit} se-Indonesia; jumlah murid dari laporan
-          yayasan 2024. Cabang kelolaan lembaga mitra tidak diterbitkan satu per satu, hubungi
+          Jumlah cabang dari data jaringan {namaUnit} se-Indonesia. Cabang kelolaan lembaga mitra tidak diterbitkan satu per satu, hubungi
           panitia pusat untuk diarahkan ke cabang terdekat.
         </span>
       </p>

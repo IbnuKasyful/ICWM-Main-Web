@@ -215,6 +215,7 @@ const perjalanan: EntriPerjalanan[] = [
     tahun: "2026",
     judul: "196 cabang dan ekosistem pendidikan yang lengkap",
     peristiwa: [
+      "20 Juni: Kerja sama dengan Markaz Ma'ahid Riyadh dalam peningkatan kualitas pendidikan, tata kelola lembaga, serta penguatan sumber daya manusia.",
       "TAUD SaQu & MIT SaQu kini mencapai 196 cabang di Indonesia.",
       "Islamic Center Wadi Mubarak memasuki tahun ke-18 sejak dirintis pada 2008, dengan ekosistem pendidikan yang mencakup STIU, program tahfizh SMP/SMA, PKM, TAUD SaQu, MIT SaQu, PG TAUD, Mahabbah Boarding School, serta jaringan pendidikan Al-Qur'an di Indonesia dan luar negeri.",
     ],

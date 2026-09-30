@@ -8,9 +8,9 @@
  * Penamaan unit mengikuti nomenklatur madrasah yang lazim dipakai di
  * Indonesia: TAUD (Tahfizh Anak Usia Dini), MIT, MTs, MA, lalu STIU pada
  * jenjang tinggi. Jenjang putri tidak
- * berdiri sendiri-sendiri: MTs dan MA putri berada di bawah satu sekolah
+ * berdiri sendiri-sendiri: SMP dan SMA putri berada di bawah satu sekolah
  * berasrama, Mahabbah Boarding School (MBS), sehingga keduanya dicatat sebagai
- * dua unit dengan nama MBS, satu unit hanya boleh punya satu jenjang agar
+ * dua unit dengan nama Mahabbah, satu unit hanya boleh punya satu jenjang agar
  * penyaringan di /program tetap bekerja.
  *
  * Empat unit berjenjang `non-formal`, semuanya kaderisasi pengampu Al-Qur'an:
@@ -214,7 +214,7 @@ export const unitsMentah: unknown[] = [
     nama_lengkap: "TAUD Sahabat Al-Qur'an",
     nama_pendek: "TAUD SAQU",
     deskripsi_singkat:
-      "Tahfizh anak usia dini sejak 3 tahun 7 bulan dengan metode At-Tibyan: delapan cabang dikelola langsung yayasan, selebihnya jaringan mitra di 25 provinsi.",
+      "Tahfizh anak usia dini mulai 4 tahun dengan metode At-Tibyan: delapan cabang dikelola langsung yayasan, selebihnya jaringan mitra di 25 provinsi.",
     url_subdomain: "https://taud.wadimubarak.com",
     logo: { src: "/img/logo-taud-saqu.png", alt: "Logo TAUD Sahabat Al-Qur’an", width: 238, height: 234 },
     warna_aksen: "#00a2e9",
@@ -253,8 +253,8 @@ export const unitsMentah: unknown[] = [
   },
   {
     slug: "mts-tahfizh-putra",
-    nama_lengkap: "MTs Tahfizh Wadi Mubarak Putra",
-    nama_pendek: "MTs Tahfizh Putra",
+    nama_lengkap: "MTs Wadi Mubarak Putra",
+    nama_pendek: "MTs Wadi Mubarak",
     deskripsi_singkat:
       "Madrasah tsanawiyah putra berasrama: jalur reguler dan takhassush, kurikulum ulama Madinah, bahasa Arab intensif, dan pembinaan musyrif 24 jam.",
     url_subdomain: "https://mtsmawadimubarak.com",
@@ -274,14 +274,14 @@ export const unitsMentah: unknown[] = [
   },
   {
     slug: "ma-tahfizh-putra",
-    nama_lengkap: "MA Tahfizh Wadi Mubarak Putra",
-    nama_pendek: "MA Tahfizh Putra",
+    nama_lengkap: "MA Wadi Mubarak Putra",
+    nama_pendek: "MA Wadi Mubarak",
     deskripsi_singkat:
       "Madrasah aliyah putra: 30 juz bersanad, ulum syar'i, dan program persiapan studi Timur Tengah terpadu sejak kelas sepuluh.",
     url_subdomain: "https://mtsmawadimubarak.com",
     logo: {
       src: "/img/LOGO-MA-WADI-MUBARAK_panjang.png",
-      alt: "Logo MA Tahfizh Wadi Mubarak",
+      alt: "Logo MA Wadi Mubarak",
       width: 4043,
       height: 1786,
     },
@@ -300,11 +300,12 @@ export const unitsMentah: unknown[] = [
   },
   {
     slug: "mts-mbs-putri",
-    nama_lengkap: "MTs Mahabbah Boarding School Putri",
-    nama_pendek: "MTs MBS Putri",
+    nama_lengkap: "SMP Mahabbah Boarding School Putri",
+    nama_pendek: "SMP Mahabbah Putri",
     deskripsi_singkat:
-      "Jenjang tsanawiyah Mahabbah Boarding School: asrama putri terpisah, tahfizh berpadu sains, lingkungan bilingual, dan pendampingan berbasis psikologi pendidikan.",
+      "Jenjang SMP Mahabbah Boarding School: asrama putri terpisah, tahfizh berpadu sains, lingkungan bilingual, dan pendampingan berbasis psikologi pendidikan.",
     url_subdomain: "https://mtsmawadimubarak.com",
+    url_daftar: "https://bit.ly/Mahabbah-Boarding-School_batch6",
     logo: {
       src: "/img/logo-mahabbah.png",
       alt: "Logo Mahabbah Boarding School",
@@ -326,11 +327,12 @@ export const unitsMentah: unknown[] = [
   },
   {
     slug: "ma-mbs-putri",
-    nama_lengkap: "MA Mahabbah Boarding School Putri",
-    nama_pendek: "MA MBS Putri",
+    nama_lengkap: "SMA Mahabbah Boarding School Putri",
+    nama_pendek: "SMA Mahabbah Putri",
     deskripsi_singkat:
-      "Jenjang aliyah Mahabbah Boarding School: target 30 juz bersanad, integrasi Al-Qur'an dan sains, serta bimbingan belajar masuk perguruan tinggi negeri.",
+      "Jenjang SMA Mahabbah Boarding School: target 30 juz bersanad, integrasi Al-Qur'an dan sains, serta bimbingan belajar masuk perguruan tinggi negeri.",
     url_subdomain: "https://mtsmawadimubarak.com",
+    url_daftar: "https://bit.ly/Mahabbah-Boarding-School_batch6",
     logo: {
       src: "/img/logo-mahabbah.png",
       alt: "Logo Mahabbah Boarding School",
@@ -485,7 +487,7 @@ const profilInput: ProfilInput[] = [
     unit: "taud-saqu",
     namaTampil: "TAUD SAQU",
     untuk_siapa: [
-      "Anak mulai usia 3 tahun 7 bulan yang sudah lulus toilet training dan mampu mengikuti instruksi",
+      "Anak mulai usia 4 tahun yang sudah lulus toilet training dan mampu mengikuti instruksi",
       "Orang tua yang ingin anaknya mengenal Al-Qur'an sebelum masuk MI/SD",
       "Keluarga yang mencari sekolah harian, bukan asrama, di kota terdekat",
       "Keluarga yang siap menuntaskan masa pendidikan tiga tahun di TAUD",
@@ -521,11 +523,11 @@ const profilInput: ProfilInput[] = [
       { judul: "Outing", isi: "Kegiatan edukatif bulanan di luar sekolah: olahraga, museum, kebun binatang, dan lainnya." },
     ],
     fasilitas: [
-      "Ruang kelas ber-AC dengan area lesehan",
-      "Halaman bermain dan kebun mini",
-      "Ruang tahfizh terpisah",
-      "Klinik dan perawat harian",
-      "Antar-jemput di cabang tertentu",
+      "Ruang belajar, tersedia AC di beberapa cabang",
+      "Perangkat audio murottal",
+      "Area bermain indoor dan outdoor",
+      "Media pembelajaran Al-Qur'an dan audiovisual",
+      "Fasilitas pendukung anak dan parenting",
     ],
     alur_ppdb: [
       "Pilih lokasi terdekat dan hubungi panitianya lewat WhatsApp",
@@ -576,12 +578,11 @@ const profilInput: ProfilInput[] = [
       { judul: "Kegiatan penunjang", isi: "Memanah, olahraga, outbond, liqo hiwari, dan kunjungan belajar." },
     ],
     fasilitas: [
-      "18 ruang kelas dengan proyektor",
-      "Masjid kampus berkapasitas 800 jamaah",
-      "Laboratorium sains dan komputer",
-      "Lapangan olahraga dan kolam renang",
-      "Perpustakaan dengan 6.000 judul",
-      "Kantin sehat dan klinik",
+      "Ruang kelas untuk pembelajaran umum dan tahfizh Al-Qur'an",
+      "Masjid/musala untuk ibadah dan kegiatan keislaman",
+      "Perpustakaan dan sumber literasi",
+      "Lapangan olahraga dan area aktivitas siswa",
+      "Aula serta fasilitas pendukung kegiatan siswa",
     ],
     alur_ppdb: [
       "Mengisi formulir daring dan luring serta membayar biaya pendaftaran",
@@ -595,7 +596,7 @@ const profilInput: ProfilInput[] = [
   {
     slug: "mts-tahfizh-putra",
     unit: "mts-tahfizh-putra",
-    namaTampil: "MTs Tahfizh Putra",
+    namaTampil: "MTs Wadi Mubarak",
     untuk_siapa: [
       "Lulusan MI/SD putra yang siap tinggal di asrama",
       "Anak dengan hafalan awal minimal 1 juz",
@@ -644,7 +645,7 @@ const profilInput: ProfilInput[] = [
   {
     slug: "ma-tahfizh-putra",
     unit: "ma-tahfizh-putra",
-    namaTampil: "MA Tahfizh Putra",
+    namaTampil: "MA Wadi Mubarak",
     untuk_siapa: [
       "Lulusan MTs/SMP putra dengan hafalan minimal 5 juz",
       "Santri yang menargetkan 30 juz sebelum kuliah",
@@ -697,7 +698,7 @@ const profilInput: ProfilInput[] = [
   {
     slug: "mts-mbs-putri",
     unit: "mts-mbs-putri",
-    namaTampil: "MTs MBS Putri",
+    namaTampil: "SMP Mahabbah Putri",
     untuk_siapa: [
       "Lulusan MI/SD putri yang siap mondok",
       "Keluarga yang menginginkan asrama putri terpisah penuh",
@@ -722,21 +723,20 @@ const profilInput: ProfilInput[] = [
       },
       {
         judul: "Bersambung ke MA di sekolah yang sama",
-        isi: "Lulusan MTs melanjutkan ke MA MBS tanpa pindah asrama maupun berganti pengampu.",
+        isi: "Lulusan SMP melanjutkan ke SMA Mahabbah tanpa pindah asrama maupun berganti pengampu.",
       },
     ],
     kurikulum: [
       { judul: "Tahfizh", isi: "Tahfizh menuju 30 juz dengan tahsin dan tilawah bersanad." },
       { judul: "Diniyah", isi: "Fikih wanita, akidah, bahasa Arab, dan sirah nabawiyah." },
       { judul: "Bahasa", isi: "Bahasa Arab dan Inggris aktif untuk membentuk kemampuan komunikasi global." },
-      { judul: "Akademik", isi: "Kurikulum madrasah tsanawiyah penuh, dipadukan dengan sains." },
+      { judul: "Akademik", isi: "Kurikulum SMP penuh, dipadukan dengan sains." },
       { judul: "Qur'anic parenting", isi: "Pembentukan akhlak, disiplin, dan kemandirian berbasis Al-Qur'an dan Sunnah." },
     ],
     fasilitas: [
       "Asrama putri di zona terpisah",
       "Musala dan ruang tahfizh khusus",
       "Ruang keterampilan dan tata boga",
-      "Klinik dengan perawat perempuan",
       "Area olahraga tertutup dan lapangan panahan",
     ],
     alur_ppdb: [
@@ -749,7 +749,7 @@ const profilInput: ProfilInput[] = [
   {
     slug: "ma-mbs-putri",
     unit: "ma-mbs-putri",
-    namaTampil: "MA MBS Putri",
+    namaTampil: "SMA Mahabbah Putri",
     untuk_siapa: [
       "Lulusan MTs/SMP putri dengan hafalan minimal 5 juz",
       "Santriwati yang menargetkan 30 juz sebelum kuliah",
@@ -780,15 +780,13 @@ const profilInput: ProfilInput[] = [
     kurikulum: [
       { judul: "Tahfizh", isi: "30 juz dengan tahsin, tilawah bersanad, dan ujian tasmi' bertahap." },
       { judul: "Diniyah", isi: "Fikih, tafsir, hadis, dan bahasa Arab lanjutan." },
-      { judul: "Sains dan akademik", isi: "Kurikulum madrasah aliyah dengan peminatan IPA dan IPS." },
+      { judul: "Sains dan akademik", isi: "Kurikulum SMA penuh, dipadukan dengan sains." },
       { judul: "Persiapan studi lanjut", isi: "Bimbingan belajar masuk PTN dan kuliah umum bersama para masyaikh." },
     ],
     fasilitas: [
       "Asrama putri di zona terpisah",
       "Ruang tahfizh dan musala keputrian",
-      "Laboratorium IPA",
       "Ruang keterampilan dan tata boga",
-      "Klinik dengan tenaga kesehatan perempuan",
     ],
     alur_ppdb: [
       "Pendaftaran daring",
@@ -1061,44 +1059,126 @@ const profilInput: ProfilInput[] = [
  * Unit yang fotonya sudah tersedia memakai dokumentasi sungguhan; sisanya
  * masih memakai gambar contoh dari `galeriUnit`. Begitu satu unit dapat foto,
  * cukup tambahkan slug-nya di sini, tidak ada yang lain yang perlu diubah.
- *
- * MTs dan MA berbagi satu berkas dokumentasi: kedua jenjang tinggal di kampus
- * yang sama dan difoto pada kegiatan yang sama. Yang dibedakan hanya foto hero
- * dan urutan galerinya, supaya halaman kedua unit tidak tampak kembar.
  */
 function fotoDok(nama: string, alt: string, width: number, height: number): ImageData {
   return { src: `/img/${nama}.jpg`, alt, width, height };
 }
 
-/** Dokumentasi MTs & MA Tahfizh Wadi Mubarak Putra, Megamendung. */
-const fotoTahfizhPutra = [
+/**
+ * Dokumentasi MTs & MA Wadi Mubarak Putra, Megamendung. Kedua jenjang
+ * satu kampus, tetapi fotonya dipilah per jenjang sesuai tandaan pengelola
+ * (September 2026). Apel pagi dan penandatanganan kerja sama Ma'ahid dipakai
+ * keduanya.
+ */
+const fotoMtsPutra = [
   fotoDok(
     "galeri-mtsma-apel-pagi",
-    "Santri MTs dan MA Tahfizh Putra berbaris pada apel pagi di halaman masjid kampus Megamendung",
-    2000,
-    1125,
-  ),
-  fotoDok(
-    "galeri-mtsma-kelas-papan-tulis",
-    "Ustadz menerangkan materi di papan tulis di hadapan santri MTs dan MA Tahfizh Putra pada pelajaran pagi",
+    "Santri MTs dan MA Wadi Mubarak berbaris pada apel pagi di halaman masjid kampus Megamendung",
     2000,
     1125,
   ),
   fotoDok(
     "galeri-mtsma-halaqah-tahsin",
-    "Halaqah tahsin MTs Tahfizh Putra: satu pengampu menyimak delapan santri duduk melingkar",
+    "Halaqah tahsin MTs Wadi Mubarak: satu pengampu menyimak delapan santri duduk melingkar",
     1280,
     720,
   ),
   fotoDok(
     "galeri-mtsma-kelas-malam-penjelasan",
-    "Ustadz menjelaskan pelajaran kepada santri MTs dan MA Tahfizh Putra yang duduk di bangku kelas pada jam belajar malam",
+    "Ustadz menjelaskan pelajaran kepada santri MTs dan MA Wadi Mubarak yang duduk di bangku kelas pada jam belajar malam",
     2000,
     1500,
   ),
   fotoDok(
     "galeri-mtsma-menulis-di-kelas",
-    "Santri MTs dan MA Tahfizh Putra berseragam cokelat menulis di bukunya saat pelajaran berlangsung",
+    "Santri MTs dan MA Wadi Mubarak berseragam pramuka menulis di bukunya saat pelajaran berlangsung",
+    2000,
+    1125,
+  ),
+  fotoDok(
+    "galeri-mtsma-soal-tertulis-ruang-kelas",
+    "Santri MTs dan MA Wadi Mubarak serempak mengerjakan soal tertulis di bangku masing-masing",
+    1280,
+    720,
+  ),
+  fotoDok(
+    "galeri-mtsma-menyimak-pelajaran",
+    "Dua santri MTs dan MA Wadi Mubarak berseragam pramuka menyimak penjelasan ustadz dari bangku kelas",
+    2000,
+    1125,
+  ),
+  fotoDok(
+    "galeri-mtsma-penghargaan-tahfizh",
+    "Penyerahan penghargaan prestasi tahfizh Al-Qur'an terbaik kepada santri MTs Wadi Mubarak",
+    1280,
+    720,
+  ),
+  fotoDok(
+    "galeri-mtsma-penghargaan-akademik",
+    "Penyerahan penghargaan santri terbaik kategori akademik jenjang MTs di masjid kampus",
+    1280,
+    720,
+  ),
+  fotoDok(
+    "galeri-mtsma-kelas-seragam-cokelat",
+    "Santri MTs dan MA Wadi Mubarak berseragam pramuka mengikuti pelajaran yang dipandu ustadz dari depan kelas",
+    2000,
+    1125,
+  ),
+  fotoDok(
+    "galeri-mtsma-kerja-sama-maahid",
+    "Penandatanganan nota kesepahaman Islamic Center Wadi Mubarak dengan Ma'ahid, Riyadh",
+    1024,
+    576,
+  ),
+  fotoDok(
+    "galeri-mts-kajian-kitab",
+    "Ustadz membimbing halaqah kajian kitab santri MTs Wadi Mubarak di masjid kampus",
+    1600,
+    900,
+  ),
+  fotoDok(
+    "galeri-mts-halaqah-malam",
+    "Halaqah tahfizh santri MTs Wadi Mubarak di masjid kampus selepas magrib",
+    1600,
+    900,
+  ),
+  fotoDok(
+    "galeri-mts-halaqah-syaikh",
+    "Syaikh membersamai halaqah santri MTs Wadi Mubarak yang duduk melingkar",
+    1600,
+    1200,
+  ),
+  fotoDok(
+    "galeri-mts-halaqah-setoran",
+    "Santri MTs Wadi Mubarak bergiliran menyetorkan hafalan kepada ustadz dalam halaqah",
+    1600,
+    900,
+  ),
+  fotoDok(
+    "galeri-mts-halaqah-pagi",
+    "Beberapa halaqah santri MTs Wadi Mubarak berlangsung bersamaan di masjid kampus pada pagi hari",
+    1600,
+    900,
+  ),
+  fotoDok(
+    "galeri-mts-diskusi-kitab",
+    "Ustadz menerangkan isi kitab kepada santri MTs Wadi Mubarak dalam halaqah di masjid",
+    1600,
+    900,
+  ),
+];
+
+const fotoMaPutra = [
+  fotoDok(
+    "galeri-mtsma-apel-pagi",
+    "Santri MTs dan MA Wadi Mubarak berbaris pada apel pagi di halaman masjid kampus Megamendung",
+    2000,
+    1125,
+  ),
+  fotoDok(
+    "galeri-mtsma-kelas-papan-tulis",
+    "Ustadz menerangkan materi di papan tulis di hadapan santri MTs dan MA Wadi Mubarak pada pelajaran pagi",
     2000,
     1125,
   ),
@@ -1109,68 +1189,38 @@ const fotoTahfizhPutra = [
     1125,
   ),
   fotoDok(
-    "galeri-mtsma-soal-tertulis-ruang-kelas",
-    "Santri MTs dan MA Tahfizh Putra serempak mengerjakan soal tertulis di bangku masing-masing",
-    1280,
-    720,
-  ),
-  fotoDok(
     "galeri-mtsma-kelas-malam",
-    "Santri MTs dan MA Tahfizh Putra menyimak pelajaran di ruang kelas pada jam belajar malam",
+    "Santri MTs dan MA Wadi Mubarak menyimak pelajaran di ruang kelas pada jam belajar malam",
     2000,
     1500,
   ),
   fotoDok(
     "galeri-mtsma-olahraga-futsal",
-    "Santri MTs dan MA Tahfizh Putra berfoto bersama seusai bermain futsal di lapangan kampus",
-    2000,
-    1125,
-  ),
-  fotoDok(
-    "galeri-mtsma-menyimak-pelajaran",
-    "Dua santri MTs dan MA Tahfizh Putra berseragam cokelat menyimak penjelasan ustadz dari bangku kelas",
+    "Santri MTs dan MA Wadi Mubarak berfoto bersama seusai bermain futsal di lapangan kampus",
     2000,
     1125,
   ),
   fotoDok(
     "galeri-mtsma-lembar-soal",
-    "Santri MTs dan MA Tahfizh Putra mengerjakan lembar soal di ruang kelas",
+    "Santri MTs dan MA Wadi Mubarak mengerjakan lembar soal di ruang kelas",
     2000,
     1125,
   ),
   fotoDok(
-    "galeri-mtsma-penghargaan-tahfizh",
-    "Penyerahan penghargaan prestasi tahfizh Al-Qur'an terbaik kepada santri MTs Tahfizh Putra",
-    1280,
-    720,
-  ),
-  fotoDok(
     "galeri-mtsma-kelas-pagi",
-    "Santri MTs dan MA Tahfizh Putra berseragam putih bersiap memulai pelajaran pagi di ruang kelas",
+    "Santri MTs dan MA Wadi Mubarak berseragam putih bersiap memulai pelajaran pagi di ruang kelas",
     2000,
     1125,
   ),
   fotoDok(
     "galeri-mtsma-mencatat-pelajaran",
-    "Santri MTs dan MA Tahfizh Putra mencatat pelajaran di buku tulis pada jam belajar malam",
+    "Santri MTs dan MA Wadi Mubarak mencatat pelajaran di buku tulis pada jam belajar malam",
     2000,
     1500,
   ),
   fotoDok(
-    "galeri-mtsma-penghargaan-akademik",
-    "Penyerahan penghargaan santri terbaik kategori akademik jenjang MTs di masjid kampus",
-    1280,
-    720,
-  ),
-  fotoDok(
-    "galeri-mtsma-kelas-seragam-cokelat",
-    "Santri MTs dan MA Tahfizh Putra berseragam cokelat mengikuti pelajaran yang dipandu ustadz dari depan kelas",
-    2000,
-    1125,
-  ),
-  fotoDok(
     "galeri-mtsma-soal-tertulis-berjas",
-    "Santri Tahfizh Putra berjas dan berpeci hitam mengerjakan soal tertulis di ruang kelas",
+    "Santri MA Wadi Mubarak berjas dan berpeci hitam mengerjakan soal tertulis di ruang kelas",
     2000,
     1125,
   ),
@@ -1182,13 +1232,55 @@ const fotoTahfizhPutra = [
   ),
   fotoDok(
     "galeri-mtsma-soal-tertulis-seragam-putih",
-    "Santri MTs dan MA Tahfizh Putra berkemeja putih mengerjakan soal tertulis di ruang kelas",
+    "Santri MTs dan MA Wadi Mubarak berkemeja putih mengerjakan soal tertulis di ruang kelas",
     2000,
     1125,
   ),
+  fotoDok(
+    "galeri-ma-setoran-meja",
+    "Santri MA Wadi Mubarak menyetorkan hafalan di hadapan ustadz penyimak di masjid kampus",
+    1600,
+    900,
+  ),
+  fotoDok(
+    "galeri-ma-talaqqi-syaikh",
+    "Santri MA Wadi Mubarak bertalaqqi langsung kepada syaikh di masjid kampus",
+    1600,
+    900,
+  ),
+  fotoDok(
+    "galeri-ma-halaqah-jendela",
+    "Halaqah tahfizh malam santri MA Wadi Mubarak di sisi jendela masjid kampus",
+    1600,
+    900,
+  ),
+  fotoDok(
+    "galeri-ma-murajaah-malam",
+    "Santri MA Wadi Mubarak bermuraja'ah dengan mushaf di atas meja lipat pada malam hari",
+    1600,
+    900,
+  ),
+  fotoDok(
+    "galeri-ma-tilawah-bersama",
+    "Santri MA Wadi Mubarak membaca Al-Qur'an bersama di masjid kampus",
+    1600,
+    900,
+  ),
+  fotoDok(
+    "galeri-ma-setoran-hafalan",
+    "Halaqah setoran hafalan santri MA Wadi Mubarak di masjid kampus",
+    1600,
+    900,
+  ),
+  fotoDok(
+    "galeri-ma-halaqah-malam",
+    "Santri MA Wadi Mubarak duduk melingkar dalam halaqah tahfizh malam di masjid kampus",
+    1600,
+    900,
+  ),
 ];
 
-/** Dokumentasi Mahabbah Boarding School (MTs & MA putri). */
+/** Dokumentasi Mahabbah Boarding School (SMP & SMA putri). */
 const fotoMahabbah = [
   fotoDok(
     "galeri-mbs-rihlah-book-fair",
@@ -1510,20 +1602,20 @@ const fotoUnit: Record<string, { hero: ImageData; galeri: ImageData[] }> = {
   "mts-tahfizh-putra": {
     hero: fotoDok(
       "galeri-mtsma-apel-pagi",
-      "Apel pagi santri MTs Tahfizh Wadi Mubarak Putra di halaman masjid kampus Megamendung",
+      "Apel pagi santri MTs Wadi Mubarak Putra di halaman masjid kampus Megamendung",
       2000,
       1125,
     ),
-    galeri: fotoTahfizhPutra,
+    galeri: fotoMtsPutra,
   },
   "ma-tahfizh-putra": {
     hero: fotoDok(
       "galeri-mtsma-dauroh-bahasa-arab",
-      "Peserta dauroh bahasa Arab intensif MA Tahfizh Wadi Mubarak Putra di masjid kampus",
+      "Peserta dauroh bahasa Arab intensif MA Wadi Mubarak Putra di masjid kampus",
       2000,
       1125,
     ),
-    galeri: [...fotoTahfizhPutra.slice(2), ...fotoTahfizhPutra.slice(0, 2)],
+    galeri: fotoMaPutra,
   },
   "mts-mbs-putri": {
     hero: fotoDok(
@@ -1537,7 +1629,7 @@ const fotoUnit: Record<string, { hero: ImageData; galeri: ImageData[] }> = {
   "ma-mbs-putri": {
     hero: fotoDok(
       "galeri-mbs-rihlah-book-fair",
-      "Santriwati MA Mahabbah Boarding School membentangkan spanduk rihlah ilmiah Road to Islamic Book Fair",
+      "Santriwati SMA Mahabbah Boarding School membentangkan spanduk rihlah ilmiah Road to Islamic Book Fair",
       1280,
       960,
     ),

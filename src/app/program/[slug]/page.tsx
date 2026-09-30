@@ -364,6 +364,26 @@ export default async function HalamanProfilUnit({
                       Minta dikabari
                     </ButtonLink>
                   </>
+                ) : unit.url_daftar ? (
+                  <>
+                    <p className="text-sm leading-relaxed text-ink-muted">
+                      Sudah merasa cocok? Isi formulir pendaftaran daring dari panitia{" "}
+                      {unit.nama_pendek}.
+                    </p>
+                    <ButtonLink href={unit.url_daftar} eksternal ukuran="lg">
+                      Daftar sekarang
+                      <Icon nama="keluar" className="size-4" />
+                    </ButtonLink>
+                    <ButtonLink
+                      href={tautanWhatsApp(unit.kontak_wa, pesanWa)}
+                      eksternal
+                      varian="garis"
+                      ukuran="md"
+                    >
+                      <Icon nama="whatsapp" className="size-4" />
+                      Tanya panitia dulu
+                    </ButtonLink>
+                  </>
                 ) : unit.url_subdomain ? (
                   <>
                     <p className="text-sm leading-relaxed text-ink-muted">

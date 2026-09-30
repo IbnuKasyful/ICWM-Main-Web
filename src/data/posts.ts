@@ -37,7 +37,7 @@ const daftar: PostInput[] = [
     slug: "wisuda-tahfizh-angkatan-ke-12",
     judul: "Wisuda Tahfizh Angkatan ke-12: 47 Santri Menuntaskan 30 Juz",
     ringkasan:
-      "Sebanyak 47 santri MA Tahfizh Putra dan MA MBS Putri menuntaskan hafalan 30 juz dan menjalani tasmi' terbuka di hadapan wali santri.",
+      "Sebanyak 47 santri MA Wadi Mubarak dan SMA Mahabbah Putri menuntaskan hafalan 30 juz dan menjalani tasmi' terbuka di hadapan wali santri.",
     tanggal: "2026-07-12",
     category: "prestasi",
     unit_utama: "ma-tahfizh-putra",
@@ -58,7 +58,7 @@ const daftar: PostInput[] = [
     slug: "ppdb-2026-2027-gelombang-pertama-dibuka",
     judul: "PPDB 2026/2027 Gelombang Pertama Resmi Dibuka",
     ringkasan:
-      "Pendaftaran santri baru untuk MIT, MTs, dan MA Tahfizh dibuka mulai 1 Oktober dengan kuota terbatas per rombongan belajar.",
+      "Pendaftaran santri baru untuk MIT, MTs, dan MA Wadi Mubarak dibuka mulai 1 Oktober dengan kuota terbatas per rombongan belajar.",
     tanggal: "2026-07-08",
     category: "pengumuman",
     unit_utama: "mit-saqu",
@@ -97,7 +97,7 @@ const daftar: PostInput[] = [
     slug: "kerja-sama-beasiswa-dengan-universitas-islam-madinah",
     judul: "Penandatanganan Kerja Sama Jalur Beasiswa dengan Lembaga Mitra",
     ringkasan:
-      "Yayasan menandatangani nota kesepahaman jalur rekomendasi beasiswa bagi lulusan MA Tahfizh Putra dan MA Mahabbah Boarding School.",
+      "Yayasan menandatangani nota kesepahaman jalur rekomendasi beasiswa bagi lulusan MA Wadi Mubarak dan SMA Mahabbah Boarding School.",
     tanggal: "2026-06-24",
     category: "kerja-sama",
     unit_utama: "ma-tahfizh-putra",
