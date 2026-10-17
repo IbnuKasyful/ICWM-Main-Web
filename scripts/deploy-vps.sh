@@ -45,6 +45,12 @@ BUILD_TARGET=cpanel npm run build
 # ke sebelah server.js. node_modules build dibuang, standalone membawa miliknya.
 cp -r .next/static .next/standalone/.next/static
 cp -r public .next/standalone/public
+# Cache fetch hasil build juga tidak ikut. Tanpanya pengunjung pertama setelah
+# deploy menunggu ~13 detik selama arsip berita diambil ulang dari CMS.
+if [ -d .next/cache/fetch-cache ]; then
+  mkdir -p .next/standalone/.next/cache
+  cp -r .next/cache/fetch-cache .next/standalone/.next/cache/
+fi
 rm -rf node_modules
 chown -R www:www "$REL"
 
