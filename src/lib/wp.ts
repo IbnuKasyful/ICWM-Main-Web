@@ -1,7 +1,8 @@
 /**
  * Klien WPGraphQL, satu-satunya tempat aplikasi ini berbicara dengan WordPress.
  *
- * Dipakai oleh `src/lib/content.ts` (batas API, PRD §18). Tidak ada komponen
+ * Dipakai oleh `src/lib/content.ts` (batas API, PRD §18) dan oleh
+ * `src/lib/wp-berita.ts`, yang memakai `kueri` dari sini. Tidak ada komponen
  * yang boleh mengimpor berkas ini langsung.
  *
  * Sifat penting: **tidak pernah melempar ke pemanggil.** Setiap kegagalan
@@ -35,12 +36,21 @@ type BalasanGraphql<T> = {
   errors?: { message: string }[];
 };
 
+type OpsiKueri = {
+  /** Label cache Next.js, disegarkan lewat `/api/revalidate`. */
+  tag: string;
+  /** Umur cache ISR dalam detik. */
+  umur: number;
+  batasMs?: number;
+  variables?: Record<string, unknown>;
+};
+
 /**
  * Menjalankan satu kueri GraphQL. Mengembalikan `null` pada kegagalan apa pun.
  *
  * @param label Nama kueri untuk pesan galat di log server.
  */
-async function kueri<T>(label: string, query: string): Promise<T | null> {
+export async function kueri<T>(label: string, query: string, opsi: OpsiKueri): Promise<T | null> {
   const url = endpointWp();
   if (!url) return null;
 
@@ -53,10 +63,10 @@ async function kueri<T>(label: string, query: string): Promise<T | null> {
         "content-type": "application/json",
         ...(token ? { authorization: `Bearer ${token}` } : {}),
       },
-      body: JSON.stringify({ query }),
-      signal: AbortSignal.timeout(BATAS_MS),
+      body: JSON.stringify({ query, variables: opsi.variables }),
+      signal: AbortSignal.timeout(opsi.batasMs ?? BATAS_MS),
       // Hasilnya di-cache Next.js dan disegarkan lewat tag, bukan per permintaan.
-      next: { revalidate: UMUR_CACHE, tags: [TAG_DONASI] },
+      next: { revalidate: opsi.umur, tags: [opsi.tag] },
     });
 
     if (!res.ok) {
@@ -156,7 +166,10 @@ function tanpaTag(html: string): string {
  * `null` berarti WordPress tidak dapat dihubungi.
  */
 export async function ambilProgramDonasiWp(): Promise<unknown[] | null> {
-  const data = await kueri<{ programDonasis: { nodes: NodeDonasi[] } }>("programDonasi", KUERI_DONASI);
+  const data = await kueri<{ programDonasis: { nodes: NodeDonasi[] } }>("programDonasi", KUERI_DONASI, {
+    tag: TAG_DONASI,
+    umur: UMUR_CACHE,
+  });
   if (!data) return null;
 
   return data.programDonasis.nodes.map((n) => {

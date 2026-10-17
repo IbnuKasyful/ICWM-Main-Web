@@ -1,30 +1,26 @@
 /**
- * Klien REST WordPress untuk berita dan artikel.
+ * Klien WordPress untuk berita dan artikel.
  *
- * Terpisah dari `wp.ts` karena berbicara dengan antarmuka yang berbeda:
- * `wp.ts` memakai WPGraphQL untuk CPT `program_donasi`, sedangkan berita
- * diambil lewat REST API bawaan WordPress (`/wp-json/wp/v2`). Alasannya
- * praktis, instalasi WordPress yayasan di wadimubarak.com tidak memasang
- * WPGraphQL, tetapi REST API-nya publik dan sudah menyediakan seluruh yang
- * dibutuhkan halaman /informasi.
+ * Berita dibaca dari CMS headless di cms.wadimubarak.com lewat WPGraphQL,
+ * memakai `kueri` dan `WPGRAPHQL_ENDPOINT` yang sama dengan program donasi di
+ * `wp.ts`. Berkas ini terpisah karena urusannya lain: paginasi arsip 600+
+ * tulisan dan pemetaan 37 kategori WordPress ke taksonomi situs induk.
  *
  * Sifatnya sama dengan `wp.ts`: **tidak pernah melempar ke pemanggil.** Setiap
  * kegagalan mengembalikan `null` dan `content.ts` melanjutkan dengan tulisan
  * contoh di `src/data/posts.ts`. Situs tidak boleh mati hanya karena WordPress
  * sedang tidak bisa dihubungi.
  *
- * Catatan penting soal ukuran: pemakaian `_embed` ditolak dengan sengaja.
- * Balasan ber-`_embed` untuk 100 tulisan mencapai 5,5 MB, 2,8 MB di antaranya
- * hanya objek taksonomi dan media yang disematkan berulang-ulang, dan itu
- * melewati batas cache data Next.js, sehingga setiap halaman yang dirender
- * mengambil ulang seluruh arsip. Dengan `_fields` yang ketat plus tiga tabel
- * pencarian kecil (kategori, penulis, media), satu halaman turun ke ~1 MB dan
- * benar-benar ter-cache.
+ * Catatan penting soal ukuran: Next.js tidak meng-cache balasan di atas 2 MB,
+ * sehingga setiap halaman yang dirender akan mengambil ulang seluruh arsip.
+ * Satu halaman berisi 100 tulisan terukur sampai 1,25 MB (Oktober 2026), terlalu
+ * dekat dengan batas itu, jadi diambil 50 per permintaan.
  */
 
 import type { Category, Lokasi } from "@/lib/schemas";
+import { kueri, wpAktif } from "@/lib/wp";
 
-/** Ambang satu permintaan. Arsip 100 tulisan bisa ~1 MB, jadi tidak ketat. */
+/** Ambang satu permintaan. Halaman 50 tulisan bisa ~600 KB, jadi tidak ketat. */
 const BATAS_MS = 20000;
 
 /** Label cache Next.js, dipakai `/api/revalidate` untuk menyegarkan seketika. */
@@ -33,28 +29,20 @@ export const TAG_BERITA = "berita";
 /** ISR 1 jam, sepadan dengan `revalidate` di halaman /informasi. */
 const UMUR_CACHE = 3600;
 
-/** WordPress membatasi `per_page` pada 100. */
-const PER_HALAMAN = 100;
+/** Lihat catatan ukuran di atas. WPGraphQL sendiri membatasi `first` pada 100. */
+const PER_HALAMAN = 50;
 
 /**
  * Berapa halaman paling banyak diambil. Arsip yayasan berisi 600+ tulisan;
- * delapan halaman memberi ruang tumbuh tanpa membuat build berjalan tanpa batas
- * kalau suatu saat WordPress mengembalikan hal yang tak terduga.
+ * dua puluh halaman memberi ruang tumbuh sampai 1.000 tulisan tanpa membuat
+ * build berjalan tanpa batas kalau suatu saat WordPress mengembalikan hal yang
+ * tak terduga.
  */
-const MAKS_HALAMAN = 8;
-
-/** Kolom yang benar-benar dipakai. Sisanya tidak diminta. */
-const KOLOM_POST =
-  "id,slug,date,title,excerpt,content,featured_media,categories,tags,author";
-
-export function endpointBerita(): string | undefined {
-  const url = process.env["WP_REST_ENDPOINT"]?.trim();
-  return url ? url.replace(/\/+$/, "") : undefined;
-}
+const MAKS_HALAMAN = 20;
 
 /** True bila berita dibaca dari WordPress, bukan dari data contoh. */
 export function beritaWpAktif(): boolean {
-  return endpointBerita() !== undefined;
+  return wpAktif();
 }
 
 /* -------------------------------------------------------------------------- */
@@ -72,6 +60,9 @@ export function beritaWpAktif(): boolean {
  * `pemasaran`, `publishing`, `bimbel-saqu`, `madrasah-online`, `sahabat-resto`,
  * dan `live-streaming`, semuanya lini usaha atau kanal lain, bukan kabar
  * yayasan. Menambah kategori ke situs induk cukup dengan satu baris di sini.
+ *
+ * Slug ini aman dari Polylang: kategori sengaja tidak diterjemahkan di CMS
+ * (mu-plugin `icwm-polylang.php`), jadi slug-nya sama di semua bahasa.
  */
 const KATEGORI_INDUK: Record<string, Category> = {
   // Berita
@@ -125,31 +116,84 @@ const UNIT_DARI_KATEGORI: Record<string, string[]> = {
 const UNIT_INDUK = "wadi-mubarak";
 
 /* -------------------------------------------------------------------------- */
-/* Bentuk balasan REST WordPress                                               */
+/* Kueri dan bentuk balasan WPGraphQL                                          */
 /* -------------------------------------------------------------------------- */
 
-type Terender = { rendered?: string | null };
+/**
+ * Hanya bahasa Indonesia: tulisan terjemahan (Polylang) punya slug sendiri dan
+ * belum punya tempat di situs induk. `first: 100` pada taksonomi karena
+ * WPGraphQL bawaannya hanya mengembalikan 10.
+ */
+const KUERI_BERITA = /* GraphQL */ `
+  query Berita($first: Int!, $after: String) {
+    posts(
+      first: $first
+      after: $after
+      where: { status: PUBLISH, language: ID, orderby: { field: DATE, order: DESC } }
+    ) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      nodes {
+        slug
+        date
+        title
+        excerpt
+        content
+        author {
+          node {
+            name
+          }
+        }
+        categories(first: 100) {
+          nodes {
+            slug
+          }
+        }
+        tags(first: 100) {
+          nodes {
+            name
+          }
+        }
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+            mediaDetails {
+              width
+              height
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
-type PostWp = {
-  id?: number;
-  slug?: string | null;
-  date?: string | null;
-  title?: Terender | null;
-  excerpt?: Terender | null;
-  content?: Terender | null;
-  featured_media?: number | null;
-  categories?: number[] | null;
-  tags?: number[] | null;
-  author?: number | null;
+type NodePost = {
+  slug: string | null;
+  date: string | null;
+  title: string | null;
+  excerpt: string | null;
+  content: string | null;
+  author: { node: { name: string | null } | null } | null;
+  categories: { nodes: { slug: string | null }[] } | null;
+  tags: { nodes: { name: string | null }[] } | null;
+  featuredImage: {
+    node: {
+      sourceUrl: string | null;
+      altText: string | null;
+      mediaDetails: { width: number | null; height: number | null } | null;
+    } | null;
+  } | null;
 };
 
-type TermWp = { id?: number; slug?: string | null; name?: string | null };
-
-type MediaWp = {
-  id?: number;
-  source_url?: string | null;
-  alt_text?: string | null;
-  media_details?: { width?: number | null; height?: number | null } | null;
+type HalamanPosts = {
+  posts: {
+    pageInfo: { hasNextPage: boolean; endCursor: string | null };
+    nodes: NodePost[];
+  };
 };
 
 /* -------------------------------------------------------------------------- */
@@ -213,83 +257,20 @@ function ringkas(teks: string, batas = 200): string {
 const GAMBAR_CADANGAN = { src: "/img/post-1.svg", alt: "", width: 1200, height: 800 } as const;
 
 /* -------------------------------------------------------------------------- */
-/* Pengambilan                                                                 */
+/* Pemetaan                                                                    */
 /* -------------------------------------------------------------------------- */
 
-/** Satu permintaan JSON. `null` berarti gagal; `[]` berarti memang kosong. */
-async function ambil<T>(alamat: string, label: string): Promise<T[] | null> {
-  try {
-    const res = await fetch(alamat, {
-      signal: AbortSignal.timeout(BATAS_MS),
-      next: { revalidate: UMUR_CACHE, tags: [TAG_BERITA] },
-    });
-
-    // Melewati halaman terakhir dijawab 400 oleh WordPress; itu akhir yang wajar.
-    if (res.status === 400) return [];
-    if (!res.ok) {
-      console.error(`[wp-berita] ${label}: HTTP ${res.status}`);
-      return null;
-    }
-    return (await res.json()) as T[];
-  } catch (galat) {
-    console.error(
-      `[wp-berita] ${label}: ${galat instanceof Error ? galat.message : String(galat)}`,
-    );
-    return null;
-  }
-}
-
-/** Tabel id → slug/nama untuk taksonomi dan penulis. Kecil, sekali ambil. */
-async function tabel(
-  url: string,
-  jalur: string,
-  kolom: "slug" | "name",
-): Promise<Map<number, string>> {
-  const peta = new Map<number, string>();
-  const isi = await ambil<TermWp>(
-    `${url}/wp/v2/${jalur}?per_page=100&_fields=id,${kolom}`,
-    jalur,
-  );
-  for (const t of isi ?? []) {
-    const nilai = t[kolom];
-    if (typeof t.id === "number" && nilai) peta.set(t.id, nilai);
-  }
-  return peta;
-}
-
-/** Gambar unggulan diambil sekaligus lewat `include`, bukan satu per satu. */
-async function tabelMedia(url: string, id: number[]): Promise<Map<number, MediaWp>> {
-  const peta = new Map<number, MediaWp>();
-  for (let i = 0; i < id.length; i += 100) {
-    const potongan = id.slice(i, i + 100);
-    const isi = await ambil<MediaWp>(
-      `${url}/wp/v2/media?per_page=100&include=${potongan.join(",")}` +
-        `&_fields=id,source_url,alt_text,media_details`,
-      `media ${i / 100 + 1}`,
-    );
-    for (const m of isi ?? []) if (typeof m.id === "number") peta.set(m.id, m);
-  }
-  return peta;
-}
-
-type Tabel = {
-  kategori: Map<number, string>;
-  tag: Map<number, string>;
-  penulis: Map<number, string>;
-  media: Map<number, MediaWp>;
-};
-
-function petakan(p: PostWp, t: Tabel): unknown | null {
+function petakan(p: NodePost): unknown | null {
   const slug = p.slug?.trim();
-  const judulMentah = tanpaTag(p.title?.rendered ?? "");
-  const konten = p.content?.rendered ?? "";
+  const judulMentah = tanpaTag(p.title ?? "");
+  const konten = p.content ?? "";
   if (!slug || !judulMentah || !konten.trim()) return null;
 
-  const kategoriWp = (p.categories ?? [])
-    .map((id) => t.kategori.get(id))
+  const kategoriWp = (p.categories?.nodes ?? [])
+    .map((k) => k.slug)
     .filter((s): s is string => Boolean(s));
-  const topik = (p.tags ?? [])
-    .map((id) => t.tag.get(id))
+  const topik = (p.tags?.nodes ?? [])
+    .map((t) => t.name)
     .filter((s): s is string => Boolean(s));
 
   // Kategori pertama yang dikenal menentukan kategori situs induk. Tulisan yang
@@ -300,18 +281,18 @@ function petakan(p: PostWp, t: Tabel): unknown | null {
   const unitTerkait = [...new Set(kategoriWp.flatMap((s) => UNIT_DARI_KATEGORI[s] ?? []))];
   const unit = unitTerkait.length > 0 ? unitTerkait : [UNIT_INDUK];
 
-  const media = p.featured_media ? t.media.get(p.featured_media) : undefined;
-  const gambar = media?.source_url
+  const media = p.featuredImage?.node;
+  const gambar = media?.sourceUrl
     ? {
-        src: media.source_url,
-        alt: media.alt_text?.trim() ? media.alt_text : judulMentah,
-        width: media.media_details?.width ?? 1200,
-        height: media.media_details?.height ?? 800,
+        src: media.sourceUrl,
+        alt: media.altText?.trim() ? media.altText : judulMentah,
+        width: media.mediaDetails?.width ?? 1200,
+        height: media.mediaDetails?.height ?? 800,
       }
     : GAMBAR_CADANGAN;
 
   const judul = rapikanJudul(judulMentah);
-  const kutipan = tanpaTag(p.excerpt?.rendered ?? "") || tanpaTag(konten);
+  const kutipan = tanpaTag(p.excerpt ?? "") || tanpaTag(konten);
 
   // Seluruh unit yayasan berkampus di Bogor kecuali Sleman, dan WordPress tidak
   // menandai lokasi sama sekali, jadi Bogor adalah satu-satunya nilai jujur.
@@ -329,14 +310,18 @@ function petakan(p: PostWp, t: Tabel): unknown | null {
     lokasi,
     topik,
     gambar,
-    penulis: (p.author ? t.penulis.get(p.author) : undefined) ?? "Humas Wadi Mubarak",
+    penulis: p.author?.node?.name ?? "Humas Wadi Mubarak",
     // Kurasi PRD §9.1: hanya tulisan yang kategorinya terdaftar di
-    // `KATEGORI_INDUK` yang naik ke situs induk. Sisanya tetap tinggal di
-    // wadimubarak.com tanpa ikut tayang di situs induk.
+    // `KATEGORI_INDUK` yang naik ke situs induk. Sisanya tetap tersimpan di
+    // CMS tanpa ikut tayang di situs induk.
     tampilkan_di_induk: slugDikenal !== undefined,
     konten,
   };
 }
+
+/* -------------------------------------------------------------------------- */
+/* Pengambilan                                                                 */
+/* -------------------------------------------------------------------------- */
 
 /**
  * Ambil seluruh tulisan dari WordPress dalam bentuk mentah yang sama dengan
@@ -346,42 +331,30 @@ function petakan(p: PostWp, t: Tabel): unknown | null {
  * `null` berarti WordPress tidak dapat dihubungi sama sekali.
  */
 export async function ambilPostsWp(): Promise<unknown[] | null> {
-  const url = endpointBerita();
-  if (!url) return null;
+  const mentah: NodePost[] = [];
+  let after: string | null = null;
 
-  const mentah: PostWp[] = [];
   for (let n = 1; n <= MAKS_HALAMAN; n++) {
-    const isi = await ambil<PostWp>(
-      `${url}/wp/v2/posts?per_page=${PER_HALAMAN}&page=${n}` +
-        `&status=publish&orderby=date&order=desc&_fields=${KOLOM_POST}`,
-      `posts halaman ${n}`,
-    );
+    const data: HalamanPosts | null = await kueri<HalamanPosts>(`posts halaman ${n}`, KUERI_BERITA, {
+      tag: TAG_BERITA,
+      umur: UMUR_CACHE,
+      batasMs: BATAS_MS,
+      variables: { first: PER_HALAMAN, after },
+    });
     // Gagal di halaman pertama = WordPress tidak terjangkau; menyerah dan pakai
     // data statis. Gagal di halaman lanjutan = pakai saja yang sudah terkumpul.
-    if (isi === null) {
+    if (!data) {
       if (n === 1) return null;
       break;
     }
-    if (isi.length === 0) break;
-    mentah.push(...isi);
-    if (isi.length < PER_HALAMAN) break;
+    mentah.push(...data.posts.nodes);
+    if (!data.posts.pageInfo.hasNextPage || !data.posts.pageInfo.endCursor) break;
+    after = data.posts.pageInfo.endCursor;
   }
-
-  if (mentah.length === 0) return null;
-
-  const idMedia = [
-    ...new Set(mentah.map((p) => p.featured_media).filter((id): id is number => Boolean(id))),
-  ];
-  const [kategori, tag, penulis, media] = await Promise.all([
-    tabel(url, "categories", "slug"),
-    tabel(url, "tags", "name"),
-    tabel(url, "users", "name"),
-    tabelMedia(url, idMedia),
-  ]);
 
   const hasil: unknown[] = [];
   for (const p of mentah) {
-    const dipetakan = petakan(p, { kategori, tag, penulis, media });
+    const dipetakan = petakan(p);
     if (dipetakan) hasil.push(dipetakan);
   }
 
