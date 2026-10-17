@@ -1,0 +1,2 @@
+# Skrip shell harus LF; dengan CRLF bash gagal ("command not found" karena \r).
+*.sh text eol=lf
