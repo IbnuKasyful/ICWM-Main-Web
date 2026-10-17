@@ -149,7 +149,8 @@ async function muatPosts(): Promise<readonly Post[]> {
 
 /**
  * PRD §9.1 & §9.6, situs induk HANYA menampilkan tulisan yang dikurasi naik.
- * Semua jalur baca publik wajib melewati fungsi ini.
+ * Semua daftar publik wajib melewati fungsi ini; satu-satunya pengecualian
+ * adalah `getPost` untuk tautan langsung.
  */
 export async function getPostsInduk(): Promise<readonly Post[]> {
   const semua = await muatPosts();
@@ -159,9 +160,30 @@ export async function getPostsInduk(): Promise<readonly Post[]> {
     .sort(terbaruDahulu);
 }
 
+/**
+ * Satu tulisan untuk halaman rinciannya, termasuk yang tidak dinaikkan ke
+ * situs induk. Tulisan seperti itu tidak muncul di daftar, sitemap, feed,
+ * maupun halaman unit (semuanya lewat `getPostsInduk`), tetapi tautan
+ * langsungnya tetap terbuka. Ini menjaga tautan lama dari WordPress di Google
+ * dan grup WhatsApp tetap hidup setelah domain utama pindah.
+ */
 export async function getPost(slug: string): Promise<Post | undefined> {
   const semua = await muatPosts();
-  return semua.find((p) => p.slug === slug && p.tampilkan_di_induk);
+  const dicari = bentukSlug(slug);
+  return semua.find((p) => bentukSlug(p.slug) === dicari);
+}
+
+/**
+ * 13 slug arsip berisi huruf Arab atau emoji (`shalat-malam-nabi-ﷺ-…`). Next
+ * menyerahkan parameter rute masih ter-persen (`%ef%b7%ba`), sedangkan
+ * WPGraphQL mengirim karakter aslinya, jadi keduanya disamakan dulu.
+ */
+function bentukSlug(slug: string): string {
+  try {
+    return decodeURIComponent(slug).normalize("NFC");
+  } catch {
+    return slug;
+  }
 }
 
 /** Slug untuk `generateStaticParams`, hanya yang tayang di induk. */

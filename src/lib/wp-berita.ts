@@ -4,7 +4,8 @@
  * Berita dibaca dari CMS headless di cms.wadimubarak.com lewat WPGraphQL,
  * memakai `kueri` dan `WPGRAPHQL_ENDPOINT` yang sama dengan program donasi di
  * `wp.ts`. Berkas ini terpisah karena urusannya lain: paginasi arsip 600+
- * tulisan dan pemetaan 37 kategori WordPress ke taksonomi situs induk.
+ * tulisan dan pemetaan 37 kategori WordPress ke taksonomi situs induk (petanya
+ * di `kategori-wp.ts`).
  *
  * Sifatnya sama dengan `wp.ts`: **tidak pernah melempar ke pemanggil.** Setiap
  * kegagalan mengembalikan `null` dan `content.ts` melanjutkan dengan tulisan
@@ -17,6 +18,7 @@
  * dekat dengan batas itu, jadi diambil 50 per permintaan.
  */
 
+import { KATEGORI_INDUK, UNIT_DARI_KATEGORI } from "@/lib/kategori-wp";
 import type { Category, Lokasi } from "@/lib/schemas";
 import { kueri, wpAktif } from "@/lib/wp";
 
@@ -44,73 +46,6 @@ const MAKS_HALAMAN = 20;
 export function beritaWpAktif(): boolean {
   return wpAktif();
 }
-
-/* -------------------------------------------------------------------------- */
-/* Pemetaan taksonomi WordPress → taksonomi situs induk                        */
-/* -------------------------------------------------------------------------- */
-
-/**
- * PRD §7.1 mengunci kategori situs induk pada tujuh term, sedangkan WordPress
- * yayasan memakai 37 kategori yang tumbuh apa adanya. Peta ini jembatannya.
- *
- * Kunci adalah slug kategori WordPress. Kategori yang TIDAK ada di sini
- * dianggap bukan isi redaksional situs induk dan tulisannya tidak dinaikkan
- * (lihat `tampilkan_di_induk` di bawah), itu cara kurasi PRD §9.1 bekerja
- * selama WordPress belum punya penanda khusus. Yang sengaja ditinggalkan:
- * `pemasaran`, `publishing`, `bimbel-saqu`, `madrasah-online`, `sahabat-resto`,
- * dan `live-streaming`, semuanya lini usaha atau kanal lain, bukan kabar
- * yayasan. Menambah kategori ke situs induk cukup dengan satu baris di sini.
- *
- * Slug ini aman dari Polylang: kategori sengaja tidak diterjemahkan di CMS
- * (mu-plugin `icwm-polylang.php`), jadi slug-nya sama di semua bahasa.
- */
-const KATEGORI_INDUK: Record<string, Category> = {
-  // Berita
-  "berita-nasional": "berita",
-  "berita-timur-tengah": "berita",
-  "dunia-islam": "berita",
-  yasaqu: "berita",
-  // Pengumuman
-  pendaftaran: "pengumuman",
-  // Kegiatan unit dan program
-  "taud-saqu": "kegiatan",
-  "mahabbah-boarding-school": "kegiatan",
-  "mts-ma": "kegiatan",
-  "stiu-wm": "kegiatan",
-  "lkid-saqu": "kegiatan",
-  "graha-quran": "kegiatan",
-  "wq-wisata-quran": "kegiatan",
-  "mimbar-membangun-dan-memakmurkan-masjid": "kegiatan",
-  // Artikel keilmuan dan pengasuhan
-  artikel: "artikel",
-  akhlaq: "artikel",
-  fiqh: "artikel",
-  "fiqh-artikel": "artikel",
-  hadist: "artikel",
-  tafsir: "artikel",
-  qiraat: "artikel",
-  "sirah-nabi": "artikel",
-  ulama: "artikel",
-  sahabat: "artikel",
-  tausiyah: "artikel",
-  "quranic-parenting": "artikel",
-  ramadhan: "artikel",
-  dzulhijjah: "artikel",
-  "haji-umrah": "artikel",
-};
-
-/**
- * Kategori WordPress yang menandai tulisan milik sebuah unit. Dipakai mengisi
- * `unit` dan `unit_utama`, yang menentukan URL kanonik sekaligus penyaring
- * "unit" di /informasi dan blok berita di halaman profil unit.
- */
-const UNIT_DARI_KATEGORI: Record<string, string[]> = {
-  "taud-saqu": ["taud-saqu"],
-  "mahabbah-boarding-school": ["mts-mbs-putri", "ma-mbs-putri"],
-  "mts-ma": ["mts-tahfizh-putra", "ma-tahfizh-putra"],
-  "stiu-wm": ["stiu-wadi-mubarak"],
-  "lkid-saqu": ["pkm-wadi-mubarak"],
-};
 
 /** Nilai `unit_utama` untuk tulisan yang bukan milik unit tertentu. */
 const UNIT_INDUK = "wadi-mubarak";
@@ -324,13 +259,27 @@ function petakan(p: NodePost): unknown | null {
 /* -------------------------------------------------------------------------- */
 
 /**
+ * Selama build, satu worker merender ratusan halaman /informasi sekaligus dan
+ * cache fetch masih kosong, jadi tanpa ini setiap halaman mengambil seluruh
+ * arsip sendiri-sendiri. Itu pernah membanjiri CMS dengan ~600 kueri dalam
+ * semenit dan membuat server kehabisan memori (17 Oktober 2026). Di luar build
+ * tidak dipakai, supaya ISR tetap membaca data terbaru.
+ */
+let janjiBuild: Promise<unknown[] | null> | undefined;
+
+/**
  * Ambil seluruh tulisan dari WordPress dalam bentuk mentah yang sama dengan
  * `postsMentah`. Validasi Zod tetap dijalankan `content.ts` memakai skema yang
  * sama, jadi data CMS tidak lebih dipercaya daripada data statis.
  *
  * `null` berarti WordPress tidak dapat dihubungi sama sekali.
  */
-export async function ambilPostsWp(): Promise<unknown[] | null> {
+export function ambilPostsWp(): Promise<unknown[] | null> {
+  if (process.env["NEXT_PHASE"] !== "phase-production-build") return ambilSemua();
+  return (janjiBuild ??= ambilSemua());
+}
+
+async function ambilSemua(): Promise<unknown[] | null> {
   const mentah: NodePost[] = [];
   let after: string | null = null;
 

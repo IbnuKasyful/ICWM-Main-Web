@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+import { redirectLama } from "./src/lib/redirect-lama";
+
 /**
  * Header keamanan, PRD §15.
  * CSP dibiarkan longgar untuk gambar/skrip GA4; perketat saat domain WP final.
@@ -36,6 +38,10 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "images.unsplash.com" },
     ],
     formats: ["image/avif", "image/webp"],
+  },
+  // URL WordPress lama di domain utama. Tulisan (`/<slug>/`) diurus src/app/[slug].
+  async redirects() {
+    return redirectLama();
   },
   async headers() {
     return [
