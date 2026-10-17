@@ -1,14 +1,15 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
-import { site } from "@/lib/site";
+import { endpointWp } from "@/lib/wp";
 
 /**
  * Penerima formulir kontak, PRD §6 & §15.
  *
- * Honeypot + pembatasan laju berbasis IP, tanpa CAPTCHA. Pengiriman surel
- * memakai REST API Resend lewat `fetch` sehingga tidak menambah dependensi
- * (PRD §6: jangan menambah paket di luar daftar).
+ * Honeypot + pembatasan laju berbasis IP, tanpa CAPTCHA. Pesan yang lolos
+ * diteruskan ke plugin `cms/wm-kontak` di CMS, yang menyimpannya di wp-admin
+ * lalu mengirim surel ke PSB pusat lewat WP Mail SMTP (Gmail). Alamat tujuan
+ * dan label keperluan diatur di plugin itu, bukan di sini.
  */
 
 export const runtime = "nodejs";
@@ -57,15 +58,6 @@ function ambilIp(request: Request): string {
   return pertama || request.headers.get("x-real-ip") || "tidak-diketahui";
 }
 
-const labelKeperluan: Record<z.infer<typeof skemaPesan>["keperluan"], string> = {
-  ppdb: "Pendaftaran santri baru",
-  donasi: "Donasi & LAZIS",
-  "kerja-sama": "Kerja sama lembaga",
-  media: "Media & pers",
-  alumni: "Alumni",
-  lainnya: "Lainnya",
-};
-
 export async function POST(request: Request) {
   const ip = ambilIp(request);
 
@@ -99,15 +91,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true, pesan: "Pesan Anda terkirim." });
   }
 
-  const kunciResend = process.env["RESEND_API_KEY"];
-  // Seluruh pesan formulir masuk ke surel PSB pusat.
-  const tujuan = site.kontak.email;
-  const pengirim = process.env["KONTAK_EMAIL_PENGIRIM"];
+  const rahasia = process.env["KONTAK_SECRET"]?.trim();
+  const cms = endpointWp();
 
-  // Tanpa kredensial (mis. saat pengembangan front-end), pesan dicatat di server
-  // dan pengunjung tetap menerima balasan yang jujur.
-  if (!kunciResend || !pengirim) {
-    console.info("[kontak] Kredensial surel belum diatur; pesan tidak dikirim.", {
+  // Tanpa CMS atau rahasia (mis. saat pengembangan front-end), pesan dicatat di
+  // server dan pengunjung tetap menerima balasan yang jujur.
+  if (!rahasia || !cms) {
+    console.info("[kontak] CMS belum diatur; pesan tidak diteruskan.", {
       keperluan: data.keperluan,
       nama: data.nama,
     });
@@ -118,33 +108,27 @@ export async function POST(request: Request) {
     });
   }
 
-  const isi = [
-    `Keperluan: ${labelKeperluan[data.keperluan]}`,
-    `Nama: ${data.nama}`,
-    `Surel: ${data.email}`,
-    `Telepon: ${data.telepon || "-"}`,
-    "",
-    data.pesan,
-  ].join("\n");
-
   try {
-    const tanggapan = await fetch("https://api.resend.com/emails", {
+    // Penerimanya plugin cms/wm-kontak, di CMS yang sama dengan WPGraphQL.
+    const tanggapan = await fetch(new URL("/wp-json/wm/v1/kontak", cms), {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${kunciResend}`,
         "Content-Type": "application/json",
+        "x-kontak-secret": rahasia,
       },
       body: JSON.stringify({
-        from: pengirim,
-        to: [tujuan],
-        reply_to: data.email,
-        subject: `[${labelKeperluan[data.keperluan]}] Pesan dari ${data.nama}`,
-        text: isi,
+        nama: data.nama,
+        email: data.email,
+        telepon: data.telepon ?? "",
+        keperluan: data.keperluan,
+        pesan: data.pesan,
       }),
+      signal: AbortSignal.timeout(15000),
+      cache: "no-store",
     });
 
     if (!tanggapan.ok) {
-      console.error("[kontak] Resend menolak permintaan", tanggapan.status);
+      console.error("[kontak] CMS menolak pesan", tanggapan.status);
       return NextResponse.json(
         {
           ok: false,
@@ -153,8 +137,15 @@ export async function POST(request: Request) {
         { status: 502 },
       );
     }
+
+    // Pesan sudah tersimpan di CMS walau surelnya gagal; redaksi membacanya di
+    // menu Pesan Kontak, jadi bagi pengunjung pesannya tetap sampai.
+    const hasilCms = (await tanggapan.json().catch(() => null)) as { terkirim?: boolean } | null;
+    if (hasilCms?.terkirim === false) {
+      console.error("[kontak] Pesan tersimpan di CMS tetapi surel gagal dikirim");
+    }
   } catch (galat) {
-    console.error("[kontak] Gagal menghubungi layanan surel", galat);
+    console.error("[kontak] Gagal menghubungi CMS", galat);
     return NextResponse.json(
       { ok: false, pesan: "Pesan gagal dikirim. Silakan hubungi kami lewat WhatsApp." },
       { status: 502 },

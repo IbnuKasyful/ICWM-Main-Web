@@ -44,7 +44,7 @@ Lalu di **Setup Node.js App**:
 
 Tambahkan variabel lingkungan di panel yang sama (bukan berkas `.env`, agar tidak
 ikut terunggah): `NEXT_PUBLIC_SITE_URL`, `WPGRAPHQL_ENDPOINT`,
-`REVALIDATE_SECRET`, `RESEND_API_KEY`, `KONTAK_EMAIL_*`. Kosongkan
+`REVALIDATE_SECRET`, `KONTAK_SECRET`. Kosongkan
 `NEXT_PUBLIC_MODE_PRATINJAU` hanya setelah seluruh data Tier 1 resmi.
 
 Klik **Restart**. Cache ISR ditulis ke disk di dalam `.next/cache`, tidak perlu
