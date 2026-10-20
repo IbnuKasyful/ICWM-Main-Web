@@ -28,7 +28,7 @@ export function AjakanDonasi({ sorot }: { sorot: ProgramDonasi | undefined }) {
 
           <div className="relative grid grid-cols-1 gap-10 p-6 sm:p-8 md:p-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:items-center lg:p-16">
             <div>
-              <LogoLazis tinggi={72} className="mb-6" />
+              <LogoLazis tinggi={96} className="mb-6 h-24" />
 
               <h2 className="max-w-xl font-display text-display-md text-balance text-white md:text-display-lg">
                 Titipkan zakat Anda pada tim amil yang{" "}

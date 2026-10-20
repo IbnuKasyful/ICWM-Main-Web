@@ -123,28 +123,34 @@ export default async function HalamanDonasi() {
         <div className="container-page relative py-8 md:py-14">
           <Breadcrumb jejak={[{ label: "Donasi", href: "/donasi" }]} terang />
 
-          <LogoLazis className="mt-6" />
+          {/* Logo di kolom kanan mulai md; di ponsel naik ke atas judul dan
+              mengecil, supaya hero tetap pendek. */}
+          <div className="mt-6 grid grid-cols-1 gap-6 md:mt-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-10">
+            <LogoLazis className="h-24 justify-self-start md:order-last md:h-60 md:justify-self-end lg:h-72" />
 
-          <h1 className="mt-5 max-w-3xl font-display text-display-md text-balance text-white md:text-display-lg">
-            Titipkan zakat Anda pada tim amil yang{" "}
-            <span className="text-accent-300">Anda kenal jejaknya</span>
-          </h1>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-pretty text-white/70">
-            {site.lazis.nama} menghimpun dan menyalurkan zakat, infak, sedekah, dan wakaf untuk
-            santri penghafal Al-Qur&apos;an. Setiap program di halaman ini menyebut peruntukan,
-            satuan biaya, dan penerima manfaatnya.
-          </p>
+            <div>
+              <h1 className="max-w-3xl font-display text-display-md text-balance text-white md:text-display-lg">
+                Titipkan zakat Anda pada tim amil yang{" "}
+                <span className="text-accent-300">Anda kenal jejaknya</span>
+              </h1>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-pretty text-white/70">
+                {site.lazis.nama} menghimpun dan menyalurkan zakat, infak, sedekah, dan wakaf untuk
+                santri penghafal Al-Qur&apos;an. Setiap program di halaman ini menyebut peruntukan,
+                satuan biaya, dan penerima manfaatnya.
+              </p>
 
-          <div className="mt-7 flex flex-wrap gap-3">
-            <ButtonLink href="#rekening" varian="terang">
-              Lihat rekening lembaga
-            </ButtonLink>
-            <ButtonLink
-              href="#program"
-              className="border border-white/25 bg-transparent text-white hover:bg-white/10"
-            >
-              Lihat program donasi
-            </ButtonLink>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <ButtonLink href="#rekening" varian="terang">
+                  Lihat rekening lembaga
+                </ButtonLink>
+                <ButtonLink
+                  href="#program"
+                  className="border border-white/25 bg-transparent text-white hover:bg-white/10"
+                >
+                  Lihat program donasi
+                </ButtonLink>
+              </div>
+            </div>
           </div>
         </div>
       </div>

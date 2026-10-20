@@ -84,18 +84,21 @@ const RASIO_LAZIS = 717 / 1040;
  * tua, sedangkan tulisan logo hijau tua dan magenta, jadi tanpa alas logonya
  * tidak terbaca. Nama lembaga sudah disebut di paragraf sesudahnya, karena itu
  * gambarnya dianggap hiasan.
+ *
+ * Tinggi diatur lewat `className` pada alas (mis. `h-24 md:h-64`), gambarnya
+ * mengisi alas dikurangi padding. `tinggi` hanya ukuran terbesar yang diminta
+ * dari next/image.
  */
-export function LogoLazis({ tinggi = 88, className }: { tinggi?: number; className?: string }) {
+export function LogoLazis({ tinggi = 240, className }: { tinggi?: number; className?: string }) {
   return (
-    <span className={cn("inline-flex rounded-2xl bg-white p-3 shadow-lift", className)}>
+    <span className={cn("inline-flex h-28 rounded-2xl bg-white p-3 shadow-lift", className)}>
       <Image
         src="/img/logo-lazis.png"
         alt=""
         aria-hidden="true"
         width={Math.round(tinggi * RASIO_LAZIS)}
         height={tinggi}
-        className="w-auto"
-        style={{ height: tinggi }}
+        className="h-full w-auto"
       />
     </span>
   );
