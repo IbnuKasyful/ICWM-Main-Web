@@ -18,10 +18,14 @@ import type { Category } from "@/lib/schemas";
  * dianggap bukan isi redaksional situs induk dan tulisannya tidak dinaikkan
  * (lihat `tampilkan_di_induk` di `wp-berita.ts`), itu cara kurasi PRD §9.1
  * bekerja selama WordPress belum punya penanda khusus. Yang sengaja
- * ditinggalkan: `pemasaran`, `publishing`, `bimbel-saqu`, `madrasah-online`,
- * `sahabat-resto`, dan `live-streaming`, semuanya lini usaha atau kanal lain,
- * bukan kabar yayasan. Menambah kategori ke situs induk cukup dengan satu baris
- * di sini.
+ * ditinggalkan: `bimbel-saqu`, `madrasah-online`, `sahabat-resto`, dan
+ * `live-streaming`, semuanya lini usaha atau kanal lain, bukan kabar yayasan;
+ * juga `pemasaran`, yang mencampur kabar, pengumuman, dan promosi sehingga
+ * tulisannya diberi rubrik satu per satu.
+ *
+ * Sejak Oktober 2026 peta ini tidak lagi menentukan kategori tulisan: itu
+ * tugas rubrik di plugin cms/wm-rubrik, yang diisi awal dari peta ini. Yang
+ * tersisa di sini hanya pengalihan URL `/category/<slug>/` situs lama.
  *
  * Slug ini aman dari Polylang: kategori sengaja tidak diterjemahkan di CMS
  * (mu-plugin `icwm-polylang.php`), jadi slug-nya sama di semua bahasa.
@@ -59,6 +63,8 @@ export const KATEGORI_INDUK: Record<string, Category> = {
   ramadhan: "artikel",
   dzulhijjah: "artikel",
   "haji-umrah": "artikel",
+  // Publikasi: buku terbitan yayasan
+  publishing: "publikasi",
 };
 
 /**

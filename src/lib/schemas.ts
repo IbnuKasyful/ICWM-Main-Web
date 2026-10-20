@@ -28,7 +28,11 @@ export const modelBelajarSchema = z.enum(["boarding", "non-boarding", "hybrid"])
 
 export const statusPpdbSchema = z.enum(["buka", "segera", "tutup"]);
 
-/** Datar, terkunci 7 term (PRD §7.1). */
+/**
+ * Datar, 7 term PRD §7.1 ditambah `publikasi` (Oktober 2026) untuk buku
+ * terbitan, program berbayar, dan ajakan lain yang bukan kabar. Slug-nya harus
+ * sama dengan rubrik di plugin cms/wm-rubrik.
+ */
 export const categorySchema = z.enum([
   "berita",
   "pengumuman",
@@ -37,6 +41,7 @@ export const categorySchema = z.enum([
   "kerja-sama",
   "laporan",
   "kegiatan",
+  "publikasi",
 ]);
 
 export const lokasiSchema = z.enum(["bogor", "sleman"]);

@@ -4,8 +4,8 @@
  * Berita dibaca dari CMS headless di cms.wadimubarak.com lewat WPGraphQL,
  * memakai `kueri` dan `WPGRAPHQL_ENDPOINT` yang sama dengan program donasi di
  * `wp.ts`. Berkas ini terpisah karena urusannya lain: paginasi arsip 600+
- * tulisan dan pemetaan 37 kategori WordPress ke taksonomi situs induk (petanya
- * di `kategori-wp.ts`).
+ * tulisan, rubrik dari plugin `cms/wm-rubrik`, dan kategori WordPress yang
+ * menandai unit (petanya di `kategori-wp.ts`).
  *
  * Sifatnya sama dengan `wp.ts`: **tidak pernah melempar ke pemanggil.** Setiap
  * kegagalan mengembalikan `null` dan `content.ts` melanjutkan dengan tulisan
@@ -18,8 +18,8 @@
  * dekat dengan batas itu, jadi diambil 50 per permintaan.
  */
 
-import { KATEGORI_INDUK, UNIT_DARI_KATEGORI } from "@/lib/kategori-wp";
-import type { Category, Lokasi } from "@/lib/schemas";
+import { UNIT_DARI_KATEGORI } from "@/lib/kategori-wp";
+import { categorySchema, type Category, type Lokasi } from "@/lib/schemas";
 import { kueri, wpAktif } from "@/lib/wp";
 
 /** Ambang satu permintaan. Halaman 50 tulisan bisa ~600 KB, jadi tidak ketat. */
@@ -80,6 +80,12 @@ const KUERI_BERITA = /* GraphQL */ `
         seoJudul
         seoDeskripsi
         seoNoindex
+        # Dari plugin cms/wm-rubrik, penentu kategori dan tampil tidaknya tulisan.
+        daftarRubrik(first: 10) {
+          nodes {
+            slug
+          }
+        }
         author {
           node {
             name
@@ -119,6 +125,7 @@ type NodePost = {
   seoJudul: string | null;
   seoDeskripsi: string | null;
   seoNoindex: boolean;
+  daftarRubrik: { nodes: { slug: string | null }[] } | null;
   author: { node: { name: string | null } | null } | null;
   categories: { nodes: { slug: string | null }[] } | null;
   tags: { nodes: { name: string | null }[] } | null;
@@ -215,10 +222,13 @@ function petakan(p: NodePost): unknown | null {
     .map((t) => t.name)
     .filter((s): s is string => Boolean(s));
 
-  // Kategori pertama yang dikenal menentukan kategori situs induk. Tulisan yang
-  // tak satu pun kategorinya dikenal tetap dipetakan, tetapi tidak dinaikkan.
-  const slugDikenal = kategoriWp.find((s) => s in KATEGORI_INDUK);
-  const category: Category = slugDikenal ? (KATEGORI_INDUK[slugDikenal] as Category) : "artikel";
+  // Rubrik pertama yang dikenal menentukan kategori situs induk. Tulisan tanpa
+  // rubrik tetap dipetakan, supaya tautan langsungnya hidup, tetapi tidak
+  // dinaikkan ke daftar mana pun.
+  const rubrik = (p.daftarRubrik?.nodes ?? [])
+    .map((r) => categorySchema.safeParse(r.slug))
+    .find((r) => r.success)?.data;
+  const category: Category = rubrik ?? "artikel";
 
   const unitTerkait = [...new Set(kategoriWp.flatMap((s) => UNIT_DARI_KATEGORI[s] ?? []))];
   const unit = unitTerkait.length > 0 ? unitTerkait : [UNIT_INDUK];
@@ -253,10 +263,9 @@ function petakan(p: NodePost): unknown | null {
     topik,
     gambar,
     penulis: p.author?.node?.name ?? "Humas Wadi Mubarak",
-    // Kurasi PRD §9.1: hanya tulisan yang kategorinya terdaftar di
-    // `KATEGORI_INDUK` yang naik ke situs induk. Sisanya tetap tersimpan di
-    // CMS tanpa ikut tayang di situs induk.
-    tampilkan_di_induk: slugDikenal !== undefined,
+    // Kurasi PRD §9.1: redaksi menaikkan tulisan ke situs induk dengan
+    // memberinya rubrik di CMS. Sisanya tetap tersimpan tanpa ikut didaftar.
+    tampilkan_di_induk: rubrik !== undefined,
     konten,
     seo: {
       judul: p.seoJudul?.trim() || null,

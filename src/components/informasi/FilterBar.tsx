@@ -19,6 +19,7 @@ const kategoriOpsi: Category[] = [
   "kegiatan",
   "kerja-sama",
   "laporan",
+  "publikasi",
 ];
 
 /**

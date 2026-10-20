@@ -60,6 +60,7 @@ export const labelCategory: Record<Category, string> = {
   "kerja-sama": "Kerja sama",
   laporan: "Laporan",
   kegiatan: "Kegiatan",
+  publikasi: "Publikasi",
 };
 
 export const labelJenisDonasi = {
