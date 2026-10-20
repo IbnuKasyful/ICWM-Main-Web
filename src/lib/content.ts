@@ -29,6 +29,7 @@ import {
   type Agenda,
   type Category,
   type Faq,
+  type GaleriItem,
   type ImageData,
   type Post,
   type ProgramDonasi,
@@ -36,7 +37,7 @@ import {
   type Unit,
 } from "@/lib/schemas";
 import { ambilPostsWp, beritaWpAktif } from "@/lib/wp-berita";
-import { ambilProgramDonasiWp, wpAktif } from "@/lib/wp";
+import { ambilGaleriWp, ambilProgramDonasiWp, wpAktif } from "@/lib/wp";
 
 /**
  * Batas API (PRD §18): satu-satunya tempat data mentah masuk ke aplikasi, dan
@@ -246,8 +247,36 @@ export function getFaq(): readonly Faq[] {
   return faq.slice().sort((a, b) => a.urutan - b.urutan);
 }
 
+/**
+ * Foto kurasi statis saja. Dipakai kolase /galeri dan dinding foto beranda,
+ * yang sengaja tidak ikut berubah setiap kali redaksi mencentang foto di CMS.
+ */
 export function getGaleri() {
   return galeri;
+}
+
+/**
+ * Isi kisi /galeri: foto yang dicentang di Media CMS (terbaru lebih dulu),
+ * lalu foto kurasi statis.
+ *
+ * Foto CMS divalidasi satu per satu dan yang cacat dilewati, bukan menjatuhkan
+ * seluruh galeri seperti `daftar`: satu lampiran rusak tidak sepadan dengan
+ * halaman galat.
+ */
+export async function getGaleriLengkap(): Promise<readonly GaleriItem[]> {
+  const mentah = wpAktif() ? await ambilGaleriWp() : null;
+  if (!mentah?.length) return galeri;
+
+  const dariCms: GaleriItem[] = [];
+  mentah.forEach((item, i) => {
+    const hasil = galeriItemSchema.safeParse(item);
+    if (hasil.success) dariCms.push(hasil.data);
+    else console.error(`[galeri] foto CMS [${i}] ditolak skema: ${hasil.error.message}`);
+  });
+
+  // `src` menjadi kunci kartu di kisi, jadi tidak boleh kembar.
+  const sudah = new Set(dariCms.map((f) => f.src));
+  return [...dariCms, ...galeri.filter((f) => !sudah.has(f.src))];
 }
 
 /**

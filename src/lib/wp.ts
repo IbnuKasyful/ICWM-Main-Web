@@ -199,3 +199,67 @@ export async function ambilProgramDonasiWp(): Promise<unknown[] | null> {
     };
   });
 }
+
+/* -------------------------------------------------------------------------- */
+/* Foto galeri                                                                 */
+/* -------------------------------------------------------------------------- */
+
+export const TAG_GALERI = "galeri";
+
+/**
+ * Foto CMS yang ikut ke /galeri. Dibatasi supaya halamannya tidak terus
+ * memberat seiring foto dicentang; yang tertua tergeser keluar.
+ */
+const BATAS_FOTO_GALERI = 60;
+
+/** Pasangan field `fotoGaleri` di plugin `cms/wm-galeri/wm-galeri.php`. */
+const KUERI_GALERI = /* GraphQL */ `
+  query FotoGaleri($first: Int) {
+    fotoGaleri(first: $first) {
+      src
+      keterangan
+      lebar
+      tinggi
+      kelompok
+      tulisanSlug
+      tulisanJudul
+    }
+  }
+`;
+
+type NodeFotoGaleri = {
+  src: string;
+  keterangan: string;
+  lebar: number;
+  tinggi: number;
+  kelompok: string;
+  tulisanSlug: string | null;
+  tulisanJudul: string | null;
+};
+
+/**
+ * Foto yang dicentang "Tampilkan di galeri" di Media CMS, terbaru lebih dulu,
+ * dalam bentuk mentah yang sama dengan `galeriMentah`. Validasinya di
+ * `content.ts`.
+ *
+ * `null` berarti WordPress tidak dapat dihubungi.
+ */
+export async function ambilGaleriWp(): Promise<unknown[] | null> {
+  const data = await kueri<{ fotoGaleri: NodeFotoGaleri[] | null }>("fotoGaleri", KUERI_GALERI, {
+    tag: TAG_GALERI,
+    umur: 3600,
+    variables: { first: BATAS_FOTO_GALERI },
+  });
+  if (!data) return null;
+
+  return (data.fotoGaleri ?? []).map((f) => ({
+    src: f.src,
+    alt: f.keterangan,
+    width: f.lebar,
+    height: f.tinggi,
+    kategori: f.kelompok,
+    ...(f.tulisanSlug
+      ? { tulisan: { slug: f.tulisanSlug, judul: f.tulisanJudul ?? f.keterangan } }
+      : {}),
+  }));
+}

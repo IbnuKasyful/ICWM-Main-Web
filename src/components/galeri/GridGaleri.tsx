@@ -125,11 +125,15 @@ export function GridGaleri({ galeri }: { galeri: readonly GaleriItem[] }) {
                   {labelGaleriKategori[foto.kategori]}
                 </span>
 
+                {/* Pemotong dua baris dipasang di span dalam: kalau satu elemen
+                    memegang padding dan line-clamp sekaligus, baris ketiga
+                    keterangan panjang (judul tulisan dari CMS) tetap terlihat di
+                    area padding-nya. */}
                 <span
                   aria-hidden="true"
-                  className="absolute inset-x-0 bottom-0 line-clamp-2 px-4 pb-3.5 text-sm leading-snug font-semibold text-pretty text-white"
+                  className="absolute inset-x-0 bottom-0 px-4 pb-3.5 text-sm leading-snug font-semibold text-pretty text-white"
                 >
-                  {foto.alt}
+                  <span className="line-clamp-2">{foto.alt}</span>
                 </span>
               </button>
             </li>

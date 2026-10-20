@@ -3,7 +3,7 @@ import { KolaseGaleri } from "@/components/galeri/KolaseGaleri";
 import { PageHeader } from "@/components/site/PageHeader";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Section } from "@/components/ui/Section";
-import { getGaleri } from "@/lib/content";
+import { getGaleri, getGaleriLengkap } from "@/lib/content";
 import { buatMetadata } from "@/lib/seo";
 
 /** PRD §8, ISR 1 jam. */
@@ -16,8 +16,11 @@ export const metadata = buatMetadata({
   path: "/galeri",
 });
 
-export default function HalamanGaleri() {
-  const galeri = getGaleri();
+export default async function HalamanGaleri() {
+  const galeri = await getGaleriLengkap();
+  // Kolase kepala halaman memakai foto kurasi, supaya tampilan pertama halaman
+  // tidak berganti setiap kali redaksi mencentang foto baru di CMS.
+  const kurasi = getGaleri();
 
   /* Kepala halaman ini dibangun dari fotonya sendiri, jadi saat galeri kosong
      tidak ada yang bisa disusun, halaman kembali memakai kepala halaman baku. */
@@ -46,7 +49,7 @@ export default function HalamanGaleri() {
 
   return (
     <>
-      <KolaseGaleri galeri={galeri} />
+      <KolaseGaleri galeri={kurasi.length > 0 ? kurasi : galeri} />
       <GridGaleri galeri={galeri} />
     </>
   );

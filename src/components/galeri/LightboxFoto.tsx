@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useCallback, useEffect, useRef } from "react";
 
 import { Icon } from "@/components/ui/Icon";
@@ -18,13 +19,16 @@ import type { ImageData } from "@/lib/schemas";
  *
  * Keadaannya dipegang pemanggil (`aktif`), karena pemicunya, kartu di kisi,
  * tinggal di sana.
+ *
+ * Foto yang diunggah dari sebuah tulisan di CMS membawa `tulisan`, dan
+ * lightbox menautkannya supaya pembaca bisa membaca kabar lengkapnya.
  */
 export function LightboxFoto({
   galeri,
   aktif,
   setAktif,
 }: {
-  galeri: readonly ImageData[];
+  galeri: readonly (ImageData & { tulisan?: { slug: string; judul: string } })[];
   aktif: number | null;
   setAktif: React.Dispatch<React.SetStateAction<number | null>>;
 }) {
@@ -112,6 +116,24 @@ export function LightboxFoto({
             <p className="flex min-h-10 max-w-2xl items-center text-sm leading-relaxed text-pretty text-white/80">
               {foto.alt}
             </p>
+
+            {/* Barisnya selalu ada, berisi tautan atau tidak, dengan alasan yang
+                sama dengan tinggi dasar keterangan di atas. */}
+            <div className="flex h-5 items-center">
+              {foto.tulisan ? (
+                <Link
+                  href={`/informasi/${foto.tulisan.slug}`}
+                  title={foto.tulisan.judul}
+                  className="group inline-flex items-center gap-1.5 text-sm font-semibold text-white underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  Baca beritanya
+                  <Icon
+                    nama="panah"
+                    className="size-4 transition-transform group-hover:translate-x-0.5"
+                  />
+                </Link>
+              ) : null}
+            </div>
 
             <div className="flex items-center gap-2">
               <TombolLightbox

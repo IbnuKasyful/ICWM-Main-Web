@@ -82,7 +82,11 @@ export const galeriKategoriSchema = z.enum([
 
 export type GaleriKategori = z.infer<typeof galeriKategoriSchema>;
 
-export const galeriItemSchema = imageSchema.extend({ kategori: galeriKategoriSchema });
+export const galeriItemSchema = imageSchema.extend({
+  kategori: galeriKategoriSchema,
+  /** Tulisan tempat foto CMS diunggah; foto kurasi statis tidak punya. */
+  tulisan: z.object({ slug: z.string().min(1), judul: z.string() }).optional(),
+});
 
 export type GaleriItem = z.infer<typeof galeriItemSchema>;
 
