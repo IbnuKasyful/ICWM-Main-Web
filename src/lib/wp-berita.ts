@@ -4,8 +4,7 @@
  * Berita dibaca dari CMS headless di cms.wadimubarak.com lewat WPGraphQL,
  * memakai `kueri` dan `WPGRAPHQL_ENDPOINT` yang sama dengan program donasi di
  * `wp.ts`. Berkas ini terpisah karena urusannya lain: paginasi arsip 600+
- * tulisan, rubrik dari plugin `cms/wm-rubrik`, dan kategori WordPress yang
- * menandai unit (petanya di `kategori-wp.ts`).
+ * tulisan, serta rubrik dan unit dari plugin `cms/wm-rubrik` dan `cms/wm-unit`.
  *
  * Sifatnya sama dengan `wp.ts`: **tidak pernah melempar ke pemanggil.** Setiap
  * kegagalan mengembalikan `null` dan `content.ts` melanjutkan dengan tulisan
@@ -18,7 +17,7 @@
  * dekat dengan batas itu, jadi diambil 50 per permintaan.
  */
 
-import { UNIT_DARI_KATEGORI } from "@/lib/kategori-wp";
+import { unitsMentah } from "@/data/units";
 import { categorySchema, type Category, type Lokasi } from "@/lib/schemas";
 import { kueri, wpAktif } from "@/lib/wp";
 
@@ -50,14 +49,22 @@ export function beritaWpAktif(): boolean {
 /** Nilai `unit_utama` untuk tulisan yang bukan milik unit tertentu. */
 const UNIT_INDUK = "wadi-mubarak";
 
+/**
+ * Slug unit menurut urutan tampil di situs. WordPress tidak menyimpan urutan
+ * centang, jadi unit pertama di daftar ini yang menjadi `unit_utama` tulisan
+ * milik beberapa unit. Slug yang tidak dikenal situs diabaikan.
+ */
+const URUTAN_UNIT = unitsMentah.map((u) => (u as { slug: string }).slug);
+
 /* -------------------------------------------------------------------------- */
 /* Kueri dan bentuk balasan WPGraphQL                                          */
 /* -------------------------------------------------------------------------- */
 
 /**
  * Hanya bahasa Indonesia: tulisan terjemahan (Polylang) punya slug sendiri dan
- * belum punya tempat di situs induk. `first: 100` pada taksonomi karena
- * WPGraphQL bawaannya hanya mengembalikan 10.
+ * belum punya tempat di situs induk. `first` pada taksonomi diisi karena
+ * WPGraphQL bawaannya hanya mengembalikan 10. Kategori WordPress tidak diambil:
+ * rubrik dan unit sudah punya taksonominya sendiri.
  */
 const KUERI_BERITA = /* GraphQL */ `
   query Berita($first: Int!, $after: String) {
@@ -86,14 +93,15 @@ const KUERI_BERITA = /* GraphQL */ `
             slug
           }
         }
+        # Dari plugin cms/wm-unit, penentu filter unit dan blok berita unit.
+        daftarUnit(first: 20) {
+          nodes {
+            slug
+          }
+        }
         author {
           node {
             name
-          }
-        }
-        categories(first: 100) {
-          nodes {
-            slug
           }
         }
         tags(first: 100) {
@@ -126,8 +134,8 @@ type NodePost = {
   seoDeskripsi: string | null;
   seoNoindex: boolean;
   daftarRubrik: { nodes: { slug: string | null }[] } | null;
+  daftarUnit: { nodes: { slug: string | null }[] } | null;
   author: { node: { name: string | null } | null } | null;
-  categories: { nodes: { slug: string | null }[] } | null;
   tags: { nodes: { name: string | null }[] } | null;
   featuredImage: {
     node: {
@@ -215,9 +223,6 @@ function petakan(p: NodePost): unknown | null {
   const konten = p.content ?? "";
   if (!slug || !judulMentah || !konten.trim()) return null;
 
-  const kategoriWp = (p.categories?.nodes ?? [])
-    .map((k) => k.slug)
-    .filter((s): s is string => Boolean(s));
   const topik = (p.tags?.nodes ?? [])
     .map((t) => t.name)
     .filter((s): s is string => Boolean(s));
@@ -230,7 +235,8 @@ function petakan(p: NodePost): unknown | null {
     .find((r) => r.success)?.data;
   const category: Category = rubrik ?? "artikel";
 
-  const unitTerkait = [...new Set(kategoriWp.flatMap((s) => UNIT_DARI_KATEGORI[s] ?? []))];
+  const dicentang = new Set((p.daftarUnit?.nodes ?? []).map((u) => u.slug));
+  const unitTerkait = URUTAN_UNIT.filter((s) => dicentang.has(s));
   const unit = unitTerkait.length > 0 ? unitTerkait : [UNIT_INDUK];
 
   const media = p.featuredImage?.node;

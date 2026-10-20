@@ -68,9 +68,10 @@ export const KATEGORI_INDUK: Record<string, Category> = {
 };
 
 /**
- * Kategori WordPress yang menandai tulisan milik sebuah unit. Dipakai mengisi
- * `unit` dan `unit_utama`, yang menentukan URL kanonik sekaligus penyaring
- * "unit" di /informasi dan blok berita di halaman profil unit.
+ * Kategori WordPress yang menandai tulisan milik sebuah unit. Sejak Oktober
+ * 2026 unit tulisan diambil dari taksonomi plugin cms/wm-unit, yang diisi awal
+ * dari peta ini; yang tersisa di sini hanya pengalihan URL `/category/` lama
+ * ke penyaring unit di /informasi.
  */
 export const UNIT_DARI_KATEGORI: Record<string, string[]> = {
   "taud-saqu": ["taud-saqu"],
