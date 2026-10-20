@@ -1,5 +1,6 @@
 import { DaftarRekening } from "@/components/donasi/DaftarRekening";
 import { ProgramDonasiCard } from "@/components/donasi/ProgramDonasiCard";
+import { LogoLazis } from "@/components/site/Logo";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { ButtonLink } from "@/components/ui/Button";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -121,6 +122,8 @@ export default async function HalamanDonasi() {
         />
         <div className="container-page relative py-8 md:py-14">
           <Breadcrumb jejak={[{ label: "Donasi", href: "/donasi" }]} terang />
+
+          <LogoLazis className="mt-6" />
 
           <h1 className="mt-5 max-w-3xl font-display text-display-md text-balance text-white md:text-display-lg">
             Titipkan zakat Anda pada tim amil yang{" "}

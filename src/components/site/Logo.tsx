@@ -74,6 +74,33 @@ export function Lockup({
   );
 }
 
+/* Rasio logo LAZIS, berkas public/img/logo-lazis.png 717 × 1040 piksel. */
+const RASIO_LAZIS = 717 / 1040;
+
+/**
+ * Logo LAZIS, selalu di atas alas putih.
+ *
+ * Kedua tempatnya (hero /donasi dan ajakan donasi di beranda) berlatar biru
+ * tua, sedangkan tulisan logo hijau tua dan magenta, jadi tanpa alas logonya
+ * tidak terbaca. Nama lembaga sudah disebut di paragraf sesudahnya, karena itu
+ * gambarnya dianggap hiasan.
+ */
+export function LogoLazis({ tinggi = 88, className }: { tinggi?: number; className?: string }) {
+  return (
+    <span className={cn("inline-flex rounded-2xl bg-white p-3 shadow-lift", className)}>
+      <Image
+        src="/img/logo-lazis.png"
+        alt=""
+        aria-hidden="true"
+        width={Math.round(tinggi * RASIO_LAZIS)}
+        height={tinggi}
+        className="w-auto"
+        style={{ height: tinggi }}
+      />
+    </span>
+  );
+}
+
 export function Wordmark({
   nama,
   keterangan,

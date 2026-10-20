@@ -33,7 +33,7 @@ export const site = {
     jalan: "Jl. Raya Puncak Kp. Goleah RT 01 RW 01, Desa Kuta, Kec. Megamendung",
     kota: "Kabupaten Bogor",
     provinsi: "Jawa Barat",
-    kodePos: "16750",
+    kodePos: "16770",
     negara: "Indonesia",
   },
   kontak: {

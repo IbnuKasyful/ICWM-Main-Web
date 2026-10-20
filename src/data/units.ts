@@ -106,6 +106,9 @@ const cabangPkm: Cabang[] = [
  * diperiksa: nomor 0888-2780-278 juga tercetak di situs Ma'had Sabilul Qur'an,
  * dan Gunungkidul hanya dimiliki Al-Arqam. Sisanya, alamat Megamendung dengan
  * narahubung Ustadz Muhammad Iqbal, jatuh ke Rumah Tahfizh Imtiaz.
+ *
+ * Ma'had Sabilul Qur'an sudah tidak menjadi cabang dan dikeluarkan dari daftar
+ * atas permintaan pengelola (Oktober 2026).
  */
 const cabangSmpTahfizh: Cabang[] = [
   {
@@ -116,16 +119,6 @@ const cabangSmpTahfizh: Cabang[] = [
     kota: "Kabupaten Bogor",
     alamat: "Jalan Bukit Zanbaqah RT 04 RW 08, Desa Bojongkoneng, Kec. Babakan Madang, Kabupaten Bogor, Jawa Barat",
     kontak_wa: "6288809252683",
-    status_ppdb: "buka",
-  },
-  {
-    slug: "smp-sabilul-quran-bogor",
-    nama: "Ma'had Sabilul Qur'an",
-    provinsi: "Jawa Barat",
-    pulau: "Jawa",
-    kota: "Kabupaten Bogor",
-    alamat: "Kp. Sukaremi Kabandungan, Cipayung Datar, Megamendung, Kab. Bogor, Jawa Barat",
-    kontak_wa: "628882780278",
     status_ppdb: "buka",
   },
   {
@@ -368,7 +361,7 @@ export const unitsMentah: unknown[] = [
     cabang: [],
     persebaran: [],
     status_ppdb: "buka",
-    periode_ppdb: "Setahun sekali: PMB tahun akademik 2026/2027",
+    periode_ppdb: "Setahun sekali: SPMB tahun akademik 2027/2028",
     kontak_wa: "6285883576234",
     urutan_tampil: 7,
     aktif: true,
@@ -443,7 +436,12 @@ export const unitsMentah: unknown[] = [
     deskripsi_singkat:
       "Ma'had tahfizh intensif bagi lulusan SMA sederajat hingga usia 23 tahun yang ingin menuntaskan hafalan dalam waktu singkat dan bersanad.",
     url_subdomain: "https://imtiaz.wadimubarak.com",
-    logo: { src: "/img/logo-wadi-mubarak.png", alt: "Logo Wadi Mubarak", width: 797, height: 938 },
+    logo: {
+      src: "/img/logo-imtiaz-putri.png",
+      alt: "Logo Ma'had Tahfizh Intensif Imtiaz",
+      width: 818,
+      height: 1046,
+    },
     warna_aksen: "#7c3aed",
     jenjang: "non-formal",
     gender: "putri",
@@ -1495,6 +1493,8 @@ const fotoImtiaz = [
  * suasana pondok: ujian semester, daurah bersama syaikh tamu, asesmen lapangan
  * akreditasi, pelepasan KKN, dan organisasi mahasiswanya. Jenjang inilah yang
  * membedakan STIU dari unit lain di halaman ini, jadi itu pula yang tampak.
+ * Foto asesmen akreditasi dipakai sebagai hero (Oktober 2026), jadi tempatnya
+ * di galeri diisi forum daurah renstra.
  */
 const fotoStiu = [
   fotoDok(
@@ -1522,10 +1522,10 @@ const fotoStiu = [
     960,
   ),
   fotoDok(
-    "galeri-stiu-asesmen-aipt",
-    "Foto bersama tim asesor dan pengelola STIU Wadi Mubarak pada asesmen lapangan akreditasi institusi",
-    1280,
-    720,
+    "galeri-stiu-daurah-renstra",
+    "Forum daurah STIU Wadi Mubarak di aula kampus Megamendung dengan latar pegunungan",
+    2000,
+    1125,
   ),
   fotoDok(
     "galeri-stiu-pelantikan-bem",
@@ -1637,10 +1637,10 @@ const fotoUnit: Record<string, { hero: ImageData; galeri: ImageData[] }> = {
   },
   "stiu-wadi-mubarak": {
     hero: fotoDok(
-      "galeri-stiu-daurah-renstra",
-      "Forum daurah STIU Wadi Mubarak di aula kampus Megamendung dengan latar pegunungan",
-      2000,
-      1125,
+      "galeri-stiu-asesmen-aipt",
+      "Foto bersama tim asesor dan pengelola STIU Wadi Mubarak pada asesmen lapangan akreditasi institusi",
+      1280,
+      720,
     ),
     galeri: fotoStiu,
   },

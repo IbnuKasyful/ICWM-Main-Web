@@ -18,7 +18,7 @@ export const cabangTaudIcwm: Cabang[] = [
     provinsi: "Jawa Barat",
     pulau: "Jawa",
     kota: "Kabupaten Bogor",
-    alamat: "Jl. Raya Puncak, Kp. Goleah RT 01/RW 01, Kuta, Megamendung, Kab. Bogor, Jawa Barat 16750",
+    alamat: "Jl. Raya Puncak, Kp. Goleah RT 01/RW 01, Kuta, Megamendung, Kab. Bogor, Jawa Barat 16770",
     kontak_wa: "6285165074542",
     status_ppdb: "buka",
   },
