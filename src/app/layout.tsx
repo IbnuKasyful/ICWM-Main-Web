@@ -6,7 +6,7 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { getUnitsAktif } from "@/lib/content";
-import { jsonldOrganization, jsonldWebsite } from "@/lib/seo";
+import { gambarBagikan, jsonldOrganization, jsonldWebsite } from "@/lib/seo";
 import { modePratinjau, navFooter, navKepatuhan, site } from "@/lib/site";
 
 import "./globals.css";
@@ -41,6 +41,12 @@ export const metadata: Metadata = {
     siteName: site.nama,
     locale: "id_ID",
     url: site.url,
+    // Beranda dan halaman yang tidak memakai `buatMetadata` mewarisi gambar ini.
+    images: [{ ...gambarBagikan(), alt: site.nama }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [gambarBagikan().url],
   },
   /* Selama mode pratinjau aktif, situs tidak boleh masuk indeks mesin pencari
      karena isinya masih data contoh, lihat `modePratinjau` di lib/site.ts. */

@@ -8,6 +8,27 @@ function urlGambar(src: string): string {
   return /^https?:\/\//.test(src) ? src : `${site.url}${src}`;
 }
 
+const ASAL_UNGGAHAN_CMS = "https://cms.wadimubarak.com/wp-content/uploads/";
+
+/** Pratinjau tautan untuk halaman tanpa foto, atau yang gambarnya SVG. */
+const GAMBAR_BAGIKAN_BAWAAN = "/img/galeri-wisuda-huffazh.jpg";
+
+/**
+ * og:image lewat route src/app/og: JPEG 1200×630 yang cukup kecil untuk
+ * WhatsApp. Foto aslinya terlalu besar untuk WhatsApp, dan SVG tidak didukung
+ * platform mana pun, jadi SVG diganti foto bawaan. URL luar dipakai apa adanya.
+ */
+export function gambarBagikan(src?: string): { url: string; width?: number; height?: number } {
+  const ukuran = { width: 1200, height: 630 };
+  if (src?.startsWith(ASAL_UNGGAHAN_CMS)) {
+    return { url: `${site.url}/og/cms/${src.slice(ASAL_UNGGAHAN_CMS.length)}.jpg`, ...ukuran };
+  }
+  if (src && /^https?:\/\//.test(src)) return { url: src };
+
+  const lokal = src && /^\/img\/[^/]+\.(jpe?g|png|webp|avif)$/i.test(src) ? src : GAMBAR_BAGIKAN_BAWAAN;
+  return { url: `${site.url}/og${lokal}.jpg`, ...ukuran };
+}
+
 /** PRD §13, metadata per halaman lewat Metadata API, tanpa kecuali. */
 export function buatMetadata({
   judul,
@@ -32,7 +53,7 @@ export function buatMetadata({
   judulPenuh?: boolean;
 }): Metadata {
   const url = `${site.url}${path}`;
-  const gambarOg = urlGambar(gambar ?? "/img/hero-utama.svg");
+  const gambarOg = gambarBagikan(gambar);
 
   return {
     title: judulPenuh ? { absolute: judul } : judul,
@@ -46,7 +67,7 @@ export function buatMetadata({
       siteName: site.nama,
       locale: "id_ID",
       type: jenis,
-      images: [{ url: gambarOg }],
+      images: [{ ...gambarOg, alt: judul }],
       ...(terbit ? { publishedTime: terbit } : {}),
       ...(penulis ? { authors: [penulis] } : {}),
     },
@@ -54,7 +75,7 @@ export function buatMetadata({
       card: "summary_large_image",
       title: judul,
       description: deskripsi,
-      images: [gambarOg],
+      images: [gambarOg.url],
     },
   };
 }

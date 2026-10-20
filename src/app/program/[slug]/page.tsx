@@ -42,7 +42,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     judul: unit.nama_lengkap,
     deskripsi: unit.deskripsi_singkat,
     path: `/program/${unit.slug}`,
-    gambar: `/img/unit-${unit.slug}.svg`,
+    // Ilustrasi unit berformat SVG, yang tidak tampil saat tautan dibagikan.
+    gambar: getUnitProfil(slug)?.hero.src,
   });
 }
 
