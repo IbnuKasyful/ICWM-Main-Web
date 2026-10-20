@@ -55,8 +55,26 @@ rm -rf node_modules
 chown -R www:www "$REL"
 
 echo "==> Mengalihkan ke $SHA"
+LAMA=$(readlink -f "$APP/current" || true)
 ln -sfn "$REL/.next/standalone" "$APP/current"
-pm2 startOrReload "$APP/shared/ecosystem.config.cjs" --update-env
+
+# `--update-env` hanya menimpa variabel yang masih ada di .env.production.
+# Variabel yang dihapus dari berkas itu tetap menempel di proses dan dump PM2,
+# dan Next membacanya saat render ISR. Bila ada yang dihapus sejak rilis
+# sebelumnya, proses dibuat ulang (jeda beberapa detik) supaya env-nya persis
+# isi berkas.
+kunci() { sed -nE 's/^\s*([A-Z0-9_]+)\s*=.*/\1/p' "$1" | sort -u; }
+DIHAPUS=""
+if [ -n "$LAMA" ] && [ -f "$LAMA/.env.production" ]; then
+  DIHAPUS=$(comm -23 <(kunci "$LAMA/.env.production") <(kunci "$APP/shared/.env.production") | tr '\n' ' ')
+fi
+if [ -n "$DIHAPUS" ]; then
+  echo "==> Variabel dihapus sejak rilis lalu: $DIHAPUS, proses PM2 dibuat ulang"
+  pm2 delete icwm-web >/dev/null 2>&1 || true
+  pm2 start "$APP/shared/ecosystem.config.cjs"
+else
+  pm2 startOrReload "$APP/shared/ecosystem.config.cjs" --update-env
+fi
 pm2 save --force >/dev/null
 
 # Simpan tiga rilis terbaru.

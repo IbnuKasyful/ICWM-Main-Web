@@ -3,6 +3,11 @@ import type { Metadata } from "next";
 import { site } from "@/lib/site";
 import type { Agenda, Post, ProgramDonasi, Unit } from "@/lib/schemas";
 
+/** Gambar lokal (`/img/...`) diberi domain situs; URL penuh dari CMS dipakai apa adanya. */
+function urlGambar(src: string): string {
+  return /^https?:\/\//.test(src) ? src : `${site.url}${src}`;
+}
+
 /** PRD §13, metadata per halaman lewat Metadata API, tanpa kecuali. */
 export function buatMetadata({
   judul,
@@ -24,7 +29,7 @@ export function buatMetadata({
   noIndex?: boolean;
 }): Metadata {
   const url = `${site.url}${path}`;
-  const gambarOg = gambar ? `${site.url}${gambar}` : `${site.url}/img/hero-utama.svg`;
+  const gambarOg = urlGambar(gambar ?? "/img/hero-utama.svg");
 
   return {
     title: judul,
@@ -133,7 +138,7 @@ export function jsonldArticle(post: Post): Jsonld {
     datePublished: post.tanggal,
     dateModified: post.tanggal,
     inLanguage: "id-ID",
-    image: `${site.url}${post.gambar.src}`,
+    image: urlGambar(post.gambar.src),
     author: { "@type": "Organization", name: post.penulis },
     publisher: { "@id": `${site.url}/#organization` },
     mainEntityOfPage: `${site.url}/informasi/${post.slug}`,
@@ -171,7 +176,7 @@ export function jsonldEvent(agenda: Agenda): Jsonld {
         addressCountry: "ID",
       },
     },
-    ...(agenda.poster ? { image: `${site.url}${agenda.poster.src}` } : {}),
+    ...(agenda.poster ? { image: urlGambar(agenda.poster.src) } : {}),
     organizer: agenda.penyelenggara
       ? { "@type": "Organization", name: agenda.penyelenggara, url: site.url }
       : { "@id": `${site.url}/#organization` },
