@@ -96,44 +96,20 @@ const cabangPkm: Cabang[] = [
 ];
 
 /**
- * Ma'had cabang Program Tahfizh tingkat SMP Putra, dari daftar "Jurusan" di
- * smp.wadimubarak.com (berandanya sendiri sedang 404, daftar itu masih tampil
- * di kaki halaman). Alamat dan narahubung dari halaman 1 dokumen "Selayang
- * Pandang Program Tahfizh SMP Putra" terbitan yayasan.
+ * Ma'had cabang Program Tahfizh Putra yang menerima jenjang MTs sekaligus MA,
+ * jadi satu daftar dipakai kedua unit. Daftar dari pengelola (Oktober 2026),
+ * menggantikan daftar lama yang terpisah per jenjang (Sulthon Al-Islamy,
+ * Al-Arqam, Thoyyibah, dan Sabilul Qur'an tidak lagi tercantum).
  *
- * Halaman itu memuat empat alamat tanpa mencantumkan nama pondoknya sebagai
- * teks, namanya berupa gambar. Urutannya dipetakan lewat kecocokan yang bisa
- * diperiksa: nomor 0888-2780-278 juga tercetak di situs Ma'had Sabilul Qur'an,
- * dan Gunungkidul hanya dimiliki Al-Arqam. Sisanya, alamat Megamendung dengan
- * narahubung Ustadz Muhammad Iqbal, jatuh ke Rumah Tahfizh Imtiaz.
- *
- * Ma'had Sabilul Qur'an sudah tidak menjadi cabang dan dikeluarkan dari daftar
- * atas permintaan pengelola (Oktober 2026).
+ * Alamat dan narahubung hanya diisi bila sudah ada sumbernya: Imtiaz (Abu Bakr
+ * Ash-Shidiq) dari dokumen "Selayang Pandang Program Tahfizh SMP Putra", yang
+ * dulu tercatat sebagai Rumah Tahfizh Imtiaz Megamendung; Imtiaz Sukabumi dari
+ * sma.wadimubarak.com.
  */
-const cabangSmpTahfizh: Cabang[] = [
+const cabangMtsMaTahfizh: Cabang[] = [
   {
-    slug: "smp-sulthon-al-islamy-sentul",
-    nama: "Ma'had Sulthon Al-Islamy",
-    provinsi: "Jawa Barat",
-    pulau: "Jawa",
-    kota: "Kabupaten Bogor",
-    alamat: "Jalan Bukit Zanbaqah RT 04 RW 08, Desa Bojongkoneng, Kec. Babakan Madang, Kabupaten Bogor, Jawa Barat",
-    kontak_wa: "6288809252683",
-    status_ppdb: "buka",
-  },
-  {
-    slug: "smp-al-arqam-gunungkidul",
-    nama: "Ma'had Tahfizh Al-Arqam",
-    provinsi: "DI Yogyakarta",
-    pulau: "Jawa",
-    kota: "Kabupaten Gunungkidul",
-    alamat: "Jalan Yogyakarta–Wonosari, Padukuhan Nogosari II, Desa Bandung, Kec. Playen, Kabupaten Gunung Kidul, DI Yogyakarta",
-    kontak_wa: "6285326932713",
-    status_ppdb: "buka",
-  },
-  {
-    slug: "smp-rumah-tahfizh-imtiaz-bogor",
-    nama: "Rumah Tahfizh Imtiaz",
+    slug: "imtiaz-abu-bakr-megamendung",
+    nama: "Ma'had Tahfizh Imtiaz (Abu Bakr Ash-Shidiq)",
     provinsi: "Jawa Barat",
     pulau: "Jawa",
     kota: "Kabupaten Bogor",
@@ -141,16 +117,8 @@ const cabangSmpTahfizh: Cabang[] = [
     kontak_wa: "6289524151750",
     status_ppdb: "buka",
   },
-];
-
-/**
- * Ma'had cabang Program Tahfizh tingkat SMA Putra, dari bagian "Jenjang
- * Pendidikan" di sma.wadimubarak.com. Sama seperti SMP: alamat dan narahubung
- * hanya diisi bila ma'hadnya menerbitkan sendiri.
- */
-const cabangSmaTahfizh: Cabang[] = [
   {
-    slug: "sma-imtiaz-sukabumi",
+    slug: "imtiaz-sukabumi",
     nama: "Ma'had Tahfizh Imtiaz Sukabumi",
     provinsi: "Jawa Barat",
     pulau: "Jawa",
@@ -160,7 +128,7 @@ const cabangSmaTahfizh: Cabang[] = [
     status_ppdb: "buka",
   },
   {
-    slug: "sma-ar-rabwah-cirebon",
+    slug: "ar-rabwah-cirebon",
     nama: "Ma'had Tahfizh Ar-Rabwah",
     provinsi: "Jawa Barat",
     pulau: "Jawa",
@@ -168,35 +136,19 @@ const cabangSmaTahfizh: Cabang[] = [
     status_ppdb: "buka",
   },
   {
-    slug: "sma-al-arqam-gunungkidul",
-    nama: "Ma'had Tahfizh Al-Arqam",
-    provinsi: "DI Yogyakarta",
-    pulau: "Jawa",
-    kota: "Kabupaten Gunungkidul",
-    status_ppdb: "buka",
-  },
-  {
-    slug: "sma-al-quds-al-islamy-sumenep",
-    nama: "Ma'had Tahfizh Al-Quds Al-Islamy",
-    provinsi: "Jawa Timur",
-    pulau: "Jawa",
-    kota: "Kabupaten Sumenep",
-    status_ppdb: "buka",
-  },
-  {
-    slug: "sma-thoyyibah-bandung",
-    nama: "Ma'had Tahfizh Thoyyibah",
-    provinsi: "Jawa Barat",
-    pulau: "Jawa",
-    kota: "Lembang, Bandung Barat",
-    status_ppdb: "buka",
-  },
-  {
-    slug: "sma-baitul-mubarak-jakarta",
-    nama: "Ma'had Tahfizh Baitul Mubarak",
+    slug: "baitul-mubarak-jakarta",
+    nama: "Pondok Tahfizh Baitul Mubarak",
     provinsi: "DKI Jakarta",
     pulau: "Jawa",
     kota: "Jakarta",
+    status_ppdb: "buka",
+  },
+  {
+    slug: "al-quds-al-islamy-sumenep",
+    nama: "Ma'had Tahfizh Al Quds Al Islamy",
+    provinsi: "Jawa Timur",
+    pulau: "Jawa",
+    kota: "Kabupaten Sumenep",
     status_ppdb: "buka",
   },
 ];
@@ -257,7 +209,7 @@ export const unitsMentah: unknown[] = [
     gender: "putra",
     model_belajar: "boarding",
     lokasi_kampus: "bogor",
-    cabang: cabangSmpTahfizh,
+    cabang: cabangMtsMaTahfizh,
     persebaran: [],
     status_ppdb: "buka",
     periode_ppdb: "Batch 3: tahun pelajaran 2027/2028",
@@ -283,7 +235,7 @@ export const unitsMentah: unknown[] = [
     gender: "putra",
     model_belajar: "boarding",
     lokasi_kampus: "bogor",
-    cabang: cabangSmaTahfizh,
+    cabang: cabangMtsMaTahfizh,
     persebaran: [],
     status_ppdb: "buka",
     periode_ppdb: "Batch 3: tahun pelajaran 2027/2028",
