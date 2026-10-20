@@ -277,6 +277,15 @@ export const postSchema = z.object({
   tampilkan_di_induk: z.boolean(),
   /** HTML dari editor WordPress. */
   konten: z.string().min(1),
+  /** Isian Yoast di CMS; null berarti memakai `judul` dan `ringkasan`. */
+  seo: z
+    .object({
+      /** Sudah lengkap dengan nama situs, dipasang tanpa template judul. */
+      judul: z.string().min(1).nullable(),
+      deskripsi: z.string().min(1).nullable(),
+      noindex: z.boolean(),
+    })
+    .optional(),
 });
 
 export type Post = z.infer<typeof postSchema>;

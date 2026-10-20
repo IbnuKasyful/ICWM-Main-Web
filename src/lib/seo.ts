@@ -18,6 +18,7 @@ export function buatMetadata({
   terbit,
   penulis,
   noIndex = false,
+  judulPenuh = false,
 }: {
   judul: string;
   deskripsi: string;
@@ -27,12 +28,14 @@ export function buatMetadata({
   terbit?: string | undefined;
   penulis?: string | undefined;
   noIndex?: boolean;
+  /** Judul sudah memuat nama situs (isian Yoast), jadi template layout dilewati. */
+  judulPenuh?: boolean;
 }): Metadata {
   const url = `${site.url}${path}`;
   const gambarOg = urlGambar(gambar ?? "/img/hero-utama.svg");
 
   return {
-    title: judul,
+    title: judulPenuh ? { absolute: judul } : judul,
     description: deskripsi,
     alternates: { canonical: url },
     ...(noIndex ? { robots: { index: false, follow: true } } : {}),
@@ -134,7 +137,7 @@ export function jsonldArticle(post: Post): Jsonld {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: post.judul,
-    description: post.ringkasan,
+    description: post.seo?.deskripsi ?? post.ringkasan,
     datePublished: post.tanggal,
     dateModified: post.tanggal,
     inLanguage: "id-ID",

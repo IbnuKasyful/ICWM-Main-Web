@@ -76,6 +76,10 @@ const KUERI_BERITA = /* GraphQL */ `
         title
         excerpt
         content
+        # Dari plugin cms/wm-seo, isian Yoast di editor tulisan.
+        seoJudul
+        seoDeskripsi
+        seoNoindex
         author {
           node {
             name
@@ -112,6 +116,9 @@ type NodePost = {
   title: string | null;
   excerpt: string | null;
   content: string | null;
+  seoJudul: string | null;
+  seoDeskripsi: string | null;
+  seoNoindex: boolean;
   author: { node: { name: string | null } | null } | null;
   categories: { nodes: { slug: string | null }[] } | null;
   tags: { nodes: { name: string | null }[] } | null;
@@ -251,6 +258,11 @@ function petakan(p: NodePost): unknown | null {
     // CMS tanpa ikut tayang di situs induk.
     tampilkan_di_induk: slugDikenal !== undefined,
     konten,
+    seo: {
+      judul: p.seoJudul?.trim() || null,
+      deskripsi: p.seoDeskripsi?.trim() || null,
+      noindex: p.seoNoindex,
+    },
   };
 }
 

@@ -26,9 +26,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!post) {
     return buatMetadata({ judul: "Tulisan tidak ditemukan", deskripsi: "", path: "/informasi", noIndex: true });
   }
+  // Isian Yoast di CMS didahulukan; tanpa itu dipakai judul dan ringkasan tulisan.
   return buatMetadata({
-    judul: post.judul,
-    deskripsi: post.ringkasan,
+    judul: post.seo?.judul ?? post.judul,
+    judulPenuh: Boolean(post.seo?.judul),
+    deskripsi: post.seo?.deskripsi ?? post.ringkasan,
+    noIndex: post.seo?.noindex ?? false,
     // PRD §13, kanonik mengikuti unit_utama, yang menentukan kepemilikan tulisan.
     path: `/informasi/${post.slug}`,
     gambar: post.gambar.src,

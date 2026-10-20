@@ -44,12 +44,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  const halamanTulisan: MetadataRoute.Sitemap = (await getPostsInduk()).map((p) => ({
-    url: `${site.url}/informasi/${p.slug}`,
-    lastModified: new Date(p.tanggal),
-    changeFrequency: "yearly",
-    priority: 0.6,
-  }));
+  // Tulisan yang ditandai noindex lewat Yoast tidak didaftarkan.
+  const halamanTulisan: MetadataRoute.Sitemap = (await getPostsInduk())
+    .filter((p) => !p.seo?.noindex)
+    .map((p) => ({
+      url: `${site.url}/informasi/${p.slug}`,
+      lastModified: new Date(p.tanggal),
+      changeFrequency: "yearly",
+      priority: 0.6,
+    }));
 
   const halamanDonasi: MetadataRoute.Sitemap = (await getProgramDonasi()).map((d) => ({
     url: `${site.url}/donasi/${d.slug}`,
