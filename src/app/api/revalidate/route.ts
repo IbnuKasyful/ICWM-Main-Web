@@ -6,7 +6,7 @@ import { TAG_DONASI } from "@/lib/wp";
 
 /**
  * Penyegaran cache atas permintaan WordPress, pasangan dari plugin
- * `cms/wm-donasi/wm-donasi.php`.
+ * `cms/wm-donasi` dan `cms/wm-segarkan-berita`.
  *
  * WordPress memanggil route ini setiap kali program donasi disimpan atau
  * tulisan diterbitkan, sehingga isi baru tampil dalam hitungan detik alih-alih

@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Wadi Mubarak, Program Donasi
  * Description:       CPT program_donasi + rincian penghimpunan, diekspos ke WPGraphQL, dan pemberitahuan otomatis ke situs Next.js setiap kali program disimpan.
- * Version:           1.1.0
+ * Version:           1.1.1
  * Requires at least: 6.4
  * Requires PHP:      8.0
  * Requires Plugins:  wp-graphql
@@ -382,15 +382,24 @@ function wm_donasi_daftar_graphql(): void
  * (situs Next.js) menerima daftar kosong dan situs diam-diam memakai data
  * statis. Program yang sudah terbit dibuka khusus untuk GraphQL; draf tetap
  * tertutup.
+ *
+ * Gambar yang diunggah ke program mewarisi privasi programnya, dan WPGraphQL
+ * memeriksa induk itu tanpa melewati filter ini, jadi gambarnya harus dibuka
+ * tersendiri. Tanpa itu `featuredImage` kosong walau gambar unggulan terpasang.
  */
 add_filter('graphql_pre_model_data_is_private', 'wm_donasi_terbit_terbaca', 10, 3);
 function wm_donasi_terbit_terbaca($privat, $model, $data)
 {
+    if ($model !== 'PostObject' || !$data instanceof WP_Post) {
+        return $privat;
+    }
+
+    $program = $data->post_type === 'attachment' ? get_post($data->post_parent) : $data;
+
     if (
-        $model === 'PostObject'
-        && $data instanceof WP_Post
-        && $data->post_type === WM_DONASI_CPT
-        && $data->post_status === 'publish'
+        $program instanceof WP_Post
+        && $program->post_type === WM_DONASI_CPT
+        && $program->post_status === 'publish'
     ) {
         return false;
     }

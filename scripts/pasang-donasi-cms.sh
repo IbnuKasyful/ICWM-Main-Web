@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Memasang plugin Program Donasi di CMS dan mengisinya dari src/data/donasi.ts.
+# Memasang plugin Program Donasi di CMS dan mengisinya dari src/data/donasi.ts,
+# sekaligus plugin Segarkan Berita yang memakai sambungan yang sama.
 #
 # Jalankan sekali dari akar proyek, SETELAH rilis Next.js yang membaca kolom
 # satuanBiaya sudah di-deploy:
@@ -29,7 +30,7 @@ node --experimental-strip-types --no-warnings --input-type=module -e "
 " "$SEMENTARA/program-donasi.json"
 
 echo "==> Mengirim plugin dan data"
-tar -C cms -cf - wm-donasi | ssh "$HOST" "mkdir -p /root/.cms-setup/donasi && tar -x -C $CMS/wp-content/plugins && chown -R www:www $CMS/wp-content/plugins/wm-donasi"
+tar -C cms -cf - wm-donasi wm-segarkan-berita | ssh "$HOST" "mkdir -p /root/.cms-setup/donasi && tar -x -C $CMS/wp-content/plugins && chown -R www:www $CMS/wp-content/plugins/wm-donasi $CMS/wp-content/plugins/wm-segarkan-berita"
 scp -q "$SEMENTARA/program-donasi.json" scripts/cms/impor-donasi.php "$HOST:/root/.cms-setup/donasi/"
 
 ssh "$HOST" "bash -s" -- "$CMS" "$ENV_NEXT" <<'REMOTE'
@@ -50,7 +51,7 @@ wp config set WM_NEXT_REVALIDATE_URL 'http://127.0.0.1:3000/api/revalidate' --ty
 wp config set WM_NEXT_REVALIDATE_SECRET "$RAHASIA" --type=constant --quiet
 
 echo "==> Mengaktifkan plugin"
-wp plugin activate wm-donasi
+wp plugin activate wm-donasi wm-segarkan-berita
 
 echo "==> Mengisi program"
 wp eval-file /root/.cms-setup/donasi/impor-donasi.php \
@@ -61,13 +62,18 @@ wp eval-file /root/.cms-setup/donasi/impor-donasi.php \
 find wp-content/uploads -user root -exec chown www:www {} +
 
 echo "==> Memeriksa sambungan"
-JUMLAH=$(curl -fsS -X POST https://cms.wadimubarak.com/graphql \
+BALASAN=$(curl -fsS -X POST https://cms.wadimubarak.com/graphql \
   -H 'content-type: application/json' \
-  -d '{"query":"{ programDonasis(first: 100) { nodes { slug satuanBiaya } } }"}' \
-  | grep -o '"slug"' | wc -l || true)
-echo "    Program terbaca lewat GraphQL publik: $JUMLAH"
+  -d '{"query":"{ programDonasis(first: 100) { nodes { slug satuanBiaya featuredImage { node { sourceUrl } } } } }"}')
+JUMLAH=$(echo "$BALASAN" | grep -o '"slug"' | wc -l || true)
+GAMBAR=$(echo "$BALASAN" | grep -o '"sourceUrl"' | wc -l || true)
+echo "    Terbaca lewat GraphQL publik: $JUMLAH program, $GAMBAR gambar"
 if [ "$JUMLAH" -eq 0 ]; then
   echo "Program tidak terbaca GraphQL, situs akan tetap memakai data statis." >&2
+  exit 1
+fi
+if [ "$GAMBAR" -eq 0 ]; then
+  echo "Gambar unggulan tidak terbaca GraphQL, semua program memakai ilustrasi cadangan." >&2
   exit 1
 fi
 
@@ -76,6 +82,14 @@ curl -fsS -X POST http://127.0.0.1:3000/api/revalidate \
   -H "x-revalidate-secret: $RAHASIA" \
   -d '{"jenis":"donasi"}'
 echo
+
+# Uji jalur yang sama dengan saat tulisan terbit, dari dalam WordPress.
+HASIL=$(wp eval 'echo wm_berita_kirim_penyegaran("") ? "ok" : "gagal";')
+echo "    Penyegaran berita dari CMS: $HASIL"
+if [ "$HASIL" != "ok" ]; then
+  echo "CMS tidak berhasil menyegarkan situs, tulisan baru tetap menunggu cache 1 jam." >&2
+  exit 1
+fi
 REMOTE
 
 echo "==> Selesai. Periksa https://wadimubarak.com/donasi"
