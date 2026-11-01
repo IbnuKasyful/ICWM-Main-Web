@@ -114,19 +114,19 @@ function terbaruDahulu(a: Post, b: Post): number {
 }
 
 /**
- * Tulisan dari WordPress, divalidasi dengan skema yang sama seperti data
- * statis. Tulisan yang tidak lolos validasi dibuang satu per satu, bukan
- * menggagalkan seluruh halaman: satu tulisan cacat di CMS tidak boleh
- * menjatuhkan /informasi.
+ * Isi dari WordPress, divalidasi dengan skema yang sama seperti data statis.
+ * Yang tidak lolos validasi dibuang satu per satu, bukan menggagalkan seluruh
+ * halaman: satu tulisan atau program cacat di CMS tidak boleh menjatuhkan
+ * /informasi maupun /donasi.
  */
-function validasiLunak(mentah: unknown[]): Post[] {
-  const hasil: Post[] = [];
+function validasiLunak<T>(schema: z.ZodType<T>, mentah: unknown[], sumber: string): T[] {
+  const hasil: T[] = [];
   for (const item of mentah) {
-    const uji = postSchema.safeParse(item);
+    const uji = schema.safeParse(item);
     if (uji.success) hasil.push(uji.data);
     else {
       const slug = (item as { slug?: unknown })?.slug;
-      console.error(`[content] tulisan WordPress dilewati (${String(slug)}): ${uji.error.message}`);
+      console.error(`[content] ${sumber} WordPress dilewati (${String(slug)}): ${uji.error.message}`);
     }
   }
   return hasil;
@@ -144,7 +144,7 @@ async function muatPosts(): Promise<readonly Post[]> {
   const mentah = await ambilPostsWp();
   if (!mentah) return postsStatis;
 
-  const dariWp = validasiLunak(mentah);
+  const dariWp = validasiLunak(postSchema, mentah, "tulisan");
   return dariWp.length > 0 ? Object.freeze(dariWp) : postsStatis;
 }
 
@@ -338,18 +338,10 @@ async function muatProgramDonasi(): Promise<readonly ProgramDonasi[]> {
   const mentah = await ambilProgramDonasiWp();
   if (!mentah) return programDonasiStatis;
 
-  // Kebun kosong bukan alasan mengosongkan halaman: kalau CMS baru dipasang dan
-  // belum ada satu pun program terbit, angka lama masih lebih berguna.
-  if (mentah.length === 0) return programDonasiStatis;
-
-  try {
-    return daftar(programDonasiSchema, mentah, "program_donasi(wp)");
-  } catch (galat) {
-    // Satu program cacat di CMS tidak boleh menjatuhkan halaman donasi. Pesannya
-    // menyebut indeks dan field yang salah supaya admin bisa diberi tahu.
-    console.error(`[donasi] data CMS ditolak skema, memakai data statis: ${String(galat)}`);
-    return programDonasiStatis;
-  }
+  // Bila tidak ada satu pun program terbit yang sah, angka lama masih lebih
+  // berguna daripada halaman kosong.
+  const dariWp = validasiLunak(programDonasiSchema, mentah, "program donasi");
+  return dariWp.length > 0 ? Object.freeze(dariWp) : programDonasiStatis;
 }
 
 export async function getProgramDonasi(): Promise<readonly ProgramDonasi[]> {

@@ -1,10 +1,11 @@
 <?php
 /**
  * Plugin Name:       Wadi Mubarak, Program Donasi
- * Description:       CPT program_donasi + kolom angka penghimpunan, diekspos ke WPGraphQL, dan pemberitahuan otomatis ke situs Next.js setiap kali angkanya disimpan.
- * Version:           1.0.0
+ * Description:       CPT program_donasi + rincian penghimpunan, diekspos ke WPGraphQL, dan pemberitahuan otomatis ke situs Next.js setiap kali program disimpan.
+ * Version:           1.1.0
  * Requires at least: 6.4
  * Requires PHP:      8.0
+ * Requires Plugins:  wp-graphql
  * Author:            Yayasan Wadi Mubarak
  * Text Domain:       wm-donasi
  *
@@ -56,6 +57,14 @@ function wm_donasi_kolom(): array
             'jenis'   => 'angka',
             'tipe'    => 'integer',
             'bantuan' => 'Angka polos, hasil rekapitulasi terakhir. Ini kolom yang biasanya Anda perbarui.',
+        ],
+        [
+            'meta'    => '_wm_satuan_biaya',
+            'graphql' => 'satuanBiaya',
+            'label'   => 'Satuan biaya',
+            'jenis'   => 'teks',
+            'tipe'    => 'string',
+            'bantuan' => 'Tampil menggantikan bar progres bila Target dan Terkumpul sama-sama 0. Contoh: "Rp 13.000 / kg" atau "Nominal bebas".',
         ],
         [
             'meta'    => '_wm_penerima_manfaat',
@@ -175,7 +184,7 @@ function wm_donasi_metabox(): void
 {
     add_meta_box(
         'wm_donasi_angka',
-        'Angka penghimpunan',
+        'Rincian program donasi',
         'wm_donasi_render_metabox',
         WM_DONASI_CPT,
         'normal',
@@ -203,8 +212,10 @@ function wm_donasi_render_metabox(WP_Post $post): void
 
         switch ($kolom['jenis']) {
             case 'angka':
+                // Bukan type="number": peramban menolak tempelan "Rp 1.305.000.000"
+                // di kolom itu, lalu kolomnya tersimpan 0 tanpa peringatan.
                 printf(
-                    '<input type="number" min="0" step="1" id="%s" name="%s" value="%s" />',
+                    '<input type="text" inputmode="numeric" id="%s" name="%s" value="%s" />',
                     $id,
                     $id,
                     esc_attr((string) (int) $nilai)
@@ -342,8 +353,10 @@ add_action('graphql_register_types', 'wm_donasi_daftar_graphql');
 function wm_donasi_daftar_graphql(): void
 {
     foreach (wm_donasi_kolom() as $kolom) {
+        // Rupiah memakai Float: Int GraphQL berhenti di 2.147.483.647, dan satu
+        // target Rp 2,5 miliar akan menggagalkan seluruh kueri program.
         $tipe = match ($kolom['tipe']) {
-            'integer' => 'Int',
+            'integer' => 'Float',
             'boolean' => 'Boolean',
             default   => 'String',
         };
@@ -354,7 +367,7 @@ function wm_donasi_daftar_graphql(): void
             'resolve'     => static function ($post) use ($kolom, $tipe) {
                 $nilai = get_post_meta($post->databaseId, $kolom['meta'], true);
                 return match ($tipe) {
-                    'Int'     => (int) $nilai,
+                    'Float'   => (float) $nilai,
                     'Boolean' => (bool) $nilai,
                     default   => (string) $nilai,
                 };
@@ -363,16 +376,38 @@ function wm_donasi_daftar_graphql(): void
     }
 }
 
+/**
+ * CPT ini sengaja tidak publik supaya tidak ada halamannya di cms.wadimubarak.com,
+ * tetapi WPGraphQL menganggap isi CPT seperti itu privat, jadi pembaca anonim
+ * (situs Next.js) menerima daftar kosong dan situs diam-diam memakai data
+ * statis. Program yang sudah terbit dibuka khusus untuk GraphQL; draf tetap
+ * tertutup.
+ */
+add_filter('graphql_pre_model_data_is_private', 'wm_donasi_terbit_terbaca', 10, 3);
+function wm_donasi_terbit_terbaca($privat, $model, $data)
+{
+    if (
+        $model === 'PostObject'
+        && $data instanceof WP_Post
+        && $data->post_type === WM_DONASI_CPT
+        && $data->post_status === 'publish'
+    ) {
+        return false;
+    }
+    return $privat;
+}
+
 /* -------------------------------------------------------------------------- */
 /* Pemberitahuan ke situs Next.js                                              */
 /* -------------------------------------------------------------------------- */
 
 /**
- * Memanggil /api/revalidate agar angka baru langsung tampil.
+ * Memanggil /api/revalidate agar perubahan langsung tampil.
  *
- * Dua konstanta berikut wajib ada di wp-config.php:
+ * Dua konstanta berikut wajib ada di wp-config.php. Next.js berjalan di VPS yang
+ * sama, jadi alamatnya langsung ke proses Node, tidak memutar lewat Cloudflare:
  *
- *   define('WM_NEXT_REVALIDATE_URL',    'https://wadimubarak.com/api/revalidate');
+ *   define('WM_NEXT_REVALIDATE_URL',    'http://127.0.0.1:3000/api/revalidate');
  *   define('WM_NEXT_REVALIDATE_SECRET', 'rahasia-sama-dengan-REVALIDATE_SECRET');
  *
  * Sengaja tidak disimpan di halaman pengaturan: rahasianya tidak perlu bisa
@@ -450,13 +485,13 @@ function wm_donasi_pemberitahuan_admin(): void
     if (!defined('WM_NEXT_REVALIDATE_URL')) {
         echo '<div class="notice notice-warning"><p><strong>Situs belum tersambung.</strong> '
             . 'Konstanta <code>WM_NEXT_REVALIDATE_URL</code> belum ada di <code>wp-config.php</code>, '
-            . 'jadi perubahan angka baru tampil di situs setelah maksimal 15 menit.</p></div>';
+            . 'jadi perubahan baru tampil di situs setelah maksimal 15 menit.</p></div>';
         return;
     }
 
     if (get_transient('wm_donasi_penyegaran_ok')) {
         delete_transient('wm_donasi_penyegaran_ok');
         echo '<div class="notice notice-success is-dismissible"><p>'
-            . 'Angka tersimpan dan halaman donasi di situs sudah diperbarui.</p></div>';
+            . 'Perubahan tersimpan dan halaman donasi di situs sudah diperbarui.</p></div>';
     }
 }

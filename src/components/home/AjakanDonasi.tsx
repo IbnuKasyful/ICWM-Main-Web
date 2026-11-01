@@ -58,7 +58,12 @@ export function AjakanDonasi({ sorot }: { sorot: ProgramDonasi | undefined }) {
                   {sorot.judul}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">{sorot.ringkasan}</p>
-                <Progress terkumpul={sorot.terkumpul} target={sorot.target} className="mt-5" />
+                <Progress
+                  terkumpul={sorot.terkumpul}
+                  target={sorot.target}
+                  satuanBiaya={sorot.satuan_biaya}
+                  className="mt-5"
+                />
                 <ButtonLink
                   href={`/donasi/${sorot.slug}`}
                   varian="garis"

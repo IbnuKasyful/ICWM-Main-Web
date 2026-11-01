@@ -1,6 +1,10 @@
 /**
  * Program LAZIS SaQu Wadi Mubarak + rekeningnya (PRD §9.4).
  *
+ * Program kini dikelola operator di CMS (menu Program Donasi, docs/cms-donasi.md).
+ * Daftar di bawah hanya cadangan saat CMS tidak dapat dihubungi, dan sumber
+ * pengisian awal CMS. Rekening tetap di sini: nomornya tidak bisa diubah dari CMS.
+ *
  * Isi berkas ini diambil dari materi kampanye LAZIS SaQu: poster payung Jum'at
  * Berkah (memuat keenam program berkelanjutan), poster Orang Tua Asuh, Beras,
  * Buka Puasa, dan Bantu Korban Gempa NTT, ditambah dokumentasi Hewan Qurban,

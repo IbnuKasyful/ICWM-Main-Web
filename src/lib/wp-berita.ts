@@ -19,7 +19,7 @@
 
 import { unitsMentah } from "@/data/units";
 import { categorySchema, type Category, type Lokasi } from "@/lib/schemas";
-import { kueri, wpAktif } from "@/lib/wp";
+import { kueri, ringkas, tanpaTag, wpAktif } from "@/lib/wp";
 
 /** Ambang satu permintaan. Halaman 50 tulisan bisa ~600 KB, jadi tidak ketat. */
 const BATAS_MS = 20000;
@@ -157,31 +157,6 @@ type HalamanPosts = {
 /* Pembersih teks                                                              */
 /* -------------------------------------------------------------------------- */
 
-const ENTITAS: Record<string, string> = {
-  "&nbsp;": " ",
-  "&amp;": "&",
-  "&lt;": "<",
-  "&gt;": ">",
-  "&quot;": '"',
-  "&#8217;": "’",
-  "&#8216;": "‘",
-  "&#8220;": "“",
-  "&#8221;": "”",
-  "&#8211;": "–",
-  "&#8212;": "—",
-  "&hellip;": "…",
-  "&#039;": "'",
-  "&#39;": "'",
-};
-
-function tanpaTag(html: string): string {
-  return html
-    .replace(/<[^>]*>/g, " ")
-    .replace(/&[a-z#0-9]+;/gi, (e) => ENTITAS[e.toLowerCase()] ?? " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
 /** Singkatan yang harus tetap kapital saat judul KAPITAL diturunkan. */
 const SINGKATAN = /\b(taud|mit|mts|ma|stiu|mbs|pkm|ppdb|saqu|lazis|pg|iqt|wm)\b/gi;
 
@@ -200,14 +175,6 @@ function rapikanJudul(judul: string): string {
       .replace(SINGKATAN, (w) => w.toUpperCase());
   }
   return bersih;
-}
-
-/** Ringkasan dibatasi 200 karakter oleh skema; dipotong di batas kata. */
-function ringkas(teks: string, batas = 200): string {
-  if (teks.length <= batas) return teks;
-  const potong = teks.slice(0, batas - 1);
-  const spasi = potong.lastIndexOf(" ");
-  return (spasi > batas * 0.6 ? potong.slice(0, spasi) : potong).trimEnd() + "…";
 }
 
 /** Gambar pengganti bila tulisan tidak punya gambar unggulan. */

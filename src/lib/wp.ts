@@ -88,6 +88,44 @@ export async function kueri<T>(label: string, query: string, opsi: OpsiKueri): P
 }
 
 /* -------------------------------------------------------------------------- */
+/* Pembersih teks                                                              */
+/* -------------------------------------------------------------------------- */
+
+const ENTITAS: Record<string, string> = {
+  "&nbsp;": " ",
+  "&amp;": "&",
+  "&#038;": "&",
+  "&lt;": "<",
+  "&gt;": ">",
+  "&quot;": '"',
+  "&#8217;": "’",
+  "&#8216;": "‘",
+  "&#8220;": "“",
+  "&#8221;": "”",
+  "&#8211;": "–",
+  "&#8212;": "—",
+  "&hellip;": "…",
+  "&#039;": "'",
+  "&#39;": "'",
+};
+
+export function tanpaTag(html: string): string {
+  return html
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&[a-z#0-9]+;/gi, (e) => ENTITAS[e.toLowerCase()] ?? " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/** Ringkasan dibatasi 200 karakter oleh skema; dipotong di batas kata. */
+export function ringkas(teks: string, batas = 200): string {
+  if (teks.length <= batas) return teks;
+  const potong = teks.slice(0, batas - 1);
+  const spasi = potong.lastIndexOf(" ");
+  return (spasi > batas * 0.6 ? potong.slice(0, spasi) : potong).trimEnd() + "…";
+}
+
+/* -------------------------------------------------------------------------- */
 /* Program donasi                                                              */
 /* -------------------------------------------------------------------------- */
 
@@ -102,6 +140,7 @@ const KUERI_DONASI = /* GraphQL */ `
         jenisDana
         target
         terkumpul
+        satuanBiaya
         penerimaManfaat
         batasWaktu
         mendesak
@@ -128,6 +167,7 @@ type NodeDonasi = {
   jenisDana: string | null;
   target: number | null;
   terkumpul: number | null;
+  satuanBiaya: string | null;
   penerimaManfaat: string | null;
   batasWaktu: string | null;
   mendesak: boolean | null;
@@ -148,15 +188,6 @@ const GAMBAR_CADANGAN = {
   height: 800,
 } as const;
 
-function tanpaTag(html: string): string {
-  return html
-    .replace(/<[^>]*>/g, "")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&amp;/g, "&")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
 /**
  * Ambil seluruh program donasi dari WordPress dalam bentuk mentah yang sama
  * dengan `programDonasiMentah`, validasi Zod tetap dijalankan di `content.ts`,
@@ -174,26 +205,28 @@ export async function ambilProgramDonasiWp(): Promise<unknown[] | null> {
 
   return data.programDonasis.nodes.map((n) => {
     const gambar = n.featuredImage?.node;
+    const judul = tanpaTag(n.title ?? "");
     return {
       slug: n.slug ?? "",
-      judul: tanpaTag(n.title ?? ""),
-      // `ringkasan` dibatasi 200 karakter oleh skema; kutipan WordPress kadang
-      // lebih panjang, jadi dipangkas di sini alih-alih menggagalkan halaman.
-      ringkasan: tanpaTag(n.excerpt ?? "").slice(0, 200),
-      jenis: n.jenisDana ?? "infak",
+      judul,
+      // Kutipan kosong diisi WordPress dari awal isi, jadi bisa melebihi batas skema.
+      ringkasan: ringkas(tanpaTag(n.excerpt ?? "")) || judul,
+      // Kolom teks yang kosong terkirim sebagai "", bukan null, jadi semua
+      // bawaan di bawah memakai `||`: skema menolak string kosong.
+      jenis: n.jenisDana || "infak",
       gambar: gambar?.sourceUrl
         ? {
             src: gambar.sourceUrl,
-            alt: gambar.altText ?? tanpaTag(n.title ?? ""),
+            alt: gambar.altText || judul,
             width: gambar.mediaDetails?.width ?? 1200,
             height: gambar.mediaDetails?.height ?? 800,
           }
         : GAMBAR_CADANGAN,
       target: n.target ?? 0,
       terkumpul: n.terkumpul ?? 0,
-      penerima_manfaat: n.penerimaManfaat ?? "—",
-      // Kolom tanggal WordPress kosong terkirim sebagai "", skema menuntut null.
-      batas_waktu: n.batasWaktu ? n.batasWaktu : null,
+      satuan_biaya: n.satuanBiaya || undefined,
+      penerima_manfaat: n.penerimaManfaat || "—",
+      batas_waktu: n.batasWaktu || null,
       konten: n.content ?? "",
       mendesak: n.mendesak ?? false,
     };
