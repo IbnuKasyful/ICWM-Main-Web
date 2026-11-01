@@ -37,6 +37,7 @@ export function buatMetadata({
   gambar,
   jenis = "website",
   terbit,
+  diperbarui,
   penulis,
   noIndex = false,
   judulPenuh = false,
@@ -47,6 +48,7 @@ export function buatMetadata({
   gambar?: string | undefined;
   jenis?: "website" | "article";
   terbit?: string | undefined;
+  diperbarui?: string | undefined;
   penulis?: string | undefined;
   noIndex?: boolean;
   /** Judul sudah memuat nama situs (isian Yoast), jadi template layout dilewati. */
@@ -69,6 +71,7 @@ export function buatMetadata({
       type: jenis,
       images: [{ ...gambarOg, alt: judul }],
       ...(terbit ? { publishedTime: terbit } : {}),
+      ...(diperbarui ? { modifiedTime: diperbarui } : {}),
       ...(penulis ? { authors: [penulis] } : {}),
     },
     twitter: {
@@ -160,7 +163,7 @@ export function jsonldArticle(post: Post): Jsonld {
     headline: post.judul,
     description: post.seo?.deskripsi ?? post.ringkasan,
     datePublished: post.tanggal,
-    dateModified: post.tanggal,
+    dateModified: post.diperbarui ?? post.tanggal,
     inLanguage: "id-ID",
     image: urlGambar(post.gambar.src),
     author: { "@type": "Organization", name: post.penulis },

@@ -274,6 +274,11 @@ export const postSchema = z.object({
   ringkasan: z.string().min(1).max(200),
   /** ISO 8601. */
   tanggal: z.string().min(1),
+  /**
+   * ISO 8601, waktu terakhir disunting di CMS. Inilah yang membuat Google tahu
+   * tulisan lama perlu dirayapi ulang, lewat sitemap dan JSON-LD.
+   */
+  diperbarui: z.string().min(1).optional(),
   category: categorySchema,
   /** Menentukan URL kanonik, wajib. */
   unit_utama: z.string().min(1),

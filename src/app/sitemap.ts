@@ -49,7 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .filter((p) => !p.seo?.noindex)
     .map((p) => ({
       url: `${site.url}/informasi/${p.slug}`,
-      lastModified: new Date(p.tanggal),
+      lastModified: new Date(p.diperbarui ?? p.tanggal),
       changeFrequency: "yearly",
       priority: 0.6,
     }));

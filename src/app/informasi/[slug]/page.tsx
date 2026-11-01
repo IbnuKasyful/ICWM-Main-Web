@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     gambar: post.gambar.src,
     jenis: "article",
     terbit: post.tanggal,
+    diperbarui: post.diperbarui,
     penulis: post.penulis,
   });
 }

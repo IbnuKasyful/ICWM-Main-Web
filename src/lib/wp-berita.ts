@@ -80,6 +80,7 @@ const KUERI_BERITA = /* GraphQL */ `
       nodes {
         slug
         date
+        modified
         title
         excerpt
         content
@@ -127,6 +128,7 @@ const KUERI_BERITA = /* GraphQL */ `
 type NodePost = {
   slug: string | null;
   date: string | null;
+  modified: string | null;
   title: string | null;
   excerpt: string | null;
   content: string | null;
@@ -229,6 +231,7 @@ function petakan(p: NodePost): unknown | null {
     ringkasan: ringkas(kutipan) || judul,
     // WordPress menyimpan waktu lokal tanpa zona; situs berjalan di WIB.
     tanggal: p.date ? `${p.date}+07:00` : new Date().toISOString(),
+    diperbarui: p.modified ? `${p.modified}+07:00` : undefined,
     category,
     unit_utama: unit[0] ?? UNIT_INDUK,
     unit,
